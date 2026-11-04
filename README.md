@@ -31,3 +31,15 @@ The project includes existing writing and website development alongside unfinish
 We welcome help with frontend and backend development, security, accessibility, design, testing, translation, documentation and maintenance. Small contributions matter. So do people willing to question an assumption, find an error or improve something another person has started.
 
 I am looking for collaborators who want to put their abilities to work in the struggle for dignity, accountability and change. Help build a place where people can tell their stories, show their evidence, create together and challenge the state structures that continue to create victims on both sides of the wall.
+
+## Website development status — 4 November 2026
+
+The existing website is at <https://stemmen-fra-innsiden.sendmailtodss.chatgpt.site>. Version 34 was published on 4 November 2026. Its application source is maintained through the existing Sites project; this collaboration repository should not be assumed to contain that application.
+
+This release brings clearer navigation, direct entrances to Rettspeilet and the LAR documentation, a unified [Kunstsamfunnet](https://stemmen-fra-innsiden.sendmailtodss.chatgpt.site/kunstsamfunnet/), 22 approved artworks with individual Norwegian and English pages, larger previews and links carrying the selected artwork into the 3D gallery and clothing preview. The landing page includes an optional galaxy-to-gallery experience with reduced-motion, keyboard and no-JavaScript alternatives. Diary, book, practical tools and [collaboration](https://stemmen-fra-innsiden.sendmailtodss.chatgpt.site/collaborate/) entrances are easier to find.
+
+Approved writing and media have been preserved. Clothing images are virtual previews. Submissions, creative accounts, original-art sales and checkout remain closed where the required production services have not been enabled. Backend tests and prototype screens do not mean that a service is open. Chinese and Cantonese interface support retains explicit fallback where translation is incomplete. Unfinished research is withheld from the public release.
+
+Everyone is welcome to help with coding, design, translation, accessibility, testing, documentation, research, legal expertise, art, writing and music. No prison connection is required. Please keep contributions focused and describe what was tested. Use public or synthetic examples; never post private manuscripts, case files, credentials or private contact information in issues, pull requests or repository history.
+
+Artwork ownership, permission to display a photograph and permission for commercial reproductions remain separate. Existing approved text and redactions must be preserved.
