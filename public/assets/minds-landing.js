@@ -44,13 +44,15 @@
       const im=new Image();im.onload=()=>{if(alive)drawBridge()};artImages.push(im);
     });
     const scenePrompt=document.createElement('div'); scenePrompt.className='minds-scene-prompt';
+    const sceneLabel=document.createElement('p'); sceneLabel.className='minds-scene-label'; sceneLabel.setAttribute('aria-hidden','true'); stageWrap.prepend(sceneLabel);
     const prompt=document.createElement('span'); prompt.textContent=en?'What is your idea?':'Hva er din idé?';
     const music=document.createElement('a'); music.href=en?'/en/music/':'/musikk/';
     music.textContent=en?'▶ Explore music':'▶ Utforsk musikk';
     scenePrompt.append(prompt,music); stageWrap.append(scenePrompt,sceneLinks);
     const creatorAtlas=new Image();creatorAtlas.onload=()=>{bridge.dataset.models='loaded';if(alive)drawBridge()};
 
-    convergence.after(bridge);
+    // Keep the visual sequence directly after the galaxy rather than interrupting it with text.
+    hero.after(bridge);
     let bridgeContext;
     try { bridgeContext = bridgeCanvas.getContext('2d', { alpha: true }); } catch (_) {}
     if (!bridgeContext) bridge.hidden = true;
@@ -147,17 +149,33 @@
       if (!bridgeContext || !bridgeWidth || !bridgeHeight) return;
       const c = bridgeContext, w = bridgeWidth, h = bridgeHeight;
       const p = motionQuery.matches ? .64 : bridgeProgress;
-      const stage = p < .25 ? 'dna' : p < .55 ? 'create' : p < .76 ? 'unity' : 'light';
-      bridge.dataset.scene = stage;
+      const stage = p < .12 ? 'converge' : p < .28 ? 'dna' : p < .55 ? 'create' : p < .76 ? 'unity' : 'light';
+      const labels = en ? {converge:'Many voices. One movement.',dna:'Ideas become possibility.',create:'Every person has something to create.',unity:'Together, we are stronger.',light:'Art finds its place.'} : {converge:'Mange stemmer. Én bevegelse.',dna:'Ideer blir til muligheter.',create:'Alle har noe å skape.',unity:'Sammen er vi sterkere.',light:'Kunsten finner sin plass.'};
+      bridge.dataset.scene = stage; sceneLabel.textContent=labels[stage];
       if (cinematic) { cinematic.render(p, phase); return; }
-      const emerge = smooth((p - .16) / .17);
+      const emerge = smooth((p - .22) / .18);
+      const dnaIn = smooth((p - .055) / .12);
+      const gathering = 1 - smooth((p - .04) / .12);
       const turn = smooth((p - .55) / .12);
       const dissolve = smooth((p - .76) / .22);
       c.clearRect(0, 0, w, h);
       c.save(); c.translate(w / 2, h / 2); c.scale(Math.min(w / 800, h / 460), Math.min(w / 800, h / 460));
       c.lineCap = 'round';
-      // The double helix relinquishes the frame as the six creators appear.
-      c.globalAlpha = 1 - emerge;
+      // Ideas converge and bloom before giving way to the helix.
+      if (gathering > 0) {
+        c.globalCompositeOperation='screen';
+        for (let i=0;i<72;i++) {
+          const angle=i*2.399+phase*.12, radius=(35+(i%12)*24)*(1-smooth(p/.13)) + 5;
+          c.globalAlpha=gathering*(.35+(i%4)*.12); c.fillStyle=colors[i%colors.length];
+          c.beginPath(); c.arc(Math.cos(angle)*radius,Math.sin(angle)*radius*.55,1.5+(i%3)*.5,0,Math.PI*2); c.fill();
+        }
+        const glow=c.createRadialGradient(0,0,0,0,0,110);
+        glow.addColorStop(0,'#fff8dc');glow.addColorStop(.15,'#ffe0a4aa');glow.addColorStop(1,'#f0b96b00');
+        c.globalAlpha=Math.sin(smooth(p/.17)*Math.PI)*.8;c.fillStyle=glow;c.fillRect(-110,-110,220,220);
+        c.globalCompositeOperation='source-over';
+      }
+      // The helix relinquishes the frame as the creators appear.
+      c.globalAlpha = dnaIn * (1 - emerge);
       for (let i = 0; i < 46; i++) {
         const y = -170 + i * 7;
         const x = Math.sin(i * .31 + phase * .35) * 55;
