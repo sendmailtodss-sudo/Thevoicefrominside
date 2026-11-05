@@ -1,0 +1,41 @@
+[
+  {
+    "court": "Gulating",
+    "year": 2025,
+    "defendantSex": "male",
+    "population": "all_eligible_cases",
+    "coverage": "unknown",
+    "sourceUrl": "https://www.domstol.no/",
+    "fullAcquittal": null,
+    "mixedOutcome": null,
+    "allConvicted": null,
+    "otherOutcome": null,
+    "unknownOutcome": null
+  },
+  {
+    "court": "Gulating",
+    "year": 2025,
+    "defendantSex": "female",
+    "population": "all_eligible_cases",
+    "coverage": "unknown",
+    "sourceUrl": "https://www.domstol.no/",
+    "fullAcquittal": null,
+    "mixedOutcome": null,
+    "allConvicted": null,
+    "otherOutcome": null,
+    "unknownOutcome": null
+  },
+  {
+    "court": "Gulating",
+    "year": 2025,
+    "defendantSex": "unknown",
+    "population": "all_eligible_cases",
+    "coverage": "unknown",
+    "sourceUrl": "https://www.domstol.no/",
+    "fullAcquittal": null,
+    "mixedOutcome": null,
+    "allConvicted": null,
+    "otherOutcome": null,
+    "unknownOutcome": null
+  }
+]

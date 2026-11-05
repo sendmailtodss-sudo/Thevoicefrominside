@@ -34,7 +34,7 @@ I am looking for collaborators who want to put their abilities to work in the st
 
 ## Website development status — 4 November 2026
 
-The existing website is at <https://stemmen-fra-innsiden.sendmailtodss.chatgpt.site>. Version 34 was published on 4 November 2026. Its application source is maintained through the existing Sites project; this collaboration repository should not be assumed to contain that application.
+The existing website is at <https://stemmen-fra-innsiden.sendmailtodss.chatgpt.site>. Version 34 was published on 4 November 2026. This repository now contains a contributor development export of that application, based on source commit `702bbcce8e4883f74f5bbcd521ebe97177c4bb17`. Production hosting remains separately managed. The export uses example editorial content and artwork; it does not include private manuscripts, case files, operational records or credentials.
 
 This release brings clearer navigation, direct entrances to Rettspeilet and the LAR documentation, a unified [Kunstsamfunnet](https://stemmen-fra-innsiden.sendmailtodss.chatgpt.site/kunstsamfunnet/), 22 approved artworks with individual Norwegian and English pages, larger previews and links carrying the selected artwork into the 3D gallery and clothing preview. The landing page includes an optional galaxy-to-gallery experience with reduced-motion, keyboard and no-JavaScript alternatives. Diary, book, practical tools and [collaboration](https://stemmen-fra-innsiden.sendmailtodss.chatgpt.site/collaborate/) entrances are easier to find.
 
@@ -43,3 +43,24 @@ Approved writing and media have been preserved. Clothing images are virtual prev
 Everyone is welcome to help with coding, design, translation, accessibility, testing, documentation, research, legal expertise, art, writing and music. No prison connection is required. Please keep contributions focused and describe what was tested. Use public or synthetic examples; never post private manuscripts, case files, credentials or private contact information in issues, pull requests or repository history.
 
 Artwork ownership, permission to display a photograph and permission for commercial reproductions remain separate. Existing approved text and redactions must be preserved.
+
+
+## Run the contributor preview
+
+Requires Node.js 24. No application dependencies or paid services are needed for the local preview.
+
+```sh
+npm ci
+npm test
+npm run check
+npm run build
+npm run dev
+```
+
+Open <http://localhost:8080>. For GitHub Codespaces, use **Code → Codespaces → Create codespace on main**, then run `npm run dev` and open forwarded port 8080. Creating a Codespace is your choice and may consume your GitHub allowance; the repository does not create one automatically.
+
+The reading layouts, navigation, gallery, clothing preview and local tools can be developed with example content. Original artwork and editorial passages remain separately managed. The local server deliberately returns a closed response for `/api/*`; it does not activate accounts, submissions, payments, email or production data access. Worker code and SQL schemas are included for review and isolated testing.
+
+See [development setup](docs/development.md), [contributing](CONTRIBUTING.md), [feature status](docs/feature-status.md) and [source provenance](docs/source-provenance.json). A GitHub commit does not deploy the public website.
+
+No new licence is granted by this export. Code, writing, artwork and commercial reproduction rights must be considered separately; do not assume an open-source or artwork licence that has not been agreed.

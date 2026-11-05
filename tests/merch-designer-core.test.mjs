@@ -1,0 +1,33 @@
+import {test} from 'node:test';
+import assert from 'node:assert/strict';
+import {normalizeDesign,presetDesign,replacePrint,designerPrice,designExport} from '../public/merch-designer-core.mjs';
+import {addItem,inquiry,inquiryText} from '../public/merch-shop-core.mjs';
+const pricing={enabled:true,productionMinorBySku:{'shirt-white-XXL':10000},printMinorPerPlacement:2000,feeMinorPerUnit:500,shippingMinor:1000,artworks:{redhood:{artistId:'artist_a',artistName:'A',feeMinor:3000,feeBasis:'per_motif_per_garment',licenseActive:true},other:{artistId:'artist_b',artistName:'B',feeMinor:4000,feeBasis:'per_motif_per_garment',licenseActive:true}}};
+test('A repeated motif incurs one artist fee per garment, with each print charged separately',()=>{const d=presetDesign('front-back','redhood');const p=designerPrice(d,pricing,2);assert.equal(p.totalMinor,36000);assert.equal(p.lines.find(x=>x.kind==='artwork').amountMinor,6000);assert.equal(p.lines.find(x=>x.kind==='printing').amountMinor,8000);assert.deepEqual(p.lines.map(x=>x.kind),['production','printing','fees','artwork','shipping']);});
+test('Different artists remain distinct and unknown costs never become a fabricated total',()=>{const d=replacePrint(presetDesign('duo','redhood'),1,{artworkId:'other'});assert.equal(designerPrice(d,pricing).totalMinor,22500);assert.equal(designerPrice(d,{...pricing,shippingMinor:null}).totalMinor,null);assert.equal(designerPrice(d,{...pricing,artworks:{...pricing.artworks,other:{...pricing.artworks.other,feeBasis:'per_print'}}}).totalMinor,null);assert.equal(designerPrice(d,{...pricing,artworks:{...pricing.artworks,other:{...pricing.artworks.other,licenseActive:false}}}).licensed,false);});
+test('Coordinates reject overlap, oversized printing and precision drift',()=>{const d=presetDesign('duo','redhood');assert.throws(()=>replacePrint(d,0,{widthCm:25}));assert.throws(()=>replacePrint(d,0,{xCm:-1}));assert.throws(()=>replacePrint(d,0,{widthCm:3}));assert.throws(()=>replacePrint(d,0,{xCm:1.001}));assert.throws(()=>normalizeDesign({...d,prints:[...d.prints,...d.prints,...d.prints]}));});
+test('Every design exports the immutable community mark without adding a prisoner number',()=>{const d=presetDesign('custom','redhood');assert.deepEqual(d.branding,{required:true,text:'Stemmen fra innsiden',placement:'front_hem'});assert.throws(()=>normalizeDesign({...d,branding:{...d.branding,required:false}}));assert.throws(()=>normalizeDesign({...d,branding:{...d.branding,text:'someone else'}}));assert.deepEqual(designExport(d).design.branding,d.branding);});
+test('Inside-only label survives presets, edits and exports; legacy designs keep the outside mark',()=>{
+ const d=presetDesign('front-back','redhood',{brandingPlacement:'inside_label'});
+ assert.equal(d.branding.placement,'inside_label');
+ assert.deepEqual(replacePrint(d,0,{widthCm:19}).branding,d.branding);
+ assert.deepEqual(designExport(d).design.branding,d.branding);
+ assert.equal(presetDesign('duo','redhood',{brandingPlacement:d.branding.placement}).branding.placement,'inside_label');
+ const legacy={...d};delete legacy.branding;
+ assert.equal(normalizeDesign(legacy).branding.placement,'front_hem');
+ assert.throws(()=>normalizeDesign({...d,branding:{...d.branding,placement:'none'}}));
+});
+test('Inside-only production is unknown until its own full cost is confirmed, including explicit zero',()=>{
+ const d=presetDesign('front-back','redhood',{brandingPlacement:'inside_label'});
+ const unknown=designerPrice(d,pricing);assert.equal(unknown.totalMinor,null);assert.equal(unknown.lines[0].amountMinor,null);
+ const configured={...pricing,productionMinorByBrandingPlacement:{inside_label:{'shirt-white-XXL':12000}}};
+ const priced=designerPrice(d,configured,2);
+ assert.equal(priced.lines[0].amountMinor,24000);assert.equal(priced.totalMinor,40000);
+ assert.equal(priced.lines.find(x=>x.kind==='artwork').amountMinor,6000);
+ assert.equal(priced.lines.find(x=>x.kind==='printing').amountMinor,8000);
+ configured.productionMinorByBrandingPlacement.inside_label['shirt-white-XXL']=0;
+ assert.equal(designerPrice(d,configured).totalMinor,8500);
+ assert.equal(designerPrice(presetDesign('front-back','redhood'),configured).lines[0].amountMinor,10000);
+});
+test('Cart keeps different layouts and artists separate; inquiries contain exact placement',()=>{const d=presetDesign('duo','redhood'),e=replacePrint(d,1,{artworkId:'other'});let cart=[];for(const design of [d,e])cart=addItem(cart,{product:'shirt',artworkId:'redhood',size:'XXL',quantity:1,design});assert.equal(cart.length,2);const data=inquiry(cart);assert.deepEqual(data.items[1].designSpecification.design,e);assert.match(inquiryText(data),/other/);assert.match(data.items[1].specification,/obligatorisk/);});
+test('Browser design specifications roundtrip through strict server normalization without changing placement or mark',async()=>{const {normalizeMerchDesign}=await import('../worker/merch-design.js');for(const layout of ['back-chest','front-back','duo','trio','custom'])for(const color of ['white','black','navy'])for(const brandingPlacement of ['front_hem','inside_label']){const d=presetDesign(layout,'work_2f93e21d-8991-4cbb-a2b3-6d2e83f945d3',{color,size:'XL',brandingPlacement});assert.deepEqual(normalizeMerchDesign(d),d);}});

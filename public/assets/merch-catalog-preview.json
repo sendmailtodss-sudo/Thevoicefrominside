@@ -1,0 +1,127 @@
+{
+  "enabled": false,
+  "mode": "closed",
+  "status": "not_open",
+  "currency": "NOK",
+  "termsVersion": null,
+  "shippingMinor": null,
+  "seller": null,
+  "products": [
+    {
+      "sku": "shirt-white-S",
+      "type": "shirt",
+      "name": {
+        "no": "Hvit T-skjorte",
+        "en": "White T-shirt"
+      },
+      "size": "S",
+      "color": "white",
+      "priceMinor": null,
+      "available": false
+    },
+    {
+      "sku": "shirt-white-M",
+      "type": "shirt",
+      "name": {
+        "no": "Hvit T-skjorte",
+        "en": "White T-shirt"
+      },
+      "size": "M",
+      "color": "white",
+      "priceMinor": null,
+      "available": false
+    },
+    {
+      "sku": "shirt-white-L",
+      "type": "shirt",
+      "name": {
+        "no": "Hvit T-skjorte",
+        "en": "White T-shirt"
+      },
+      "size": "L",
+      "color": "white",
+      "priceMinor": null,
+      "available": false
+    },
+    {
+      "sku": "shirt-white-XL",
+      "type": "shirt",
+      "name": {
+        "no": "Hvit T-skjorte",
+        "en": "White T-shirt"
+      },
+      "size": "XL",
+      "color": "white",
+      "priceMinor": null,
+      "available": false
+    },
+    {
+      "sku": "shirt-white-XXL",
+      "type": "shirt",
+      "name": {
+        "no": "Hvit T-skjorte",
+        "en": "White T-shirt"
+      },
+      "size": "XXL",
+      "color": "white",
+      "priceMinor": null,
+      "available": false
+    },
+    {
+      "sku": "shirt-white-XXXL",
+      "type": "shirt",
+      "name": {
+        "no": "Hvit T-skjorte",
+        "en": "White T-shirt"
+      },
+      "size": "XXXL",
+      "color": "white",
+      "priceMinor": null,
+      "available": false
+    },
+    {
+      "sku": "wallpaper-custom",
+      "type": "wallpaper",
+      "name": {
+        "no": "Veggtapet etter mål",
+        "en": "Custom wallpaper"
+      },
+      "size": "custom",
+      "priceMinor": null,
+      "available": false
+    },
+    {
+      "sku": "stencil-150x200",
+      "type": "stencil",
+      "name": {
+        "no": "Malingssjablong",
+        "en": "Painting stencil"
+      },
+      "size": "150 × 200 cm",
+      "priceMinor": null,
+      "available": false
+    }
+  ],
+  "artworks": [
+    {
+      "id": "redhood",
+      "name": {
+        "no": "Rødhette i gangen",
+        "en": "Little Red Riding Hood in the corridor"
+      },
+      "image": "/design-assets/merch/redhood.jpeg",
+      "artist": "Innsatt 2601-46",
+      "available": false
+    },
+    {
+      "id": "gjenbruk",
+      "name": {
+        "no": "Gjenbruk",
+        "en": "Reuse"
+      },
+      "image": "/design-assets/book-r8/page-354.webp",
+      "artist": "Innsatt 2601-46",
+      "available": false
+    }
+  ]
+}

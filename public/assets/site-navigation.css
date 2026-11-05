@@ -1,0 +1,47 @@
+/* Shared navigation remains usable without JavaScript or animation. */
+.sfi-header,.sfi-header *{box-sizing:border-box}
+.sfi-header{position:sticky;top:0;z-index:1000;width:100%;max-width:none!important;margin:0!important;padding:0!important;background:#fcfbf7;color:#172b31;border-bottom:1px solid #d9d8cf;font:14px/1.4 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;box-shadow:0 2px 14px #152b3210}
+.sfi-header a{color:inherit;text-decoration:none}
+.sfi-top{max-width:1480px;margin:auto;padding:16px clamp(18px,4vw,64px);display:flex;align-items:center;justify-content:space-between;gap:20px}
+.sfi-brand{display:flex;align-items:center;gap:13px;min-height:44px;flex-shrink:0;font-size:14px;font-weight:750;letter-spacing:.07em;line-height:1.1}
+.sfi-brand-mark{width:33px;height:33px;border:1px solid #977442;border-radius:50%;display:grid;place-items:center;color:#81602f;font:26px Georgia,serif}
+.sfi-brand small{display:block;margin-top:6px;font-size:10px;font-weight:500;letter-spacing:.17em}
+.sfi-quick{display:flex;align-items:center;gap:8px}
+.sfi-quick a{display:inline-flex;align-items:center;min-height:44px;padding:9px 12px;font-weight:600}
+.sfi-quick a:first-child{border:1px solid #b8c7c6;border-radius:3px}
+.sfi-quick .sfi-lar{color:#743f2f}
+.sfi-menu-button{display:none;min-width:68px;min-height:44px;padding:10px 13px;background:#183c43;border:0;border-radius:3px;color:#fff;font:600 14px system-ui;cursor:pointer}
+.sfi-navigation{max-width:1480px;margin:auto;padding:0 clamp(18px,4vw,64px);border-top:1px solid #e7e6df}
+.sfi-navigation ul{list-style:none;display:flex;justify-content:space-between;gap:6px;margin:0;padding:0}
+.sfi-navigation li{margin:0;padding:0}
+.sfi-navigation a{min-height:49px;display:flex;align-items:center;padding:10px 8px;border-bottom:3px solid transparent;font-size:13px;font-weight:580;white-space:nowrap}
+.sfi-navigation a:hover,.sfi-navigation a[aria-current]{color:#8a4c2e;border-bottom-color:#b08043}
+.sfi-header a:focus-visible,.sfi-header button:focus-visible{outline:3px solid #a46c30;outline-offset:3px}
+.sfi-skip{position:fixed;top:-100px;left:16px;z-index:10001;padding:14px;background:#fff;color:#172b31;font:600 16px system-ui}
+.sfi-skip:focus{top:12px}
+html{scroll-padding-top:150px}
+body.sfi-navigation-ready>.mast,body.sfi-navigation-ready>.chapter-nav,body.sfi-navigation-ready>.review-nav,body.sfi-navigation-ready>.movement-header,body.sfi-navigation-ready>header.brand{display:none!important}
+body.sfi-navigation-ready>.sfi-language-bar{max-width:none;margin:0;padding:9px clamp(18px,4vw,64px);background:#f1f2ed;border-bottom:1px solid #dddfd7}
+body.sfi-navigation-ready .ppt-tools{margin:18px auto;padding:16px 22px;max-width:1100px}
+body.sfi-navigation-ready .ppt-tools h2{font-size:22px}
+body.sfi-navigation-ready .ppt-tools .ppt-language{display:flex;align-items:center;gap:12px}
+body.sfi-navigation-ready .ppt-tools select{width:auto;max-width:240px;min-height:44px}
+.sfi-directory{padding:clamp(22px,4vw,44px);margin:30px 0 44px;background:#f1f3ed;border:1px solid #d4ddd6;font-family:system-ui,sans-serif}
+.sfi-directory h2{font:clamp(27px,4vw,39px)/1.15 Georgia,serif;margin:0 0 14px;color:#173b43}
+.sfi-directory p{font:16px/1.65 system-ui,sans-serif}
+.sfi-directory-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:22px}
+.sfi-directory-grid a{display:block;padding:21px;background:#fff;border:1px solid #d7ded7;text-decoration:none;color:#163c44}
+.sfi-directory-grid a:hover{border-color:#9c763d;background:#fffdf7}
+.sfi-directory-grid strong{display:block;font:600 19px/1.35 system-ui,sans-serif}
+.sfi-directory-grid span{display:block;margin-top:9px;font:14px/1.65 system-ui,sans-serif;color:#425856}
+.sfi-directory-grid small{display:block;margin-top:13px;font:12px/1.5 system-ui;color:#6a5740}
+.sfi-directory-grid a:focus-visible{outline:3px solid #956c2d;outline-offset:3px}
+@media(max-width:1050px){.sfi-navigation a{font-size:12px;padding-inline:4px}.sfi-top{padding-block:10px}.sfi-brand{font-size:12px}.sfi-quick a{padding-inline:9px}}
+@media(max-width:780px){.sfi-top{gap:9px;flex-wrap:wrap;padding:11px 18px}.sfi-brand{font-size:11px;letter-spacing:.04em}.sfi-brand small{font-size:9px}.sfi-brand-mark{width:29px;height:29px}.sfi-quick{margin-left:auto;gap:2px}.sfi-quick a{font-size:12px;padding:8px}.sfi-quick .sfi-lar{display:none}.sfi-menu-button{display:block}.sfi-navigation ul{display:grid;grid-template-columns:1fr 1fr;gap:0 14px}.sfi-navigation{padding:8px 18px 14px;max-height:68vh;overflow:auto;overscroll-behavior:contain}.sfi-navigation a{font-size:14px;white-space:normal;min-height:48px}.sfi-header[data-collapsed="true"] .sfi-navigation{display:none}html{scroll-padding-top:100px}.sfi-directory{padding:22px 18px}.sfi-directory-grid{grid-template-columns:1fr}.sfi-directory-grid a{padding:18px}}
+@media(max-width:390px){.sfi-brand-mark{display:none}.sfi-brand{font-size:10px}.sfi-top{padding-inline:12px;gap:6px}.sfi-quick a{font-size:11px;padding:6px}.sfi-menu-button{min-width:56px;padding:8px}.sfi-brand small{font-size:8px}}
+@media print{.sfi-header,.sfi-skip{display:none!important}}
+
+.sfi-navigation .sfi-mobile-lar{display:none}@media(max-width:780px){.sfi-navigation .sfi-mobile-lar{display:block}}
+
+/* The shared masthead supplies the brand; retain the local language selector. */
+.sfi-navigation-ready>.ac-header{justify-content:flex-end;padding-block:10px;border-bottom:0}.sfi-navigation-ready>.ac-header>.ac-brand{display:none}

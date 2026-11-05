@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; worker-src 'none'">
+  <title>Rettsspeil – private prototype | Stemmen fra innsiden</title>
+  <link rel="stylesheet" href="/assets/study.css">
+  <script type="module" src="/assets/study-app.mjs"></script>
+<link rel="stylesheet" href="/assets/i18n.css"><script defer src="/assets/i18n.js"></script><link rel="stylesheet" href="/assets/site-navigation.css"><script defer src="/assets/site-navigation.js"></script><meta name="robots" content="noindex,nofollow"><link rel="stylesheet" href="/dev-assets/preview.css"></head>
+<body class="sfi-navigation-ready"><aside id="dev-preview-notice" class="dev-preview-notice">Development preview · Example media and editorial content · Server services are disabled.</aside>
+<!-- site-navigation-start -->
+<a class="sfi-skip" href="#main">Skip to content</a>
+<header class="sfi-header" data-site-navigation>
+ <div class="sfi-top"><a class="sfi-brand" href="/en/"><span class="sfi-brand-mark" aria-hidden="true">✦</span><span>STEMMEN FRA INNSIDEN<small>THE VOICE FROM INSIDE</small></span></a>
+ <div class="sfi-quick"><a href="/en/rettsspeil/">Justice mirror</a><a class="sfi-lar" href="/en/dagbok/lar-bak-murene/">LAR</a><a data-language-link href="/rettsspeil/" lang="nb">Norsk</a></div>
+ <button class="sfi-menu-button" data-menu-toggle aria-controls="sfi-navigation" aria-expanded="true" type="button">Menu</button></div>
+ <nav class="sfi-navigation" id="sfi-navigation" aria-label="Main navigation"><ul><li><a href="/en/dagbok/">Diary from Inside</a></li><li><a href="/en/boken/">The book</a></li><li><a href="/en/art-community/">Art community</a></li><li><a href="/en/verksted/">Workshop</a></li><li><a href="/en/fight-for-whats-right/">Fight for what&#x27;s right</a></li><li><a href="/en/presse/">Free press</a></li><li><a href="/en/collaborate/">Collaborate</a></li><li class="sfi-mobile-lar"><a href="/en/dagbok/lar-bak-murene/">LAR diary</a></li></ul></nav>
+</header>
+<!-- site-navigation-end -->
+<div class="review-banner">Local tools and prototypes. Real submissions and payments are not open.</div>
+<header class="masthead"><a href="/en/">STEMMEN FRA INNSIDEN</a><span>Local prototype · no external case submissions</span><nav aria-label="Language"><a href="/rettsspeil/" lang="nb">🇳🇴 Norsk</a> · <a href="/en/rettsspeil/" lang="en" aria-current="page">🇬🇧 English</a></nav></header>
+<main id="main">
+  <section class="hero" aria-labelledby="hero-title">
+    <p class="eyebrow">Documentation · solidarity · independent review</p>
+    <h1 id="hero-title">Rettsspeil</h1>
+    <p class="lead">When more people ask the same questions, we can examine them together.</p>
+    <p>A workspace for understanding decisions and examining patterns in administrative procedures. The aim is a verifiable basis for professional review, access to records and possible legal assistance.</p>
+    <div class="notice"><strong>This is a prototype.</strong> You can try local text review and a simulated study. Real study submissions, contact registration, external AI analysis and payments are closed. The analysis examples and account demonstration use fictional test data. A separate section displays only a confirmed account report, if one is available from the server.</div>
+    <nav class="section-nav" aria-label="On this page"><a href="#path">Three phases towards legal assessment</a><a href="#progress">Follow progress</a><a href="#local">1. Understand a decision</a><a href="#study">2. Explore the study</a><a href="#fund">3. Explore the lawyer-held account</a><a href="#participation">Before participation opens</a></nav>
+  </section>
+
+  <section id="path" class="panel" aria-labelledby="path-title">
+    <p class="eyebrow">Build the evidence base and funding in parallel</p>
+    <h2 id="path-title">Three phases – legal assessment when the basis is ready</h2>
+    <ol class="phase-grid"><li><strong>1. Collect and analyse</strong><p>Decisions receive preliminary analysis while contributions are collected by the lawyer responsible for the account. Each decision can count as machine-analysed without prior legal assessment. Account administration and reconciliation are a separate engagement.</p></li><li><strong>2. Invite an assessment</strong><p>Once enough distinct decisions have received preliminary analysis and a current account report confirms sufficient available funds, a lawyer can be invited to assess the material. No invitation is sent automatically.</p></li><li><strong>3. Independent legal assessment</strong><p>The lawyer decides whether there are grounds for an engagement and whether to accept it. Later use of funds requires a mandate, agreed terms and a budget. A full progress indicator is not a legal conclusion.</p></li></ol>
+    <h3>Two conditions must be documented</h3>
+    <div id="study-readiness-live" class="readiness-grid" aria-live="polite"><article class="readiness-card"><h4>Preliminary analysis base</h4><p>No confirmed analysis report yet</p></article><article class="readiness-card"><h4>Available funding</h4><p>No confirmed account report yet</p></article></div>
+    <p class="small">Real analysis collection has not opened. The test figures below never populate this section and cannot be combined with a real account report to indicate that the project is ready.</p>
+  </section>
+
+  <section id="progress" class="panel progress-panel" aria-labelledby="progress-title">
+    <p class="eyebrow">Progress · controlled report releases</p>
+    <h2 id="progress-title">See the work move forward</h2>
+    <p class="lead progress-lead">More participants. More decisions preliminarily analysed. A clearer basis for a later legal assessment.</p>
+    <p>Readers should be able to follow the material before the lawyer-assessment phase: decisions received, decisions machine-analysed and flags for possible review needs. A machine flag is neither a probability nor an established breach of law.</p>
+    <div class="notice"><strong>All figures here are fictional test data.</strong> No real submissions are collected. Try the three releases to see how a controlled update can be displayed.</div>
+    <div class="progress-toolbar"><div id="progress-report-meta" aria-live="polite"></div><div class="actions"><button id="progress-next" type="button">Show next test period</button><button id="progress-reset" type="button" class="secondary">Return to first test period</button><button id="progress-export" type="button" class="secondary">Download progress report</button></div></div>
+    <p id="progress-message" class="status" role="status"></p>
+    <div id="progress-totals" class="progress-totals" aria-live="polite"></div>
+    <div class="progress-units"><p><strong>People:</strong> Each participant with an accepted decision is counted once.</p><p><strong>Decisions:</strong> Resubmitting a file must not make the same decision count again.</p><p><strong>Checkpoints:</strong> One legal provision assessed in one decision. Several checkpoints may concern the same person and decision.</p></div>
+    <h3>Where does the review stand?</h3>
+    <p>Machine analysis, human checking and legal assessment are shown separately. A decision counts as fully machine-analysed when every planned checkpoint has machine-analysis provenance. Prior legal assessment is not required. Missing documents may remain unresolved, and a flag only means that something should be checked. Retained machine flags may later concern the same points that receive human or legal review; these counts must not be added together.</p>
+    <div id="progress-review-status" class="progress-status-grid"></div>
+    <h3>Legal provisions assessed</h3>
+    <p class="small">The table counts checkpoints per provision. Its example references illustrate the method; they are not a completed check of current law. One decision may appear in several rows.</p>
+    <div id="progress-provisions" class="progress-table-wrap" tabindex="0" role="region" aria-label="Checkpoints per legal provision. The table scrolls sideways on narrow screens."></div>
+    <h3>Next working milestones</h3>
+    <p class="small">Milestones describe workload in this test. No milestone opens collection, releases money or starts legal proceedings.</p>
+    <div id="progress-milestones" class="progress-milestones"></div>
+    <details><summary>How updates should be checked</summary><p>A public report must have checked underlying material and a visible date. Small groups and small changes are withheld where they might reveal participation. Figures for priority or lawyer-reviewed issues require material from at least ten distinct people before display; their relationship to earlier releases must also be checked. This does not guarantee anonymity.</p><p>Duplicate checking is demonstrated here with test keys. Verification of distinct real people and decisions, analysis provenance and central approval of reports must be established before real submissions. A local text review or MAITE draft does not automatically enter the overview.</p><p>This example has its own underlying data. The institution breakdown and lawyer-held account below are separate demonstrations with different units and test figures.</p><p><a href="/en/gjennomgang/fremdrift/">Read the definitions and progress-overview plan</a>.</p></details>
+  </section>
+
+  <section id="local" class="panel" aria-labelledby="local-title">
+    <p class="eyebrow">Step 1 · in this browser tab</p>
+    <h2 id="local-title">Understand a decision</h2>
+    <p>Fixed search rules look for Norwegian wording and find potentially relevant excerpts and questions. The interface is translated; your source text stays unchanged. This is <strong>not an AI analysis or legal assessment</strong>, and a missing match does not establish non-compliance. The tool does not determine guilt, motive, appeal deadlines or compensation claims.</p>
+    <form id="study-local-form" autocomplete="off">
+      <div class="field-row"><label for="study-authority">Which authority does the text concern?<select id="study-authority"><option value="kriminalomsorg">Norwegian Correctional Service: prison, region or KDI</option><option value="nav">NAV</option><option value="barnevern">Child welfare services</option><option value="statsforvalteren">County Governor</option><option value="tilsynsradet">Supervisory Council</option><option value="sivilombudet">Parliamentary Ombud</option></select></label><label for="study-file">Open a local text file (.txt, maximum 1 MB)<input id="study-file" type="file" accept=".txt,text/plain"></label></div>
+      <p class="small">Have several documents, a PDF or a scanned letter? <a href="/en/maite/">Open the new MAITE case workspace</a> for a document register, local OCR, receipt dates, chronology and drafts. This simpler text review keeps its own workspace.</p>
+      <label for="study-source">Decision text<textarea id="study-source" rows="10" maxlength="160000" spellcheck="false" placeholder="Try the example below. For your own text, first remove unnecessary names, national identifiers and other identifying details."></textarea></label>
+      <label class="check"><input id="study-complete" type="checkbox"> I have also examined relevant attachments and earlier decisions. This is my own statement, not verified by the system.</label>
+      <div class="actions"><button type="button" id="study-example" class="secondary">Insert synthetic example</button><button type="button" id="study-analyze">Review the text locally</button><button type="button" id="study-clear" class="secondary">Clear this workspace</button></div>
+      <p class="small">The text is not sent to a server or AI provider. This page uses no analytics service or browser storage for case content. “Clear” removes content from the interface and program references. Secure erasure from the device, browser memory, extensions or your original files cannot be guaranteed.</p>
+    </form>
+    <p id="study-status" class="status" role="status" aria-live="polite"></p>
+    <div id="study-review" hidden></div>
+    <div id="study-export-wrap" hidden><button id="study-export" type="button">Download private working note</button><p class="small">The note may contain your excerpts and comments. It is not anonymised and must not be published. Downloading sends nothing.</p></div>
+    <details><summary>What about automatic AI analysis?</summary><p><a href="/en/analyseverksted/">Open the analysis workshop</a> for multiple documents, dated legal texts and checks of structured model results against exact quotations. A separate local runner has been built for a selected AI provider, but requires an API key and explicit approval of the content before transmission. No real cases have been sent and no model account is connected. Preliminary machine analysis does not require prior legal assessment. Source checking does not establish legal correctness, and private results do not automatically enter public statistics. “Maximum effort” or a long processing time does not guarantee a correct answer.</p></details>
+  </section>
+
+  <section id="study" class="panel" aria-labelledby="study-title">
+    <p class="eyebrow">Step 2 · synthetic test data only</p>
+    <h2 id="study-title">Example institution breakdown</h2>
+    <p>This is a separate method exercise with its own synthetic cases, not a breakdown of the progress figures above. Statistics can show which checkpoints need further work. They cannot alone establish that anyone deliberately broke the law. Test material is grouped by institution, broad function and year, without names or prisoner numbers.</p>
+    <div class="actions"><button id="study-demo-normal" type="button">Show synthetic study</button><button id="study-demo-small" class="secondary" type="button">Try a small dataset</button><button id="study-aggregate-export" class="secondary" type="button">Download test statistics</button></div>
+    <div id="study-cohorts" aria-live="polite"></div>
+    <div class="method-grid"><div><h3>Each case counts once</h3><p>Several decisions or uploads from one case must be reconciled before counting. Duplicate checking is demonstrated with fixed test IDs. Linking real cases requires a separate, controlled process.</p></div><div><h3>Small counts are withheld</h3><p>At least 10 cases per visible cell. The entire category breakdown is withheld where a small cell could otherwise be calculated. Fixed releases and restrictions on small changes limit inference between reports. This does not guarantee anonymity.</p></div><div><h3>Counterevidence matters too</h3><p>Completeness, document versions, appeals and information supporting the decision must accompany private review. A self-selected sample cannot show how common an error is across the correctional service.</p></div></div>
+  </section>
+
+  <section id="fund" class="panel" aria-labelledby="fund-title">
+    <p class="eyebrow">Funding alongside analysis</p>
+    <h2 id="fund-title">Legal assistance – funds held by the lawyer</h2>
+    <p>The plan is for contributions to go directly to a suitable account controlled only by the project's account lawyer, if the lawyer and bank accept the arrangement. The lawyer may take on account administration and reconciliation before a later engagement to assess litigation. The website, project owner and AI tool must not be able to withdraw or transfer money.</p>
+    <div class="notice"><strong>No fundraising is open.</strong> Account administration, authority over funds and contribution terms must be settled separately. There is no account number or payment button here. The server report and local demonstration below are clearly separated.</div>
+    <div class="method-grid"><div><h3>Funds held by the lawyer</h3><p>The lawyer confirms receipts against the bank statement and keeps records under the agreed arrangement. A pledge does not count as money received.</p></div><div><h3>A defined engagement</h3><p>Funds may only pay for agreed legal assistance. Once sufficient analysed material and confirmed funding are available, a lawyer is invited to assess the material, a possible engagement and its budget. A case count or AI assessment cannot start proceedings or trigger payment.</p></div><div><h3>Returning unused funds</h3><p>Terms must specify deadlines, costs and when funds must be returned. The system can prepare a refund list when the conditions are met. The lawyer makes the transfers and confirms them against the bank.</p></div></div>
+    <h3>Confirmed account report</h3>
+    <p>This section retrieves only dated aggregate amounts from the server's reporting service. The designated account reporter confirms the figures; the website has no bank access. Donor names, account numbers, payment references and individual cases are not published.</p>
+    <div id="study-fund-real-report" class="fund-report real-fund-report" aria-live="polite"><p>No confirmed account report yet</p></div>
+    <div class="actions"><button id="fund-real-refresh" class="secondary" type="button">Fetch latest account report</button><a class="button-link" href="/en/lawyer-account/">Open the account report</a><a class="button-link" href="/assets/review/advokatkonto-avtaleutkast.txt" download>Download draft agreement for the lawyer (Norwegian)</a><a href="/en/gjennomgang/advokatkonto/">Read the full proposal</a></div>
+    <details class="fund-demo" open><summary>Try the account workflow with fictional amounts</summary>
+      <p>The example has a six-month collection period, seven days for assessment, then seven days to register any disbursement. Its test goals are NOK 5,000 in reconciled available funds and 100 preliminarily machine-analysed decisions. These are demonstration values, not agreed terms for real fundraising. The analysis button represents the analysis operator; account buttons represent the account lawyer. The separate legal assessment is tried only after both goals are met. The buttons confer no login or authority over funds and perform no AI analysis.</p>
+      <div id="study-fund-readiness" class="readiness-demo" aria-live="polite"></div>
+      <div id="study-fund-summary" aria-live="polite"></div>
+      <div class="actions"><button id="fund-analysis" type="button">Register preliminary analysis: 100 test decisions</button><button id="fund-pay" type="button">Register test receipt: NOK 5,000</button><button id="fund-reconcile" class="secondary" type="button">Simulate the lawyer's bank reconciliation</button><button id="fund-mismatch" class="secondary" type="button">Try a bank-statement discrepancy</button><button id="fund-review" class="secondary" type="button">Simulate the lawyer's later assessment</button><button id="fund-lawyer" class="secondary" type="button">Simulate the lawyer's budget approval</button><button id="fund-payout" class="secondary" type="button">Register confirmed test disbursement</button></div>
+      <div class="actions"><button id="fund-expire" class="secondary" type="button">Simulate expiry of deadlines</button><button id="fund-cancel" class="secondary" type="button">Simulate loss of the basis for proceeding</button><button id="fund-refund" class="secondary" type="button">Register confirmed test refunds</button><button id="fund-reset" class="secondary" type="button">Restart the demonstration</button></div>
+      <h3>Reconciled test report · fictional amounts only</h3>
+      <div id="study-fund-report" class="fund-report" aria-live="polite"></div>
+      <div class="actions"><button id="fund-report" type="button" class="secondary" disabled>Download aggregate test report</button></div>
+      <p id="fund-status" class="status" role="status"></p>
+      <p class="small">An approval to use funds is not a bank transfer. A refund list is not a completed refund. Confirmed totals change only when a corresponding bank event is registered in the demonstration. Real bank controls must follow the agreement with the lawyer and bank.</p>
+    </details>
+  </section>
+
+  <section id="participation" class="panel" aria-labelledby="participation-title">
+    <h2 id="participation-title">What you should be able to consider before participating</h2>
+    <p>The first real pilot must be limited to adults aged 18 or over. Participation must be voluntary and separate from decisions about imprisonment, treatment or benefits. Declining or withdrawing must have no adverse consequences. Other people's information, particularly children's, requires separate assessment even where the submitter is an adult.</p><ol class="steps"><li><strong>Understand the purpose.</strong> The study must test questions using an open method and also record findings that do not support the suspicion.</li><li><strong>Check the documents.</strong> Keep your originals. Distinguish personal experience, the document's wording and assessment. Appeal deadlines must be handled independently of the project.</li><li><strong>Understand what may be shared.</strong> Private review is separate from permission to enter a study or publish material.</li><li><strong>Choose any later contact separately.</strong> A contact link makes information pseudonymised, not anonymous. An independent custodian must control that link. Contact information must not appear in public statistics.</li><li><strong>A new request if a case becomes possible.</strong> A lawyer must check originals and seek fresh consent and an engagement before information is used in a specific case. Nobody automatically becomes a party to litigation.</li><li><strong>Understand withdrawal and retention.</strong> It must be clear what can be withdrawn, what has already been aggregated and published, and how long each type of information is retained.</li></ol>
+    <div class="notice"><strong>Participation is not open.</strong> No checkbox on this page activates real collection. A legal basis for processing health information and criminal-offence data, among other types, must be assessed separately. Consent alone does not resolve every requirement.</div>
+    <details><summary>Before a public launch</summary><ul id="study-gates"></ul><p>The project owner must approve the working version. A verifiable method, security review and defined operational responsibility must precede real collection.</p></details>
+  </section>
+</main>
+<footer><p>Rettsspeil · Stemmen fra innsiden · Private prototype</p><p>Analysis examples are fictional. Any confirmed account amounts appear only in their dedicated reporting section, without donor information.</p><a href="/en/klagehjelp/">Open existing appeal assistance</a> · <a href="/en/innsyn/">Find access-request templates</a></footer>
+</body></html>

@@ -1,0 +1,577 @@
+{
+  "version": 1,
+  "items": [
+    {
+      "id": "gjenbruk",
+      "name": {
+        "no": "Eksempelverk 01",
+        "en": "Example artwork 01"
+      },
+      "image": "/design-assets/demo/example-art.png",
+      "thumbnail": "/design-assets/demo/example-art.png",
+      "page": 354,
+      "artistId": "project-innsatt260146",
+      "artistName": "Example artist",
+      "medium": "development-placeholder",
+      "original": {
+        "editionSize": null,
+        "status": "not_listed",
+        "verification": "none"
+      },
+      "reproduction": {
+        "status": "preview_only",
+        "priceOre": null,
+        "currency": "NOK"
+      },
+      "commercialLicense": {
+        "status": "not_confirmed"
+      }
+    },
+    {
+      "id": "book-page-12",
+      "name": {
+        "no": "Eksempelverk 02",
+        "en": "Example artwork 02"
+      },
+      "image": "/design-assets/demo/example-art.png",
+      "thumbnail": "/design-assets/demo/example-art.png",
+      "page": 12,
+      "artistId": "project-innsatt260146",
+      "artistName": "Example artist",
+      "medium": "development-placeholder",
+      "original": {
+        "editionSize": null,
+        "status": "not_listed",
+        "verification": "none"
+      },
+      "reproduction": {
+        "status": "preview_only",
+        "priceOre": null,
+        "currency": "NOK"
+      },
+      "commercialLicense": {
+        "status": "not_confirmed"
+      }
+    },
+    {
+      "id": "book-page-14",
+      "name": {
+        "no": "Eksempelverk 03",
+        "en": "Example artwork 03"
+      },
+      "image": "/design-assets/demo/example-art.png",
+      "thumbnail": "/design-assets/demo/example-art.png",
+      "page": 14,
+      "artistId": "project-innsatt260146",
+      "artistName": "Example artist",
+      "medium": "development-placeholder",
+      "original": {
+        "editionSize": null,
+        "status": "not_listed",
+        "verification": "none"
+      },
+      "reproduction": {
+        "status": "preview_only",
+        "priceOre": null,
+        "currency": "NOK"
+      },
+      "commercialLicense": {
+        "status": "not_confirmed"
+      }
+    },
+    {
+      "id": "book-page-18",
+      "name": {
+        "no": "Eksempelverk 04",
+        "en": "Example artwork 04"
+      },
+      "image": "/design-assets/demo/example-art.png",
+      "thumbnail": "/design-assets/demo/example-art.png",
+      "page": 18,
+      "artistId": "project-innsatt260146",
+      "artistName": "Example artist",
+      "medium": "development-placeholder",
+      "original": {
+        "editionSize": null,
+        "status": "not_listed",
+        "verification": "none"
+      },
+      "reproduction": {
+        "status": "preview_only",
+        "priceOre": null,
+        "currency": "NOK"
+      },
+      "commercialLicense": {
+        "status": "not_confirmed"
+      }
+    },
+    {
+      "id": "book-page-22",
+      "name": {
+        "no": "Eksempelverk 05",
+        "en": "Example artwork 05"
+      },
+      "image": "/design-assets/demo/example-art.png",
+      "thumbnail": "/design-assets/demo/example-art.png",
+      "page": 22,
+      "artistId": "project-innsatt260146",
+      "artistName": "Example artist",
+      "medium": "development-placeholder",
+      "original": {
+        "editionSize": null,
+        "status": "not_listed",
+        "verification": "none"
+      },
+      "reproduction": {
+        "status": "preview_only",
+        "priceOre": null,
+        "currency": "NOK"
+      },
+      "commercialLicense": {
+        "status": "not_confirmed"
+      }
+    },
+    {
+      "id": "book-page-34",
+      "name": {
+        "no": "Eksempelverk 06",
+        "en": "Example artwork 06"
+      },
+      "image": "/design-assets/demo/example-art.png",
+      "thumbnail": "/design-assets/demo/example-art.png",
+      "page": 34,
+      "artistId": "project-innsatt260146",
+      "artistName": "Example artist",
+      "medium": "development-placeholder",
+      "original": {
+        "editionSize": null,
+        "status": "not_listed",
+        "verification": "none"
+      },
+      "reproduction": {
+        "status": "preview_only",
+        "priceOre": null,
+        "currency": "NOK"
+      },
+      "commercialLicense": {
+        "status": "not_confirmed"
+      }
+    },
+    {
+      "id": "book-page-38",
+      "name": {
+        "no": "Eksempelverk 07",
+        "en": "Example artwork 07"
+      },
+      "image": "/design-assets/demo/example-art.png",
+      "thumbnail": "/design-assets/demo/example-art.png",
+      "page": 38,
+      "artistId": "project-innsatt260146",
+      "artistName": "Example artist",
+      "medium": "development-placeholder",
+      "original": {
+        "editionSize": null,
+        "status": "not_listed",
+        "verification": "none"
+      },
+      "reproduction": {
+        "status": "preview_only",
+        "priceOre": null,
+        "currency": "NOK"
+      },
+      "commercialLicense": {
+        "status": "not_confirmed"
+      }
+    },
+    {
+      "id": "book-page-42",
+      "name": {
+        "no": "Eksempelverk 08",
+        "en": "Example artwork 08"
+      },
+      "image": "/design-assets/demo/example-art.png",
+      "thumbnail": "/design-assets/demo/example-art.png",
+      "page": 42,
+      "artistId": "project-innsatt260146",
+      "artistName": "Example artist",
+      "medium": "development-placeholder",
+      "original": {
+        "editionSize": null,
+        "status": "not_listed",
+        "verification": "none"
+      },
+      "reproduction": {
+        "status": "preview_only",
+        "priceOre": null,
+        "currency": "NOK"
+      },
+      "commercialLicense": {
+        "status": "not_confirmed"
+      }
+    },
+    {
+      "id": "book-page-122",
+      "name": {
+        "no": "Eksempelverk 09",
+        "en": "Example artwork 09"
+      },
+      "image": "/design-assets/demo/example-art.png",
+      "thumbnail": "/design-assets/demo/example-art.png",
+      "page": 122,
+      "artistId": "project-innsatt260146",
+      "artistName": "Example artist",
+      "medium": "development-placeholder",
+      "original": {
+        "editionSize": null,
+        "status": "not_listed",
+        "verification": "none"
+      },
+      "reproduction": {
+        "status": "preview_only",
+        "priceOre": null,
+        "currency": "NOK"
+      },
+      "commercialLicense": {
+        "status": "not_confirmed"
+      }
+    },
+    {
+      "id": "book-page-184",
+      "name": {
+        "no": "Eksempelverk 10",
+        "en": "Example artwork 10"
+      },
+      "image": "/design-assets/demo/example-art.png",
+      "thumbnail": "/design-assets/demo/example-art.png",
+      "page": 184,
+      "artistId": "project-innsatt260146",
+      "artistName": "Example artist",
+      "medium": "development-placeholder",
+      "original": {
+        "editionSize": null,
+        "status": "not_listed",
+        "verification": "none"
+      },
+      "reproduction": {
+        "status": "preview_only",
+        "priceOre": null,
+        "currency": "NOK"
+      },
+      "commercialLicense": {
+        "status": "not_confirmed"
+      }
+    },
+    {
+      "id": "book-page-218",
+      "name": {
+        "no": "Eksempelverk 11",
+        "en": "Example artwork 11"
+      },
+      "image": "/design-assets/demo/example-art.png",
+      "thumbnail": "/design-assets/demo/example-art.png",
+      "page": 218,
+      "artistId": "project-innsatt260146",
+      "artistName": "Example artist",
+      "medium": "development-placeholder",
+      "original": {
+        "editionSize": null,
+        "status": "not_listed",
+        "verification": "none"
+      },
+      "reproduction": {
+        "status": "preview_only",
+        "priceOre": null,
+        "currency": "NOK"
+      },
+      "commercialLicense": {
+        "status": "not_confirmed"
+      }
+    },
+    {
+      "id": "book-page-224",
+      "name": {
+        "no": "Eksempelverk 12",
+        "en": "Example artwork 12"
+      },
+      "image": "/design-assets/demo/example-art.png",
+      "thumbnail": "/design-assets/demo/example-art.png",
+      "page": 224,
+      "artistId": "project-innsatt260146",
+      "artistName": "Example artist",
+      "medium": "development-placeholder",
+      "original": {
+        "editionSize": null,
+        "status": "not_listed",
+        "verification": "none"
+      },
+      "reproduction": {
+        "status": "preview_only",
+        "priceOre": null,
+        "currency": "NOK"
+      },
+      "commercialLicense": {
+        "status": "not_confirmed"
+      }
+    },
+    {
+      "id": "book-page-256",
+      "name": {
+        "no": "Eksempelverk 13",
+        "en": "Example artwork 13"
+      },
+      "image": "/design-assets/demo/example-art.png",
+      "thumbnail": "/design-assets/demo/example-art.png",
+      "page": 256,
+      "artistId": "project-innsatt260146",
+      "artistName": "Example artist",
+      "medium": "development-placeholder",
+      "original": {
+        "editionSize": null,
+        "status": "not_listed",
+        "verification": "none"
+      },
+      "reproduction": {
+        "status": "preview_only",
+        "priceOre": null,
+        "currency": "NOK"
+      },
+      "commercialLicense": {
+        "status": "not_confirmed"
+      }
+    },
+    {
+      "id": "book-page-324",
+      "name": {
+        "no": "Eksempelverk 14",
+        "en": "Example artwork 14"
+      },
+      "image": "/design-assets/demo/example-art.png",
+      "thumbnail": "/design-assets/demo/example-art.png",
+      "page": 324,
+      "artistId": "project-innsatt260146",
+      "artistName": "Example artist",
+      "medium": "development-placeholder",
+      "original": {
+        "editionSize": null,
+        "status": "not_listed",
+        "verification": "none"
+      },
+      "reproduction": {
+        "status": "preview_only",
+        "priceOre": null,
+        "currency": "NOK"
+      },
+      "commercialLicense": {
+        "status": "not_confirmed"
+      }
+    },
+    {
+      "id": "book-page-336",
+      "name": {
+        "no": "Eksempelverk 15",
+        "en": "Example artwork 15"
+      },
+      "image": "/design-assets/demo/example-art.png",
+      "thumbnail": "/design-assets/demo/example-art.png",
+      "page": 336,
+      "artistId": "project-innsatt260146",
+      "artistName": "Example artist",
+      "medium": "development-placeholder",
+      "original": {
+        "editionSize": null,
+        "status": "not_listed",
+        "verification": "none"
+      },
+      "reproduction": {
+        "status": "preview_only",
+        "priceOre": null,
+        "currency": "NOK"
+      },
+      "commercialLicense": {
+        "status": "not_confirmed"
+      }
+    },
+    {
+      "id": "book-page-340",
+      "name": {
+        "no": "Eksempelverk 16",
+        "en": "Example artwork 16"
+      },
+      "image": "/design-assets/demo/example-art.png",
+      "thumbnail": "/design-assets/demo/example-art.png",
+      "page": 340,
+      "artistId": "project-innsatt260146",
+      "artistName": "Example artist",
+      "medium": "development-placeholder",
+      "original": {
+        "editionSize": null,
+        "status": "not_listed",
+        "verification": "none"
+      },
+      "reproduction": {
+        "status": "preview_only",
+        "priceOre": null,
+        "currency": "NOK"
+      },
+      "commercialLicense": {
+        "status": "not_confirmed"
+      }
+    },
+    {
+      "id": "book-page-344",
+      "name": {
+        "no": "Eksempelverk 17",
+        "en": "Example artwork 17"
+      },
+      "image": "/design-assets/demo/example-art.png",
+      "thumbnail": "/design-assets/demo/example-art.png",
+      "page": 344,
+      "artistId": "project-innsatt260146",
+      "artistName": "Example artist",
+      "medium": "development-placeholder",
+      "original": {
+        "editionSize": null,
+        "status": "not_listed",
+        "verification": "none"
+      },
+      "reproduction": {
+        "status": "preview_only",
+        "priceOre": null,
+        "currency": "NOK"
+      },
+      "commercialLicense": {
+        "status": "not_confirmed"
+      }
+    },
+    {
+      "id": "book-page-348",
+      "name": {
+        "no": "Eksempelverk 18",
+        "en": "Example artwork 18"
+      },
+      "image": "/design-assets/demo/example-art.png",
+      "thumbnail": "/design-assets/demo/example-art.png",
+      "page": 348,
+      "artistId": "project-innsatt260146",
+      "artistName": "Example artist",
+      "medium": "development-placeholder",
+      "original": {
+        "editionSize": null,
+        "status": "not_listed",
+        "verification": "none"
+      },
+      "reproduction": {
+        "status": "preview_only",
+        "priceOre": null,
+        "currency": "NOK"
+      },
+      "commercialLicense": {
+        "status": "not_confirmed"
+      }
+    },
+    {
+      "id": "book-page-352",
+      "name": {
+        "no": "Eksempelverk 19",
+        "en": "Example artwork 19"
+      },
+      "image": "/design-assets/demo/example-art.png",
+      "thumbnail": "/design-assets/demo/example-art.png",
+      "page": 352,
+      "artistId": "project-innsatt260146",
+      "artistName": "Example artist",
+      "medium": "development-placeholder",
+      "original": {
+        "editionSize": null,
+        "status": "not_listed",
+        "verification": "none"
+      },
+      "reproduction": {
+        "status": "preview_only",
+        "priceOre": null,
+        "currency": "NOK"
+      },
+      "commercialLicense": {
+        "status": "not_confirmed"
+      }
+    },
+    {
+      "id": "book-page-358",
+      "name": {
+        "no": "Eksempelverk 20",
+        "en": "Example artwork 20"
+      },
+      "image": "/design-assets/demo/example-art.png",
+      "thumbnail": "/design-assets/demo/example-art.png",
+      "page": 358,
+      "artistId": "project-innsatt260146",
+      "artistName": "Example artist",
+      "medium": "development-placeholder",
+      "original": {
+        "editionSize": null,
+        "status": "not_listed",
+        "verification": "none"
+      },
+      "reproduction": {
+        "status": "preview_only",
+        "priceOre": null,
+        "currency": "NOK"
+      },
+      "commercialLicense": {
+        "status": "not_confirmed"
+      }
+    },
+    {
+      "id": "book-page-366",
+      "name": {
+        "no": "Eksempelverk 21",
+        "en": "Example artwork 21"
+      },
+      "image": "/design-assets/demo/example-art.png",
+      "thumbnail": "/design-assets/demo/example-art.png",
+      "page": 366,
+      "artistId": "project-innsatt260146",
+      "artistName": "Example artist",
+      "medium": "development-placeholder",
+      "original": {
+        "editionSize": null,
+        "status": "not_listed",
+        "verification": "none"
+      },
+      "reproduction": {
+        "status": "preview_only",
+        "priceOre": null,
+        "currency": "NOK"
+      },
+      "commercialLicense": {
+        "status": "not_confirmed"
+      }
+    },
+    {
+      "id": "book-page-384",
+      "name": {
+        "no": "Eksempelverk 22",
+        "en": "Example artwork 22"
+      },
+      "image": "/design-assets/demo/example-art.png",
+      "thumbnail": "/design-assets/demo/example-art.png",
+      "page": 384,
+      "artistId": "project-innsatt260146",
+      "artistName": "Example artist",
+      "medium": "development-placeholder",
+      "original": {
+        "editionSize": null,
+        "status": "not_listed",
+        "verification": "none"
+      },
+      "reproduction": {
+        "status": "preview_only",
+        "priceOre": null,
+        "currency": "NOK"
+      },
+      "commercialLicense": {
+        "status": "not_confirmed"
+      }
+    }
+  ]
+}

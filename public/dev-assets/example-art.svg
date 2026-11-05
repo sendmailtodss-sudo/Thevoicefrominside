@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1100" role="img" aria-labelledby="title desc">
+<title id="title">Development artwork placeholder</title><desc id="desc">An abstract brass doorway on a dark background. Original artwork is not included in this source export.</desc>
+<defs><linearGradient id="bg" x2="1" y2="1"><stop stop-color="#080f13"/><stop offset="1" stop-color="#25353b"/></linearGradient><linearGradient id="light"><stop stop-color="#806243"/><stop offset=".5" stop-color="#edd5a0"/><stop offset="1" stop-color="#96734d"/></linearGradient></defs>
+<rect width="900" height="1100" fill="url(#bg)"/><rect x="270" y="140" width="360" height="670" rx="2" fill="none" stroke="url(#light)" stroke-width="3"/><path d="M450 140V810L630 990" fill="none" stroke="url(#light)" stroke-width="18"/><path d="M270 810L100 1050M630 810L800 1050" stroke="#806243" opacity=".5"/>
+<text x="450" y="900" fill="#ecd8b0" font-family="sans-serif" font-size="22" text-anchor="middle" letter-spacing="6">EXAMPLE ARTWORK</text><text x="450" y="944" fill="#aab9bc" font-family="sans-serif" font-size="16" text-anchor="middle">DEVELOPMENT PREVIEW</text></svg>

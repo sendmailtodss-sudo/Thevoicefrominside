@@ -1,0 +1,14 @@
+# Contributor and agent guidance
+
+This is the public developer distribution of Stemmen fra innsiden / The Voice from Inside. Read `README.md` and `docs/development.md` before changing behavior.
+
+- Use Node 24 and the existing dependency-free structure. Run `npm test` and `npm run build` for relevant code changes.
+- Preserve Norwegian and English navigation, accessible non-3D alternatives, keyboard controls, mobile layouts and reduced-motion behavior.
+- Use synthetic data in tests and examples. Do not add credentials, production service bindings, private manuscripts, case files, contact logs or private personal information.
+- Public project identity is Innsatt 2601-46. Do not infer or add personal social accounts.
+- Keep live services disabled in the local preview. A screen, mock, test or build is not evidence that a service is operational.
+- Do not deploy, send mail, schedule social posts, purchase services or activate payment/submission integrations as a side effect of development.
+- Preserve approved editorial text and redactions. Keep changes to application code separate from requests to change writing or artwork rights.
+- Explain what changed, why, and which checks actually ran. Report limitations directly.
+
+Historical private operational instructions and launch logs are intentionally outside this repository. They are not required to develop with its example data.
