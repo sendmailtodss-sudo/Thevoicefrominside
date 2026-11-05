@@ -15,3 +15,9 @@ The goal is a scroll-controlled scene with lifelike adult creators of varied app
 Find and evaluate realistic, appropriately licensed rigged assets and the specific creative-action motion clips. Prove one motion with a correct artwork that deforms with the shirt; check quality, license, file size and runtime. Extend to a coordinated group only after the single-person proof passes. Preserve a reduced-motion and non-WebGL path and never represent buying or other closed services as active.
 
 This document records research, not an assertion that a realistic animation is completed or published.
+
+## Follow-up: recorded creative movements
+
+CMU subject 79 includes take 79_31 (writing on a chalkboard), 79_43 (painting), and 79_78 (taking a movie). These BVH recordings were downloaded from [Shriinivas/cmubvh](https://github.com/Shriinivas/cmubvh/tree/main/Sequence-076-080/79) and retargeted locally using the 3d-gen mocap pipeline. A private GLB prototype contains all three actions. The painting action was also combined with the exact artwork panel attached to the torso rig and tested in a local Three.js scroll harness at desktop and emulated mobile sizes.
+
+This is an engineering proof, not a finished realistic scene: character appearance remains game-like, the flat artwork panel does not deform naturally with the shirt, the props and independent eight-person choreography are not implemented, and physical mobile performance has not been measured. Verify the source terms for any production use; do not assume code licenses also cover models or motion data. CMU's requested acknowledgment: The data used in this project was obtained from mocap.cs.cmu.edu. The database was created with funding from NSF EIA-0196217.
