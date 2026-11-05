@@ -42,6 +42,13 @@ export function createCinematic({ canvas, arts, links, requestRender, onAssetErr
   for (let i=0;i<count;i++) { const a=rand()*Math.PI*2, r=2+rand()*12; positions.push(Math.cos(a)*r, (rand()-.5)*9, Math.sin(a)*r-4); }
   starsGeometry.setAttribute('position', new THREE.Float32BufferAttribute(positions,3));
   const stars = add(new THREE.Points(starsGeometry,new THREE.PointsMaterial({color:0xcce7d8,size:.035,transparent:true,opacity:.7,depthWrite:false})));
+  // The same scroll clock draws ideas into a central light before the DNA appears.
+  const ideaPositions = new Float32Array(72 * 3);
+  const ideaGeometry = new THREE.BufferGeometry();
+  ideaGeometry.setAttribute('position',new THREE.BufferAttribute(ideaPositions,3));
+  const ideas = add(new THREE.Points(ideaGeometry,new THREE.PointsMaterial({color:0xffdfa1,size:.11,transparent:true,opacity:0,depthWrite:false})));
+  const glow = add(plane(5,5,new THREE.MeshBasicMaterial({color:0xffe4ad,transparent:true,opacity:0,depthWrite:false,blending:THREE.AdditiveBlending})));
+  glow.position.z=-2;
   const helix = new THREE.Group(); add(helix);
   // Batch the helix into two draw calls, and stop submitting it after the handoff.
   const rungs = [], dots = [];
@@ -98,12 +105,16 @@ export function createCinematic({ canvas, arts, links, requestRender, onAssetErr
   const clamp = n => Math.max(0,Math.min(1,n));
   const smooth = n => {const t=clamp(n);return t*t*(3-2*t);};
   function render(p,phase) {
-    const emerge=smooth((p-.13)/.2), turn=smooth((p-.52)/.14), light=smooth((p-.72)/.22);
+    const emerge=smooth((p-.22)/.18), turn=smooth((p-.52)/.14), light=smooth((p-.72)/.22);
+    const gathering=1-smooth((p-.04)/.12), dnaIn=smooth((p-.055)/.12);
+    ideas.visible=gathering>.001; ideas.material.opacity=gathering*.8;
+    if (ideas.visible) { for (let i=0;i<72;i++) { const a=i*2.399+phase*.12,r=(2+(i%12)*.52)*(1-smooth(p/.13))+.1; ideaPositions[i*3]=Math.cos(a)*r;ideaPositions[i*3+1]=Math.sin(a)*r*.55;ideaPositions[i*3+2]=-2; } ideaGeometry.attributes.position.needsUpdate=true; }
+    glow.material.opacity=Math.sin(smooth(p/.17)*Math.PI)*.13; glow.visible=glow.material.opacity>.001;
     camera.position.x=Math.sin(p*Math.PI)*.55; camera.position.z=18-p*1.2; camera.lookAt(0,0,0);
     stars.rotation.y=phase*.012+p*.22;
     helix.rotation.y=phase*.18+p*2; helix.scale.setScalar(1+emerge*.3);
-    helix.visible=emerge<.999;
-    helix.children.forEach(o=>{o.material.opacity=(1-emerge)*.8;});
+    helix.visible=emerge<.999 && dnaIn>.001;
+    helix.children.forEach(o=>{o.material.opacity=dnaIn*(1-emerge)*.8;});
     // Individual activity shares one exact turn clock, then one unity and light clock.
     people.forEach(({group,poses},i)=>{
       const individualTurn=turn;
