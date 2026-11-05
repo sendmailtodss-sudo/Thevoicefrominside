@@ -159,6 +159,8 @@
       const turn = smooth((p - .55) / .12);
       const dissolve = smooth((p - .76) / .22);
       c.clearRect(0, 0, w, h);
+      const galleryReveal = smooth((p - .68) / .28);
+      c.save(); c.globalAlpha = galleryReveal * .95; c.fillStyle = '#ede7d8'; c.fillRect(0,0,w,h); c.restore();
       c.save(); c.translate(w / 2, h / 2); c.scale(Math.min(w / 800, h / 460), Math.min(w / 800, h / 460));
       c.lineCap = 'round';
       // Ideas converge and bloom before giving way to the helix.
@@ -185,6 +187,10 @@
         for (const dx of [x,-x]) { c.beginPath(); c.arc(dx,y,2.4,0,Math.PI*2); c.fill(); }
       }
       const N=8, spread=96;
+      // Individual paths carry the shared idea toward each creator.
+      c.globalAlpha=Math.sin(emerge*Math.PI)*.35;
+      c.strokeStyle='#b8e6da';c.lineWidth=1;
+      for(let i=0;i<N;i++) {c.beginPath();c.moveTo(0,0);c.quadraticCurveTo((i-3.5)*24,-45,(i-3.5)*spread,25);c.stroke();}
       for(let i=0;i<N;i++) {
         const x=(i-(N-1)/2)*spread, y=-135+(i%2)*10;
         c.globalAlpha=emerge*(.35+.65*dissolve);c.fillStyle='#ddc68c';c.fillRect(x-34,y-42,68,84);
