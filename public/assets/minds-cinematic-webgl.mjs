@@ -60,6 +60,15 @@ export function createCinematic({ canvas, arts, links, requestRender, onAssetErr
   const dotGeometry = new THREE.BufferGeometry(); dotGeometry.setAttribute('position',new THREE.Float32BufferAttribute(dots,3));
   helix.add(new THREE.LineSegments(rungGeometry,new THREE.LineBasicMaterial({color:0x8cc7c3,transparent:true,opacity:.7})));
   helix.add(new THREE.Points(dotGeometry,new THREE.PointsMaterial({color:0xf4d89b,size:.09,transparent:true,opacity:.8,depthWrite:false})));
+  // A soft gallery wall appears behind the figures as their work takes shape.
+  const wall = add(plane(23,12,new THREE.MeshBasicMaterial({color:0xede7d8,transparent:true,opacity:0,depthWrite:false,side:THREE.DoubleSide})));
+  wall.position.set(0,0,-5);
+  const emergenceTrails = [];
+  for(let i=0;i<8;i++) {
+    const x=(i-3.5)*1.66;
+    const line=new THREE.Line(new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(0,0,-2),new THREE.Vector3(x,-1.3,1)]),new THREE.LineBasicMaterial({color:0xb8e6da,transparent:true,opacity:0,depthWrite:false}));
+    add(line); emergenceTrails.push(line);
+  }
   const frames = [], beams = [], shirtArts = [];
   const particlePositions = new Float32Array(8 * 12 * 3);
   const particleGeometry = new THREE.BufferGeometry();
@@ -112,6 +121,13 @@ export function createCinematic({ canvas, arts, links, requestRender, onAssetErr
     glow.material.opacity=Math.sin(smooth(p/.17)*Math.PI)*.13; glow.visible=glow.material.opacity>.001;
     camera.position.x=Math.sin(p*Math.PI)*.55; camera.position.z=18-p*1.2; camera.lookAt(0,0,0);
     stars.rotation.y=phase*.012+p*.22;
+    const galleryReveal=smooth((p-.68)/.28);
+    wall.material.opacity=galleryReveal*.95; wall.visible=galleryReveal>.001;
+    stars.material.opacity=.7*(1-galleryReveal*.85);
+    emergenceTrails.forEach((line,i)=>{
+      line.material.opacity=Math.sin(emerge*Math.PI)*(.16+(i%2)*.07);
+      line.visible=line.material.opacity>.001;
+    });
     helix.rotation.y=phase*.18+p*2; helix.scale.setScalar(1+emerge*.3);
     helix.visible=emerge<.999 && dnaIn>.001;
     helix.children.forEach(o=>{o.material.opacity=dnaIn*(1-emerge)*.8;});
