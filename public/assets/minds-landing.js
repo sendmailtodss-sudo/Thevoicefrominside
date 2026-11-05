@@ -10,6 +10,7 @@
     const canvas = host.querySelector('.minds-canvas');
     const button = host.querySelector('.minds-motion');
     const gallery = host.querySelector('.minds-gallery');
+    const convergence = host.querySelector('.minds-convergence');
     const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
     const listeners = [];
     const on = (target, name, handler, options) => {
@@ -21,8 +22,42 @@
     // The CSS star field and all content remain usable if Canvas is unavailable.
     if (!ctx) { host.dataset.visual = 'static'; return; }
     host.dataset.visual = 'canvas';
+    // A purely decorative, locally rendered bridge: no generated images or external services.
+    const bridge = document.createElement('div');
+    bridge.className = 'minds-visual-bridge';
+    bridge.setAttribute('aria-label', document.documentElement.lang === 'en' ? 'Creators and their artwork' : 'Skapere og kunstverk');
+    const bridgeCanvas = document.createElement('canvas');
+    bridgeCanvas.className = 'minds-visual-bridge-canvas';
+    bridgeCanvas.setAttribute('aria-hidden','true');
+    const stageWrap = document.createElement('div'); stageWrap.className='minds-scene-stage';
+    stageWrap.append(bridgeCanvas); bridge.append(stageWrap);
+    const en=document.documentElement.lang==='en';
+    const sceneLinks=document.createElement('nav');sceneLinks.className='minds-scene-links';
+    sceneLinks.setAttribute('aria-label',en?'Choose an artwork for your T-shirt':'Velg et kunstverk til T-skjorten');
+    const artImages=[];
+    const sceneModels=['creator-hiphop-male','creator-punk-female','creator-kpop-male','creator-workwear-female','creator-business-male','creator-red-female','creator-orange-male','creator-hiphop-female'];
+    const arts=(window.SFIFeaturedArt?.length ? window.SFIFeaturedArt : (window.BookArt||[])).slice(0,8);
+    arts.forEach((art,i)=>{
+      const id=art.id || (art.page===354?'gjenbruk':'book-page-'+String(art.page));
+      const link=document.createElement('a');link.href=(en?'/en/shop/':'/butikk/')+'?art='+id+'&model='+sceneModels[i]+'&placement=back';
+      link.textContent=en?art.en:art.no;link.dataset.artId=id;sceneLinks.append(link);
+      const im=new Image();im.onload=()=>{if(alive)drawBridge()};artImages.push(im);
+    });
+    const scenePrompt=document.createElement('div'); scenePrompt.className='minds-scene-prompt';
+    const prompt=document.createElement('span'); prompt.textContent=en?'What is your idea?':'Hva er din idé?';
+    const music=document.createElement('a'); music.href=en?'/en/music/':'/musikk/';
+    music.textContent=en?'▶ Explore music':'▶ Utforsk musikk';
+    scenePrompt.append(prompt,music); stageWrap.append(scenePrompt,sceneLinks);
+    const creatorAtlas=new Image();creatorAtlas.onload=()=>{bridge.dataset.models='loaded';if(alive)drawBridge()};
+
+    convergence.after(bridge);
+    let bridgeContext;
+    try { bridgeContext = bridgeCanvas.getContext('2d', { alpha: true }); } catch (_) {}
+    if (!bridgeContext) bridge.hidden = true;
+    let bridgeWidth = 0, bridgeHeight = 0, bridgeProgress = 0;
+    let cinematic = null, cinematicCanvas = null, cinematicObserver = null, cinematicLoading = false;
     let width = 0, height = 0, frame = 0, last = 0, phase = 0;
-    let paused = motionQuery.matches, visible = true, alive = true;
+    let paused = motionQuery.matches, visible = true, heroVisible = true, bridgeVisible = false, alive = true;
     let progress = 0, starCount = 0;
     let points = [], clusters = [];
     // Seeded positions avoid noisy layout changes on resize.
@@ -105,13 +140,80 @@
       });
       ctx.globalAlpha = 1; ctx.globalCompositeOperation = 'source-over';
     }
+    // One scroll clock controls the cohort; no independent per-person timers.
+    const clamp = value => Math.max(0, Math.min(1, value));
+    const smooth = value => { const t = clamp(value); return t * t * (3 - 2 * t); };
+    function drawBridge() {
+      if (!bridgeContext || !bridgeWidth || !bridgeHeight) return;
+      const c = bridgeContext, w = bridgeWidth, h = bridgeHeight;
+      const p = motionQuery.matches ? .64 : bridgeProgress;
+      const stage = p < .25 ? 'dna' : p < .55 ? 'create' : p < .76 ? 'unity' : 'light';
+      bridge.dataset.scene = stage;
+      if (cinematic) { cinematic.render(p, phase); return; }
+      const emerge = smooth((p - .16) / .17);
+      const turn = smooth((p - .55) / .12);
+      const dissolve = smooth((p - .76) / .22);
+      c.clearRect(0, 0, w, h);
+      c.save(); c.translate(w / 2, h / 2); c.scale(Math.min(w / 800, h / 460), Math.min(w / 800, h / 460));
+      c.lineCap = 'round';
+      // The double helix relinquishes the frame as the six creators appear.
+      c.globalAlpha = 1 - emerge;
+      for (let i = 0; i < 46; i++) {
+        const y = -170 + i * 7;
+        const x = Math.sin(i * .31 + phase * .35) * 55;
+        c.strokeStyle = '#86b9be'; c.lineWidth = 1;
+        c.beginPath(); c.moveTo(x,y); c.lineTo(-x,y); c.stroke();
+        c.fillStyle = '#e3d5a0';
+        for (const dx of [x,-x]) { c.beginPath(); c.arc(dx,y,2.4,0,Math.PI*2); c.fill(); }
+      }
+      const N=8, spread=96;
+      for(let i=0;i<N;i++) {
+        const x=(i-(N-1)/2)*spread, y=-135+(i%2)*10;
+        c.globalAlpha=emerge*(.35+.65*dissolve);c.fillStyle='#ddc68c';c.fillRect(x-34,y-42,68,84);
+        c.fillStyle='#f7f3e8';c.fillRect(x-31,y-39,62,78);
+        const art=artImages[i];
+        if(art?.complete&&art.naturalWidth) {
+          const factor=Math.min(58/art.naturalWidth,74/art.naturalHeight), iw=art.naturalWidth*factor, ih=art.naturalHeight*factor;
+          c.drawImage(art,x-iw/2,y-ih/2,iw,ih);
+        }
+        if(dissolve>0) {
+          c.globalAlpha=Math.sin(dissolve*Math.PI);c.strokeStyle='#ffe2a1';c.lineWidth=1.4;
+          c.beginPath();c.moveTo(x,25);c.quadraticCurveTo(x+25,-50,x,y);c.stroke();
+          for(let j=0;j<12;j++) {const t=clamp(dissolve*1.3-j*.025);c.fillStyle=j%2?'#a8e0dd':'#ffe2a1';c.beginPath();c.arc(x+Math.sin(j*2.4)*12*(1-t),25+(y-25)*t,1.8,0,Math.PI*2);c.fill();}
+        }
+      }
+      if(creatorAtlas.complete&&creatorAtlas.naturalWidth) {
+        const sourceH=creatorAtlas.naturalHeight/2;
+        const targetW=800, targetH=targetW*sourceH/creatorAtlas.naturalWidth;
+        const targetY=-25;
+        c.globalAlpha=emerge*(1-dissolve)*(1-turn);
+        c.drawImage(creatorAtlas,0,0,creatorAtlas.naturalWidth,sourceH,-targetW/2,targetY,targetW,targetH);
+        c.globalAlpha=emerge*(1-dissolve)*turn;
+        c.drawImage(creatorAtlas,0,sourceH,creatorAtlas.naturalWidth,sourceH,-targetW/2,targetY,targetW,targetH);
+        // Exact original art is composited, never regenerated as part of the shirt.
+        for(let i=0;i<N;i++) {
+          const art=artImages[i];if(!art?.complete||!art.naturalWidth)continue;
+          c.globalAlpha=emerge*(1-dissolve)*turn;
+          const placement=window.SFICreatorPrintPlacement(i), scale=targetW/N/222;
+          const x=-targetW/2+i*targetW/N+placement.center*scale;
+          const fit=Math.min(placement.width*scale/art.naturalWidth,placement.height*scale/art.naturalHeight);
+          const aw=art.naturalWidth*fit, ah=art.naturalHeight*fit;
+          c.drawImage(art,x-aw/2,targetY+placement.top*scale+(placement.height*scale-ah)/2,aw,ah);
+          const artist=arts[i].artistName || 'Innsatt 2601-46';
+          c.fillStyle='#111';c.textAlign='center';c.font=`bold ${Math.min(7,100/Math.max(1,artist.length))*scale}px Arial`;
+          c.fillText(artist==='Innsatt 2601-46'?'Innsatt 260146':artist,x,targetY+(placement.top+placement.height+10)*scale);
+        }
+      }
+      c.restore();
+    }
     function cancel() { if (frame) cancelAnimationFrame(frame); frame = 0; }
     function tick(time) {
       frame = 0;
       if (!alive || paused || !visible || document.hidden) return;
       if (time - last >= 1000 / 30) {
         phase += Math.min((time - last) / 1000, .05); last = time;
-        draw();
+        if (heroVisible) draw();
+        if (bridgeVisible) drawBridge();
       }
       frame = requestAnimationFrame(tick);
     }
@@ -131,27 +233,78 @@
       canvas.width = Math.round(width * dpr); canvas.height = Math.round(height * dpr);
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       starCount = width < 700 ? 260 : 680;
-      draw();
+      const bridgeRect = (cinematicCanvas || bridgeCanvas).getBoundingClientRect();
+      bridgeWidth = Math.round(bridgeRect.width); bridgeHeight = Math.round(bridgeRect.height);
+      if (bridgeContext) {
+        bridgeCanvas.width = Math.round(bridgeWidth * dpr); bridgeCanvas.height = Math.round(bridgeHeight * dpr);
+        bridgeContext.setTransform(dpr, 0, 0, dpr, 0, 0);
+      }
+      if (cinematic) cinematic.resize(bridgeWidth, bridgeHeight);
+      draw(); drawBridge();
     }
+    async function loadCinematic() {
+      if (cinematicLoading || cinematic || !alive) return;
+      cinematicLoading = true; cinematicObserver?.disconnect();
+      // The fallback and WebGL share the browser image cache, but neither requests
+      // the scene images until the bridge is approaching the viewport.
+      artImages.forEach((image, i) => { image.src = arts[i].src; });
+      creatorAtlas.src='/design-assets/creators-atlas-20261105.png';
+      try {
+        const module = await import('/assets/minds-cinematic-webgl.mjs');
+        if (!alive) return;
+        const candidate = document.createElement('canvas');
+        candidate.className = 'minds-cinematic-webgl';
+        Object.assign(candidate.style, {display:'block', width:'100%', flex:'1', minHeight:'0', height:'100%', pointerEvents:'auto', touchAction:'pan-y'});
+        candidate.setAttribute('aria-hidden', 'true');
+        const fallback = () => {
+          if (!alive || cinematicCanvas !== candidate) return;
+          cinematic?.dispose(); cinematic = null; candidate.remove(); cinematicCanvas = null;
+          bridgeCanvas.style.display = ''; host.dataset.visual = 'canvas'; resize();
+        };
+        const instance = module.createCinematic({canvas: candidate, arts, links: sceneLinks.querySelectorAll('a'), requestRender: () => { if (alive) drawBridge(); }, onAssetError: fallback});
+        if (!alive) { instance.dispose(); return; }
+        cinematicCanvas = candidate; cinematic = instance;
+        const css = document.createElement('link'); css.rel = 'stylesheet'; css.href = '/assets/minds-cinematic-webgl.css';
+        if (!document.querySelector('link[href="/assets/minds-cinematic-webgl.css"]')) document.head.append(css);
+        stageWrap.insertBefore(candidate, bridgeCanvas); bridgeCanvas.style.display = 'none';
+        host.dataset.visual = 'webgl';
+        candidate.addEventListener('webglcontextlost', event => {
+          event.preventDefault();
+          if (!alive) return;
+          fallback();
+        }, {once:true});
+        resize();
+      } catch (_) { host.dataset.visual = 'canvas'; }
+    }
+    if ('IntersectionObserver' in window) {
+      cinematicObserver = new IntersectionObserver(entries => { if (entries.some(entry => entry.isIntersecting)) loadCinematic(); }, {rootMargin:'600px'});
+      cinematicObserver.observe(bridge);
+    } else loadCinematic();
     button.hidden = false;
-    on(button, 'click', () => { paused = !paused; updateLabel(); draw(); schedule(); });
-    on(motionQuery, 'change', () => { if (motionQuery.matches) paused = true; updateLabel(); draw(); schedule(); });
+    on(button, 'click', () => { paused = !paused; updateLabel(); draw(); drawBridge(); schedule(); });
+    on(motionQuery, 'change', () => { if (motionQuery.matches) paused = true; updateLabel(); draw(); drawBridge(); schedule(); });
     on(document, 'visibilitychange', schedule);
     on(window, 'scroll', () => {
       if (paused) return;
       const rect = hero.getBoundingClientRect();
       progress = Math.max(0, Math.min(1, -rect.top / Math.max(1, rect.height)));
       hero.style.setProperty('--minds-drift', String(progress * 12));
+      const bridgeRect = bridge.getBoundingClientRect();
+      bridgeProgress = clamp(-bridgeRect.top / Math.max(1, bridgeRect.height - stageWrap.clientHeight));
+      if (bridgeVisible) drawBridge();
     }, { passive: true });
     const resizeObserver = 'ResizeObserver' in window ? new ResizeObserver(resize) : null;
-    if (resizeObserver) resizeObserver.observe(hero); else on(window, 'resize', resize);
+    if (resizeObserver) { resizeObserver.observe(hero); resizeObserver.observe(bridge); } else on(window, 'resize', resize);
     const observer = 'IntersectionObserver' in window ? new IntersectionObserver(entries => {
       for (const entry of entries) {
-        if (entry.target === hero) { visible = entry.isIntersecting; schedule(); }
+        if (entry.target === hero) heroVisible = entry.isIntersecting;
+        else if (entry.target === bridge) bridgeVisible = entry.isIntersecting;
         else if (entry.target === gallery && entry.isIntersecting) gallery.dataset.revealed = 'true';
       }
+      visible = heroVisible || bridgeVisible; schedule();
     }, { threshold: .01 }) : null;
-    observer?.observe(hero); observer?.observe(gallery);
+    observer?.observe(hero); observer?.observe(bridge); observer?.observe(gallery);
+    if (!observer) bridgeVisible = true;
     // Give the skip link an explicit keyboard destination without forcing smooth scrolling.
     on(host.querySelector('.minds-skip'), 'click', event => {
       event.preventDefault();
@@ -161,8 +314,9 @@
     updateLabel(); resize(); schedule();
     release = () => {
       alive = false; cancel(); listeners.forEach(fn => fn());
-      observer?.disconnect(); resizeObserver?.disconnect();
-      button.hidden = true;
+      observer?.disconnect(); resizeObserver?.disconnect(); cinematicObserver?.disconnect();
+      cinematic?.dispose(); cinematicCanvas?.remove();
+      button.hidden = true; bridge.remove();
     };
   }
   window.MindsLanding = { mount, destroy: () => release() };

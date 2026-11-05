@@ -2,8 +2,9 @@ import {normalizeDesign,designExport} from './merch-designer-core.mjs';
 export {normalizeDesign,designExport,designerPrice,presetDesign,replacePrint,designSku,COLORS,LAYOUTS} from './merch-designer-core.mjs';
 export const SIZES=Object.freeze(['S','M','L','XL','XXL','XXXL']);
 export const DEFAULT_ART=Object.freeze([
+ {id:'lar-bak-murene',nameNo:'LAR bak murene',nameEn:'LAR behind the walls',image:'/design-assets/approved-illustrations/lar-bak-murene-80643262351fb9d6e4de954d72707ed2fb72610c7d8a3e6296027439d3b07136.webp'},
  {id:'redhood',nameNo:'Rødhette i gangen',nameEn:'Little Red Riding Hood in the corridor',image:'/design-assets/merch/redhood.jpeg'},
- {id:'gjenbruk',nameNo:'Gjenbruk',nameEn:'Reuse',image:'/design-assets/book-r8/page-354.webp'}
+ {id:'gjenbruk',nameNo:'Gjenbruk',nameEn:'Reuse',image:'/design-assets/approved-illustrations/gjenbruk-c38d5fda603e9bb4f7d6e6bfd6c946aaf7a6db749ae47aadf1e6f38ac39bd797.webp'}
 ]);
 export function money(minor,language='no') {
  if(!Number.isSafeInteger(minor)||minor<0)throw new Error('amount');

@@ -5,12 +5,14 @@
  const aliases={'/kunstsamfunnet/':'/en/art-community/','/advokatkonto/':'/en/lawyer-account/','/advokatkonto/rapport/':'/en/lawyer-account/report/','/advokatvalg/':'/en/counsel-choice/','/analyse/':'/en/analysis/','/butikk/':'/en/shop/','/gjennomgang/':'/en/review/','/kunstfellesskap/':'/en/creative-community/','/kunstner/':'/en/artist/','/musikk/':'/en/music/','/originalverk/':'/en/original-art/','/samtaleregler/':'/en/discussion-rules/','/verksted/fellesskap/':'/en/verksted/community/'};
  const reverse=Object.fromEntries(Object.entries(aliases).map(([a,b])=>[b,a]));
  const current=location.pathname.endsWith('/')?location.pathname:location.pathname+'/';
- const detailNo=current.startsWith('/en/art-community/art/')?current.replace('/en/art-community/art/','/kunstsamfunnet/verk/'):null;
+ const newDetailNo=current.startsWith('/en/creative-community/art/')?current.replace('/en/creative-community/art/','/kunstfellesskap/verk/'):null;
+ const detailNo=newDetailNo||(current.startsWith('/en/art-community/art/')?current.replace('/en/art-community/art/','/kunstsamfunnet/verk/'):null);
  const original=detailNo||reverse[current]||current.replace(/^\/en(?=\/)/,'')||'/';
  // Sensitive workspaces can render arbitrary document and user text. Restrict
  // translation there to navigation and explicitly safe page controls.
- const sensitive=/^\/(?:en\/)?(?:maite|analyseverksted|analyse|analysis|klagehjelp|verksted|stemmer|gjennomgang|rettsspeil|advokatkonto|lawyer-account|review|bidrag|kunstner|artist|originalverk|original-art|musikk|music|counsel-choice|advokatvalg|art-community|kunstsamfunnet|creative-community|kunstfellesskap|innsyn-i-makt|butikk|shop)(?:\/|$)/.test(current);
- const english=(original.startsWith('/kunstsamfunnet/verk/')?original.replace('/kunstsamfunnet/verk/','/en/art-community/art/'):null)||aliases[original]||('/en'+(original==='/'?'/':original));
+ const sensitive=/^\/(?:en\/)?(?:maite|inmaite|analyseverksted|analyse|analysis|klagehjelp|verksted|stemmer|gjennomgang|rettsspeil|advokatkonto|lawyer-account|review|bidrag|kunstner|artist|originalverk|original-art|musikk|music|counsel-choice|advokatvalg|art-community|kunstsamfunnet|creative-community|kunstfellesskap|innsyn-i-makt|butikk|shop)(?:\/|$)/.test(current);
+ const newDetailEnglish=original.startsWith('/kunstfellesskap/verk/')?original.replace('/kunstfellesskap/verk/','/en/creative-community/art/'):null;
+ const english=newDetailEnglish||(original.startsWith('/kunstsamfunnet/verk/')?original.replace('/kunstsamfunnet/verk/','/en/art-community/art/'):null)||aliases[original]||('/en'+(original==='/'?'/':original));
  const norm=value=>value.trim().replace(/\s+/g,' ');
  window.SFITranslate=value=>{if(!selected||typeof value!=='string')return value;return window.SFI_TRANSLATIONS?.[selected]?.[norm(value)]||value};
  let selector=document.getElementById('language-select');
@@ -38,7 +40,9 @@
   }
  },true);
  if(!selected)return;
- const notice=document.createElement('p');notice.className='sfi-language-notice';notice.lang=selected;notice.textContent=languages[selected].notice;selector.closest('.ppt-language,.language-control,.sfi-language-bar,.ac-language')?.insertAdjacentElement('afterend',notice);
+ const notice=document.createElement('p');notice.className='sfi-language-notice';notice.lang=selected;notice.textContent=languages[selected].notice;
+ if(/^\/(?:en\/)?dagbok\/treningsbeltet\/$/.test(current))notice.textContent+=selected==='zh-Hans'?' 本文翻译尚未经独立语言审核。':' 呢篇翻譯尚未經獨立語言審校。';
+ selector.closest('.ppt-language,.language-control,.sfi-language-bar,.ac-language')?.insertAdjacentElement('afterend',notice);
  document.addEventListener('click',event=>{
   const link=event.target.closest?.('a[href]');if(!link||link.hasAttribute('download'))return;
   const raw=link.getAttribute('href');if(!raw||raw[0]==='#')return;

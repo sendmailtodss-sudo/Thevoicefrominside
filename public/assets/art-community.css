@@ -7,3 +7,6 @@
 @media(prefers-reduced-motion:reduce){.ac-page *, .ac-page *:before,.ac-page *:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}.ac-button:hover,.ac-work-link:hover img{transform:none}}
 /* Keep the local-translation coverage notice readable beside the shared header. */
 .ac-header{flex-wrap:wrap}.ac-header>.sfi-language-notice{flex-basis:100%;width:100%;max-width:none;margin:10px 0 0;letter-spacing:0}
+.ac-invite{display:grid;grid-template-columns:1fr 1fr;gap:10%;padding-block:85px;border-top:1px solid var(--ac-ink)}.ac-invite p+p{margin-top:18px}.ac-invite .ac-button{margin-top:25px}@media(max-width:700px){.ac-invite{grid-template-columns:1fr;gap:30px;padding-block:55px}}
+
+.ac-rights-copy{max-width:780px;margin-top:36px}.ac-rights-copy h3{margin:26px 0 8px}.ac-rights-copy p{line-height:1.65}

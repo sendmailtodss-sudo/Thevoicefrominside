@@ -1,31 +1,36 @@
 {
   "export_date": "2026-11-05",
-  "source_version": 34,
-  "source_commit": "702bbcce8e4883f74f5bbcd521ebe97177c4bb17",
+  "source_version": "final 5 November website source",
+  "source_commit": "d9de7e2954f4a790fc6f12257f1e6c8d46389096",
   "purpose": "Public contributor development export; not a production deployment snapshot.",
   "changed_for_export": [
-    "Editorial bodies replaced with example content on 42 routes",
-    "Images, video, audio, fonts, PDFs and office documents omitted",
-    "Gallery stable IDs retained with example media data",
-    "Search regenerated from route titles; long translation paragraphs omitted",
-    "Private hosting bindings and source history excluded",
-    "Development server and Codespaces configuration added"
+    "Editorial and case reading pages retain example material; six additional diary reading routes use example content.",
+    "Private archives, manuscripts, case documents, source uploads, credentials and hosting bindings omitted.",
+    "Current approved gallery images and their generated depth maps included; image rights remain separate.",
+    "Search and long translation data retain sanitized contributor examples.",
+    "Local preview keeps backend endpoints disabled."
   ],
   "editorial_fixture_routes": [
     "boken/index.html",
     "boken/normalitetsprinsippet/index.html",
+    "dagbok/fanger-til-gjenbruk/index.html",
+    "dagbok/fem-minutter-i-skolegangen/index.html",
     "dagbok/index.html",
     "dagbok/lar-bak-murene/index.html",
     "dagbok/musikkrommet/index.html",
+    "dagbok/nar-dorene-til-kunnskapen-stenges/index.html",
     "dagbok/skoleplassen/index.html",
     "dagbok/trening/index.html",
     "dagbok/treningsbeltet/index.html",
     "den-trojanske-hesten/index.html",
     "en/boken/index.html",
     "en/boken/normalitetsprinsippet/index.html",
+    "en/dagbok/fanger-til-gjenbruk/index.html",
+    "en/dagbok/fem-minutter-i-skolegangen/index.html",
     "en/dagbok/index.html",
     "en/dagbok/lar-bak-murene/index.html",
     "en/dagbok/musikkrommet/index.html",
+    "en/dagbok/nar-dorene-til-kunnskapen-stenges/index.html",
     "en/dagbok/skoleplassen/index.html",
     "en/dagbok/trening/index.html",
     "en/dagbok/treningsbeltet/index.html",
@@ -54,5 +59,13 @@
     "kapittel-9/index.html",
     "nytt/index.html",
     "presse/index.html"
-  ]
+  ],
+  "additional_preserved_case_routes": [
+    "advokatkonto/index.html",
+    "advokatkonto/rapport/index.html",
+    "en/lawyer-account/index.html",
+    "en/lawyer-account/report/index.html"
+  ],
+  "generic_html_updated": 158,
+  "approved_gallery_items": 27
 }

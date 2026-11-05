@@ -5,7 +5,8 @@ let sequence=0;
 const svg=(tag,attrs={})=>{const el=document.createElementNS(NS,tag);for(const [k,v]of Object.entries(attrs))el.setAttribute(k,String(v));return el;};
 export const printArtist=a=>typeof (a?.artistName||a?.artist)==='string'?(a.artistName||a.artist):'';
 export const printTitle=(a,language)=>typeof a?.name?.[language]==='string'?a.name[language]:typeof a?.name?.no==='string'?a.name.no:a?.id||'';
-export const safePrintImage=v=>typeof v==='string'&&/^\/(?:design-assets|api\/workshop\/creative\/media)\/[a-zA-Z0-9_./-]+(?:\.(?:webp|png|jpeg|jpg))?$/.test(v)&&!v.includes('..')?v:null;
+const approvedEditorialImages=new Set(['/design-assets/approved-illustrations/skoleplassen-diary-a261e5ecdf855f130d37df7c6c5d07e478f18fdd640d6e728c86bd9ce7b35d25.webp','/design-assets/approved-illustrations/kampsport-diary-b04bb7dfcc2cf6443c038428c70202c351e125bcc695d8f2636f5014157adce4.webp']);
+export const safePrintImage=v=>approvedEditorialImages.has(v)||(typeof v==='string'&&/^\/(?:design-assets|api\/workshop\/creative\/media)\/[a-zA-Z0-9_./-]+(?:\.(?:webp|png|jpeg|jpg))?$/.test(v)&&!v.includes('..'))?v:null;
 
 // Every display and export uses the same artwork, identity and placement renderer.
 export function createShirtSvg({design,artworks,side='back',language='no',guides=false,selected=0,className='print-shirt-shape'}){
@@ -21,7 +22,7 @@ export function createShirtSvg({design,artworks,side='back',language='no',guides
   if(p.side!==side)return;
   const a=artworks.find(a=>a.id===p.artworkId),source=safePrintImage(a?.image),x=180+p.xCm*8,y=170+p.yCm*8,width=p.widthCm*8,height=p.heightCm*8;
   const missing=()=>{const message=svg('text',{x:x+width/2,y:y+height/2,'text-anchor':'middle','font-size':13,fill:'#34464b'});message.dataset.role='image-unavailable';message.textContent=t('Motivbilde utilgjengelig','Artwork image unavailable');return message;};
-  if(source){const image=svg('image',{href:source,x,y,width,height,preserveAspectRatio:'xMidYMid meet'});image.dataset.source=source;image.addEventListener('error',()=>image.replaceWith(missing()),{once:true});s.append(image);}else s.append(missing());
+  if(source){const image=svg('image',{href:source,x,y,width,height,preserveAspectRatio:'xMidYMid meet',opacity:'0.94',style:'mix-blend-mode:multiply'});image.dataset.source=source;image.addEventListener('error',()=>image.replaceWith(missing()),{once:true});s.append(image);}else s.append(missing());
   if(guides&&i===selected)s.append(svg('rect',{x,y,width,height,fill:'none',stroke:'#e85c4b','stroke-width':2}));
  });
  if(front){

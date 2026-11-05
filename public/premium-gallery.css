@@ -58,3 +58,33 @@
 .ig-card:focus-within{--ig-light-x:50%;--ig-light-y:35%}
 .ig-card-open:focus-visible,.ig-card-design:focus-visible{outline:3px solid #a3452e;outline-offset:-3px}
 @media(prefers-reduced-motion:reduce){.ig-card{background:#fffaf0}}
+
+/* White-and-gold art room. The original image is always contained, never cropped. */
+.ig-stage{border:1px solid #d7c9ad;background:linear-gradient(90deg,#e6e0d2 0%,#fffdf6 23%,#fffefa 75%,#e9e1d2 100%);border-radius:2px;perspective:1400px;box-shadow:inset 0 1px 0 #fff}
+.ig-stage:before{background:linear-gradient(90deg,#8c79451a,transparent 22%,transparent 78%,#8c79451a);z-index:0}
+.ig-ceiling{position:absolute;top:0;left:0;right:0;height:16%;background:linear-gradient(#d3cbb7,#fffdf8);clip-path:polygon(0 0,100% 0,85% 100%,15% 100%);border-bottom:1px solid #d8cdb5;pointer-events:none}
+.ig-floor{width:180%;left:-40%;bottom:-28%;height:62%;background:repeating-linear-gradient(90deg,#bcae8c44 0,#bcae8c44 1px,transparent 1px,transparent 90px),linear-gradient(#e5ddcc,#fdfaf1);border-top:1px solid #c7b78b;pointer-events:none}
+.ig-frame{cursor:pointer;border:0;border-radius:0;padding:8px;background:linear-gradient(135deg,#ba9854,#f7e4ac 30%,#a98b4f 60%,#e5cc8d);box-shadow:0 16px 22px #5d4b2d30,0 1px 2px #74644750;touch-action:pan-y}
+.ig-frame img{background:#f3efe5}.ig-frame:focus-visible{outline:3px solid #145750;outline-offset:5px}
+.ig-frame[data-offset="0"]::after{content:'↗';position:absolute;bottom:14px;right:14px;background:#103f3be8;color:#fff;width:36px;height:36px;border-radius:50%;display:grid;place-items:center;font:19px Arial,sans-serif}
+.ig-navigation{background:#173e3c}.ig-detail{border-radius:0 0 2px 2px;background:#f8f5ed;border-color:#d7c9ad}
+.ig-toolbar{border-radius:2px;background:#f1eee4;border-color:#d6d0bd}.ig-modes{border-radius:2px}.ig-modes .pg-button{border-radius:1px}.ig-primary{background:#174f4c!important;border-color:#174f4c}.ig-hero h1 em{color:#9a7330}
+.ig-social-links{display:flex;flex-wrap:wrap;gap:8px 18px;margin:12px 0;align-items:center}
+.ig-social-link{min-height:44px;display:inline-flex;align-items:center;font:600 13px/1.4 Arial,sans-serif;text-underline-offset:4px;color:#234e47!important}
+.ig-card>.ig-social-links{margin:8px 17px 0;gap:4px 12px}.ig-card>.ig-social-links .ig-social-link{font-size:12px}
+.ig-native-share{background:transparent;color:#234e47;border-color:#73988d;padding:7px 12px;font:600 13px/1.4 Arial,sans-serif}
+.ig-dialog{width:min(1400px,98vw);max-height:98dvh;padding:56px 18px 16px;border-radius:2px;background:#fbf8f0;color:#173e3c;border-color:#bda265}
+.ig-image-viewport{height:calc(81dvh - 125px);overflow:auto;overscroll-behavior:contain;background:#efeadf;scrollbar-gutter:stable}
+.ig-image-viewport .ig-full{width:100%;height:100%;max-width:none;object-fit:contain}
+.ig-dialog.is-zoomed .ig-full{width:200%;height:200%;object-fit:contain}
+.ig-modal-actions{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:10px 20px}
+.ig-modal-actions .pg-button{position:static;background:#173e3c;border-color:#173e3c;padding:9px 14px;font:600 14px/1.4 Arial,sans-serif}
+.ig-work-link{font:600 14px/1.4 Arial,sans-serif;min-height:44px;display:inline-flex;align-items:center}
+.ig-dialog>.ig-social-links>.ig-social-links{justify-content:center;width:100%;margin:0}
+@media(max-width:700px){.ig-image-viewport{height:calc(75dvh - 165px)}.ig-dialog{padding:54px 10px 10px}.ig-caption{font-size:12px}.ig-modal-actions{gap:7px 12px}.ig-modal-actions .ig-primary{font-size:13px;padding:10px}.ig-card>.ig-social-links{margin-inline:10px}}
+
+.ig-modal-status{max-width:65ch;margin:0 auto 16px;text-align:center;color:#e6dfcd;font:13px/1.5 Arial,sans-serif}
+/* The optional depth effect sits exactly over the fitted original, never its letterbox. */
+.ig-image-viewport{position:relative}
+.art-depth-canvas{position:absolute;display:block;touch-action:pan-y;cursor:crosshair}
+.ig-depth-note{text-align:center;font:12px/1.5 Arial,sans-serif;color:#31544e;margin:5px auto;max-width:70ch}

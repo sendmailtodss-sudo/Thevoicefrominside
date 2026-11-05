@@ -1,4 +1,6 @@
+import {createCreatorAtlasSvg} from './creator-atlas-preview.mjs';
 import {printArtist,printTitle,safePrintImage} from './merch-shirt-preview.mjs';
+import {availableModels,resolveModel} from './model-cohort.mjs';
 
 const NS='http://www.w3.org/2000/svg';
 const FIST='M264 310 L249 293 L257 280 L270 288 L270 267 L282 262 L291 266 L303 263 L315 273 L325 273 L339 285 L336 320 L321 340 L321 365 L279 365 L279 340 Z';
@@ -13,13 +15,14 @@ const el=(tag,cls,text)=>{const n=document.createElement(tag);if(cls)n.className
 const svg=(tag,attrs={})=>{const n=document.createElementNS(NS,tag);for(const [key,value]of Object.entries(attrs))n.setAttribute(key,String(value));return n;};
 
 export function createModelSvg({design,artworks,model='male',view='both',language='no'}){
- const t=(no,en)=>language==='en'?en:no,kind=model==='female'?'female':'male',p=PLACEMENT[kind],frame=FRAMES[view]||FRAMES.both;
+ const t=(no,en)=>language==='en'?en:no,identity=resolveModel(model),kind=identity.template,p=PLACEMENT[kind],frame=FRAMES[view]||FRAMES.both;
+ if(identity.atlasIndex !== undefined)return createCreatorAtlasSvg({identity,design,artworks,view,language});
  const artwork=artworks.find(a=>a.id===design.prints[0]?.artworkId),source=safePrintImage(artwork?.image),name=printTitle(artwork,language),artist=printArtist(artwork);
  const s=svg('svg',{viewBox:frame.join(' '),width:frame[2],height:frame[3],role:'img','aria-label':t('Kunsttrykket på hiphopmodellen: ','Artwork on the hip-hop model: ')+name+' · '+artist,class:'hiphop-model-image'});
- s.dataset.artworkId=artwork?.id||'';s.dataset.model=kind;s.dataset.view=view;
+ s.dataset.artworkId=artwork?.id||'';s.dataset.model=kind;s.dataset.modelId=identity.id;s.dataset.modelStyle=identity.style;s.dataset.view=view;
  const id='model-fabric-'+(++serial),defs=svg('defs'),filter=svg('filter',{id,x:'-2%',y:'-2%',width:'104%',height:'104%'});
  filter.append(svg('feTurbulence',{type:'fractalNoise',baseFrequency:'.025 .012',numOctaves:1,seed:4,result:'folds'}),svg('feDisplacementMap',{in:'SourceGraphic',in2:'folds',scale:1.5,xChannelSelector:'R',yChannelSelector:'G'}));defs.append(filter);s.append(defs);
- const base=svg('image',{href:'/design-assets/hiphop-'+kind+'-blank.png',x:0,y:0,width:1536,height:1024});base.dataset.role='model-template';s.append(base);
+ const base=svg('image',{href:identity.image,x:0,y:0,width:1536,height:1024});base.dataset.role='model-template';s.append(base);
  if(source){const [x,y,width,height]=p.art,image=svg('image',{href:source,x,y,width,height,preserveAspectRatio:'xMidYMid meet',class:'hiphop-fabric-print',filter:`url(#${id})`});image.dataset.role='model-artwork';image.dataset.source=source;s.append(image);}
  else{const text=svg('text',{x:p.signature[0],y:300,'text-anchor':'middle','font-size':15});text.textContent=t('Motivbilde utilgjengelig','Artwork image unavailable');text.dataset.role='model-artwork-unavailable';s.append(text);}
  const signature=svg('text',{x:p.signature[0],y:p.signature[1],'text-anchor':'middle','font-size':Math.min(17,300/Math.max(1,artist.length)),'font-family':'Arial','font-weight':700,fill:'#111',class:'hiphop-fabric-print'});signature.dataset.role='model-artist-signature';signature.textContent=artist==='Innsatt 2601-46'?'Innsatt 260146':artist;s.append(signature);
@@ -48,19 +51,24 @@ export async function modelPreviewPng(options){
  const blob=await new Promise(resolve=>canvas.toBlob(resolve,'image/png'));if(!blob)throw Error('canvas');return blob;
 }
 
-export function mountModelLookbook({mount,getArtworks,getDesign,language='no',onSelect,compact=false}){
- const t=(no,en)=>language==='en'?en:no;let view=compact?'back':'both',model='male';
+export function mountModelLookbook({mount,getArtworks,getDesign,language='no',onSelect,compact=false,initialModel='all'}){
+ const t=(no,en)=>language==='en'?en:no;let view=compact?'back':'both',displayModel=availableModels().some(identity=>identity.id===initialModel)?initialModel:'all',model=displayModel==='all'?'male':(resolveModel(displayModel).atlasIndex===undefined?resolveModel(displayModel).template:displayModel);
  const wrap=el('section','hiphop-lookbook'),title=el('h2','',t('Se trykket på modellene','See the print on the models'));
  const intro=el('p','',t('Velg et kunstverk og se det på T-skjorten, med kunstnerens signatur. Se begge sider eller gå nærmere inn på trykket.','Choose an artwork and see it on the T-shirt with the artist’s signature. View both sides or look closer at the print.'));
  const label=el('label','field',t('Kunstverk og kunstner','Artwork and artist')),select=el('select');select.setAttribute('aria-label',t('Velg trykk på modellene','Choose the print on the models'));label.append(select);
  const views=el('div','model-view-options');views.setAttribute('role','group');views.setAttribute('aria-label',t('Visning','View'));
- for(const [value,no,en]of [['both','Begge sider','Both sides'],['front','Forside','Front'],['back','Rygg · se trykket stort','Back · closer view']]){const b=el('button','secondary',t(no,en));b.type='button';b.dataset.modelView=value;b.addEventListener('click',()=>{view=value;refreshImages();});views.append(b);}
+ for(const [value,no,en]of [['both','Begge sider','Both sides'],['front','Forside / side','Front / side'],['back','Rygg · se trykket stort','Back · closer view']]){const b=el('button','secondary',t(no,en));b.type='button';b.dataset.modelView=value;b.addEventListener('click',()=>{view=value;refreshImages();});views.append(b);}
  const images=el('div','hiphop-model-grid'),credits=el('p','hiphop-model-credits'),download=el('button','secondary',t('Last ned modellvisning · PNG','Download model preview · PNG')),status=el('p','message');download.type='button';status.setAttribute('role','status');
- const models=el('select');models.setAttribute('aria-label',t('Modell for nedlasting','Model for download'));for(const [value,no,en]of [['male','Herremodell','Male model'],['female','Kvinnemodell','Female model']]){const o=el('option','',t(no,en));o.value=value;models.append(o);}models.addEventListener('change',()=>{model=models.value;});
+ const models=el('select');models.setAttribute('aria-label',t('Modell for nedlasting','Model for download'));for(const identity of availableModels()){const o=el('option','',identity.label[language]||identity.label.no);o.value=identity.atlasIndex===undefined?identity.template:identity.id;models.append(o);}models.addEventListener('change',()=>{model=models.value;});
+ const modelLabel=el('label','field',t('Velg modell','Choose a model')),modelFilter=el('select');modelFilter.dataset.role='model-selector';modelFilter.setAttribute('aria-label',t('Modeller i forhåndsvisningen','Models in the preview'));
+ const allModels=el('option','',t('Begge modellene','Both models'));allModels.value='all';modelFilter.append(allModels);
+ for(const identity of availableModels()){const option=el('option','',identity.label[language]||identity.label.no);option.value=identity.id;modelFilter.append(option);}
+ modelFilter.value=displayModel;models.value=model;
+ modelFilter.addEventListener('change',()=>{displayModel=modelFilter.value;if(displayModel!=='all'){model=resolveModel(displayModel).atlasIndex===undefined?resolveModel(displayModel).template:displayModel;models.value=model;}refreshImages();});modelLabel.append(modelFilter);
  const exports=el('div','designer-actions');exports.append(models,download);
- wrap.append(title,intro,label,views,credits,images,el('p','small-note',t('Virtuell plasseringsvisning. Endelig trykk og størrelse avklares med produsenten.','Virtual placement preview. Final print and dimensions are confirmed with the maker.')),exports,status);mount.replaceChildren(wrap);
+ wrap.append(title,intro,label,modelLabel,views,credits,images,el('p','small-note',t('Virtuell plasseringsvisning. Endelig trykk og størrelse avklares med produsenten.','Virtual placement preview. Final print and dimensions are confirmed with the maker.')),exports,status);mount.replaceChildren(wrap);
  function refreshImages(){
-  images.replaceChildren();for(const kind of ['male','female']){const f=el('figure');f.append(createModelSvg({design:getDesign(),artworks:getArtworks(),model:kind,view,language}),el('figcaption','',kind==='male'?t('Herremodell','Male model'):t('Kvinnemodell','Female model')));images.append(f);}
+  images.replaceChildren();const shown=availableModels().filter(identity=>displayModel==='all'?identity.atlasIndex===undefined:identity.id===displayModel);images.dataset.modelCount=String(shown.length);for(const identity of shown){const f=el('figure');f.dataset.modelId=identity.id;f.append(createModelSvg({design:getDesign(),artworks:getArtworks(),model:identity.id,view,language}),el('figcaption','',identity.label[language]||identity.label.no));images.append(f);}
   for(const b of views.children)b.setAttribute('aria-pressed',String(b.dataset.modelView===view));
   const a=getArtworks().find(a=>a.id===getDesign().prints[0]?.artworkId);credits.textContent=printTitle(a,language)+' · '+printArtist(a);
  }

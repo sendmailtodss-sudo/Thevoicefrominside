@@ -1,0 +1,98 @@
+/* A shared editorial shell. Artwork and source-document pixels remain untouched. */
+@font-face{font-family:StemDisplay;src:url('/design-assets/display.woff') format('woff');font-display:swap}
+@font-face{font-family:StemText;src:url('/design-assets/text.woff') format('woff');font-display:swap}
+body.sfi-editorial{--ed-canvas:#0b1113;--ed-surface:#142025;--ed-raised:#1b2b30;--ed-text:#f1eee6;--ed-muted:#c5d0cf;--ed-line:#52696d;--ed-copper:#e0b889}
+.sfi-editorial :focus-visible{outline:3px solid #f3c88e!important;outline-offset:4px}
+.sfi-editorial .sfi-header{background:#101a1d;color:#f1eee6;border-color:#40565a;box-shadow:0 3px 14px #0004}
+.sfi-editorial .sfi-navigation,.sfi-editorial .sfi-navigation .sfi-section{border-color:#40565a}
+.sfi-editorial .sfi-brand-mark,.sfi-editorial .sfi-quick .sfi-lar,.sfi-editorial .sfi-section summary{color:#e0b889}
+.sfi-editorial .sfi-navigation a:hover,.sfi-editorial .sfi-navigation a[aria-current]{color:#f3c88e;border-bottom-color:#e0b889}
+.sfi-editorial .sfi-navigation .sfi-submenu{background:#18262a;color:#f1eee6;border-color:#52696d;box-shadow:0 12px 26px #0007}
+.sfi-editorial .sfi-navigation .sfi-submenu small{color:var(--ed-muted)}
+.sfi-editorial-gallery .gw-note{color:var(--ed-muted)}
+.sfi-editorial .sfi-menu-button{background:#31484c;color:#fff;border:1px solid #789093}
+.sfi-editorial .sfi-directory{background:#18272b;color:#f1eee6;border-color:#52696d}
+.sfi-editorial .sfi-directory h2{color:#f1eee6}
+.sfi-editorial .sfi-directory-grid a{background:#223338;border-color:#52696d;color:#f1eee6}
+.sfi-editorial .sfi-directory-grid a:hover{background:#2d4246;border-color:#e0b889}
+.sfi-editorial .sfi-directory-grid span,.sfi-editorial .sfi-directory-grid small{color:#d1ddda}
+/* Long-form pages: the paper of the source scans stays white inside a calm frame. */
+body.sfi-editorial-reading{background:var(--ed-canvas);color:var(--ed-text);--ink:#f1eee6;--muted:#c5d0cf;--paper:#142025;--line:#52696d;--teal:#e0b889;--gold:#e0b889;font:18px/1.75 Georgia,'Times New Roman',serif}
+.sfi-editorial-reading main{background:#142025;border-color:#40565a;box-shadow:0 12px 36px #0003}
+.sfi-editorial-reading .reading{max-width:740px}
+.sfi-editorial-reading h1,.sfi-editorial-reading h2,.sfi-editorial-reading h3{font-family:StemDisplay,Georgia,serif;letter-spacing:-.015em}
+.sfi-editorial-reading h1{line-height:1.08}.sfi-editorial-reading p{line-height:1.75}
+.sfi-editorial-reading a{color:#f0c99a}.sfi-editorial-reading .eyebrow{color:#e0b889}
+.sfi-editorial-reading .card,.sfi-editorial-reading .notice,.sfi-editorial-reading pre,.sfi-editorial-reading th,.sfi-editorial-reading .tag{background:#223338;color:#f1eee6;border-color:#52696d}
+.sfi-editorial-reading .note,.sfi-editorial-reading .status,.sfi-editorial-reading .caption,.sfi-editorial-reading figcaption,.sfi-editorial-reading footer,.sfi-editorial-reading .muted{color:#c5d0cf}
+.sfi-editorial-reading button,.sfi-editorial-reading a.button{background:#e0b889;color:#142025;border-color:#e0b889}
+.sfi-editorial-reading input,.sfi-editorial-reading select,.sfi-editorial-reading textarea{background:#fff;color:#172d32}
+.sfi-editorial-reading figure img{box-shadow:none}
+/* Case hub */
+body.sfi-editorial-hub{background:#0b1113;color:#f1eee6}
+.sfi-editorial-hub .hub-main h1,.sfi-editorial-hub .hub-main h2,.sfi-editorial-hub .hub-card h2,.sfi-editorial-hub .hub-card h3{font-family:StemDisplay,Georgia,serif;letter-spacing:-.02em}
+.sfi-editorial-hub .hub-kicker,.sfi-editorial-hub .hub-process li:before{color:#e0b889}
+.sfi-editorial-hub .hub-section,.sfi-editorial-hub .hub-process li,.sfi-editorial-hub .hub-footer{border-color:#52696d}
+.sfi-editorial-hub .hub-card,.sfi-editorial-hub .hub-note{background:#18272b;border-color:#52696d;box-shadow:0 7px 20px #0003}
+.sfi-editorial-hub .hub-card a,.sfi-editorial-hub .hub-action{color:#f0c99a}
+.sfi-editorial-hub .hub-status{background:#31484c;color:#f1eee6}
+.sfi-editorial-hub .hub-footer{color:#c5d0cf}
+/* A dark exhibition surround; the art remains in its existing neutral frames. */
+body.sfi-editorial-art{--ac-ink:#f1eee6;--ac-muted:#c5d0cf;--ac-paper:#0b1113;--ac-line:#52696d;--ac-accent:#e0b889;--ac-gold:#e0b889}
+.sfi-editorial-art h1,.sfi-editorial-art h2{font-family:StemDisplay,Georgia,serif;letter-spacing:-.02em}
+.sfi-editorial-art .ac-hero-word{color:#1c2a2d}
+.sfi-editorial-art .ac-create,.sfi-editorial-art .ac-shop-note,.sfi-editorial-art .ac-empty{background:#18272b}
+.sfi-editorial-art .ac-button,.sfi-editorial-art .ac-filters button[aria-pressed=true]{background:#e0b889;color:#142025!important;border-color:#e0b889}
+.sfi-editorial-art .ac-search input,.sfi-editorial-art select{background:#fff;color:#172128}
+.sfi-editorial-art .ac-frame,.sfi-editorial-art .ac-detail-art>a{background:#29373a}
+.sfi-editorial-art .ac-view{color:#f1eee6}
+.sfi-editorial-art .ac-hero-art{color:#172128}
+/* Merchandise controls surround a neutral, accurately white garment preview. */
+body.sfi-editorial-shop{--ink:#f1eee6;--muted:#c5d0cf;--paper:#0b1113;--white:#18272b;--gold:#e0b889;--line:#52696d;--dark:#31484c;--red:#f0a79b;background:#0b1113;color:#f1eee6}
+.sfi-editorial-shop h1,.sfi-editorial-shop h2{font-family:StemDisplay,Georgia,serif}
+.sfi-editorial-shop .art-panel{background:#28373a;border-color:#52696d}
+.sfi-editorial-shop .availability,.sfi-editorial-shop .notice,.sfi-editorial-shop .checkout-panel{background:#18272b;color:#f1eee6;border-color:#52696d}
+.sfi-editorial-shop .preview-note{color:#e0e9e7}
+.sfi-editorial-shop .field select,.sfi-editorial-shop .field input{background:#fff;color:#172d32}
+.sfi-editorial-shop .shirt-shape,.sfi-editorial-shop .wall-shape{color:#172d32}
+.sfi-editorial-shop .eyebrow{color:#e0b889}
+.sfi-editorial-shop .message,.sfi-editorial-shop #order-status{color:#172d32}
+/* Match the existing dark music and gallery spaces through their shared chrome. */
+.sfi-editorial-music .wc-main h1,.sfi-editorial-gallery .ig-main h1{font-family:StemDisplay,Georgia,serif}
+@media(max-width:720px){.sfi-editorial-reading main{padding:26px 20px}.sfi-editorial-reading h1{font-size:clamp(2.15rem,10vw,3rem)}.sfi-editorial-reading{font-size:17px}}
+@media(prefers-reduced-motion:reduce){.sfi-editorial *, .sfi-editorial *::before,.sfi-editorial *::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+@media print{body.sfi-editorial-reading,.sfi-editorial-reading main{background:#fff;color:#111;box-shadow:none}.sfi-editorial-reading a{color:#111}.sfi-editorial-reading .note,.sfi-editorial-reading figcaption{color:#333}}
+.sfi-editorial .sfi-skip{background:#fff;color:#172d32}
+.sfi-editorial-home .minds-landing h1,.sfi-editorial-home .minds-landing h2{font-family:StemDisplay,Georgia,serif;letter-spacing:-.025em}
+.sfi-editorial-home .minds-gallery{background:#142025;color:#f1eee6;border-color:#52696d}
+.sfi-editorial-home .minds-gallery .minds-kicker,.sfi-editorial-home .minds-gallery h2 em{color:#e0b889!important}
+.sfi-editorial-home .minds-gallery .minds-section-heading>p,.sfi-editorial-home .minds-art-meta,.sfi-editorial-home .minds-art-meta small,.sfi-editorial-home .minds-gallery-bottom p,.sfi-editorial-home .minds-gallery-bottom small{color:#c5d0cf}
+.sfi-editorial-home .minds-gallery-bottom{border-color:#52696d}
+.sfi-editorial-home .minds-button-dark{background:#e0b889;color:#142025!important}
+body.sfi-editorial-gallery{background:#0b1113;color:#f1eee6;--ig-coral:#e0b889;--ig-ink:#f1eee6}
+.sfi-editorial-gallery .ig-eyebrow,.sfi-editorial-gallery .ig-hero h1 em{color:#e0b889}
+.sfi-editorial-gallery .ig-toolbar,.sfi-editorial-gallery .ig-detail,.sfi-editorial-gallery .ig-values>section,.sfi-editorial-gallery .ig-values>section+section{background:#18272b;border-color:#52696d;color:#f1eee6}
+.sfi-editorial-gallery .ig-results,.sfi-editorial-gallery .ig-provenance{color:#c5d0cf}
+.sfi-editorial-gallery .ig-review,.sfi-editorial-gallery .ig-pill,.sfi-editorial-gallery .ig-feed-status{color:#172d32}
+.sfi-editorial-gallery .ig-card{background:#18272b;border-color:#52696d;color:#f1eee6}
+.sfi-editorial-gallery .ig-card-credit,.sfi-editorial-gallery .ig-original{color:#c5d0cf}
+/* Captions printed on a white evidence mat need dark ink. */
+.sfi-editorial-reading .press-document-page figcaption{color:#23272e}
+
+/* Practical workspaces keep their tested form palette and shared display type. */
+.sfi-editorial-tool h1,.sfi-editorial-tool h2{font-family:StemDisplay,Georgia,serif;letter-spacing:-.015em}
+
+/* Practical surfaces retain their own contrast-tested palettes and workflow states. */
+.sfi-editorial-tool main h1,.sfi-editorial-tool main h2,
+.sfi-editorial-utility main h1,.sfi-editorial-utility main h2{
+  font-family:StemDisplay,Georgia,serif;letter-spacing:-.015em
+}
+.sfi-editorial-tool main :is(input,select,textarea,button),
+.sfi-editorial-utility main :is(input,select,textarea,button){font:inherit}
+.sfi-editorial-tool main :is(input,select,textarea),
+.sfi-editorial-utility main :is(input,select,textarea){max-width:100%}
+.sfi-editorial-tool main :is(button,a),
+.sfi-editorial-utility main :is(button,a){touch-action:manipulation}
+/* Some older tools use content-box globally; keep shared navigation within the viewport. */
+.sfi-editorial .sfi-navigation{box-sizing:border-box}
+.sfi-editorial .sfi-header{display:block}

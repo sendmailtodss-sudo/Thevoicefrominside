@@ -9,3 +9,26 @@
 
 .minds-spark{position:relative;width:48px;height:48px;font:400 64px/.75 Georgia,serif}.minds-spark::after{content:'+';position:absolute;inset:0;transform:rotate(45deg)}
 @media(prefers-reduced-motion:no-preference){.minds-landing[data-motion=playing] .minds-gallery[data-revealed=true] .minds-frame{animation:minds-frame-arrive 750ms cubic-bezier(.2,.7,.2,1) both}.minds-landing[data-motion=playing] .minds-gallery[data-revealed=true] .minds-art:nth-child(2) .minds-frame{animation-delay:70ms}.minds-landing[data-motion=playing] .minds-gallery[data-revealed=true] .minds-art:nth-child(3) .minds-frame{animation-delay:140ms}}@keyframes minds-frame-arrive{from{translate:0 18px}to{translate:0 0}}
+
+/* Private cinematic study: a decorative bridge between the existing sections. */
+.minds-visual-bridge{height:clamp(300px,38vw,420px);position:relative;overflow:hidden;pointer-events:none;background:linear-gradient(180deg,#10242b 0%,#081b24 60%,#0c2028 100%)}
+.minds-visual-bridge-canvas{display:block;width:100%;height:100%}
+@media (prefers-reduced-motion:reduce){.minds-visual-bridge{scroll-behavior:auto}}
+
+/* Scroll storyboard: native document scrolling, no wheel interception. */
+.minds-visual-bridge{height:180vh;overflow:visible}
+.minds-visual-bridge-canvas{position:sticky;top:80px;height:calc(100svh - 100px);max-height:640px}
+@media(max-width:700px){.minds-visual-bridge{height:145vh}.minds-visual-bridge-canvas{height:65svh;top:90px}}
+@media(prefers-reduced-motion:reduce){.minds-visual-bridge{height:360px}.minds-visual-bridge-canvas{position:static;height:360px}}
+
+/* Shared creator atlas and native artwork destinations. */
+.minds-scene-stage{position:sticky;top:80px;height:calc(100svh - 100px);max-height:680px;display:flex;flex-direction:column}
+.minds-visual-bridge-canvas{position:static;top:auto;flex:1;min-height:0;height:100%;max-height:none}
+.minds-scene-links{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;padding:14px max(16px,6vw);pointer-events:auto;background:#0c2028;font:12px/1.4 Arial,sans-serif}
+.minds-scene-links a{padding:9px 12px;min-height:44px;border:1px solid #7f8f84;color:#f3e9d1;display:flex;align-items:center}
+.minds-scene-links a:hover{background:#294148}.minds-scene-links a:focus-visible{outline:3px solid #ffd375;outline-offset:2px}
+.minds-gallery-bottom{justify-content:center;text-align:center;flex-direction:column;gap:24px}
+@media(max-width:700px){.minds-scene-stage{height:70svh;top:85px}.minds-scene-links{flex-wrap:nowrap;justify-content:flex-start;overflow-x:auto}.minds-scene-links a{flex-shrink:0;max-width:190px}.minds-gallery-bottom{align-items:center}}
+@media(prefers-reduced-motion:reduce){.minds-visual-bridge{height:auto}.minds-scene-stage{position:static;height:420px}.minds-visual-bridge-canvas{height:100%}}
+
+.minds-scene-prompt{display:flex;justify-content:center;align-items:center;gap:1rem;padding:8px 16px;background:#0c2028;color:#f3e9d1;font:14px/1.4 Arial,sans-serif}.minds-scene-prompt a{color:#f3e9d1;pointer-events:auto;min-height:44px;display:inline-flex;align-items:center}.minds-scene-prompt a:focus-visible{outline:3px solid #ffd375;outline-offset:2px}

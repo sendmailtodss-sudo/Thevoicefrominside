@@ -43,3 +43,8 @@ Keep edits focused. Check both Norwegian and English routes, narrow mobile layou
 ## Publication
 
 This repository has no automatic production deployment. A commit, a passing test, a Codespaces preview and a local build are not publication receipts. Production website changes require the maintainer's explicit release workflow and approval. Do not upload private deployment configuration or copy private operational instructions into this repository.
+
+
+## 5 November contributor update
+
+The generic interface, navigation, gallery and application code were refreshed from the source revision recorded in [source provenance](source-provenance.json). The 27 approved gallery images and their depth resources are included. Reading-page fixtures and sanitized search and translation data remain examples, so this is not a complete production content mirror. Private case files and manuscripts remain excluded; the preview keeps services disabled.

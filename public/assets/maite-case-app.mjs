@@ -27,7 +27,7 @@ const errors = {
   BACKUP_CRYPTO_UNAVAILABLE:say('Lokal kryptering er ikke tilgjengelig i denne nettleseren. Ingen fil er sendt eller lastet ned.','Local encryption is unavailable in this browser. No file was sent or downloaded.'),
   INVALID_WORK_BUNDLE:say('Arbeidskopien er ugyldig eller ufullstendig. Ingen sak er erstattet.','The work file is invalid or incomplete. No case has been replaced.'),
   UNSAFE_WORK_BUNDLE:say('Arbeidskopien inneholder felt som ikke er tillatt. Ingen sak er erstattet.','The work file contains disallowed fields. No case has been replaced.'),
-  UNSUPPORTED_WORK_BUNDLE_VERSION:say('Dette er ikke en støttet MAITE-arbeidskopi. Vanlig rapporteksport kan ikke gjenåpnes.','This is not a supported MAITE work file. A report export cannot be reopened.'),
+  UNSUPPORTED_WORK_BUNDLE_VERSION:say('Dette er ikke en støttet inmAIte-arbeidskopi. Vanlig rapporteksport kan ikke gjenåpnes.','This is not a supported inmAIte work file. A report export cannot be reopened.'),
   WORK_BUNDLE_TOO_LARGE:say('Arbeidskopien overskrider grensen på 90 MB. Ingen sak er erstattet.','The work file exceeds the 90 MB limit. No case has been replaced.'),
   RESTORE_CASE_EXISTS:say('Denne saken er allerede åpen. Velg den og merk av for erstatning hvis arbeidskopien skal overta.','This case is already open. Select it and tick replace if the work file should replace it.'),
   RESTORE_CASE_MISMATCH:say('Arbeidskopien har en annen saks-ID. Fjern avmerkingen for erstatning for å åpne den som en annen sak.','The work file has a different case ID. Untick replace to open it as a separate case.'),

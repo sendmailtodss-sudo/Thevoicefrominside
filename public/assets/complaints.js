@@ -90,6 +90,10 @@
   const setStatus=message=>{status.textContent=message;};
   const restore=$('complaint-restore');
   let fileReadVersion=0,lastGenerated='',previousDraft='';
+  let complaintDirty=false;
+  form.addEventListener('input',()=>{complaintDirty=true;});
+  form.addEventListener('change',()=>{complaintDirty=true;});
+  window.addEventListener('beforeunload',event=>{if(complaintDirty){event.preventDefault();event.returnValue='';}});
   function updateRestore(){if(restore){restore.hidden=!previousDraft;restore.disabled=!previousDraft;}}
   const fields=['sector','priorSteps','authority','name','letterDate','decisionDate','receivedDate','receivedTime','deadlineDate','deadlineTime','caseRef','outcome','reasons','facts','procedure','evidence','harm'];
   function values(){return Object.fromEntries([...fields.map(k=>[k,$('complaint-'+k)?.value||'']),['stay',$('complaint-stay').checked]]);}
@@ -170,7 +174,7 @@
   $('complaint-download').addEventListener('click',()=>{if(!output.value)return;const url=URL.createObjectURL(new Blob(['\ufeff'+output.value],{type:'text/plain;charset=utf-8'}));const a=document.createElement('a');a.href=url;a.download=en?'appeal-draft.txt':'klageutkast.txt';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);setStatus(t('Utkastet er lastet ned. Det er fortsatt ikke sendt til myndigheten.','Draft downloaded. It has still not been sent to the authority.'));});
   $('complaint-print').addEventListener('click',()=>{const p=$('complaint-print-text');p.textContent=output.value;document.body.classList.add('printing-complaint');window.print();});
   window.addEventListener('afterprint',()=>document.body.classList.remove('printing-complaint'));
-  $('complaint-clear').addEventListener('click',()=>{fileReadVersion++;previousDraft='';lastGenerated='';updateRestore();form.reset();result.replaceChildren();result.hidden=true;output.value='';$('complaint-print-text').textContent='';$('complaint-draft').hidden=true;$('complaint-download').disabled=true;$('complaint-print').disabled=true;showDeadline();showSector();setStatus(t('Alle saksopplysninger og utkast er fjernet fra skjemaet.','All case information and drafts have been cleared from the form.'));});
+  $('complaint-clear').addEventListener('click',()=>{fileReadVersion++;previousDraft='';lastGenerated='';complaintDirty=false;updateRestore();form.reset();result.replaceChildren();result.hidden=true;output.value='';$('complaint-print-text').textContent='';$('complaint-draft').hidden=true;$('complaint-download').disabled=true;$('complaint-print').disabled=true;showDeadline();showSector();setStatus(t('Alle saksopplysninger og utkast er fjernet fra skjemaet.','All case information and drafts have been cleared from the form.'));});
   form.addEventListener('submit',e=>e.preventDefault());
   showDeadline();
   showSector();

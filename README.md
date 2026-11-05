@@ -85,3 +85,8 @@ Read [Contributing](CONTRIBUTING.md) and the [development guide](docs/developmen
 Current needs include mobile accessibility, articulated character animation using properly licensed assets, source validation in inmAIte, faithful Norwegian/English language review, graphics performance, and clearer artist and model selection. Advanced work is marked help wanted; starter tasks have a smaller scope.
 
 This repository is a developer distribution with examples wherever original writing or media has not been released. Use synthetic cases in development and bug reports. Keep private case files, manuscripts, contact details and credentials out of GitHub. Prototype screens and passing tests do not mean submissions, accounts, payments or legal services are open. Read the current terms for code, writing, artwork and commercial reproductions separately.
+
+
+## Contributor source update — 5 November 2026
+
+The application code, generic interface, navigation and gallery in this contributor export were updated from website source commit `d9de7e2954f4a790fc6f12257f1e6c8d46389096`. The 27 approved gallery images and depth resources are included. Editorial reading pages still use example material; private manuscripts and case documents are excluded. This repository is not a complete content mirror or a deployment receipt. See [source provenance](docs/source-provenance.json).

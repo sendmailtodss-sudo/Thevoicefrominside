@@ -4,7 +4,7 @@
  const community=document.getElementById('community-root'),existing=document.querySelector('[data-creative-view]');
  if(!community&&!existing)return;
  const en=document.documentElement.lang==='en',apiRoot='/api/workshop/creative',studio=!existing;
- const root=existing||document.createElement('section');if(!existing){root.id='creative-studio';root.className='wc-creative';community.after(root);}
+ const root=existing||document.getElementById('creative-studio')||document.createElement('section');if(!existing){root.id='creative-studio';root.className='wc-creative';community.after(root);}
  const artistPath=en?'/en/artist/':'/kunstner/',musicPath=en?'/en/music/':'/musikk/';
  if(existing)root.classList.add('wc-creative');
  const tr=(no,english)=>en?english:no;
