@@ -64,3 +64,24 @@ The reading layouts, navigation, gallery, clothing preview and local tools can b
 See [development setup](docs/development.md), [contributing](CONTRIBUTING.md), [feature status](docs/feature-status.md) and [source provenance](docs/source-provenance.json). A GitHub commit does not deploy the public website.
 
 No new licence is granted by this export. Code, writing, artwork and commercial reproduction rights must be considered separately; do not assume an open-source or artwork licence that has not been agreed.
+## Bli med og bygg / Help build the project
+
+**NO:** Vi søker utviklere, hackere, kunstnere, musikere, oversettere, jurister og testere som vil bruke kunnskapen sin for verdighet, rettssikkerhet og solidaritet med mennesker på begge sider av murene. Stemmen fra innsiden kobler personlige fortellinger, dokumentasjon og kunst med verktøy som kan gjøre makt lettere å etterprøve. Hjelp oss å gjøre arbeidet tilgjengelig, presist og nyttig.
+
+Alle er velkomne. Egne erfaringer fra fengsel kan gi verdifulle perspektiver, men ingen slik tilknytning er nødvendig, og ingen må dele sin historie eller identitet for å bidra. En liten feilrapport, en god oversettelsesmerknad eller én gjennomarbeidet kodeendring er en reell innsats.
+
+Start med [bidragsveiledningen](CONTRIBUTING.md) og [utviklingsoppsettet](docs/development.md). Se [små startoppgaver](https://github.com/sendmailtodss-sudo/Thevoicefrominside/issues?q=is%3Aissue%20is%3Aopen%20label%3A%22good%20first%20issue%22) eller [oppgaver der vi trenger hjelp](https://github.com/sendmailtodss-sudo/Thevoicefrominside/issues?q=is%3Aissue%20is%3Aopen%20label%3A%22help%20wanted%22). Skriv i saken hva du vil undersøke, så kan arbeidet samordnes. Bruk gjerne norsk eller engelsk.
+
+Vi trenger særlig hjelp med mobil og tilgjengelighet, ekte leddelt figurbevegelse med avklarte bruksrettigheter, kildekontroll i inmAIte, språklig troskap mellom norsk og engelsk, grafikkytelse og en forståelig kunstner- og modellvelger. Avanserte oppgaver er merket som hjelp ønskes; startoppgavene har mindre omfang.
+
+Dette lageret er en utviklingsutgave med eksempler der originaltekst eller medier ikke er frigitt. Bruk syntetiske saker i utvikling og feilrapporter. Ikke legg private saksdokumenter, manus, kontaktopplysninger eller innloggingsnøkler i GitHub. Prototyper og tester betyr ikke at innsending, kontoer, betaling eller juridiske tjenester er åpnet. Rettigheter til kode, tekst, kunst og kommersiell reproduksjon må leses hver for seg i prosjektets gjeldende vilkår.
+
+**EN:** We are looking for developers, hackers, artists, musicians, translators, legal reviewers and testers who want to put their skills to work for dignity, accountability and solidarity with people on both sides of prison walls. The Voice from Inside connects personal writing, documentation and art with tools that can help people examine how power is used. Help make that work accessible, accurate and useful.
+
+Everyone is welcome. Experience of prison can offer valuable insight, but no connection is required and nobody needs to disclose their history or identity to contribute. A clear bug report, a careful translation note or one focused code change can help.
+
+Read [Contributing](CONTRIBUTING.md) and the [development guide](docs/development.md), then choose a [good first issue](https://github.com/sendmailtodss-sudo/Thevoicefrominside/issues?q=is%3Aissue%20is%3Aopen%20label%3A%22good%20first%20issue%22) or a [help wanted task](https://github.com/sendmailtodss-sudo/Thevoicefrominside/issues?q=is%3Aissue%20is%3Aopen%20label%3A%22help%20wanted%22). Comment with the part you want to investigate so contributors can coordinate. Norwegian and English contributions are welcome.
+
+Current needs include mobile accessibility, articulated character animation using properly licensed assets, source validation in inmAIte, faithful Norwegian/English language review, graphics performance, and clearer artist and model selection. Advanced work is marked help wanted; starter tasks have a smaller scope.
+
+This repository is a developer distribution with examples wherever original writing or media has not been released. Use synthetic cases in development and bug reports. Keep private case files, manuscripts, contact details and credentials out of GitHub. Prototype screens and passing tests do not mean submissions, accounts, payments or legal services are open. Read the current terms for code, writing, artwork and commercial reproductions separately.
