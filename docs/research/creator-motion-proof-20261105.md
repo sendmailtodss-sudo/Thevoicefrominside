@@ -31,3 +31,9 @@ This is an engineering proof, not a finished realistic scene: character appearan
 - The authenticated Hugging Face account is non-Pro. Its identity endpoint did not expose a credit balance; no available balance or refreshed quota was inferred and no paid inference was attempted.
 
 Next: find usable realistic rigged bodies and transferable creative-motion clips with terms suitable for the actual use; integrate cloth-conforming artwork and verify natural movement and performance before publication.
+
+## Prototype: conforming a print to the shirt — 7 November 2026
+
+A private Blender experiment subdivides the artwork panel to 484 vertices, projects each vertex onto the shirt surface, and transfers nearby shirt skinning weights. All vertices found a shirt intersection. The evaluation uses existing motion at frames 1, 24 and 60; every vertex has normalized weights, multiple bones influence the mesh, and vertex displacement between frames 1 and 24 was measured at up to 0.00686 Blender units. The maximum distance to a body vertex in those frames was below 0.017 units. These checks are approximate; they do not establish absence of clipping, true cloth simulation, visual fidelity, browser rendering, or acceptable mobile performance.
+
+The avatar still looks game-like and is not the photorealistic human requested. This is a private engineering prototype, not a deployed Site feature. The next steps are a suitable licensed realistic rig, verified identity and print alignment, creative motions with props and coordinated timing, and real browser/mobile performance and accessibility testing.
