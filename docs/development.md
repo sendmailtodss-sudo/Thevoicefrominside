@@ -48,3 +48,16 @@ This repository has no automatic production deployment. A commit, a passing test
 ## 5 November contributor update
 
 The generic interface, navigation, gallery and application code were refreshed from the source revision recorded in [source provenance](source-provenance.json). The 27 approved gallery images and their depth resources are included. Reading-page fixtures and sanitized search and translation data remain examples, so this is not a complete production content mirror. Private case files and manuscripts remain excluded; the preview keeps services disabled.
+
+## Dreamina media workshop
+
+Open /verksted/dreamina/ in the private preview. Export a UTF-8 prompt, open Dreamina, generate there and download the result. Import a decodable PNG, JPEG or MP4 up to 50 MiB. Imports remain in project-specific IndexedDB on this origin and browser profile. Download a backup before clearing browser data. Import establishes no proof of origin and does not publish anything.
+
+For programmatic operation on a private Node 24 host, follow https://dreamina.capcut.com/ai-tool/install and authenticate the official CLI as the operator. Keep CLI account state outside the checkout, in a private persistent home. Optionally set DREAMINA_BIN in the host environment. No web token is needed. Run these from the project root:
+Copy .env.example to ../dreamina.env outside the source tree, set the canvas UUID from `dreamina-canvas canvas ls`, and select models and supported settings from `dreamina-canvas model list --type image` or `video`. The official installer currently supplies dreamina-canvas. Use `dreamina-canvas auth status` and `dreamina-canvas auth login` if needed. In a persistent cloud host use the same variables in its environment settings. Keep the OAuth profile on the private host.
+- `node --env-file=../dreamina.env scripts/dreamina.mjs plan-image "your prompt"` validates without remote generation. Use draft-image to save a node without running it. Video has corresponding plan-video and draft-video commands.
+- For a paid generation use image or video followed by the quoted prompt and a fresh submission UUID. Record the UUID first. The CLI manages credit confirmation interactively.
+- Run status with that same UUID; download with the resulting resource ID. The CLI writes private results to local-data/dreamina/CANVAS_UUID/RESOURCE_ID.media. File type is detected from the content when importing. No arbitrary download URL is accepted.
+- After timeout, rate limit or uncertain submission query status before further action. No automatic retries or automatic confirmation. Webhooks and account-specific numeric rate limits were not verified.
+
+The contributor preview has no live accounts or media bindings. This terminal integration uses OS account access. Production hosting is separately managed.
