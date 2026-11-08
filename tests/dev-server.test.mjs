@@ -90,3 +90,19 @@ test('private preview video is opt-in and supports byte seeking', async t => {
   assert.equal((await fetch(url, { headers: { Range: 'bytes=12-13' } })).status, 416);
   assert.equal((await fetch(url, { method: 'POST' })).status, 405);
 });
+
+test('private scene directory serves only its own configured files', async t => {
+ const temp=await fs.mkdtemp(path.join(os.tmpdir(),'voice-scenes-'));
+ const scenes=path.join(temp,'scenes'); await fs.mkdir(scenes);
+ await fs.writeFile(path.join(scenes,'galaxy.mp4'),'scene data');
+ await fs.writeFile(path.join(temp,'secret.mp4'),'outside data');
+ await fs.symlink(path.join(temp,'secret.mp4'),path.join(scenes,'escape.mp4'));
+ const server=createDevServer({privateMediaDir:scenes});server.listen(0,'127.0.0.1');await once(server,'listening');
+ t.after(async()=>{await new Promise(resolve=>server.close(resolve));await fs.rm(temp,{recursive:true,force:true})});
+ const base=`http://127.0.0.1:${server.address().port}/__private-preview/scenes/`;
+ assert.equal(await (await fetch(base+'galaxy.mp4')).text(),'scene data');
+ assert.equal((await fetch(base+'missing.mp4')).status,404);
+ assert.equal((await fetch(base+'escape.mp4')).status,403);
+ const part=await fetch(base+'galaxy.mp4',{headers:{Range:'bytes=0-4'}});
+ assert.equal(part.status,206);assert.equal(await part.text(),'scene');
+});

@@ -27,7 +27,7 @@ const unavailable = JSON.stringify({
 });
 
 /** Serve the source preview without invoking or proxying any production service. */
-export function createDevServer({ publicDir = path.join(projectRoot, 'public'), privateVideo = null } = {}) {
+export function createDevServer({ publicDir = path.join(projectRoot, 'public'), privateVideo = null, privateMediaDir = null } = {}) {
   return http.createServer(async (request, response) => {
     function send(status, body = '', contentType = 'text/plain; charset=utf-8', extra = {}) {
       const content = Buffer.isBuffer(body) ? body : Buffer.from(body);
@@ -50,8 +50,21 @@ export function createDevServer({ publicDir = path.join(projectRoot, 'public'), 
         return send(405, 'The developer preview is read-only.', undefined, { Allow: 'GET, HEAD' });
       }
       // Explicitly configured, loopback-only preview: never copy private media into public/.
-      if (pathname === '/__private-preview/opening.mp4' && privateVideo) {
-        const stat = await fs.stat(privateVideo);
+      const scene = /^\/__private-preview\/scenes\/([a-z0-9-]+)\.mp4$/.exec(pathname);
+      let selectedVideo = pathname === '/__private-preview/opening.mp4' ? privateVideo : null;
+      if (scene && privateMediaDir) {
+        const root = await fs.realpath(privateMediaDir);
+        try {
+          const candidate = await fs.realpath(path.join(root, `${scene[1]}.mp4`));
+          if (!candidate.startsWith(root + path.sep)) return send(403, 'This path is not available.');
+          selectedVideo = candidate;
+        } catch (error) {
+          if (error.code === 'ENOENT') return send(404, 'Scene not available.');
+          throw error;
+        }
+      }
+      if (selectedVideo) {
+        const stat = await fs.stat(selectedVideo);
         const match = /^bytes=(\d+)-(\d*)$/.exec(request.headers.range || '');
         let start = 0, end = stat.size - 1;
         if (request.headers.range && !match) return send(416, 'Invalid range.', undefined, { 'Content-Range': `bytes */${stat.size}` });
@@ -61,7 +74,7 @@ export function createDevServer({ publicDir = path.join(projectRoot, 'public'), 
         if (match) extra['Content-Range'] = `bytes ${start}-${end}/${stat.size}`;
         response.writeHead(match ? 206 : 200, { ...headers, ...extra });
         if (request.method === 'HEAD') return response.end();
-        return createReadStream(privateVideo, { start, end }).on('error', () => response.destroy()).pipe(response);
+        return createReadStream(selectedVideo, { start, end }).on('error', () => response.destroy()).pipe(response);
       }
       const root = await fs.realpath(publicDir);
       const inside = candidate => candidate === root || candidate.startsWith(root + path.sep);
@@ -98,9 +111,10 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
   const port = Number(process.env.PORT || 8080);
   if (!Number.isInteger(port) || port < 0 || port > 65535) throw new Error('PORT must be an integer between 0 and 65535.');
   const privateVideo = process.env.DREAMINA_PREVIEW_VIDEO || null;
-  const server = createDevServer({ privateVideo });
+  const privateMediaDir = process.env.DREAMINA_PREVIEW_DIR || null;
+  const server = createDevServer({ privateVideo, privateMediaDir });
   server.on('error', error => { console.error(`Preview could not start: ${error.message}`); process.exitCode = 1; });
-  server.listen(port, privateVideo ? '127.0.0.1' : '0.0.0.0', () => {
+  server.listen(port, privateVideo || privateMediaDir ? '127.0.0.1' : '0.0.0.0', () => {
     console.log(`Developer preview ready: http://localhost:${server.address().port}`);
     console.log('Example content; live APIs, submissions and payments disabled.');
   });
