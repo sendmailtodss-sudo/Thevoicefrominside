@@ -1,0 +1,7 @@
+/* Local light field sits behind existing text, frames and original images. */
+.sfi-motion-hero{position:relative;isolation:isolate}.sfi-art-motion{display:block;position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}.sfi-motion-hero>*:not(.sfi-art-motion){position:relative;z-index:1}.ac-hero .ac-hero-word{position:absolute;z-index:0}
+.sfi-art-motion-switch{display:inline-flex;align-items:center;min-height:44px;margin:18px 0 0;padding:8px 13px;border:1px solid #a48b69;border-radius:2px;background:transparent;color:inherit;font:12px/1.4 system-ui,sans-serif;cursor:pointer}.sfi-art-motion-switch:hover{background:#9e86621f}.sfi-art-motion-switch:focus-visible{outline:3px solid #38b2d8;outline-offset:3px}.sfi-art-motion-switch[hidden]{display:none!important}
+@media(hover:hover) and (prefers-reduced-motion:no-preference){.ac-work-link .ac-frame{transition:box-shadow .7s ease}.ac-work-link:is(:hover,:focus-visible) .ac-frame{box-shadow:0 12px 36px #b78d4c33}}
+@media(max-width:700px){.sfi-art-motion-switch{font-size:11px}.sfi-art-motion{opacity:.8}}
+@media(prefers-reduced-motion:reduce){.sfi-art-motion-switch{display:none!important}}
+@media print{.sfi-art-motion,.sfi-art-motion-switch{display:none!important}}

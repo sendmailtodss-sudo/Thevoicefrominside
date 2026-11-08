@@ -15,6 +15,7 @@ test('developer preview serves local assets and keeps external services closed',
   await fs.writeFile(path.join(publicDir, 'index.html'), '<!doctype html><h1>Preview</h1>');
   await fs.writeFile(path.join(publicDir, 'gallery', 'index.html'), '<h1>Gallery</h1>');
   await fs.writeFile(path.join(publicDir, 'app.mjs'), 'export const demo = true;');
+  await fs.writeFile(path.join(publicDir, 'film.mp4'), '0123456789');
   await fs.writeFile(path.join(publicDir, 'dev-assets', 'example-art.svg'), '<svg xmlns="http://www.w3.org/2000/svg"><text>Example artwork</text></svg>');
   await fs.writeFile(path.join(publicDir, '.env'), 'private fixture');
   await fs.writeFile(path.join(temp, 'outside.txt'), 'outside fixture');
@@ -52,6 +53,17 @@ test('developer preview serves local assets and keeps external services closed',
     }
     assert.equal((await request('/api')).status, 503);
     assert.equal((await request('/%61pi/payments', 'POST')).status, 503);
+  });
+  await t.test('public film supports seeking while retaining preview safeguards', async () => {
+    const url = `http://127.0.0.1:${port}/film.mp4`;
+    const part = await fetch(url, { headers: { Range: 'bytes=2-4' } });
+    assert.equal(part.status, 206);
+    assert.equal(part.headers.get('content-range'), 'bytes 2-4/10');
+    assert.equal(part.headers.get('x-robots-tag'), 'noindex, nofollow, noarchive');
+    assert.equal(await part.text(), '234');
+    assert.equal((await fetch(url, { headers: { Range: 'bytes=12-13' } })).status, 416);
+    const head = await fetch(url, { method: 'HEAD', headers: { Range: 'bytes=0-2' } });
+    assert.equal(head.status, 206); assert.equal(head.headers.get('content-length'), '3');
   });
   await t.test('non-API writes are rejected', async () => {
     const result = await request('/gallery/', 'POST');

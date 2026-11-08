@@ -27,3 +27,11 @@
   link.href=url.href;
  });
 })();
+
+/* Optional, local section visuals; original content stays available without scripts. */
+(()=>{function load(){
+ const path=location.pathname.replace(/^\/en(?=\/)/,'');
+ const add=(css,js)=>{if(!document.querySelector('link[href="'+css+'"]')){const l=document.createElement('link');l.rel='stylesheet';l.href=css;document.head.append(l)}const s=document.createElement('script');s.src=js;s.defer=true;document.head.append(s)};
+ if(document.querySelector('.ac-hero, .ig-hero, .ac-detail-grid'))add('/assets/subpage-art.css','/assets/subpage-art.js');
+ if(/^\/(dagbok|boken|kapitler|kapittel-9|kapittel-10|kapittel-11|presse|juridisk-motvekt)(\/|$)/.test(path))add('/assets/section-motion/story-motion.css','/assets/section-motion/story-motion.js');
+ }if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',load,{once:true});else load()})();

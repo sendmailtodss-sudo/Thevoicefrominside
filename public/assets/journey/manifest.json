@@ -1,0 +1,212 @@
+{
+  "scenes": [
+    {
+      "id": "galaxy",
+      "enabled": true,
+      "video": "/assets/journey/galaxy.mp4",
+      "poster": "/assets/journey/galaxy.webp",
+      "mode": "scrub"
+    },
+    {
+      "id": "brains",
+      "enabled": true,
+      "video": "/assets/journey/brains.mp4",
+      "poster": "/assets/journey/brains.webp",
+      "mode": "scrub"
+    },
+    {
+      "id": "impulses",
+      "enabled": true,
+      "video": "/assets/journey/impulses.mp4",
+      "poster": "/assets/journey/impulses.webp",
+      "mode": "scrub"
+    },
+    {
+      "id": "vortex",
+      "enabled": true,
+      "video": "/assets/journey/vortex.mp4",
+      "poster": "/assets/journey/vortex.webp",
+      "mode": "scrub"
+    },
+    {
+      "id": "supernova",
+      "enabled": true,
+      "video": "/assets/journey/supernova.mp4",
+      "poster": "/assets/journey/supernova.webp",
+      "mode": "scrub"
+    },
+    {
+      "id": "dna",
+      "enabled": true,
+      "video": "/assets/journey/dna.mp4",
+      "poster": "/assets/journey/dna.webp",
+      "mode": "scrub"
+    },
+    {
+      "id": "painter",
+      "enabled": true,
+      "video": "/assets/journey/painter.mp4",
+      "poster": "/assets/journey/painter.webp",
+      "mode": "play"
+    },
+    {
+      "id": "poet",
+      "enabled": true,
+      "video": "/assets/journey/poet.mp4",
+      "poster": "/assets/journey/poet.webp",
+      "mode": "play"
+    },
+    {
+      "id": "rapper",
+      "enabled": true,
+      "video": "/assets/journey/rapper.mp4",
+      "poster": "/assets/journey/rapper.webp",
+      "mode": "play"
+    },
+    {
+      "id": "metal",
+      "enabled": true,
+      "video": "/assets/journey/metal.mp4",
+      "poster": "/assets/journey/metal.webp",
+      "mode": "play"
+    },
+    {
+      "id": "ai",
+      "enabled": true,
+      "video": "/assets/journey/ai.mp4",
+      "poster": "/assets/journey/ai.webp",
+      "mode": "play"
+    },
+    {
+      "id": "streetart",
+      "enabled": true,
+      "video": "/assets/journey/streetart.mp4",
+      "poster": "/assets/journey/streetart.webp",
+      "mode": "play"
+    },
+    {
+      "id": "filmmaker",
+      "enabled": true,
+      "video": "/assets/journey/filmmaker.mp4",
+      "poster": "/assets/journey/filmmaker.webp",
+      "mode": "play"
+    },
+    {
+      "id": "gallery",
+      "enabled": true,
+      "poster": "/assets/journey/gallery.webp",
+      "video": "/assets/journey/gallery.mp4",
+      "mode": "play",
+      "artworks": [
+        {
+          "id": "lar-bak-murene",
+          "no": "LAR bak murene",
+          "en": "LAR behind the walls",
+          "src": "/design-assets/approved-illustrations/lar-bak-murene-80643262351fb9d6e4de954d72707ed2fb72610c7d8a3e6296027439d3b07136.webp",
+          "artistName": "Innsatt 2601-46"
+        },
+        {
+          "id": "fri-presse",
+          "no": "Fri presse",
+          "en": "Free press",
+          "src": "/design-assets/approved-illustrations/fri-presse-c2082aa9b1401973757fc9f9520dada4c4e36ac98651a99a03fe2059e0c37a58.webp",
+          "artistName": "Innsatt 2601-46"
+        },
+        {
+          "id": "gjenbruk",
+          "no": "Gjenbruk",
+          "en": "Reuse",
+          "src": "/design-assets/approved-illustrations/gjenbruk-c38d5fda603e9bb4f7d6e6bfd6c946aaf7a6db749ae47aadf1e6f38ac39bd797.webp",
+          "artistName": "Innsatt 2601-46"
+        }
+      ]
+    },
+    {
+      "id": "bergen",
+      "enabled": true,
+      "video": "/assets/journey/bergen.mp4",
+      "poster": "/assets/journey/bergen.webp",
+      "mode": "play",
+      "title": {
+        "no": "Bergen · prøve",
+        "en": "Bergen · preview",
+        "zh": "卑尔根 · 预览"
+      },
+      "description": {
+        "no": "Midlertidig KI-illustrasjon. Kunsttrykkene bearbeides videre.",
+        "en": "Temporary AI illustration. The artwork prints are being refined.",
+        "zh": "临时 AI 插图。衣服上的艺术图案仍在完善中。"
+      }
+    },
+    {
+      "id": "paris",
+      "enabled": true,
+      "video": "/assets/journey/paris.mp4",
+      "poster": "/assets/journey/paris.webp",
+      "mode": "play",
+      "title": {
+        "no": "Paris · prøve",
+        "en": "Paris · preview",
+        "zh": "巴黎 · 预览"
+      },
+      "description": {
+        "no": "Midlertidig KI-illustrasjon. Kunsttrykkene bearbeides videre.",
+        "en": "Temporary AI illustration. The artwork prints are being refined.",
+        "zh": "临时 AI 插图。衣服上的艺术图案仍在完善中。"
+      }
+    },
+    {
+      "id": "new-york",
+      "enabled": true,
+      "video": "/assets/journey/new-york.mp4",
+      "poster": "/assets/journey/new-york.webp",
+      "mode": "play",
+      "title": {
+        "no": "New York · prøve",
+        "en": "New York · preview",
+        "zh": "纽约 · 预览"
+      },
+      "description": {
+        "no": "Midlertidig KI-illustrasjon. Kunsttrykkene bearbeides videre.",
+        "en": "Temporary AI illustration. The artwork prints are being refined.",
+        "zh": "临时 AI 插图。衣服上的艺术图案仍在完善中。"
+      }
+    },
+    {
+      "id": "interior",
+      "enabled": true,
+      "video": "/assets/journey/interior.mp4",
+      "poster": "/assets/journey/interior.webp",
+      "mode": "play",
+      "artworks": [
+        {
+          "id": "lar-bak-murene",
+          "no": "LAR bak murene",
+          "en": "LAR behind the walls",
+          "src": "/design-assets/approved-illustrations/lar-bak-murene-80643262351fb9d6e4de954d72707ed2fb72610c7d8a3e6296027439d3b07136.webp",
+          "artistName": "Innsatt 2601-46"
+        }
+      ]
+    },
+    {
+      "id": "stencil",
+      "enabled": true,
+      "video": "/assets/journey/stencil.mp4",
+      "poster": "/assets/journey/stencil.webp",
+      "mode": "play",
+      "artworks": [
+        {
+          "id": "redhood",
+          "no": "Rødhette i gangen",
+          "en": "Little Red Riding Hood in the corridor",
+          "src": "/design-assets/merch/redhood.jpeg",
+          "artistName": "Innsatt 2601-46",
+          "details": {
+            "no": "/butikk/?art=redhood",
+            "en": "/en/shop/?art=redhood"
+          }
+        }
+      ]
+    }
+  ]
+}

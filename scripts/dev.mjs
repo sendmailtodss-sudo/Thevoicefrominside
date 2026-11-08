@@ -88,7 +88,22 @@ export function createDevServer({ publicDir = path.join(projectRoot, 'public'), 
         if ((await fs.stat(filename)).isDirectory()) filename = path.join(filename, 'index.html');
         filename = await fs.realpath(filename);
         if (!safeResolved(filename)) return send(403, 'This path is not available.');
-        if (!(await fs.stat(filename)).isFile()) return send(404, 'Not found.');
+        const info = await fs.stat(filename);
+        if (!info.isFile()) return send(404, 'Not found.');
+        // Scrubbing the public film journey requires byte ranges as well as the
+        // existing private-media preview. Resolve and verify the path first.
+        if (path.extname(filename).toLowerCase() === '.mp4') {
+          const match = /^bytes=(\d+)-(\d*)$/.exec(request.headers.range || '');
+          let start = 0, end = info.size - 1;
+          if (request.headers.range && !match) return send(416, 'Invalid range.', undefined, { 'Content-Range': `bytes */${info.size}` });
+          if (match) { start = Number(match[1]); end = match[2] ? Math.min(Number(match[2]), end) : end; }
+          if (start > end || start >= info.size) return send(416, 'Invalid range.', undefined, { 'Content-Range': `bytes */${info.size}` });
+          const extra = { 'Content-Type': 'video/mp4', 'Content-Length': end - start + 1, 'Accept-Ranges': 'bytes' };
+          if (match) extra['Content-Range'] = `bytes ${start}-${end}/${info.size}`;
+          response.writeHead(match ? 206 : 200, { ...headers, ...extra });
+          if (request.method === 'HEAD') return response.end();
+          return createReadStream(filename, { start, end }).on('error', () => response.destroy()).pipe(response);
+        }
         return send(200, await fs.readFile(filename), types[path.extname(filename).toLowerCase()] || 'application/octet-stream');
       } catch (error) {
         if (!['ENOENT', 'ENOTDIR'].includes(error.code)) throw error;

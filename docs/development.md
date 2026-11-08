@@ -62,7 +62,13 @@ Copy .env.example to ../dreamina.env outside the source tree, set the canvas UUI
 
 The contributor preview has no live accounts or media bindings. This terminal integration uses OS account access. Production hosting is separately managed.
 
-## Private opening preview
+## Cinematic journey in the contributor preview
+
+The Norwegian and English home pages now include the published scroll-driven visual journey. The available public clips and approved artwork are included under `public/assets/journey/`; the selected original images retain their existing ownership and terms. The city scenes are explicitly marked as temporary AI illustrations: their shirt prints are not faithful reproductions. The surveillance sequence is an edited approximation, and some creator recording and sending actions remain unfinished. Images and video are illustrative, not documentary recordings.
+
+Use the existing preview command above. The server supports byte ranges for local MP4 files, allowing forward and reverse seeking without any live service. Sound starts off; keyboard navigation, motion controls, reduced-motion and a no-JavaScript fallback remain available. The preview is still noindex and all `/api/` routes remain disabled. This repository is a sanitized contributor distribution, not a complete mirror of production editorial content or a production deployment.
+
+## Historical private opening preview
 
 The opening prototype can use an explicitly supplied local MP4 without adding it to the repository. On a private machine run `DREAMINA_PREVIEW_VIDEO=/absolute/private/path/opening.mp4 PORT=8769 npm run dev`. In this mode the preview server binds to 127.0.0.1 only and exposes that one selected file through a read-only range-enabled route. The media is not included in the build. Treat any forwarded port as access to the private clip. Without the file, the opening displays its fallback. The scroll prototype seeks through the clip and uses a separately animated star overlay; additional approved media, seamless stage transitions and an original scene-synchronized soundtrack remain future work.
 
