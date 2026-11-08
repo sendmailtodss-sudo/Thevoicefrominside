@@ -1,4 +1,14 @@
-Stemmen fra innsiden — The Voice from Inside
+# Stemmen fra innsiden — The Voice from Inside
+
+**Thevoicefrominside** is the public contributor repository for *Stemmen fra innsiden*, a Norwegian project connecting personal stories, art and tools for human dignity and justice.
+
+**Nettside / website:** https://stemmen-fra-innsiden.sendmailtodss.chatgpt.site
+
+**NO:** Nettsiden ble oppdatert 8. november 2026 med en filmatisk reise, nye animasjoner og et illustrert eksempel på hjelp fra en pårørende. Bysekvensene er foreløpige, og flere filmrettinger gjenstår.
+
+**EN:** The website was updated on 8 November 2026 with a cinematic journey, section animations and an illustrated example of support from a friend or relative. The city sequences are provisional, and further film work remains.
+
+This repository is a privacy-reviewed contributor distribution. It uses examples where original writing or media are not released, and it is not an automatic mirror or deployment receipt for the live website. Production services, submissions and payments should not be assumed active merely because prototype code exists.
 
 Stemmen fra innsiden grows out of my book, my diary and my experiences with the Norwegian prison and justice systems. It brings personal stories together with documents, art and music to expose what happens when institutions lose sight of the human beings they are supposed to serve.
 
