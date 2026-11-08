@@ -8,7 +8,7 @@
  const scenes=[
   ['galaxy','Melkeveien'],['brains','Hjernene'],['impulses','Kollektiv bevissthet'],['vortex','Idéer og virvel'],['supernova','Supernova'],['dna','DNA-reisen'],
   ['painter','Maleren'],['poet','Poeten'],['rapper','Rapperen'],['metal','Skrapmetallkunstneren'],['ai','AI-kunstneren'],['streetart','Gatekunstnerne'],['filmmaker','Filmskaper og performer'],
-  ['gallery','Fra uttrykk til galleri'],['bergen','Bergen'],['paris','Paris'],['new-york','New York'],['interior','Kunsten i interiøret'],['stencil','Sjablongen'],['red-riding-hood','Rødhette']
+  ['gallery','Fra uttrykk til galleri'],['bergen','Bergen'],['paris','Paris'],['new-york','Fiktiv amerikansk bygate'],['interior','Kunsten i interiøret'],['stencil','Sjablongen'],['red-riding-hood','Sjablongavsløring']
  ];
  section.style.setProperty('--scene-count',scenes.length);
  const heading=document.querySelector('[data-opening-scene]'),label=document.querySelector('[data-opening-label]');
@@ -25,7 +25,7 @@
    if(!response.ok)throw Error('missing');
    section.dataset.available='yes';video.src=src;video.load();
    if(audio){audio.src=src;if(audioOn)audio.play().catch(mute)}
-   status.textContent=({painter:'Eldre prøve · Celle og valgt verk mangler.',gallery:'Privat prøve · Riktige verk og medieflater mangler.',bergen:'Midlertidig byprøve · Riktig ryggtrykk mangler.',paris:'Midlertidig byprøve · Riktig ryggtrykk mangler.'})[id] || 'Privat prøve · Skroll videre eller bakover.';
+   status.textContent=({painter:'Eldre prøve · Celle og valgt verk mangler.',gallery:'Privat prøve · Riktige verk og medieflater mangler.',bergen:'Midlertidig byprøve · Riktig ryggtrykk mangler.',paris:'Midlertidig byprøve · Riktig ryggtrykk mangler.', 'new-york':'Fiktiv bygate · Ikke dokumentert New York eller riktig ryggtrykk.', stencil:'Midlertidig sjablongprøve · Handlingene er ikke godkjent.', 'red-riding-hood':'Midlertidig motiv · Ikke det godkjente Rødhette-verket.'})[id] || 'Privat prøve · Skroll videre eller bakover.';
   } catch {if(serial!==token)return;section.dataset.available='no';status.textContent='Midlertidig plassholder · Denne scenen er ikke levert ennå.'}
  };
  const update=()=>{scheduled=false;const rect=section.getBoundingClientRect(),distance=Math.max(1,section.offsetHeight-innerHeight);
