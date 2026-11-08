@@ -73,3 +73,20 @@ test('developer preview serves local assets and keeps external services closed',
     assert.equal((await request('/%00')).status, 400);
   });
 });
+
+test('private preview video is opt-in and supports byte seeking', async t => {
+  const temp = await fs.mkdtemp(path.join(os.tmpdir(), 'voice-video-'));
+  const video = path.join(temp, 'private.mp4');
+  await fs.writeFile(video, '0123456789');
+  const server = createDevServer({ privateVideo: video });
+  server.listen(0, '127.0.0.1');
+  await once(server, 'listening');
+  t.after(async () => { await new Promise(resolve => server.close(resolve)); await fs.rm(temp, { recursive: true, force: true }); });
+  const url = `http://127.0.0.1:${server.address().port}/__private-preview/opening.mp4`;
+  const partial = await fetch(url, { headers: { Range: 'bytes=2-4' } });
+  assert.equal(partial.status, 206);
+  assert.equal(partial.headers.get('content-range'), 'bytes 2-4/10');
+  assert.equal(await partial.text(), '234');
+  assert.equal((await fetch(url, { headers: { Range: 'bytes=12-13' } })).status, 416);
+  assert.equal((await fetch(url, { method: 'POST' })).status, 405);
+});

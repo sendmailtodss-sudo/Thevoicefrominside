@@ -61,3 +61,7 @@ Copy .env.example to ../dreamina.env outside the source tree, set the canvas UUI
 - After timeout, rate limit or uncertain submission query status before further action. No automatic retries or automatic confirmation. Webhooks and account-specific numeric rate limits were not verified.
 
 The contributor preview has no live accounts or media bindings. This terminal integration uses OS account access. Production hosting is separately managed.
+
+## Private opening preview
+
+The opening prototype can use an explicitly supplied local MP4 without adding it to the repository. On a private machine run `DREAMINA_PREVIEW_VIDEO=/absolute/private/path/opening.mp4 PORT=8769 npm run dev`. In this mode the preview server binds to 127.0.0.1 only and exposes that one selected file through a read-only range-enabled route. The media is not included in the build. Treat any forwarded port as access to the private clip. Without the file, the opening displays its fallback. The scroll prototype seeks through the clip and uses a separately animated star overlay; additional approved media, seamless stage transitions and an original scene-synchronized soundtrack remain future work.
