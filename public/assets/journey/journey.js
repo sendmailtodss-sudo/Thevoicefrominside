@@ -75,10 +75,11 @@
       });
     }
     function seek(){if(quiet||disposed||!Number.isFinite(video.duration)||video.duration<=0)return;const wanted=clamp(fraction*video.duration,0,video.duration-.05);if(!video.seeking&&Math.abs(video.currentTime-wanted)>.08)try{video.currentTime=wanted}catch{}}
-    function playRemainder(){const scene=scenes[index];if(disposed||quiet||document.hidden||scene?.mode!=='play'||root.getBoundingClientRect().bottom<0)return;video.play().catch(()=>{})}
+    function canPlay(){const rect=root.getBoundingClientRect();return !disposed&&!quiet&&!document.hidden&&!artDialog?.open&&scenes[index]?.mode==='play'&&rect.bottom>navHeight&&rect.top<innerHeight}
+    function playRemainder(){if(canPlay())video.play().catch(()=>{})}
     function openArt(art,opener){
       if(typeof HTMLDialogElement==='undefined')return false;
-      silence();video.pause();artOpener=opener;
+      clearTimeout(idle);silence();video.pause();artOpener=opener;
       artDialog?.remove();artDialog=document.createElement('dialog');artDialog.className='sj-art-dialog';artDialog.setAttribute('aria-labelledby','sj-art-dialog-title');
       const head=document.createElement('header'),name=document.createElement('h2'),close=document.createElement('button');name.id='sj-art-dialog-title';name.textContent=lang==='en'?art.en:art.no;close.type='button';close.textContent='×';close.setAttribute('aria-label',lang==='en'?'Close':lang==='zh'?'关闭':'Lukk');head.append(name,close);
       const viewport=document.createElement('div');viewport.className='sj-art-viewport';const img=document.createElement('img');img.src=art.src;img.alt=lang==='en'?art.en:art.no;viewport.append(img);
@@ -119,7 +120,7 @@
     function setQuiet(){const was=quiet;const anchor=root.getBoundingClientRect().top+scrollY-navHeight;quiet=manualQuiet||motionQuery.matches;root.dataset.quiet=String(quiet);video.pause();if(quiet){video.removeAttribute('src');video.load();root.dataset.video='loading';scrollTo({top:anchor,behavior:'instant'})}else if(was&&index>=0){const savedFraction=fraction;show(index);scrollTo({top:anchor+(index+savedFraction)/scenes.length*Math.max(1,root.offsetHeight-(innerHeight-navHeight)),behavior:'instant'})}paintText();schedule()}
     on(window,'scroll',schedule,{passive:true});on(window,'resize',()=>{measureHeader();schedule()});on(video,'loadedmetadata',()=>{seek();if(quiet)video.pause()});on(video,'loadeddata',()=>{if(!quiet){seek();if(!video.seeking){root.dataset.video='ready';releaseFrame()}}});on(video,'seeked',()=>{if(!quiet){root.dataset.video='ready';releaseFrame()}});
     on(video,'error',()=>{root.dataset.video='loading';releaseFrame();q('[data-sj-status]').textContent=t('unavailable')});
-    on(video,'ended',()=>{const scene=scenes[index];if(!quiet&&scene?.mode==='play'&&Number.isFinite(scene.loopStart)&&scene.loopStart<video.duration){video.currentTime=Math.max(0,scene.loopStart);video.play().catch(()=>{})}});
+    on(video,'ended',()=>{const scene=scenes[index];if(canPlay()&&Number.isFinite(scene.loopStart)&&scene.loopStart<video.duration){video.currentTime=Math.max(0,scene.loopStart);video.play().catch(()=>{})}});
     on(q('[data-sj-prev]'),'click',()=>go(index-1));on(q('[data-sj-next]'),'click',()=>go(index+1));on(q('[data-sj-motion]'),'click',()=>{manualQuiet=!quiet;setQuiet()});on(motionQuery,'change',setQuiet);on(q('[data-sj-sound]'),'click',toggleSound);on(q('[data-sj-language]'),'change',e=>{lang=e.target.value;paintText();save(true);silence();const destination=lang==='en'?'/en/':lang==='zh'?'/?lang=zh-Hans':'/';location.assign(destination)});
     on(root,'keydown',e=>{if(e.target.closest('input,select,textarea'))return;if(e.key==='ArrowLeft'||e.key==='ArrowRight'){e.preventDefault();go(index+(e.key==='ArrowRight'?1:-1))}});
     on(root,'click',e=>{const artwork=e.target.closest('a');if(artwork?._art&&openArt(artwork._art,artwork)){e.preventDefault();return}if(e.target.closest('a')){save(true);silence()}});on(window,'pagehide',()=>{save(true);silence()});on(window,'pageshow',()=>{silence();schedule()});on(document,'visibilitychange',()=>{if(document.hidden){video.pause();silence()}});

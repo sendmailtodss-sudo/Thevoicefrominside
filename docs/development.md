@@ -71,3 +71,16 @@ Use the existing preview command above. The server supports byte ranges for loca
 ## Historical private opening preview
 
 The earlier private scroll prototype is no longer mounted on the home page. The preview server still supports its optional local media routes for development and legacy integrations: set `DREAMINA_PREVIEW_VIDEO=/absolute/private/path/opening.mp4` for `/__private-preview/opening.mp4`, or `DREAMINA_PREVIEW_DIR=/absolute/private/scenes` for `/__private-preview/scenes/NAME.mp4`. Either setting binds the server to 127.0.0.1 and exposes the specified files read-only with byte ranges. Setting these variables does not replace the current public journey. Do not expose a forwarded port publicly: anyone who can reach it can retrieve the configured private media. Private trials are not automatically approved artwork.
+
+### Journey playback while inspecting artwork
+
+The journey pauses while its artwork dialog is open. Both delayed idle playback
+and end-of-clip looping use the same visibility check; hidden tabs, offscreen
+journeys, reduced motion and an open artwork dialog cannot restart playback.
+Closing the dialog leaves playback paused until the visitor scrolls again.
+
+Browser regression check: navigate to the gallery scene, immediately open a work,
+wait longer than the 450 ms idle delay, and verify the video remains paused. Repeat
+with an `ended` event while the dialog is open, on desktop and mobile. On 10 November
+2026 this reproduced unwanted playback before the fix and remained paused afterward
+at 1440 × 900 and 390 × 844. All 165 Node tests, source check and build also passed.
