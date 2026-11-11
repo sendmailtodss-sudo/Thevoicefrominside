@@ -24,18 +24,18 @@
     // immediate; fading it in after unloading the video creates a visible blink.
     let retainedFrame=false,transitionTimer=0,preloadTimer=0,warmSrc='';
     const warmVideo=document.createElement('video');warmVideo.muted=true;warmVideo.playsInline=true;warmVideo.setAttribute('aria-hidden','true');
-    function clearTransition(){clearTimeout(transitionTimer);delete root.dataset.transitioning;delete root.dataset.transitionPhase}
-    function holdFrame(){
+    function clearTransition(){clearTimeout(transitionTimer);delete root.dataset.transitioning;delete root.dataset.transitionPhase;delete root.dataset.looping}
+    function holdFrame(kind='scene'){
       clearTransition();
       if(video.readyState>=2&&video.videoWidth)try{hold.width=video.videoWidth;hold.height=video.videoHeight;hold.getContext('2d').drawImage(video,0,0);retainedFrame=true}catch{}
       if(!retainedFrame)return;
       hold.style.transition='none';hold.style.opacity='1';void hold.offsetWidth;
-      if(!quiet){root.dataset.transitioning='true';root.dataset.transitionPhase='loading'}
+      if(!quiet){if(kind==='loop')root.dataset.looping='true';else{root.dataset.transitioning='true';root.dataset.transitionPhase='loading'}}
     }
     function releaseFrame(){
-      if(quiet){clearTransition();hold.style.transition='none';hold.style.opacity='0';return}
+      if(quiet){clearTransition();hold.style.transition='none';hold.style.opacity='0';commitScene();return}
       const serial=mediaSerial;
-      requestAnimationFrame(()=>{if(disposed||serial!==mediaSerial)return;hold.style.transition='';hold.style.opacity='0';if(root.dataset.transitioning==='true'){root.dataset.transitionPhase='reveal';clearTimeout(transitionTimer);transitionTimer=setTimeout(()=>{if(serial===mediaSerial)clearTransition()},820)}})
+      requestAnimationFrame(()=>{if(disposed||serial!==mediaSerial)return;hold.style.transition='';hold.style.opacity='0';commitScene();if(root.dataset.transitioning==='true')root.dataset.transitionPhase='reveal';if(root.dataset.transitioning==='true'||root.dataset.looping==='true'){clearTimeout(transitionTimer);transitionTimer=setTimeout(()=>{if(serial===mediaSerial)clearTransition()},820)}})
     }
     function clearWarmVideo(){clearTimeout(preloadTimer);warmSrc='';warmVideo.pause();warmVideo.removeAttribute('src');warmVideo.load()}
     function warmAdjacent(){
@@ -58,13 +58,13 @@
     let navHeight=0;
     function measureHeader(){const header=document.querySelector('.sfi-header');const position=header?getComputedStyle(header).position:'';navHeight=header&&['sticky','fixed'].includes(position)?Math.max(0,header.getBoundingClientRect().height):0;root.style.setProperty('--sj-nav-height',navHeight+'px')}
     measureHeader();
-    let scenes=[],index=-1,fraction=0,raf=0,idle=0,lang=location.pathname.startsWith('/en')?'en':document.documentElement.lang.startsWith('zh')?'zh':'no',quiet=motionQuery.matches,manualQuiet=false,soundOn=false,ctx=null,gain=null,oscillators=[],disposed=false,mediaSerial=0,lastScroll=-1,artGrid=null,galleryEntry=null,artDialog=null,artOpener=null,oldOverflow='';
+    let scenes=[],index=-1,visibleIndex=-1,pendingScrollSeek=false,inspectionPaused=false,fraction=0,raf=0,idle=0,lang=location.pathname.startsWith('/en')?'en':document.documentElement.lang.startsWith('zh')?'zh':'no',quiet=motionQuery.matches,manualQuiet=false,soundOn=false,ctx=null,gain=null,oscillators=[],disposed=false,mediaSerial=0,lastScroll=-1,artGrid=null,galleryEntry=null,artDialog=null,artOpener=null,oldOverflow='';
     const on=(el,event,fn,opts)=>{el.addEventListener(event,fn,opts);clean.push(()=>el.removeEventListener(event,fn,opts))};
     const t=k=>TEXT[lang][k]||TEXT.no[k]||k;
     const save=pending=>{try{sessionStorage.setItem(KEY,JSON.stringify({scene:scenes[index]?.id,fraction,lang,pending,at:Date.now()}))}catch{}};
     let saved=null;try{saved=JSON.parse(sessionStorage.getItem(KEY));if(saved&&Date.now()-saved.at<3600000&&TEXT[saved.lang])lang=saved.lang}catch{}
     const requestedLang=new URLSearchParams(location.search).get('lang');if(requestedLang==='zh-Hans'||requestedLang==='zh')lang='zh';else if(requestedLang==='en'||requestedLang==='no')lang=requestedLang;else lang=location.pathname.startsWith('/en')?'en':'no';
-    const title=s=>s.title?.[lang]||TITLES[s.id]?.[{no:0,en:1,zh:2}[lang]]||s.id;
+    const title=s=>{const label=s.title?.[lang]||TITLES[s.id]?.[{no:0,en:1,zh:2}[lang]]||s.id;return (s.reviewStatus==='draft'?{no:'Utkast · ',en:'Draft · ',zh:'草稿 · '}[lang]:'')+label};
     function artworkDetails(art){
       const fallback=(lang==='en'?'/en/creative-community/art/':'/kunstfellesskap/verk/')+art.id+'/';
       const candidate=art.details?.[lang==='en'?'en':'no'];
@@ -87,7 +87,7 @@
       q('[data-sj-motion]').disabled=motionQuery.matches;q('[data-sj-motion]').textContent=quiet?t('resume'):t('pause');q('[data-sj-motion]').setAttribute('aria-pressed',String(quiet));
       q('[data-sj-sound]').textContent=t(soundOn?'on':'off');q('[data-sj-sound]').setAttribute('aria-pressed',String(soundOn));
       if(quiet)q('.sj-hint').textContent=t('quiet');
-      const scene=scenes[index];if(scene){q('.sj-scene-title').textContent=title(scene);if(scene.type==='art'){setText(q('h1'),t('artTitle'));setText(q('.sj-deck'),t('artDeck'))}else if(index>0){setText(q('h1'),title(scene));setText(q('.sj-deck'),scene.description?.[lang]||t('deck'))}}
+      const scene=scenes[visibleIndex];if(scene){q('.sj-scene-title').textContent=title(scene);if(scene.type==='art'){setText(q('h1'),t('artTitle'));setText(q('.sj-deck'),t('artDeck'))}else if(visibleIndex>0){setText(q('h1'),title(scene));setText(q('.sj-deck'),scene.description?.[lang]||t('deck'))}}
       if(galleryEntry){galleryEntry.href=galleryRoomUrl();galleryEntry.textContent=t('gallery')}
       if(artGrid)for(const a of artGrid.querySelectorAll('a')){const art=a._art;a.href=artworkDetails(art);a.querySelector('strong').textContent=lang==='en'?art.en:art.no}
     }
@@ -109,12 +109,34 @@
         if(available)a.removeAttribute('aria-hidden');else a.setAttribute('aria-hidden','true');
       });
     }
-    function seek(){if(quiet||disposed||scenes[index]?.mode!=='scrub'||!Number.isFinite(video.duration)||video.duration<=0)return;const wanted=clamp(fraction*video.duration,0,video.duration-.05);if(!video.seeking&&Math.abs(video.currentTime-wanted)>.08)try{video.currentTime=wanted}catch{}}
-    function canPlay(){const rect=root.getBoundingClientRect();return !disposed&&!quiet&&!document.hidden&&!artDialog?.open&&scenes[index]?.type!=='art'&&!!scenes[index]?.video&&rect.bottom>navHeight&&rect.top<innerHeight}
-    function playRemainder(){if(canPlay())video.play().catch(()=>{})}
+    // A scroll seek is consumed once. A loop's seeked event must not seek
+    // back to the unchanged scroll fraction and pin idle scrub scenes there.
+    function seekScroll(){
+      if(!pendingScrollSeek||!canPlay()||!Number.isFinite(video.duration)||video.duration<=0||video.seeking)return;
+      const wanted=clamp(fraction*video.duration,0,video.duration-.05);pendingScrollSeek=false;
+      if(Math.abs(video.currentTime-wanted)>.08)try{video.currentTime=wanted}catch{}
+    }
+    function canPlay(){const rect=root.getBoundingClientRect();return !disposed&&!quiet&&!inspectionPaused&&!document.hidden&&!artDialog?.open&&scenes[index]?.type!=='art'&&!!scenes[index]?.video&&rect.bottom>navHeight&&rect.top<innerHeight}
+    function playRemainder(){if(canPlay()&&!video.seeking&&!pendingScrollSeek)video.play().catch(()=>{})}
+    function mediaReady(){
+      if(quiet||disposed||video.readyState<2)return;
+      seekScroll();if(video.seeking||pendingScrollSeek)return;
+      root.dataset.video='ready';releaseFrame();warmAdjacent();playRemainder();
+    }
+    function loopVideo(){
+      if(!canPlay()||!Number.isFinite(video.duration)||video.duration<=0)return;
+      if(pendingScrollSeek){seekScroll();return;}
+      const start=scenes[index]?.loopStart;
+      const target=Number.isFinite(start)&&start>=0&&start<video.duration?start:0;
+      holdFrame('loop');
+      try{video.currentTime=target}catch{clearTransition();hold.style.opacity='0';return;}
+      // seeked/mediaReady releases the retained last frame over the new frame.
+      // play() is deliberately delayed until that seek finishes and rechecks
+      // dialog, reduced motion, tab visibility and the viewport at that time.
+    }
     function openArt(art,opener){
       if(typeof HTMLDialogElement==='undefined')return false;
-      clearTimeout(idle);silence();video.pause();artOpener=opener;
+      clearTimeout(idle);inspectionPaused=true;silence();video.pause();artOpener=opener;
       artDialog?.remove();artDialog=document.createElement('dialog');artDialog.className='sj-art-dialog';artDialog.setAttribute('aria-labelledby','sj-art-dialog-title');
       const head=document.createElement('header'),name=document.createElement('h2'),close=document.createElement('button');name.id='sj-art-dialog-title';name.textContent=lang==='en'?art.en:art.no;close.type='button';close.textContent='×';close.setAttribute('aria-label',lang==='en'?'Close':lang==='zh'?'关闭':'Lukk');head.append(name,close);
       const viewport=document.createElement('div');viewport.className='sj-art-viewport';const img=document.createElement('img');img.src=art.src;img.alt=lang==='en'?art.en:art.no;viewport.append(img);
@@ -135,10 +157,16 @@
       q('.sj-copy').append(artGrid);
       if(scene.id==='gallery'){galleryEntry=document.createElement('a');galleryEntry.className='sj-gallery-entry';galleryEntry.href=galleryRoomUrl();galleryEntry.textContent=t('gallery');q('.sj-copy').append(galleryEntry)}
     }
+    function commitScene(){
+      if(index<0||visibleIndex===index)return;
+      visibleIndex=index;root.dataset.visibleScene=scenes[index].id;
+      q('.sj-count').textContent=String(index+1).padStart(2,'0')+' / '+String(scenes.length).padStart(2,'0');
+      showArt(scenes[index]);paintText();q('[data-sj-status]').textContent=title(scenes[index]);
+    }
     function show(next){
-      if(!scenes[next])return;holdFrame();clearTimeout(preloadTimer);index=next;const scene=scenes[index];mediaSerial++;root.dataset.scene=scene.id;root.dataset.sceneType=scene.type||'video';root.dataset.scrub=String(scene.mode==='scrub');root.dataset.framing=scene.type==='art'?'contain':'cover';root.style.setProperty('--sj-focus-x',(Number.isFinite(scene.focusX)?clamp(scene.focusX,0,100):50)+'%');root.style.setProperty('--sj-focus-y',(Number.isFinite(scene.focusY)?clamp(scene.focusY,0,100):50)+'%');root.dataset.video='loading';video.pause();video.removeAttribute('src');video.load();
-      poster.src=scene.poster||'/assets/journey/galaxy.webp';backdrop.src=poster.src;q('.sj-count').textContent=String(index+1).padStart(2,'0')+' / '+String(scenes.length).padStart(2,'0');q('[data-sj-prev]').disabled=index===0;q('[data-sj-next]').disabled=index===scenes.length-1;
-      showArt(scene);settleEntrances();if(scene.type==='art'||quiet)releaseFrame();paintText();ambient();q('[data-sj-status]').textContent=title(scene);
+      if(!scenes[next])return;holdFrame();clearTimeout(preloadTimer);index=next;const scene=scenes[index];pendingScrollSeek=scene.mode==='scrub';mediaSerial++;root.dataset.scene=scene.id;root.dataset.sceneType=scene.type||'video';root.dataset.scrub=String(scene.mode==='scrub');root.dataset.framing=scene.type==='art'?'contain':'cover';root.style.setProperty('--sj-focus-x',(Number.isFinite(scene.focusX)?clamp(scene.focusX,0,100):50)+'%');root.style.setProperty('--sj-focus-y',(Number.isFinite(scene.focusY)?clamp(scene.focusY,0,100):50)+'%');root.dataset.video='loading';video.pause();video.removeAttribute('src');video.load();
+      poster.src=scene.poster||'/assets/journey/galaxy.webp';backdrop.src=poster.src;q('[data-sj-prev]').disabled=index===0;q('[data-sj-next]').disabled=index===scenes.length-1;
+      settleEntrances();if(visibleIndex<0||!retainedFrame)commitScene();if(scene.type==='art'||quiet)releaseFrame();paintText();ambient();
       if(!quiet&&scene.type!=='art'&&scene.video){video.src=scene.video;video.muted=!soundOn;video.volume=.45;video.load()}
       clearTimeout(idle);idle=setTimeout(playRemainder,450);save(false);
     }
@@ -147,20 +175,22 @@
       if(quiet){root.style.setProperty('--sj-progress',(index+1)/scenes.length);settleEntrances();return}
       const rect=root.getBoundingClientRect(),distance=Math.max(1,root.offsetHeight-(innerHeight-navHeight)),progress=clamp((navHeight-rect.top)/distance,0,.999999)*scenes.length;
       const next=Math.floor(progress);fraction=progress-next;root.style.setProperty('--sj-progress',progress/scenes.length);
-      if(next!==index)show(next);else if(lastScroll!==scrollY){if(scenes[index]?.mode==='scrub'){video.pause();seek()}else playRemainder();clearTimeout(idle);idle=setTimeout(playRemainder,140)}
+      if(next!==index){if(!artDialog?.open)inspectionPaused=false;show(next)}else if(lastScroll!==scrollY){if(!artDialog?.open)inspectionPaused=false;if(scenes[index]?.mode==='scrub'){video.pause();pendingScrollSeek=true;seekScroll()}else playRemainder();clearTimeout(idle);idle=setTimeout(playRemainder,140)}
       settleEntrances();lastScroll=scrollY;
       if(rect.bottom<0||rect.top>innerHeight){video.pause();if(soundOn)silence()}
     }
     const schedule=()=>{if(!raf)raf=requestAnimationFrame(render)};
     function go(next){next=clamp(next,0,scenes.length-1);fraction=0;if(quiet){show(next);schedule();return}const y=root.getBoundingClientRect().top+scrollY-navHeight+next/scenes.length*Math.max(1,root.offsetHeight-(innerHeight-navHeight))+2;scrollTo({top:y,behavior:'instant'});schedule()}
     function setQuiet(){const was=quiet;const anchor=root.getBoundingClientRect().top+scrollY-navHeight;quiet=manualQuiet||motionQuery.matches;root.dataset.quiet=String(quiet);video.pause();clearWarmVideo();clearTransition();if(quiet){video.removeAttribute('src');video.load();root.dataset.video='loading';scrollTo({top:anchor,behavior:'instant'})}else if(was&&index>=0){const savedFraction=fraction;show(index);scrollTo({top:anchor+(index+savedFraction)/scenes.length*Math.max(1,root.offsetHeight-(innerHeight-navHeight)),behavior:'instant'})}paintText();schedule()}
-    on(window,'scroll',schedule,{passive:true});on(window,'resize',()=>{measureHeader();schedule()});on(video,'loadedmetadata',()=>{seek();if(quiet)video.pause()});on(video,'loadeddata',()=>{if(!quiet&&video.readyState>=2){seek();if(!video.seeking){root.dataset.video='ready';releaseFrame();warmAdjacent();playRemainder()}}});on(video,'seeked',()=>{if(!quiet&&video.readyState>=2){if(scenes[index]?.mode==='scrub')seek();if(!video.seeking){root.dataset.video='ready';releaseFrame();warmAdjacent();playRemainder()}}});
-    on(video,'error',()=>{root.dataset.video='loading';releaseFrame();clearWarmVideo();q('[data-sj-status]').textContent=t('unavailable')});
-    on(video,'ended',()=>{const scene=scenes[index];if(canPlay()&&Number.isFinite(scene.loopStart)&&scene.loopStart<video.duration){video.currentTime=Math.max(0,scene.loopStart);video.play().catch(()=>{})}});
+    on(window,'scroll',schedule,{passive:true});on(window,'resize',()=>{measureHeader();schedule()});
+    on(video,'loadedmetadata',()=>{seekScroll();if(quiet)video.pause()});
+    on(video,'loadeddata',mediaReady);on(video,'seeked',mediaReady);
+    on(video,'error',()=>{pendingScrollSeek=false;root.dataset.video='loading';releaseFrame();clearWarmVideo();q('[data-sj-status]').textContent=t('unavailable')});
+    on(video,'ended',loopVideo);
     on(q('[data-sj-prev]'),'click',()=>go(index-1));on(q('[data-sj-next]'),'click',()=>go(index+1));on(q('[data-sj-motion]'),'click',()=>{manualQuiet=!quiet;setQuiet()});on(motionQuery,'change',setQuiet);on(q('[data-sj-sound]'),'click',toggleSound);on(q('[data-sj-language]'),'change',e=>{lang=e.target.value;paintText();save(true);silence();const destination=lang==='en'?'/en/':lang==='zh'?'/?lang=zh-Hans':'/';location.assign(destination)});
     on(root,'keydown',e=>{if(e.target.closest('input,select,textarea'))return;if(e.key==='ArrowLeft'||e.key==='ArrowRight'){e.preventDefault();go(index+(e.key==='ArrowRight'?1:-1))}});
     on(root,'click',e=>{const artwork=e.target.closest('a');if(artwork?._art&&openArt(artwork._art,artwork)){e.preventDefault();return}if(e.target.closest('a')){save(true);silence()}});on(window,'pagehide',()=>{save(true);silence()});on(window,'pageshow',()=>{silence();schedule()});on(document,'visibilitychange',()=>{if(document.hidden){video.pause();clearWarmVideo();silence()}});
-    dispose=()=>{disposed=true;controller.abort();clean.forEach(f=>f());cancelAnimationFrame(raf);clearTimeout(idle);clearWarmVideo();clearTransition();video.pause();video.removeAttribute('src');video.load();oscillators.forEach(o=>{try{o.stop()}catch{}});ctx?.close().catch(()=>{});artGrid?.remove();galleryEntry?.remove();if(artDialog){artDialog.close();artDialog?.remove();document.body.style.overflow=oldOverflow}hold.remove();portal.remove();backdrop.remove();thoughts.remove();root.querySelectorAll('.sj-entrances a').forEach(a=>{a.style.opacity='';a.style.transform='';a.style.pointerEvents='';a.tabIndex=0;a.removeAttribute('aria-hidden')});root.removeAttribute('data-enhanced');root.removeAttribute('data-video');root.removeAttribute('data-quiet');root.removeAttribute('data-scrub');controls.hidden=true};
+    dispose=()=>{disposed=true;controller.abort();clean.forEach(f=>f());cancelAnimationFrame(raf);clearTimeout(idle);clearWarmVideo();clearTransition();video.pause();video.removeAttribute('src');video.load();oscillators.forEach(o=>{try{o.stop()}catch{}});ctx?.close().catch(()=>{});artGrid?.remove();galleryEntry?.remove();if(artDialog){artDialog.close();artDialog?.remove();document.body.style.overflow=oldOverflow}hold.remove();portal.remove();backdrop.remove();thoughts.remove();root.querySelectorAll('.sj-entrances a').forEach(a=>{a.style.opacity='';a.style.transform='';a.style.pointerEvents='';a.tabIndex=0;a.removeAttribute('aria-hidden')});root.removeAttribute('data-enhanced');root.removeAttribute('data-video');root.removeAttribute('data-quiet');root.removeAttribute('data-scrub');root.removeAttribute('data-visible-scene');controls.hidden=true};
     paintText();
     fetch(root.dataset.manifest||'/assets/journey/manifest.json',{signal:controller.signal}).then(r=>{if(!r.ok)throw Error('manifest');return r.json()}).then(data=>{
       if(disposed)return;scenes=(data.scenes||[]).filter(s=>s.enabled===true&&typeof s.id==='string'&&(s.type==='art'||(typeof s.video==='string'&&s.video.startsWith('/assets/journey/'))));if(!scenes.length)return;

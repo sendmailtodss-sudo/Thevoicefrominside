@@ -99,3 +99,31 @@ wait longer than the 450 ms idle delay, and verify the video remains paused. Rep
 with an `ended` event while the dialog is open, on desktop and mobile. On 10 November
 2026 this reproduced unwanted playback before the fix and remained paused afterward
 at 1440 × 900 and 390 × 844. All 165 Node tests, source check and build also passed.
+
+### Idle loops and buffered scene captions
+
+Every visible journey video now restarts at its configured `loopStart`, or at zero
+when no valid start is configured. The decoded last frame remains above the seek
+and fades over the new frame using the existing 0.75-second blend. This prevents
+an empty frame; it does not make different filmed camera takes physically
+continuous. A real scroll seek is consumed once, so the loop's `seeked` event
+cannot send an idle scrub scene back to its unchanged scroll fraction.
+
+While a new scene is buffering behind a retained frame, the preceding scene's
+caption, count and artwork links remain until the new video frame is ready.
+`reviewStatus: "draft"` marks the scene title and live status as Utkast, Draft or
+草稿 according to the journey language. This is a scene status, not an edit of
+an author's original writing.
+
+Playback and loop seeks recheck dialog inspection, motion preference, tab
+visibility and viewport visibility. Closing an artwork dialog alone leaves the
+journey paused until the next scroll. Reduced motion keeps the static alternative.
+
+Browser regression checks should let a real clip reach its native `ended` event
+and continue through multiple ends without scrolling. Exercise both the default
+zero start and an explicit nonzero `loopStart` in a scrub scene. Withhold a next
+video briefly and verify that its incoming title/count do not replace the old
+caption while the old frame is still covering the buffer. Repeat at 1440 × 900
+and 390 × 844, including Norwegian/English draft labels, an open/closed artwork
+dialog, manual pause, hidden-tab and offscreen suppression, and reduced motion.
+A synthetic `ended` event alone does not establish that a real clip loops.
