@@ -1,44 +1,47 @@
-# Journey playback and transitions
+# Input-controlled journey and transitions
 
-The current filmed creator scenes play continuously while the visitor stays in
-that scene. Small scroll movements within a scene do not pause or seek that
-performance. Crossing a chapter boundary can leave the clip before it finishes;
-a retained decoded frame and a short light aperture connect it to the next clip.
-Cosmic scenes marked `scrub` follow scroll position while scrolling and continue
-playing when the visitor pauses.
+The main journey has one reversible input timeline. Videos never call `play()`
+and do not loop; their currentTime follows normalized scroll progress. Light,
+word, binary-stream and portal transformations use the same input. All timed
+CSS animation and transitions in the journey are suppressed. A decoded retained
+frame covers source replacement until the next requested frame is available;
+I/O completion may reveal that requested frame, but it does not start playback.
+Two to three localized expressions pass through the neural network at once.
 
-The renderer retains the previous decoded frame immediately before changing the
-video source. It fades that layer only after the next source has decoded a frame.
-One adjacent silent resource may preload; phones request metadata only and data
-saving, reduced motion, hidden pages and destruction clear the buffer. No new
-media or external generation service is introduced by this change.
+The visitor can move forward or backward freely without forced delays. The
+origin is a small point before Big Bang, with the selected invitation above it.
+That invitation returns only at the origin. The persistent header offers Norsk,
+English and 简体中文; the same scene, query parameters and fragment are retained
+when language is changed inside the journey. Original artwork titles and exact
+artist aliases remain source text; fixed controls and their explanations use
+local dictionaries. Cantonese and editorial dictionaries are retained separately.
 
-Video and poster use full-bleed cover framing on desktop and portrait screens.
-Optional numeric `focusX` and `focusY` scene metadata can place the crop between
-0 and 100 percent. Artwork thumbnails and the expanded art dialog continue to
-contain the whole original image. A portrait crop cannot display the entire
-width of a landscape film; full artwork inspection remains in the actual gallery.
+The journey uses full-bleed cover framing on desktop and portrait screens.
+Numeric focusX/focusY metadata can position a film crop. Artwork inspection
+contains the entire original. Six preview works are drawn from the same curated
+catalogue as the one screen/VR gallery; there is no second gallery service.
+Keyboard navigation, direct content links, muted initial audio, dialog inspection
+and reduced-motion alternatives remain available. A separate opt-in film player
+and the user-activated gallery/VR have their own explicit playback controls.
 
-Manual motion controls, muted initial audio, dialog pause, hidden-page pause and
-reduced-motion alternatives remain part of the journey. A transition effect does
-not establish physical continuity between separately generated films.
+## Scene requirements and remaining media
 
-## Owner's scene decisions, 11 November 2026
+The requested story is: point, Big Bang, detailed Milky Way, brains and synapses,
+collective thought network, warp, Earth/clouds, Bergen prison gate, a C7-window
+arrival, a fictional confident muscular adult greeting the camera, then a similar
+painter's cell with the selected original LAR artwork. The photo/flash/teleport
+leaves the easel empty before the next prison art form. Metal work, courtyard
+graffiti, spoken poetry and the music room lead toward the collective portal and
+gallery. Creation takes place in prison; later Bergen/Paris fashion examples and
+the LA interior show uses of the art afterward. New York remains disabled.
 
-- Keep the outdoor fashion examples to an adult woman in Bergen and an adult man
-  in Paris. Disable New York. The woman wears the requested hip-hop styling and
-  tied top; both people should appear warm, confident and stylish.
-- The real selected original artwork belongs on the garment. Temporary generated
-  print approximations are drafts, not faithful reproductions. The platform is
-  open to all contributing artists.
-- Creator scenes take place inside prison. City fashion and the interior scene
-  show uses of the work afterward.
-- The luxury-home sequence approaches from above with an LA skyline, enters
-  through a window, shows a small home gathering, sweeps past the occupied sofa
-  and finishes on the full-wall artwork.
-- The journey leads into the same six-work gallery used on screen and in VR,
-  with onward clothing and collaboration links. Gallery navigation is shared
-  with the separate gallery improvement; no second gallery is created here.
+These are creative requirements, not verification of a real building, cell,
+window or performer. The new gate/C7/fictional-person sequence, LAR on the easel,
+and higher-native-detail galaxy imagery are not produced by a controller change.
+`requestedMediaReplacements` records those dependencies. Existing illustrative
+arrival/painter clips are drafts. Preserve the originals and do not describe an
+unverified reconstruction or temporary print as a finished faithful film.
 
-These are the owner's latest scene requirements, not a claim that the replacement
-fashion and interior films have already been produced or approved.
+The cinematic source assets remain subject to their existing rights. Functional
+scroll tests do not establish photorealism, physical camera continuity or a
+hardware VR result. Review actual replacement media separately before release.

@@ -6,8 +6,9 @@ function el(tag,cl,text){const n=document.createElement(tag);if(cl)n.className=c
 function listen(target,event,fn,opt){target.addEventListener(event,fn,opt);dispose.push(()=>target.removeEventListener(event,fn,opt))}
 function routeOf(root){return root.dataset?.premiumRoute||window.__existingPreview?.route||location.pathname}
 function language(root){return routeOf(root).startsWith('/en/')}
-function label(item,en){const value=en?item.en:item.no;return item.creative?value:(window.SFITranslate?.(value)||value)}
-function sourceLabel(item,en){if(item.editorial)return en?'Editorial illustration':'Redaksjonell illustrasjon';if(item.creative)return en?'Published artist contribution':'Publisert kunstnerbidrag';return window.BookArtSourceLabel?.(item,en)||(en?'R8 · PDF page ':'R8 · PDF-side ')+item.page}
+function label(item,en){const value=en?item.en:item.no;if(new URL(location.href).searchParams.get('lang')==='zh-Hans')return item.no||value;return item.creative?value:(window.SFITranslate?.(value)||value)}
+function ui(value){return window.SFITranslate?.(value)||value}
+function sourceLabel(item,en){if(item.editorial)return ui(en?'Editorial illustration':'Redaksjonell illustrasjon');if(item.creative)return ui(en?'Published artist contribution':'Publisert kunstnerbidrag');const original=window.BookArtSourceLabel?.(item,en);if(original){if(new URL(location.href).searchParams.get('lang')==='zh-Hans')return ui(original).replace(/^(R[0-9]+) · (?:PDF-side|PDF page) /,'$1 · PDF页 ');return original}return ui(en?'R8 · PDF page':'R8 · PDF-side')+' '+item.page}
 function asset(path){return typeof window.__premiumResolveAsset==='function'?window.__premiumResolveAsset(path):path}
 function signature(){return el('span','pg-credit',credit)}
 function button(text,aria){const b=el('button','pg-button',text);b.type='button';b.setAttribute('aria-label',aria);return b}
@@ -42,17 +43,17 @@ function publicArtwork(row){
  return {id:row.id,src:expected,full:expected,no:row.title,en:row.title,tagNo:'Kunstnerverk',tagEn:'Artist work',creative:true,artistId:row.artistId,artistName:row.artistName,origin:row.origin,original,reproductionAllowed:permitted};
 }
 function originalText(item,en){
- if(!item.creative)return en?'Original: not listed · No price or bidding available.':'Original: ikke lagt ut · Ingen pris eller budgivning tilgjengelig.';
+ if(!item.creative)return ui(en?'Original: not listed · No price or bidding available.':'Original: ikke lagt ut · Ingen pris eller budgivning tilgjengelig.');
  const words=en?{available:'Available',reserved:'Reserved',sold:'Sold',not_listed:'Not listed'}:{available:'Tilgjengelig',reserved:'Reservert',sold:'Solgt',not_listed:'Ikke lagt ut'};
- let result=(en?'Original: ':'Original: ')+words[item.original.status];
+ let result=ui('Original:')+' '+ui(words[item.original.status]);
  if(item.original.status==='available'&&item.original.priceMinor!==null)result+=' · '+new Intl.NumberFormat(en?'en-GB':'nb-NO',{style:'currency',currency:'NOK',maximumFractionDigits:2}).format(item.original.priceMinor/100);
- if(item.original.editionSize===1)result+=en?' · One physical original, declared by the artist.':' · Ett fysisk originalverk, erklært av kunstneren.';
+ if(item.original.editionSize===1)result+=' · '+ui(en?'One physical original, declared by the artist.':'Ett fysisk originalverk, erklært av kunstneren.');
  return result;
 }
 function originText(item,en){
- if(!item.creative)return en?'AI-assisted · Innsatt 260146':'KI-assistert · Innsatt 260146';
+ if(!item.creative)return ui(en?'AI-assisted · Innsatt 260146':'KI-assistert · Innsatt 260146');
  const kinds=en?{original:'Created without generative AI','ai-assisted':'AI-assisted','ai-generated':'AI-generated'}:{original:'Egenprodusert uten generativ KI','ai-assisted':'KI-assistert','ai-generated':'KI-generert'};
- return kinds[item.origin]+' · '+item.artistName;
+ return ui(kinds[item.origin])+' · '+item.artistName;
 }
 
 function mountImmersive(root,en){
@@ -66,7 +67,7 @@ function mountImmersive(root,en){
  const toolbar=el('div','ig-toolbar'),modes=el('div','ig-modes');modes.setAttribute('role','group');modes.setAttribute('aria-label',t('Velg visning','Choose a view'));
  const three=button(t('Rom med dybde','View in 3D'),t('Vis kunstrommet i 3D','Show the 3D gallery')),two=button(t('Enkel oversikt','Simple grid'),t('Vis tilgjengelig todimensjonal oversikt','Show accessible two-dimensional grid'));modes.append(three,two);modes.hidden=true;
  const search=el('input','ig-search');search.type='search';search.placeholder=t('Søk tittel eller tema …','Search a title or theme …');search.setAttribute('aria-label',search.placeholder);
- const filter=el('select','ig-filter');filter.setAttribute('aria-label',t('Velg tema','Choose a theme'));filter.append(new Option(t('Alle temaer','All themes'),'all'));for(const tag of [...new Set(ordered.map(x=>en?x.tagEn:x.tagNo))])filter.append(new Option(tag,tag));toolbar.append(search,filter);
+ const filter=el('select','ig-filter');filter.setAttribute('aria-label',t('Velg tema','Choose a theme'));filter.append(new Option(t('Alle temaer','All themes'),'all'));for(const tag of [...new Set(ordered.map(x=>en?x.tagEn:x.tagNo))])filter.append(new Option(ui(tag),tag));toolbar.append(search,filter);
  const tour=el('div','ig-tour'),instructions=el('p','ig-instructions',t('Sveip til siden eller bruk pilene. Med tastatur: venstre/høyre, Home og End. Åpne bildet for alle detaljer.','Swipe sideways or use the arrows. Keyboard: left/right, Home and End. Open the image to see every detail.'));
  instructions.id='ig-instructions';const stage=el('div','ig-stage');stage.tabIndex=0;stage.setAttribute('role','region');stage.setAttribute('aria-roledescription',t('bildekarusell','artwork carousel'));stage.setAttribute('aria-label',t('Kunstrom','Art room'));stage.setAttribute('aria-describedby',instructions.id);
  const ceiling=el('div','ig-ceiling');ceiling.setAttribute('aria-hidden','true');const floor=el('div','ig-floor');floor.setAttribute('aria-hidden','true');const panels=el('div','ig-panels');stage.append(ceiling,floor,panels);
@@ -122,7 +123,7 @@ function mountImmersive(root,en){
  listen(share,'click',()=>shareArtwork(shown[position],shareStatus));
  function select(index){interacted=true;position=Math.max(0,Math.min(shown.length-1,index));draw()}
  function draw(){
-  empty.hidden=shown.length>0;result.textContent=t(`${shown.length} av ${ordered.length} verk`,`${shown.length} of ${ordered.length} artworks`);panels.replaceChildren();grid.replaceChildren();
+  empty.hidden=shown.length>0;result.textContent=new URL(location.href).searchParams.get('lang')==='zh-Hans'?`${shown.length} 件作品，共 ${ordered.length} 件`:t(`${shown.length} av ${ordered.length} verk`,`${shown.length} of ${ordered.length} artworks`);panels.replaceChildren();grid.replaceChildren();
   tour.hidden=mode!=='3d'||!shown.length;grid.hidden=mode!=='2d'||!shown.length;
   if(!shown.length)return;
   detail.querySelector('.ig-social-links')?.remove();detail.append(shareLinks(shown[position]));

@@ -79,7 +79,7 @@ The contributor preview has no live accounts or media bindings. This terminal in
 
 ## Cinematic journey in the contributor preview
 
-The Norwegian and English home pages now include the published scroll-driven visual journey. The available public clips and approved artwork are included under `public/assets/journey/`; the selected original images retain their existing ownership and terms. The city scenes are explicitly marked as temporary AI illustrations: their shirt prints are not faithful reproductions. The surveillance sequence is an edited approximation, and some creator recording and sending actions remain unfinished. Images and video are illustrative, not documentary recordings.
+The contributor home pages include a scroll-controlled visual journey. The available public clips and approved artwork are included under `public/assets/journey/`; the selected original images retain their existing ownership and terms. The city scenes are explicitly marked as temporary AI illustrations: their shirt prints are not faithful reproductions. The surveillance sequence is an edited approximation, and some creator recording and sending actions remain unfinished. Images and video are illustrative, not documentary recordings.
 
 Use the existing preview command above. The server supports byte ranges for local MP4 files, allowing forward and reverse seeking without any live service. Sound starts off; keyboard navigation, motion controls, reduced-motion and a no-JavaScript fallback remain available. The preview is still noindex and all `/api/` routes remain disabled. This repository is a sanitized contributor distribution, not a complete mirror of production editorial content or a production deployment.
 
@@ -87,43 +87,33 @@ Use the existing preview command above. The server supports byte ranges for loca
 
 The earlier private scroll prototype is no longer mounted on the home page. The preview server still supports its optional local media routes for development and legacy integrations: set `DREAMINA_PREVIEW_VIDEO=/absolute/private/path/opening.mp4` for `/__private-preview/opening.mp4`, or `DREAMINA_PREVIEW_DIR=/absolute/private/scenes` for `/__private-preview/scenes/NAME.mp4`. Either setting binds the server to 127.0.0.1 and exposes the specified files read-only with byte ranges. Setting these variables does not replace the current public journey. Do not expose a forwarded port publicly: anyone who can reach it can retrieve the configured private media. Private trials are not automatically approved artwork.
 
-### Journey playback while inspecting artwork
+### Input-controlled journey
 
-The journey pauses while its artwork dialog is open. Both delayed idle playback
-and end-of-clip looping use the same visibility check; hidden tabs, offscreen
-journeys, reduced motion and an open artwork dialog cannot restart playback.
-Closing the dialog leaves playback paused until the visitor scrolls again.
+The confirmed 11 November design replaces idle playback and loops with a fully
+reversible timeline. Every main-journey MP4 remains paused; its decoded time,
+word positions, binary stream, light aperture and progress indicator derive
+from the current scroll position. Stopping input holds the frame and effects;
+scrolling up reverses the same timeline. There are no forced viewing delays.
+The separate opt-in film player and user-activated gallery/VR are independent
+controls, not autonomous main-journey playback.
 
-Browser regression check: navigate to the gallery scene, immediately open a work,
-wait longer than the 450 ms idle delay, and verify the video remains paused. Repeat
-with an `ended` event while the dialog is open, on desktop and mobile. On 10 November
-2026 this reproduced unwanted playback before the fix and remained paused afterward
-at 1440 × 900 and 390 × 844. All 165 Node tests, source check and build also passed.
+The opening begins with a small point before Big Bang. Its invitation disappears
+when scrolling starts and returns at the origin. The primary language selector
+is in the persistent header and offers Norsk, English and 简体中文. Scene and
+URL query/hash state are retained when changing language within the journey.
+The new fixed Chinese control dictionary supplements the existing editorial
+and Cantonese dictionaries; it does not replace or certify all website text.
 
-### Idle loops and buffered scene captions
+Use `scripts/apply-scroll-opening.mjs` for the bounded homepage migration on the
+maintainer's separately managed full-content source. It relocates the existing
+entrance block after the visual opening and changes only named opening anchors;
+original text elsewhere must remain byte-identical. Run it after the existing
+public-entrance patch. See [journey transitions](journey-transitions.md) for media
+limits and checks.
 
-Every visible journey video now restarts at its configured `loopStart`, or at zero
-when no valid start is configured. The decoded last frame remains above the seek
-and fades over the new frame using the existing 0.75-second blend. This prevents
-an empty frame; it does not make different filmed camera takes physically
-continuous. A real scroll seek is consumed once, so the loop's `seeked` event
-cannot send an idle scrub scene back to its unchanged scroll fraction.
-
-While a new scene is buffering behind a retained frame, the preceding scene's
-caption, count and artwork links remain until the new video frame is ready.
-`reviewStatus: "draft"` marks the scene title and live status as Utkast, Draft or
-草稿 according to the journey language. This is a scene status, not an edit of
-an author's original writing.
-
-Playback and loop seeks recheck dialog inspection, motion preference, tab
-visibility and viewport visibility. Closing an artwork dialog alone leaves the
-journey paused until the next scroll. Reduced motion keeps the static alternative.
-
-Browser regression checks should let a real clip reach its native `ended` event
-and continue through multiple ends without scrolling. Exercise both the default
-zero start and an explicit nonzero `loopStart` in a scrub scene. Withhold a next
-video briefly and verify that its incoming title/count do not replace the old
-caption while the old frame is still covering the buffer. Repeat at 1440 × 900
-and 390 × 844, including Norwegian/English draft labels, an open/closed artwork
-dialog, manual pause, hidden-tab and offscreen suppression, and reduced motion.
-A synthetic `ended` event alone does not establish that a real clip loops.
+Regression checks should hold an actual decoded video and the neural chapter
+stationary for at least 1.5 seconds and compare pixels as well as currentTime.
+Seek forward and back through every enabled MP4; check desktop/mobile, all three
+journey languages, language changes, artwork inspection, keyboard navigation,
+resize, skip links and reduced motion. An unchanged scroll value or a mocked
+ended event alone does not establish a frozen visual presentation.
