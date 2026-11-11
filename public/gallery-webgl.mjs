@@ -11,6 +11,7 @@ export function createRoom(host, items, {en, onOpen, onExit, initialIndex=0}) {
  renderer.localClippingEnabled=true;renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,1.5));renderer.outputColorSpace=THREE.SRGBColorSpace;sceneEl.append(renderer.domElement);
  const scene=new THREE.Scene();scene.background=new THREE.Color(0xddd6c8);
  const camera=new THREE.PerspectiveCamera(55,1,.1,100);camera.position.set(0,1.85,8.6);camera.lookAt(0,2.15,0);
+ const rig=new THREE.Group();scene.add(rig);rig.add(camera);
  const mat=(color)=>new THREE.MeshBasicMaterial({color});
  function plane(w,h,color,x,y,z,rotation=0){const mesh=new THREE.Mesh(new THREE.PlaneGeometry(w,h),mat(color));mesh.position.set(x,y,z);mesh.rotation.y=rotation;scene.add(mesh);return mesh}
  plane(19,5.5,0xe5dfd2,0,2.75,-2);plane(17,14,0xafa797,0,-.04,2).rotation.x=-Math.PI/2;
@@ -28,7 +29,7 @@ export function createRoom(host, items, {en, onOpen, onExit, initialIndex=0}) {
  function disposeObject(object){object.traverse(obj=>{obj.geometry?.dispose();for(const material of (Array.isArray(obj.material)?obj.material:[obj.material]))if(material){for(const value of Object.values(material))if(value?.isTexture)value.dispose();material.dispose()}})}
  // Load only after entering the room. Keep the procedural sculpture if loading fails.
  import('./vendor/three/GLTFLoader.js').then(({GLTFLoader})=>new GLTFLoader().load('/design-assets/dna-sculpture-trellis2.glb',gltf=>{const model=gltf.scene;if(!active){disposeObject(model);return}const box=new THREE.Box3().setFromObject(model),size=box.getSize(new THREE.Vector3());if(!Number.isFinite(size.y)||size.y<.00001){disposeObject(model);return}const scale=3.3/size.y;model.scale.setScalar(scale);const scaledBox=new THREE.Box3().setFromObject(model),center=scaledBox.getCenter(new THREE.Vector3());model.position.set(2.25-center.x,.23-scaledBox.min.y,.9-center.z);model.traverse(obj=>{if(obj.material){for(const material of (Array.isArray(obj.material)?obj.material:[obj.material])){material.clippingPlanes=[new THREE.Plane(new THREE.Vector3(0,1,0),-.32)];material.needsUpdate=true}}});scene.remove(fallbackSculpture);disposeObject(fallbackSculpture);scene.add(model);sceneEl.dataset.sculpture='trellis2';render()},undefined,()=>{sceneEl.dataset.sculpture='fallback'})).catch(()=>{if(active)sceneEl.dataset.sculpture='fallback'});
- function render(){if(active&&!document.hidden&&!renderer.getContext().isContextLost())renderer.render(scene,camera)}
+ function render(){if(active&&(renderer.xr.isPresenting||!document.hidden)&&!renderer.getContext().isContextLost())renderer.render(scene,camera)}
  function resize(){if(!active)return;const rect=sceneEl.getBoundingClientRect();if(!rect.width||!rect.height)return;renderer.setSize(rect.width,rect.height,false);camera.aspect=rect.width/rect.height;camera.updateProjectionMatrix();render()}
  function clear(){group.traverse(obj=>{obj.geometry?.dispose();if(obj.material){obj.material.map?.dispose();obj.material.dispose()}});group.clear()}
  function draw(){const current=++token;clear();const item=items[index];status.textContent=`${index+1} / ${items.length} — ${en?item.en:item.no} · ${en?'AI-assisted':'KI-assistert'} · ${item.artistName||'Innsatt 2601-46'}`;prev.disabled=index===0;next.disabled=index===items.length-1;
@@ -37,7 +38,20 @@ export function createRoom(host, items, {en, onOpen, onExit, initialIndex=0}) {
   }render()}
  function step(delta){index=Math.max(0,Math.min(items.length-1,index+delta));draw()}
  function open(){onOpen(items[index]);}
- function end(){if(!active)return;active=false;token++;observer.disconnect();document.removeEventListener('visibilitychange',visibility);clear();disposeObject(scene);renderer.dispose();wrap.remove();onExit()}
+ // WebXR is offered only after the browser confirms immersive VR support.
+ let session=null, starting=false;
+ const vrButton=document.createElement('button');vrButton.type='button';vrButton.className='gw-vr';vrButton.textContent=t('Gå inn i VR','Enter VR');
+ const vrMessage=document.createElement('p');vrMessage.className='gw-vr-message';vrMessage.setAttribute('role','status');
+ const controllerRay=new THREE.Raycaster(),direction=new THREE.Vector3(),origin=new THREE.Vector3(),rotation=new THREE.Matrix4();
+ [0,1].forEach(i=>{const controller=renderer.xr.getController(i);const line=new THREE.Line(new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(0,0,0),new THREE.Vector3(0,0,-12)]),new THREE.LineBasicMaterial({color:0xffffff}));controller.add(line);controller.addEventListener('select',()=>{rotation.identity().extractRotation(controller.matrixWorld);origin.setFromMatrixPosition(controller.matrixWorld);direction.set(0,0,-1).applyMatrix4(rotation);controllerRay.set(origin,direction);const hit=controllerRay.intersectObjects(group.children).find(x=>Number.isInteger(x.object.userData.index));if(hit&&hit.object.userData.index!==index){index=hit.object.userData.index;draw()}});rig.add(controller)});
+ function restoreXR(){session=null;renderer.setAnimationLoop(null);rig.position.set(0,0,0);camera.position.set(0,1.85,8.6);camera.lookAt(0,2.15,0);vrButton.disabled=false;vrButton.textContent=t('Gå inn i VR','Enter VR');vrMessage.textContent='';if(active)resize()}
+ async function enterXR(){if(!active||starting||session)return;starting=true;vrButton.disabled=true;let requested;
+  try{requested=await navigator.xr.requestSession('immersive-vr');if(!active){await requested.end();return}session=requested;requested.addEventListener('end',restoreXR,{once:true});renderer.xr.enabled=true;renderer.xr.setReferenceSpaceType('local');const gl=renderer.getContext();if(gl.makeXRCompatible)await gl.makeXRCompatible();if(!active||session!==requested){await requested.end();return}rig.position.set(0,1.6,8.6);camera.position.set(0,0,0);camera.rotation.set(0,0,0);await renderer.xr.setSession(requested);if(!active||session!==requested){await requested.end();return}renderer.setAnimationLoop(render);vrButton.disabled=false;vrButton.textContent=t('Avslutt VR','Exit VR');vrMessage.textContent=t('Pek på et verk og trykk på kontrolleren for å velge det. Avslutt VR for å åpne bildet.','Point at an artwork and press the controller to select it. Exit VR to open the image.');}
+  catch{if(requested){try{await requested.end()}catch{}}if(session===requested)restoreXR();if(active){vrButton.disabled=false;vrMessage.textContent=t('VR kunne ikke startes. Du kan fortsatt bruke kunstrommet her.','VR could not start. You can still use the art room here.')}}finally{starting=false}
+ }
+ vrButton.addEventListener('click',()=>{if(session){vrButton.disabled=true;session.end().catch(()=>{if(active)vrButton.disabled=false})}else enterXR()});
+ if(window.isSecureContext&&navigator.xr?.isSessionSupported){navigator.xr.isSessionSupported('immersive-vr').then(supported=>{if(active&&supported){wrap.querySelector('.gw-controls').append(vrButton);wrap.append(vrMessage)}}).catch(()=>{});}
+ function end(){if(!active)return;active=false;token++;observer.disconnect();document.removeEventListener('visibilitychange',visibility);renderer.setAnimationLoop(null);if(session){session.removeEventListener('end',restoreXR);session.end().catch(()=>{});session=null}clear();disposeObject(scene);renderer.dispose();wrap.remove();onExit()}
  const visibility=()=>{if(!document.hidden)resize()};document.addEventListener('visibilitychange',visibility);
  const observer=new ResizeObserver(resize);observer.observe(sceneEl);
  wrap.querySelector('.gw-exit').addEventListener('click',end);prev.addEventListener('click',()=>step(-1));next.addEventListener('click',()=>step(1));wrap.querySelector('.gw-open').addEventListener('click',open);
