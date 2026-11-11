@@ -261,20 +261,29 @@
     {
       "id": "bergen",
       "enabled": true,
-      "video": "/assets/journey/bergen.mp4",
-      "poster": "/assets/journey/bergen.webp",
+      "video": "/assets/journey/bergen-fashion-study-lar-a85a7dc8e087b0ce.mp4",
+      "poster": "/assets/journey/bergen-fashion-study-lar-a85a7dc8e087b0ce-poster.webp",
       "mode": "play",
       "title": {
-        "no": "Bergen · prøve",
-        "en": "Bergen · preview",
-        "zh": "卑尔根 · 预览"
+        "no": "Motestudie i Bergen",
+        "en": "Bergen fashion study",
+        "zh": "卑尔根服装设计研究"
       },
       "description": {
-        "no": "Midlertidig KI-illustrasjon. Kunsttrykkene bearbeides videre.",
-        "en": "Temporary AI illustration. The artwork prints are being refined.",
-        "zh": "临时 AI 插图。衣服上的艺术图案仍在完善中。"
+        "no": "Voksen modell i Bergen med knyttet topp. Hele LAR-originalen, domenet og artistaliaset er satt inn digitalt. En klesstudie, ikke dokumentasjon av et produsert plagg.",
+        "en": "Adult model in Bergen wearing a knotted top. The whole original LAR artwork, domain and artist alias are composited digitally. A fashion study, not evidence of a manufactured garment."
       },
-      "reviewStatus": "draft"
+      "reviewStatus": "draft",
+      "loopStart": 5.3,
+      "provenance": {
+        "provider": "Higgsfield",
+        "model": "seedance_2_5",
+        "videoSha256": "a85a7dc8e087b0ceec0a4f8fdc732b3f3320a95565c0d35fe676081b7a487702",
+        "durationSeconds": 8.041667,
+        "originalArtworkSha256": "80643262351fb9d6e4de954d72707ed2fb72610c7d8a3e6296027439d3b07136",
+        "process": "Perspective tracked original print and fabric luminance modulation; not full3Dfabricsimulation",
+        "productionProof": false
+      }
     },
     {
       "id": "paris",
