@@ -44,6 +44,8 @@ The current site includes Norwegian and English reading routes, the curated [gal
 
 You can develop with Node 24 and any editor, without a ChatGPT subscription. Codex and other AI assistants can work with the same files and Git branches when their own account access permits; they are optional development tools. Hosting, domain ownership and any optional AI service have their own account and pricing terms.
 
+The main journey uses a reversible scroll timeline: stopping freezes its visible motion. Its controls support Norwegian, English and Simplified Chinese. New location-specific media remain separately reviewed drafts. The [private synthetic forum backend](docs/forum-api-contract.md) and [explicit erasure operator](docs/forum-erasure-operator.md) are separate opt-in development tools; the public website does not expose those private routes or enable real membership, KYC or payments.
+
 The frontend consists of ordinary HTML, CSS, JavaScript and media files. See the [development guide](docs/development.md) for local work and the [independent hosting guide](docs/independent-hosting.md) for the portable frontend output, production-content boundary and release process. A local commit, GitHub push and Vercel publication are separate actions; this document does not certify that a local change has been pushed or deployed.
 
 Everyone is welcome to help with code, design, translation, accessibility, testing, legal expertise, art, writing and music. Use public or synthetic examples. Preserve approved writing, redactions and artwork; display permission and commercial reproduction rights remain separate.

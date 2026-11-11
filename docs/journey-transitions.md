@@ -28,12 +28,29 @@ and the user-activated gallery/VR have their own explicit playback controls.
 
 The requested story is: point, Big Bang, detailed Milky Way, brains and synapses,
 collective thought network, warp, Earth/clouds, Bergen prison gate, a C7-window
-arrival, a fictional confident muscular adult greeting the camera, then a similar
-painter's cell with the selected original LAR artwork. The photo/flash/teleport
+arrival, and a fictional confident muscular adult who smiles and winks as the
+camera passes him. Continue through his cell door and corridor into a similar
+painter's cell with the selected original LAR artwork. Do not stop or require a
+nod at the first performer. The photo/flash/teleport
 leaves the easel empty before the next prison art form. Metal work, courtyard
 graffiti, spoken poetry and the music room lead toward the collective portal and
 gallery. Creation takes place in prison; later Bergen/Paris fashion examples and
 the LA interior show uses of the art afterward. New York remains disabled.
+
+The prison creators wear the requested red tracksuits; the first fictional
+performer wears contemporary hiphop streetwear. Keep these prison costumes
+separate from the already specified Bergen and Paris fashion outfits. Private
+uploaded references now document the real entrance, corridors, cells and a
+graffiti courtyard. Their source identifiers, extracted frames and timestamps
+remain in the private production register. A C7 label and dedicated metal/music
+rooms have not been independently identified. An animated C7 music video is an
+illustration reference, not a measured documentary floor plan. A matching red
+tracksuit top is a requested costume choice, not a claim about the filmed outfit.
+
+Preserve the observed gate's second inner grille. A continuous flight through an
+opening gate is a creative reconstruction; a camera must not pass through a
+closed barrier. The user's C-building/window identification remains distinct
+from what the reference frames independently establish.
 
 These are creative requirements, not verification of a real building, cell,
 window or performer. The new gate/C7/fictional-person sequence, LAR on the easel,
