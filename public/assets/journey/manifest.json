@@ -107,14 +107,21 @@
       "enabled": true,
       "video": "/assets/journey/poet.mp4",
       "poster": "/assets/journey/poet.webp",
-      "mode": "play"
+      "mode": "play",
+      "reviewStatus": "draft",
+      "description": {
+        "no": "En illustrativ leseprøve. Opptak og sending av diktet er ikke ferdigstilt.",
+        "en": "An illustrative reading draft. Recording and sending the poem remain unfinished.",
+        "zh": "朗读场景草稿。诗歌的录制与发送尚未完成。"
+      }
     },
     {
       "id": "rapper",
-      "enabled": true,
+      "enabled": false,
       "video": "/assets/journey/rapper.mp4",
       "poster": "/assets/journey/rapper.webp",
-      "mode": "play"
+      "mode": "play",
+      "reviewStatus": "superseded"
     },
     {
       "id": "metal",
@@ -125,10 +132,11 @@
     },
     {
       "id": "ai",
-      "enabled": true,
+      "enabled": false,
       "video": "/assets/journey/ai.mp4",
       "poster": "/assets/journey/ai.webp",
-      "mode": "play"
+      "mode": "play",
+      "reviewStatus": "superseded"
     },
     {
       "id": "streetart",
@@ -157,10 +165,61 @@
     },
     {
       "id": "filmmaker",
-      "enabled": true,
+      "enabled": false,
       "video": "/assets/journey/filmmaker.mp4",
       "poster": "/assets/journey/filmmaker.webp",
-      "mode": "play"
+      "mode": "play",
+      "reviewStatus": "superseded"
+    },
+    {
+      "id": "music-room",
+      "enabled": true,
+      "video": "/assets/journey/prison-music.mp4",
+      "poster": "/assets/journey/prison-music.webp",
+      "mode": "play",
+      "reviewStatus": "draft",
+      "title": {
+        "no": "Musikkrommet",
+        "en": "The music room",
+        "zh": "音乐室"
+      },
+      "description": {
+        "no": "Et fiktivt musikkrom. Opptaks- og sendehandlingen bearbeides videre.",
+        "en": "A fictional music room. The recording and sending sequence is being refined.",
+        "zh": "虚构的音乐室。录制和发送的动作仍在完善中。"
+      },
+      "provenance": {
+        "provider": "Higgsfield",
+        "model": "seedance_2_5",
+        "jobId": "5934c943-ca83-4003-80e3-5571c2b3d70c",
+        "durationSeconds": 12,
+        "resolution": "720p"
+      }
+    },
+    {
+      "id": "collective-portal",
+      "enabled": true,
+      "video": "/assets/journey/collective-portal.mp4",
+      "poster": "/assets/journey/collective-portal.webp",
+      "mode": "play",
+      "reviewStatus": "draft",
+      "title": {
+        "no": "Mange uttrykk. Ett møte.",
+        "en": "Many expressions. One meeting.",
+        "zh": "多种表达，在此相遇。"
+      },
+      "description": {
+        "no": "En visuell overgang fra tanker og tråder til kunsten.",
+        "en": "A visual transition from thoughts and threads to the art.",
+        "zh": "从思想与丝线走向艺术的视觉过渡。"
+      },
+      "provenance": {
+        "provider": "Higgsfield",
+        "model": "seedance_2_5",
+        "jobId": "e1a359b1-68d3-442c-ad61-8a668324934c",
+        "durationSeconds": 8,
+        "resolution": "720p"
+      }
     },
     {
       "id": "gallery",
