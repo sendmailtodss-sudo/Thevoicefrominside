@@ -62,11 +62,11 @@ function mountImmersive(root,en){
  const ordered=art.slice().sort((a,b)=>rank(a)-rank(b)||(a.page??Infinity)-(b.page??Infinity));
  if(!ordered.length){host.append(el('p','',t('Ingen bilder er tilgjengelige akkurat nå.','No artworks are available right now.')));return}
  const params=new URLSearchParams(location.search),reduced=matchMedia('(prefers-reduced-motion: reduce)');
- let shown=ordered.slice(),position=Math.max(0,ordered.findIndex(x=>artworkId(x)===params.get('art'))),mode=params.get('view')==='2d'||reduced.matches?'2d':'3d',query='',category='all',opener=null,alive=true,interacted=false,feedPage=0;let pendingFeed=null;
+ let shown=ordered.slice(),position=Math.max(0,ordered.findIndex(x=>artworkId(x)===params.get('art'))),mode='2d',query='',category='all',opener=null,alive=true,interacted=false,feedPage=0;let pendingFeed=null;
  const toolbar=el('div','ig-toolbar'),modes=el('div','ig-modes');modes.setAttribute('role','group');modes.setAttribute('aria-label',t('Velg visning','Choose a view'));
- const three=button(t('Rom med dybde','View in 3D'),t('Vis kunstrommet i 3D','Show the 3D gallery')),two=button(t('Enkel oversikt','Simple grid'),t('Vis tilgjengelig todimensjonal oversikt','Show accessible two-dimensional grid'));modes.append(three,two);
+ const three=button(t('Rom med dybde','View in 3D'),t('Vis kunstrommet i 3D','Show the 3D gallery')),two=button(t('Enkel oversikt','Simple grid'),t('Vis tilgjengelig todimensjonal oversikt','Show accessible two-dimensional grid'));modes.append(three,two);modes.hidden=true;
  const search=el('input','ig-search');search.type='search';search.placeholder=t('Søk tittel eller tema …','Search a title or theme …');search.setAttribute('aria-label',search.placeholder);
- const filter=el('select','ig-filter');filter.setAttribute('aria-label',t('Velg tema','Choose a theme'));filter.append(new Option(t('Alle temaer','All themes'),'all'));for(const tag of [...new Set(ordered.map(x=>en?x.tagEn:x.tagNo))])filter.append(new Option(tag,tag));toolbar.append(modes,search,filter);
+ const filter=el('select','ig-filter');filter.setAttribute('aria-label',t('Velg tema','Choose a theme'));filter.append(new Option(t('Alle temaer','All themes'),'all'));for(const tag of [...new Set(ordered.map(x=>en?x.tagEn:x.tagNo))])filter.append(new Option(tag,tag));toolbar.append(search,filter);
  const tour=el('div','ig-tour'),instructions=el('p','ig-instructions',t('Sveip til siden eller bruk pilene. Med tastatur: venstre/høyre, Home og End. Åpne bildet for alle detaljer.','Swipe sideways or use the arrows. Keyboard: left/right, Home and End. Open the image to see every detail.'));
  instructions.id='ig-instructions';const stage=el('div','ig-stage');stage.tabIndex=0;stage.setAttribute('role','region');stage.setAttribute('aria-roledescription',t('bildekarusell','artwork carousel'));stage.setAttribute('aria-label',t('Kunstrom','Art room'));stage.setAttribute('aria-describedby',instructions.id);
  const ceiling=el('div','ig-ceiling');ceiling.setAttribute('aria-hidden','true');const floor=el('div','ig-floor');floor.setAttribute('aria-hidden','true');const panels=el('div','ig-panels');stage.append(ceiling,floor,panels);
@@ -171,7 +171,7 @@ function mountImmersive(root,en){
   finally{clearTimeout(timeout);pendingFeed=null;if(alive)more.disabled=false}
  }
  listen(window,'sfi-language-ready',()=>{for(const option of filter.options)option.textContent=window.SFITranslate?.(option.textContent)||option.textContent;draw()});
- host.openGalleryArtwork=id=>{const item=ordered.find(entry=>artworkId(entry)===id);if(!item)return false;query='';category='all';search.value='';filter.value='all';shown=ordered.slice();position=shown.indexOf(item);interacted=true;setMode('3d');openImage(item,full);return true};
+ host.openGalleryArtwork=id=>{const item=ordered.find(entry=>artworkId(entry)===id);if(!item)return false;query='';category='all';search.value='';filter.value='all';shown=ordered.slice();position=shown.indexOf(item);interacted=true;setMode('2d');openImage(item,full);return true};
  dispose.push(()=>{delete host.openGalleryArtwork});
  feedStatus.hidden=true;more.hidden=true;
 }
