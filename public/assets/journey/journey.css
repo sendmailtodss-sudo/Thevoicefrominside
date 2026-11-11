@@ -71,3 +71,7 @@ body.minds-home>.site-tools{display:none!important}
  body:has(#dev-preview-notice) .sj[data-enhanced=true] .sj-hint{display:none!important}
  body:has(#dev-preview-notice) .sj[data-enhanced=true] .sj-bottom{gap:4px}
 }
+
+/* Native entry to the existing gallery; immersive VR still requires its own user action. */
+.sj-gallery-entry{display:inline-flex;align-items:center;justify-content:center;margin-top:1rem;padding:.8rem 1rem;min-height:44px;border:1px solid currentColor;border-radius:.25rem;color:inherit;font:inherit;text-decoration:none;background:rgba(0,0,0,.25)}
+.sj-gallery-entry:hover{text-decoration:underline}.sj-gallery-entry:focus-visible{outline:3px solid #f0cb8c;outline-offset:4px}
