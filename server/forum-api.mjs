@@ -86,7 +86,7 @@ function providerError(value, status) {
   if (status === 401 || code === '28000' || code === 'PGRST301') fail(401, 'invalid_session');
   if (status === 403 || code === '42501') fail(403, 'access_denied');
   if (code === 'P0002') fail(404, 'not_found');
-  if (code === '40001' || code === '23505') fail(409, 'conflict');
+  if (code === 'PT409' || code === '40001' || code === '23505' || status === 409) fail(409, 'conflict');
   if (status === 429 || code === 'P0001' && value?.message === 'quota_exceeded') fail(429, 'quota_exceeded');
   if ((typeof code === 'string' && /^22[A-Z0-9]{3}$/.test(code)) || code === '23514' || status === 400 || status === 422) fail(400, 'invalid_payload');
   fail(503, 'private_provider_unavailable');

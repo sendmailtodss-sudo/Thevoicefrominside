@@ -64,3 +64,5 @@ node --use-env-proxy scripts/serve-private-forum.mjs \
 This separate runner binds only `127.0.0.1`, limits browser connections to its own origin, and leaves unrelated APIs closed. `npm run dev` retains its original read-only behavior. Outside localhost/development, cookies always retain Secure and the host prefix.
 
 This is a bounded pilot: ordinary room thread lists return at most100 threads, messages have a precise forward cursor, and the transaction guard prioritizes clear revoke/write ordering over large-scale throughput. A larger real-participant service needs separate privacy, moderation, performance and operational review.
+
+The integration runner refuses to reuse an already exercised fixture. The single explicit `--resume-after-business-conflict-fix` path accepts only the original 49-pass run stopped at `changed_payload_same_key_conflicts`, archives its report by hash, verifies the same synthetic identities/sessions without reseeding, and reuses the original thread/message/request key before continuing. This is reconciliation of one recorded failure, not a general retry or account-reactivation option.

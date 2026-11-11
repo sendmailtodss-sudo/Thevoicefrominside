@@ -62,7 +62,7 @@ test('body bounds apply to actual streamed bytes even without a Content-Length h
  const p=providerStub();const r=await handleForumRequest(req('/messages',{method:'POST',headers:cookie,body:{thread_id:userId,body:'🙂'.repeat(6000),idempotency_key:sessionId}}),{env,fetcher:p.fetcher});assert.equal(r.status,413);assert.equal(p.calls.length,1);
 });
 test('database conflicts and durable quotas map to bounded errors without provider text',async()=>{
- for(const [code,message,status] of [['40001','raw conflict detail',409],['42501','raw private detail',403],['P0001','quota_exceeded',429]]){
+ for(const [code,message,status] of [['PT409','raw conflict detail',409],['40001','raw conflict detail',409],['42501','raw private detail',403],['P0001','quota_exceeded',429]]){
   const p=providerStub();const base=p.fetcher;p.fetcher=async(url,init)=>url.includes('/rpc/sfi_forum_rpc')?Response.json({code,message,details:'private-query-data'},{status:400}):base(url,init);
   const r=await handleForumRequest(req('/messages',{method:'POST',headers:cookie,body:{thread_id:userId,body:'hello',idempotency_key:sessionId}}),{env,fetcher:p.fetcher});assert.equal(r.status,status);const text=await r.text();assert(!text.includes('raw'));assert(!text.includes('private-query-data'));
  }

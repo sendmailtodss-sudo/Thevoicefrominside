@@ -5,6 +5,7 @@ import crypto from 'node:crypto';
 import {handleForumRequest} from '../server/forum-api.mjs';
 
 const args=process.argv.slice(2);
+const resume=args.includes('--resume-after-business-conflict-fix');
 const value=key=>args[args.indexOf(key)+1];
 if(!args.includes('--run-private-synthetic')||!args.includes('--credentials')||!args.includes('--out')||!args.includes('--project-ref')){
  console.error('Usage: node --use-env-proxy scripts/check-forum-provider.mjs --run-private-synthetic --credentials /private/provider.env --project-ref EXPECTED_REF --out /private/new-check-directory');process.exit(2);
@@ -29,7 +30,17 @@ const accountPath=path.join(out,'ACCOUNTS-PRIVATE-DO-NOT-UPLOAD.json');
 let fixture;
 if(fs.existsSync(accountPath))fixture=JSON.parse(fs.readFileSync(accountPath,'utf8'));
 else{fixture={intentId:crypto.randomUUID(),createdUtc:new Date().toISOString(),accounts:{}};for(const label of ['inside','relative','moderator','reviewer','pending','erase','quota'])fixture.accounts[label]={email:`${label}-${fixture.intentId}@forum.invalid`,password:crypto.randomBytes(24).toString('base64url')};fs.writeFileSync(accountPath,JSON.stringify(fixture,null,2)+'\n',{mode:0o600});}
-if(fixture.testsStarted){console.error('Existing test fixture has already been exercised; reconcile it explicitly or use a fresh private output directory. No accounts or memberships were changed.');process.exit(2);}
+if(fixture.testsStarted){
+ const priorPath=path.join(out,'PROVIDER-CHECK-REPORT.json');
+ const priorBytes=fs.existsSync(priorPath)?fs.readFileSync(priorPath):null;
+ const prior=priorBytes&&JSON.parse(priorBytes);
+ if(!resume||prior?.passed!==false||prior?.failedPhase!=='persistence_and_idempotency'||prior?.failedCheck!=='changed_payload_same_key_conflicts'||prior?.tests?.length!==49){console.error('Existing test fixture requires explicit reconciliation. No accounts or memberships were changed.');process.exit(2);}
+ const archive=path.join(out,'PROVIDER-CHECK-REPORT-v1-PARTIAL49.json');
+ if(fs.existsSync(archive)&&!fs.readFileSync(archive).equals(priorBytes))throw Error('prior_evidence_archive_conflict');
+ if(!fs.existsSync(archive))fs.writeFileSync(archive,priorBytes,{mode:0o600,flag:'wx'});
+ report.priorEvidence={file:path.basename(archive),sha256:crypto.createHash('sha256').update(priorBytes).digest('hex'),passedChecks:49,failedCheck:prior.failedCheck};
+ report.resumeMode='same_fixture_after_business_conflict_fix_no_reseed';
+}else if(resume){throw Error('resume_requires_exact_prior_partial_failure');}
 const saveAccounts=()=>fs.writeFileSync(accountPath,JSON.stringify(fixture,null,2)+'\n',{mode:0o600});
 async function api(route,{label,method='GET',body,headers={}}={}){
  const a=label&&fixture.accounts[label];const r=await handleForumRequest(new Request('https://private-check.example.invalid/api/forum'+route,{method,headers:{...(a?.cookie?{Cookie:a.cookie}:{}),...(body===undefined?{}:{Origin:'https://private-check.example.invalid','Content-Type':'application/json'}),...headers},...(body===undefined?{}:{body:JSON.stringify(body)})}),{env});
@@ -39,6 +50,7 @@ async function login(label){const a=fixture.accounts[label];const r=await api('/
 try{
  phase='schema_present';const health=await remote('/rest/v1/sfi_forum_rooms?select=id',{admin:true});assert(health.status===200&&health.data?.length===2,'actual_schema_two_rooms');
  phase='seed_synthetic_auth';
+ if(!resume){
  for(const [label,a]of Object.entries(fixture.accounts)){
   if(!a.id){let r=await remote('/auth/v1/admin/users',{admin:true,method:'POST',body:{email:a.email,password:a.password,email_confirm:true,user_metadata:{synthetic_only:true,pilot_intent:fixture.intentId}}});
    if(r.status!==200&&r.status!==201){const list=await remote('/auth/v1/admin/users?page=1&per_page=1000',{admin:true});const found=list.data?.users?.find(u=>u.email===a.email&&u.user_metadata?.pilot_intent===fixture.intentId);if(found)r={status:200,data:found};}
@@ -56,14 +68,30 @@ try{
  const reviewSeed=await remote('/rest/v1/sfi_forum_reviewers',{admin:true,method:'POST',body:{user_id:fixture.accounts.reviewer.id,active:true}});assert([200,201].includes(reviewSeed.status),'separate_membership_reviewer_seeded');
  fixture.testsStarted=true;saveAccounts();
  phase='auth_and_rooms';for(const label of Object.keys(fixture.accounts))await login(label);
+ }else{
+ phase='resume_readonly_fixture_verification';
+ for(const [label,a]of Object.entries(fixture.accounts)){
+  const actual=await remote('/auth/v1/admin/users/'+encodeURIComponent(a.id),{admin:true});
+  assert(actual.status===200&&actual.data?.email===a.email&&actual.data?.user_metadata?.synthetic_only===true&&actual.data?.user_metadata?.pilot_intent===fixture.intentId,`resume_synthetic_identity_${label}`);
+  const me=await api('/me',{label});
+  assert(me.status===200&&me.data.data.member.user_id===a.id&&me.data.data.member.status===(label==='pending'?'pending':'approved'),`resume_original_session_and_state_${label}`);
+ }
+ }
  let r=await api('/rooms',{label:'inside'});assert(r.status===200&&r.data.data.rooms.map(x=>x.id).join()==='inside','inside_has_only_inside_room');
  r=await api('/rooms',{label:'relative'});assert(r.status===200&&r.data.data.rooms.map(x=>x.id).join()==='relatives','relative_has_only_relatives_room');
  r=await api('/rooms',{label:'reviewer'});assert(r.status===200&&r.data.data.rooms.length===0,'membership_reviewer_does_not_gain_chat_access');
  r=await api('/rooms',{headers:{'oai-authenticated-user-id':fixture.accounts.inside.id}});assert(r.status===401,'forged_sites_header_fails_actual_backend');
- phase='persistence_and_idempotency';const threadKey=crypto.randomUUID();r=await api('/threads',{label:'inside',method:'POST',body:{room:'inside',title:'Synthetic creative check',body:'Only invented test content.',idempotency_key:threadKey}});assert(r.status===200&&r.data.data.thread.id,'actual_thread_created');const thread=r.data.data.thread;
- const key=crypto.randomUUID(),payload={thread_id:thread.id,body:'Synthetic persistent reply.',idempotency_key:key};const pair=await Promise.all([api('/messages',{label:'inside',method:'POST',body:payload}),api('/messages',{label:'inside',method:'POST',body:payload})]);assert(pair.every(x=>x.status===200)&&pair[0].data.data.message.id===pair[1].data.data.message.id&&pair.filter(x=>x.data.data.replayed).length===1,'concurrent_duplicate_is_one_record');const message=pair[0].data.data.message;
+ phase='persistence_and_idempotency';let thread,message,payload;
+ if(!resume){const threadKey=crypto.randomUUID();r=await api('/threads',{label:'inside',method:'POST',body:{room:'inside',title:'Synthetic creative check',body:'Only invented test content.',idempotency_key:threadKey}});assert(r.status===200&&r.data.data.thread.id,'actual_thread_created');thread=r.data.data.thread;
+ const key=crypto.randomUUID();payload={thread_id:thread.id,body:'Synthetic persistent reply.',idempotency_key:key};const pair=await Promise.all([api('/messages',{label:'inside',method:'POST',body:payload}),api('/messages',{label:'inside',method:'POST',body:payload})]);assert(pair.every(x=>x.status===200)&&pair[0].data.data.message.id===pair[1].data.data.message.id&&pair.filter(x=>x.data.data.replayed).length===1,'concurrent_duplicate_is_one_record');message=pair[0].data.data.message;
  const duplicateQuota=await remote('/rest/v1/sfi_forum_quotas?select=bucket,count&user_id=eq.'+fixture.accounts.inside.id,{admin:true});
  assert(duplicateQuota.status===200&&duplicateQuota.data.find(x=>x.bucket==='messages')?.count===1&&duplicateQuota.data.find(x=>x.bucket==='writes')?.count===2,'idempotent_duplicate_debits_quota_only_once');
+ }else{
+ r=await api('/threads?room=inside',{label:'inside'});const found=r.data.data?.threads?.filter(x=>x.title==='Synthetic creative check'&&x.author_id===fixture.accounts.inside.id);assert(r.status===200&&found?.length===1,'resume_same_original_thread');thread=found[0];
+ r=await api('/messages?thread_id='+thread.id,{label:'inside'});const foundMessages=r.data.data?.messages?.filter(x=>x.body==='Synthetic persistent reply.'&&x.author_id===fixture.accounts.inside.id);assert(r.status===200&&foundMessages?.length===1&&foundMessages[0].client_request_id,'resume_same_original_message_and_key');message=foundMessages[0];payload={thread_id:thread.id,body:message.body,idempotency_key:message.client_request_id};
+ }
+ const conflictStarted=Date.now();const conflictDirect=await remote('/rest/v1/rpc/sfi_forum_rpc',{token:fixture.accounts.inside.token,method:'POST',body:{p_action:'create_message',p_payload:{...payload,body:'Changed synthetic content.'}}});
+ assert(conflictDirect.status===409&&conflictDirect.data?.code==='PT409','direct_rpc_business_conflict_is_http409_pt409');report.businessConflict={status:conflictDirect.status,code:conflictDirect.data.code,elapsedMs:Date.now()-conflictStarted};
  r=await api('/messages',{label:'inside',method:'POST',body:{...payload,body:'Changed synthetic content.'}});assert(r.status===409,'changed_payload_same_key_conflicts');
  r=await api('/messages?thread_id='+thread.id,{label:'inside'});assert(r.status===200&&r.data.data.messages.filter(x=>x.id===message.id).length===1,'persisted_message_readback_once');
  const direct=await remote('/rest/v1/sfi_forum_messages?select=id,body&id=eq.'+message.id,{token:fixture.accounts.inside.token});assert(direct.status===200&&direct.data.length===1,'direct_provider_read_authorised_context');
@@ -99,5 +127,5 @@ try{
  r=await api('/rooms',{label:'erase'});assert(r.status===401,'erasure_revokes_existing_session');
  r=await api('/logout',{label:'relative',method:'POST',body:{}});assert(r.status===200&&r.cookie.includes('Max-Age=0'),'actual_logout_clears_cookie');
  r=await api('/rooms',{label:'relative'});assert(r.status===401,'logged_out_cookie_not_reusable');
- report.completedUtc=new Date().toISOString();report.passed=true;report.livePublicForum=false;report.limitations=['No Vercel/browser deployment tested by this runner.','Erasure job intentionally remains pending; no provider deletion claim.','Synthetic test accounts/rows retained in the private EU pilot for follow-up.'];persist();console.log(JSON.stringify({passed:true,checks:report.tests.length,report:path.join(out,'PROVIDER-CHECK-REPORT.json'),privateAccountsRetained:true}));
+ report.completedUtc=new Date().toISOString();report.passed=true;report.totalChecksAcrossEvidence=report.tests.length+(report.priorEvidence?.passedChecks||0);report.livePublicForum=false;report.limitations=['No Vercel/browser deployment tested by this runner.','Erasure job intentionally remains pending; no provider deletion claim.','Synthetic test accounts/rows retained in the private EU pilot for follow-up.'];persist();console.log(JSON.stringify({passed:true,checks:report.tests.length,totalChecksAcrossEvidence:report.totalChecksAcrossEvidence,report:path.join(out,'PROVIDER-CHECK-REPORT.json'),privateAccountsRetained:true}));
 }catch(error){report.failedPhase=phase;report.failedCheck=/^[a-zA-Z0-9_]+$/.test(error?.message||'')?error.message:'transport_or_provider_error';report.passed=false;report.completedUtc=new Date().toISOString();persist();console.log(JSON.stringify({passed:false,phase,check:report.failedCheck,report:path.join(out,'PROVIDER-CHECK-REPORT.json')}));process.exitCode=1;}

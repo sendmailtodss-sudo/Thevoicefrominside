@@ -1,3 +1,4 @@
+-- v2: explicit PostgREST HTTP409 for business CAS/idempotency conflicts; no data reset.
 -- Private synthetic pilot only. This migration does not open public registration.
 -- Run as the trusted database migration owner, never from a browser.
 -- All normal requests use a verified Supabase user JWT; service_role is limited
@@ -261,7 +262,7 @@ BEGIN
   IF p_payload->>'ack'<>'true' OR v_member.status<>'pending' THEN RAISE EXCEPTION 'application_not_allowed' USING ERRCODE='42501'; END IF;
   v_title:=p_payload->>'alias'; v_state:=p_payload->>'declared_role';v_version:=(p_payload->>'version')::integer;
   IF char_length(v_title) NOT BETWEEN 2 AND 60 OR v_state NOT IN ('inmate','former','relative','professional') THEN RAISE EXCEPTION 'invalid_application' USING ERRCODE='22023'; END IF;
-  IF v_version IS NULL OR v_version<>v_member.version THEN RAISE EXCEPTION 'version_conflict' USING ERRCODE='40001'; END IF;
+  IF v_version IS NULL OR v_version<>v_member.version THEN RAISE EXCEPTION 'version_conflict' USING ERRCODE='PT409'; END IF;
   PERFORM public._sfi_forum_debit(v_actor,'applications');
   UPDATE public.sfi_forum_members SET alias=v_title,declared_role=v_state,version=version+1,updated_at=now() WHERE user_id=v_actor RETURNING * INTO v_member;
   INSERT INTO public.sfi_forum_audit(actor_id,subject_id,action,record_version) VALUES(v_actor,v_actor,'application_updated',v_member.version);
@@ -280,13 +281,13 @@ BEGIN
   END IF;
   SELECT * INTO v_target FROM public.sfi_forum_members WHERE user_id=v_subject AND synthetic_test FOR UPDATE;
   IF NOT FOUND THEN RAISE EXCEPTION 'not_found' USING ERRCODE='P0002'; END IF;
-  IF v_version IS NULL OR v_version<>v_target.version THEN RAISE EXCEPTION 'version_conflict' USING ERRCODE='40001'; END IF;
+  IF v_version IS NULL OR v_version<>v_target.version THEN RAISE EXCEPTION 'version_conflict' USING ERRCODE='PT409'; END IF;
   IF v_decision='verify_test' THEN
-   IF v_target.status<>'pending' THEN RAISE EXCEPTION 'invalid_transition' USING ERRCODE='40001'; END IF;
+   IF v_target.status<>'pending' THEN RAISE EXCEPTION 'invalid_transition' USING ERRCODE='PT409'; END IF;
    UPDATE public.sfi_forum_members SET identity_state='synthetic_verified' WHERE user_id=v_subject;
   ELSIF v_decision='approve' THEN
    IF v_target.status<>'pending' OR v_target.identity_state<>'synthetic_verified' OR v_target.login_verified_at IS NULL THEN
-    RAISE EXCEPTION 'review_gates_incomplete' USING ERRCODE='40001';
+    RAISE EXCEPTION 'review_gates_incomplete' USING ERRCODE='PT409';
    END IF;
    IF v_target.declared_role IN ('inmate','former') THEN v_rooms:=ARRAY['inside'];
    ELSIF v_target.declared_role='relative' THEN v_rooms:=ARRAY['relatives'];
@@ -302,13 +303,13 @@ BEGIN
    END LOOP;
    UPDATE public.sfi_forum_members SET status='approved' WHERE user_id=v_subject;
   ELSIF v_decision='reject' THEN
-   IF v_target.status<>'pending' THEN RAISE EXCEPTION 'invalid_transition' USING ERRCODE='40001'; END IF;
+   IF v_target.status<>'pending' THEN RAISE EXCEPTION 'invalid_transition' USING ERRCODE='PT409'; END IF;
    UPDATE public.sfi_forum_members SET status='rejected',identity_state='revoked' WHERE user_id=v_subject;
   ELSIF v_decision='suspend' THEN
-   IF v_target.status<>'approved' THEN RAISE EXCEPTION 'invalid_transition' USING ERRCODE='40001'; END IF;
+   IF v_target.status<>'approved' THEN RAISE EXCEPTION 'invalid_transition' USING ERRCODE='PT409'; END IF;
    UPDATE public.sfi_forum_members SET status='suspended' WHERE user_id=v_subject;
   ELSIF v_decision='reopen' THEN
-   IF v_target.status NOT IN ('rejected','suspended') THEN RAISE EXCEPTION 'invalid_transition' USING ERRCODE='40001'; END IF;
+   IF v_target.status NOT IN ('rejected','suspended') THEN RAISE EXCEPTION 'invalid_transition' USING ERRCODE='PT409'; END IF;
    UPDATE public.sfi_forum_members SET status='pending',identity_state='pending' WHERE user_id=v_subject;
   ELSE RAISE EXCEPTION 'invalid_transition' USING ERRCODE='22023'; END IF;
   IF v_decision IN ('reject','suspend','reopen') THEN
@@ -337,10 +338,10 @@ BEGIN
   v_hash:=encode(sha256(convert_to(jsonb_build_object('action',p_action,'room',v_room,'title',v_title,'body',v_body)::text,'UTF8')),'hex');
   SELECT * INTO v_request FROM public.sfi_forum_requests WHERE user_id=v_actor AND request_id=v_key;
   IF FOUND THEN
-   IF v_request.action<>p_action OR v_request.request_hash IS DISTINCT FROM v_hash THEN RAISE EXCEPTION 'idempotency_conflict' USING ERRCODE='40001'; END IF;
+   IF v_request.action<>p_action OR v_request.request_hash IS DISTINCT FROM v_hash THEN RAISE EXCEPTION 'idempotency_conflict' USING ERRCODE='PT409'; END IF;
    SELECT * INTO v_thread FROM public.sfi_forum_threads WHERE id=v_request.record_id AND room_id=v_room AND state<>'deleted';
    SELECT * INTO v_message FROM public.sfi_forum_messages WHERE id=v_request.related_id AND state='active';
-   IF v_thread.id IS NULL OR v_message.id IS NULL THEN RAISE EXCEPTION 'request_no_longer_available' USING ERRCODE='40001'; END IF;
+   IF v_thread.id IS NULL OR v_message.id IS NULL THEN RAISE EXCEPTION 'request_no_longer_available' USING ERRCODE='PT409'; END IF;
    RETURN jsonb_build_object('thread',to_jsonb(v_thread)||jsonb_build_object('author_alias',public._sfi_forum_alias(v_thread.author_id)),'message',(to_jsonb(v_message)-'request_hash')||jsonb_build_object('author_alias',public._sfi_forum_alias(v_message.author_id)),'replayed',true);
   END IF;
   PERFORM public._sfi_forum_debit(v_actor,'threads');PERFORM public._sfi_forum_debit(v_actor,'writes');
@@ -364,15 +365,15 @@ BEGIN
      AND (v_after IS NULL OR (created_at,id)>(v_after,v_after_id)) ORDER BY created_at,id LIMIT v_limit) m;
    RETURN jsonb_build_object('thread',to_jsonb(v_thread)||jsonb_build_object('author_alias',public._sfi_forum_alias(v_thread.author_id)),'messages',v_rows);
   END IF;
-  IF v_thread.state<>'active' THEN RAISE EXCEPTION 'thread_locked' USING ERRCODE='40001'; END IF;
+  IF v_thread.state<>'active' THEN RAISE EXCEPTION 'thread_locked' USING ERRCODE='PT409'; END IF;
   v_body:=p_payload->>'body';v_key:=(p_payload->>'idempotency_key')::uuid;
   IF v_key IS NULL OR char_length(btrim(v_body)) NOT BETWEEN 1 AND 6000 OR char_length(v_body)>6000 THEN RAISE EXCEPTION 'invalid_content' USING ERRCODE='22023'; END IF;
   v_hash:=encode(sha256(convert_to(jsonb_build_object('action',p_action,'thread',v_id,'body',v_body)::text,'UTF8')),'hex');
   SELECT * INTO v_request FROM public.sfi_forum_requests WHERE user_id=v_actor AND request_id=v_key;
   IF FOUND THEN
-   IF v_request.action<>p_action OR v_request.request_hash IS DISTINCT FROM v_hash THEN RAISE EXCEPTION 'idempotency_conflict' USING ERRCODE='40001'; END IF;
+   IF v_request.action<>p_action OR v_request.request_hash IS DISTINCT FROM v_hash THEN RAISE EXCEPTION 'idempotency_conflict' USING ERRCODE='PT409'; END IF;
    SELECT * INTO v_message FROM public.sfi_forum_messages WHERE id=v_request.record_id AND thread_id=v_id AND state='active';
-   IF v_message.id IS NULL THEN RAISE EXCEPTION 'request_no_longer_available' USING ERRCODE='40001'; END IF;
+   IF v_message.id IS NULL THEN RAISE EXCEPTION 'request_no_longer_available' USING ERRCODE='PT409'; END IF;
    RETURN jsonb_build_object('message',(to_jsonb(v_message)-'request_hash')||jsonb_build_object('author_alias',public._sfi_forum_alias(v_message.author_id)),'replayed',true);
   END IF;
   PERFORM public._sfi_forum_debit(v_actor,'messages');PERFORM public._sfi_forum_debit(v_actor,'writes');
@@ -384,14 +385,14 @@ BEGIN
   v_id:=(p_payload->>'message_id')::uuid;v_version:=(p_payload->>'version')::integer;
   SELECT * INTO v_message FROM public.sfi_forum_messages WHERE id=v_id AND state<>'deleted' FOR UPDATE;
   IF NOT FOUND OR NOT public.sfi_forum_can_read_room(v_message.room_id) THEN RAISE EXCEPTION 'not_found' USING ERRCODE='P0002'; END IF;
-  IF v_version IS NULL OR v_version<>v_message.version THEN RAISE EXCEPTION 'version_conflict' USING ERRCODE='40001'; END IF;
+  IF v_version IS NULL OR v_version<>v_message.version THEN RAISE EXCEPTION 'version_conflict' USING ERRCODE='PT409'; END IF;
   v_room:=v_message.room_id;
   IF p_action='report_message' THEN
    IF v_message.state<>'active' THEN RAISE EXCEPTION 'not_found' USING ERRCODE='P0002'; END IF;
    v_reason:=p_payload->>'reason';IF char_length(btrim(v_reason)) NOT BETWEEN 3 AND 1500 OR char_length(v_reason)>1500 THEN RAISE EXCEPTION 'invalid_reason' USING ERRCODE='22023'; END IF;
    SELECT * INTO v_report FROM public.sfi_forum_reports WHERE message_id=v_id AND reporter_id=v_actor AND reported_version=v_version;
    IF FOUND THEN
-    IF v_report.reason<>v_reason THEN RAISE EXCEPTION 'report_conflict' USING ERRCODE='40001'; END IF;
+    IF v_report.reason<>v_reason THEN RAISE EXCEPTION 'report_conflict' USING ERRCODE='PT409'; END IF;
     RETURN jsonb_build_object('report',to_jsonb(v_report),'replayed',true);
    END IF;
    PERFORM public._sfi_forum_debit(v_actor,'reports');
