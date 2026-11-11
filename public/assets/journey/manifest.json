@@ -64,7 +64,7 @@
     {
       "id": "dna",
       "enabled": true,
-      "video": "/assets/journey/dna-before-arrival-fe9591bab212cfe1.mp4",
+      "video": "/assets/journey/dna-before-arrival-gop1s-726caffae9c01f9e.mp4",
       "poster": "/assets/journey/dna.webp",
       "mode": "scrub",
       "provenance": {
@@ -72,7 +72,10 @@
         "sourceSha256": "b5cb5f5928c4f957468dfb5b4c4c639f53a2b9f91880074b8ef98f4f871382c9",
         "sha256": "fe9591bab212cfe1ec4e93712723c09dda456fa75cdaee4673553a0d2bccdfaf",
         "durationSeconds": 5,
-        "generationCost": 0
+        "generationCost": 0,
+        "videoSha256": "726caffae9c01f9e04d73c82005faee6b9770d0d0a3b9728cae52307adf2d0b5",
+        "priorEncodedSha256": "fe9591bab212cfe1ec4e93712723c09dda456fa75cdaee4673553a0d2bccdfaf",
+        "keyframeIntervalSeconds": 1
       }
     },
     {
@@ -261,7 +264,7 @@
     {
       "id": "bergen",
       "enabled": true,
-      "video": "/assets/journey/bergen-fashion-study-lar-a85a7dc8e087b0ce.mp4",
+      "video": "/assets/journey/bergen-fashion-study-lar-gop1s-818e7dfe511dae24.mp4",
       "poster": "/assets/journey/bergen-fashion-study-lar-a85a7dc8e087b0ce-poster.webp",
       "mode": "play",
       "title": {
@@ -278,11 +281,13 @@
       "provenance": {
         "provider": "Higgsfield",
         "model": "seedance_2_5",
-        "videoSha256": "a85a7dc8e087b0ceec0a4f8fdc732b3f3320a95565c0d35fe676081b7a487702",
+        "videoSha256": "818e7dfe511dae24d2634090b88da7f854f5a090c2c0af3afa5808bdaa3e189e",
         "durationSeconds": 8.041667,
         "originalArtworkSha256": "80643262351fb9d6e4de954d72707ed2fb72610c7d8a3e6296027439d3b07136",
         "process": "Perspective tracked original print and fabric luminance modulation; not full3Dfabricsimulation",
-        "productionProof": false
+        "productionProof": false,
+        "priorEncodedSha256": "a85a7dc8e087b0ceec0a4f8fdc732b3f3320a95565c0d35fe676081b7a487702",
+        "keyframeIntervalSeconds": 1
       }
     },
     {
@@ -324,7 +329,7 @@
     {
       "id": "interior",
       "enabled": true,
-      "video": "/assets/journey/la-interior-study-gjenbruk-df689cc1545ebcc0.mp4",
+      "video": "/assets/journey/la-interior-study-gjenbruk-gop1s-5aea9c2b5b554657.mp4",
       "poster": "/assets/journey/la-interior-study-gjenbruk-df689cc1545ebcc0-poster.webp",
       "mode": "play",
       "artworks": [
@@ -350,11 +355,13 @@
       "provenance": {
         "provider": "Higgsfield",
         "model": "seedance_2_5",
-        "videoSha256": "df689cc1545ebcc057e8a91fcaf791dece36efb513c10f60c50ca1d6e5caf689",
+        "videoSha256": "5aea9c2b5b55465780c385a889575c70a14875e71fe1721f80e8173e3c528c4a",
         "artworkSha256": "16872400f1db5e2c943824b4540506faf285e00bbc1e056b30cc09573a1b36e9",
         "durationSeconds": 12.041667,
         "resolution": "720p",
-        "fullBriefCompleted": false
+        "fullBriefCompleted": false,
+        "priorEncodedSha256": "df689cc1545ebcc057e8a91fcaf791dece36efb513c10f60c50ca1d6e5caf689",
+        "keyframeIntervalSeconds": 1
       }
     },
     {
