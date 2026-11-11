@@ -141,7 +141,7 @@
       try { await loadMe(); } catch(nextError) { if(nextError.code==='stale_session')return;clearSession(); }
       render();
     }
-    status(errorText(error), true);
+    status(error.operationConfirmed ? t('saved')+' '+t('refreshFailed')+' '+errorText(error) : errorText(error), true);
   }
   function busy(value) {
     state.busy = value; root.setAttribute('aria-busy', String(value));
@@ -179,7 +179,7 @@
     if (!state.room) { state.thread = null; clearRoomContent(); }
   }
   async function loadRoom(room, thread = null, focus = false, ensureMessage = null) {
-    if (!canUseRoom(room)) { status(t('roomAccessDenied'), true); return; }
+    if (!canUseRoom(room)) { status(t('roomAccessDenied'), true); return false; }
     const generation = ++state.generation;
     viewRequest?.abort(); viewRequest = new AbortController();
     state.room = room; state.thread = null; clearRoomContent(); render(); status(t('loading'));
@@ -197,7 +197,8 @@
       }
       setUrl(); render(); status('');
       if (focus) document.getElementById(state.thread ? 'conversation-heading' : 'room-heading')?.focus();
-    } catch (error) { if (generation === state.generation && error.name !== 'AbortError') await handleError(error); }
+      return true;
+    } catch (error) { if (generation === state.generation && error.name !== 'AbortError') await handleError(error);return false; }
   }
   function setMessageCursor(batch){
     state.messageMore=batch.length===100;
@@ -332,7 +333,7 @@
     const signature=JSON.stringify(payload);
     if(draft.pending&&draft.pending.signature!==signature)throw new ApiError(409,'uncertain_submission');
     if(!draft.pending)draft.pending={signature,payload:{...payload,idempotency_key:crypto.randomUUID()}};
-    try {const data=await api(path,draft.pending.payload);draft.pending=null;return data;}
+    try {const data=await api(path,draft.pending.payload);if(!uuid(data?.message?.id)||(path==='/threads'&&!uuid(data?.thread?.id)))throw new ApiError(502,'invalid_response');draft.pending=null;return data;}
     catch(error){if(error.status>=400&&error.status<500)draft.pending=null;throw error;}
   }
   function freezeUncertain(form,draft) {
@@ -350,7 +351,7 @@
     append(form,p(t('bodyLimit'),'pf-small'));submit(form,draft.pending?t('retryExact'):t('createThread'));
     title.addEventListener('input',()=>{draft.title=title.value;});body.addEventListener('input',()=>{draft.body=body.value;});
     form.addEventListener('submit',event=>{event.preventDefault();if(!form.reportValidity())return;action(async()=>{
-      try {const data=await idempotent('/threads',{room:state.room,title:title.value,body:body.value},draft);state.newThreads.delete(state.room);await loadRoom(state.room,data.thread.id,true);status(t('saved'));}
+      try {const data=await idempotent('/threads',{room:state.room,title:title.value,body:body.value},draft);state.newThreads.delete(state.room);const loaded=await loadRoom(state.room,data.thread.id,true);status(t('saved')+(loaded?'':' '+t('refreshFailed')),!loaded);}
       catch(error){freezeUncertain(form,draft);throw error;}
     });});freezeUncertain(form,draft);details.append(form);container.append(details);
   }
@@ -366,9 +367,9 @@
     if(own&&message.state==='active') {
       const edit=button(t('edit'),()=>openDialog(t('editing'),panel=>{
         const form=newForm('edit-message-form'),body=textarea(form,'reply','edit-body',state.editDrafts.get(message.id)??message.body);body.addEventListener('input',()=>state.editDrafts.set(message.id,body.value));append(form,p(t('bodyLimit'),'pf-small'));submit(form,t('saveEdit'));
-        form.addEventListener('submit',event=>{event.preventDefault();if(!form.reportValidity())return;action(async()=>{const data=await api('/messages/edit',{message_id:message.id,body:body.value,version:message.version});state.editDrafts.delete(message.id);dialog?.close();await loadRoom(state.room,state.thread,true,data.message);status(t('saved'));});});panel.append(form);
+        form.addEventListener('submit',event=>{event.preventDefault();if(!form.reportValidity())return;action(async()=>{const data=await api('/messages/edit',{message_id:message.id,body:body.value,version:message.version});state.editDrafts.delete(message.id);dialog?.close();const loaded=await loadRoom(state.room,state.thread,true,data.message);status(t('saved')+(loaded?'':' '+t('refreshFailed')),!loaded);});});panel.append(form);
       },edit),{'data-message-action':'edit'});actions.append(edit);
-      actions.append(button(t('delete'),()=>{if(!confirm(t('confirmDelete')))return;action(async()=>{const data=await api('/messages/delete',{message_id:message.id,version:message.version});await loadRoom(state.room,state.thread,true,data.message);status(t('saved'));});},{'data-message-action':'delete'}));
+      actions.append(button(t('delete'),()=>{if(!confirm(t('confirmDelete')))return;action(async()=>{const data=await api('/messages/delete',{message_id:message.id,version:message.version});const loaded=await loadRoom(state.room,state.thread,true,data.message);status(t('saved')+(loaded?'':' '+t('refreshFailed')),!loaded);});},{'data-message-action':'delete'}));
     }
     if(message.state!=='deleted') {
       const report=button(t('report'),()=>openDialog(t('report'),panel=>{
@@ -379,7 +380,7 @@
         const target=message.state==='hidden'?'active':'hidden', key=target==='active'?'restore':'hide';
         const moderate=button(t(key),()=>openDialog(t('moderationTitle'),panel=>{
           const form=newForm('moderate-form'),reason=textarea(form,'reason','moderate-reason','',{minlength:3,maxlength:1500,rows:3});submit(form,t(key));
-          form.addEventListener('submit',event=>{event.preventDefault();if(!form.reportValidity())return;action(async()=>{const data=await api('/messages/moderate',{message_id:message.id,version:message.version,state:target,reason:reason.value});dialog?.close();await loadRoom(state.room,state.thread,true,data.message);status(t('saved'));});});panel.append(form);
+          form.addEventListener('submit',event=>{event.preventDefault();if(!form.reportValidity())return;action(async()=>{const data=await api('/messages/moderate',{message_id:message.id,version:message.version,state:target,reason:reason.value});dialog?.close();const loaded=await loadRoom(state.room,state.thread,true,data.message);status(t('saved')+(loaded?'':' '+t('refreshFailed')),!loaded);});});panel.append(form);
         },moderate),{'data-message-action':key});actions.append(moderate);
       }
     }
@@ -408,8 +409,9 @@
       append(form,p(t('bodyLimit'),'pf-small'));submit(form,draft.pending?t('retryExact'):t('sendReply'));
       body.addEventListener('input',()=>{draft.body=body.value;});
       form.addEventListener('submit',event=>{event.preventDefault();if(!form.reportValidity())return;action(async()=>{
-        try{const data=await idempotent('/messages',{thread_id:state.thread,body:body.value},draft);state.drafts.delete(state.thread);await refreshAfterReply(data.message);status(t('saved'));}
-        catch(error){freezeUncertain(form,draft);throw error;}
+        let confirmed=false;
+        try{const data=await idempotent('/messages',{thread_id:state.thread,body:body.value},draft);confirmed=true;draft.body='';body.value='';state.drafts.delete(state.thread);await refreshAfterReply(data.message);status(t('saved'));}
+        catch(error){if(confirmed)error.operationConfirmed=true;else freezeUncertain(form,draft);throw error;}
       });});freezeUncertain(form,draft);section.append(form);
     }
     container.append(section);
