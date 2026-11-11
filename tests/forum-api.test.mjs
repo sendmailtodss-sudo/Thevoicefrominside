@@ -96,3 +96,16 @@ test('Supabase Auth session-not-found denial normalizes to 401 and cannot reach 
  let calls=0;const r=await handleForumRequest(req('/rooms',{headers:cookie}),{env,fetcher:async()=>{calls++;return Response.json({code:403,error_code:'session_not_found'},{status:403});}});
  assert.equal(r.status,401);assert.equal((await r.json()).error.code,'invalid_session');assert.equal(calls,1);
 });
+
+test('Vercel rewrite removes only reserved host captures and preserves strict user query validation',async()=>{
+ const {forumLogicalUrl}=await import('../api/forum-route.mjs');
+ const host={url:'/api/forum/me?_forum_route=me&_sfi_forum_capture=me',query:{_forum_route:'me',_sfi_forum_capture:'me'}};
+ assert.equal(forumLogicalUrl(host),'/api/forum/me');
+ const injected={...host,url:host.url+'&path=caller-value'};
+ const p=providerStub();assert.equal((await handleForumRequest(req('/me?path=caller-value',{headers:cookie}),{env,fetcher:p.fetcher})).status,400);
+ assert.equal(forumLogicalUrl(injected),'/api/forum/me?path=caller-value');
+ const at='2026-11-11T21:00:00.123456+00:00',q=new URLSearchParams({_forum_route:'messages',_sfi_forum_capture:'messages',thread_id:userId,after_created_at:at,after_id:sessionId});
+ const u=new URL(forumLogicalUrl({url:'/api/forum/messages?'+q,query:{_forum_route:'messages',_sfi_forum_capture:'messages'}}),'https://private-forum.invalid');
+ assert.equal(u.searchParams.get('after_created_at'),at);assert.equal(u.searchParams.get('thread_id'),userId);assert.equal(u.searchParams.size,3);
+ for(const bad of [{...host,query:{_forum_route:'me',_sfi_forum_capture:'rooms'}},{...host,url:host.url+'&_forum_route=rooms'},{...host,query:{_forum_route:['me','rooms']}},{...host,query:{_forum_route:'../me'}}])assert.throws(()=>forumLogicalUrl(bad),/invalid_forum_rewrite/);
+});
