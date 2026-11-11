@@ -1,15 +1,26 @@
 # Developing the website
 
+The public website is [thevoicefrominside.dev](https://thevoicefrominside.dev), hosted on Vercel since 11 November 2026. The old ChatGPT Sites deployment is a historical rollback reference. The hosted reading experience does not depend on a ChatGPT subscription.
+
 Use Node.js 24 LTS. The preview and build use Node's standard library; no frontend framework or paid service is required.
 
 ```sh
 npm ci
 npm test
+npm run check
 npm run build
 npm run dev
 ```
 
 Open <http://localhost:8080>. Set `PORT` if that port is occupied. Stop the process with Ctrl+C. The preview serves `public/`, so source edits appear on reload. `npm run build` creates a separate `dist/` tree; it does not publish anything.
+
+## Working with any editor or AI assistant
+
+Clone or download the contributor repository, or use a Git bundle supplied by the maintainer. Read `AGENTS.md`, create a branch or separate worktree, and run the commands above. A local editor and terminal are sufficient; ChatGPT, Codex and other AI tools are optional. Access to an AI assistant depends on that provider's account terms, while the website can still run without it.
+
+Give a collaborator the focused task, relevant public files, reproduction steps and expected Norwegian/English behavior. Keep changes reviewable, and hand back the commit or patch with the checks actually run. Use synthetic examples and retain approved text and artwork. Keep private production content and credentials outside the public checkout and AI prompts unless separately authorized.
+
+For application changes, run the relevant tests, source check and build, plus browser checks for affected routes. For documentation-only edits, verify links, stated commands and the diff; a full application test run is unnecessary unless the instructions or code changed.
 
 ## GitHub Codespaces
 
@@ -23,7 +34,7 @@ The repository provides this configuration. Creating a hosted Codespace still de
 
 ## What the preview contains
 
-The developer distribution starts from version 34's browser and Worker application code. Selected editorial pages and artwork use explicitly labeled example material. Original manuscripts, case-document downloads, artwork binaries, contact logs and production credentials are not part of this distribution. Missing images display an SVG marked as an example; missing PDFs return 404.
+The contributor distribution derives from the earlier website source and includes later reviewed application changes. Selected editorial pages use explicitly labeled example material; approved public artwork and media are included where released. Private manuscripts, case-document downloads, unreleased original artwork, contact logs, service data and production credentials remain separately managed. Missing images display an SVG marked as an example; missing PDFs return 404. The full private production source must not be replaced by this sanitized checkout.
 
 The development server serves browser interfaces only. It does **not** run the Worker backend. Every `/api/` request returns `503` with `error: "development-disabled"`; submissions, login, collaboration delivery, payments and real account data are therefore unavailable. Non-API write requests return `405`. No API request is forwarded to the live website. The browser policy also limits fetch connections to this preview's own origin.
 
@@ -40,9 +51,13 @@ The Worker source and database migrations remain available for code review and i
 
 Keep edits focused. Check both Norwegian and English routes, narrow mobile layouts, keyboard navigation and reduced-motion behavior where relevant. Preserve the distinction between a functional interface prototype and a service that is actually open.
 
-## Publication
+## Portable frontend and production release
 
-This repository has no automatic production deployment. A commit, a passing test, a Codespaces preview and a local build are not publication receipts. Production website changes require the maintainer's explicit release workflow and approval. Do not upload private deployment configuration or copy private operational instructions into this repository.
+`public/` contains the browser application. `npm run build` copies it to `dist/client/`; that directory is the portable frontend output. A static host must serve nested directory-index routes, the correct media types and video byte ranges. Check direct links, language routes, downloads, gallery navigation and security headers on any proposed host.
+
+The same build also writes `dist/server/` with Cloudflare Worker modules and a generated configuration containing placeholder bindings. This is backend source for review, not an operational Vercel backend. Moving the static files does not move databases, uploaded media, identity, payments or submission processing. Those services require their own implementation, migration and verification.
+
+This repository has no tracked Vercel deployment configuration or automatic production deployment. A commit, a passing test, a Codespaces preview and a local build are not publication receipts. Production website changes use the maintainer's separately managed source and authorized release process. Reconcile contributor changes with the approved production content, retain a rollback artifact, and verify the actual deployment before switching traffic. Do not upload private deployment configuration or copy private operational instructions into this repository. See [independent hosting](independent-hosting.md) for the handover boundary.
 
 
 ## 5 November contributor update
