@@ -133,9 +133,27 @@
     {
       "id": "streetart",
       "enabled": true,
-      "video": "/assets/journey/streetart.mp4",
-      "poster": "/assets/journey/streetart.webp",
-      "mode": "play"
+      "video": "/assets/journey/prison-courtyard.mp4",
+      "poster": "/assets/journey/prison-courtyard.webp",
+      "mode": "play",
+      "title": {
+        "no": "Et uttrykk innenfor murene",
+        "en": "Expression within the walls",
+        "zh": "高墙内的表达"
+      },
+      "description": {
+        "no": "En fiktiv luftegård. Kunstmotivet legges inn i en senere kompositt.",
+        "en": "A fictional exercise yard. The artwork will be added in a later composite.",
+        "zh": "虚构的放风庭院。作品将在后续合成中加入。"
+      },
+      "reviewStatus": "draft",
+      "provenance": {
+        "provider": "Higgsfield",
+        "model": "seedance_2_5",
+        "jobId": "bdeb85ec-c535-4d50-a405-8bd0fd69987d",
+        "durationSeconds": 10,
+        "resolution": "720p"
+      }
     },
     {
       "id": "filmmaker",
