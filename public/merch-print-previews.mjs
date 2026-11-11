@@ -1,6 +1,5 @@
 import {singleArtworkDesign} from './merch-designer-core.mjs';
 import {createShirtSvg,shirtPreviewPng,printArtist,printTitle} from './merch-shirt-preview.mjs';
-import {createModelSvg} from './merch-model-preview.mjs';
 const node=(tag,className,text)=>{const el=document.createElement(tag);if(className)el.className=className;if(text!==undefined)el.textContent=text;return el;};
 export function mountPrintPreviews({mount,before,getArtworks,getDesign,language='no',onSelect}){
  const t=(no,en)=>language==='en'?en:no,artist=a=>printArtist(a)||t('Kunstner ikke oppgitt','Artist not listed');
@@ -17,14 +16,14 @@ export function mountPrintPreviews({mount,before,getArtworks,getDesign,language=
  const dialog=node('dialog','print-preview-dialog');dialog.id='print-preview-dialog';dialog.setAttribute('aria-labelledby','print-preview-title');
  const top=node('div','print-preview-dialog-top'),title=node('h2','print-preview-title');title.id='print-preview-title';const close=node('button','secondary print-preview-close',t('Lukk','Close'));close.type='button';top.append(title,close);
  const byline=node('p','print-preview-byline'),models=node('div','hiphop-model-grid print-preview-models'),sides=node('div','print-preview-sides'),label=node('p','print-preview-label'),actions=node('div','designer-actions'),choose=node('button','primary-full print-preview-select',t('Velg dette motivet','Choose this artwork')),download=node('button','secondary print-preview-download',t('Last ned begge sider · PNG','Download both sides · PNG')),status=node('p','message');choose.type=download.type='button';status.setAttribute('role','status');
- actions.append(choose,download);dialog.append(top,byline,models,sides,label,node('p','small-note',t('Virtuell modellvisning og plasseringsforslag · ikke en produksjonskorrektur eller bestilling','Virtual model preview and placement proposal · not a production proof or order')),actions,status);document.body.append(dialog);
+ actions.append(choose,download);dialog.append(top,byline,models,sides,label,node('p','small-note',t('Flat plasseringsskisse med originalfil · ikke en produksjonskorrektur eller bestilling','Flat placement sketch with the original file · not a production proof or order')),actions,status);document.body.append(dialog);
  const artworkDesign=id=>singleArtworkDesign(id,{size:getDesign().size,brandingPlacement:getDesign().branding.placement});
  const closeDialog=()=>{dialog.close();if(opener?.isConnected)opener.focus();};close.addEventListener('click',closeDialog);
  dialog.addEventListener('cancel',event=>{event.preventDefault();closeDialog();});dialog.addEventListener('click',event=>{if(event.target!==dialog)return;const r=dialog.getBoundingClientRect();if(event.clientX<r.left||event.clientX>r.right||event.clientY<r.top||event.clientY>r.bottom)closeDialog();});
  function open(id,button){
   const a=getArtworks().find(a=>a.id===id);if(!a)return;active={id,design:artworkDesign(id)};opener=button;title.textContent=printTitle(a,language);byline.textContent=artist(a);status.textContent='';sides.replaceChildren();
   for(const side of ['front','back']){const figure=node('figure'),caption=node('figcaption','',side==='front'?t('Forside','Front'):t('Rygg','Back')),image=createShirtSvg({design:active.design,artworks:getArtworks(),side,language});image.classList.add('print-preview-'+side);figure.append(image,caption);sides.append(figure);}
-  models.replaceChildren();for(const model of ['male','female']){const figure=node('figure');figure.append(createModelSvg({design:active.design,artworks:getArtworks(),model,view:'back',language}),node('figcaption','',model==='male'?t('Trykket på herremodellen','Print on the male model'):t('Trykket på kvinnemodellen','Print on the female model')));models.append(figure);}
+  models.replaceChildren();
   label.textContent=active.design.branding.placement==='inside_label'?t('Innvendig merkelapp: Stemmen fra innsiden. Ingen utvendig fellesskapsmerking.','Inside label: Stemmen fra innsiden. No exterior community mark.'):t('Stemmen fra innsiden-merket står synlig nederst på forsiden.','The Stemmen fra innsiden mark is visible at the front hem.');
   dialog.showModal();close.focus();
  }
