@@ -10,5 +10,6 @@ This is the public developer distribution of Stemmen fra innsiden / The Voice fr
 - Do not deploy, send mail, schedule social posts, purchase services or activate payment/submission integrations as a side effect of development.
 - Preserve approved editorial text and redactions. Keep changes to application code separate from requests to change writing or artwork rights.
 - Explain what changed, why, and which checks actually ran. Report limitations directly.
+- For video references, use `.agents/skills/youtube-video-analysis/SKILL.md` and its executable helper. Inspect actual timestamped frames before describing a scene; preserve access failures and distinguish stills, playback, captions and inference.
 
 Historical private operational instructions and launch logs are intentionally outside this repository. They are not required to develop with its example data.

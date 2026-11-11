@@ -30,6 +30,8 @@ The project includes existing writing and website development alongside unfinish
 
 We welcome help with frontend and backend development, security, accessibility, design, testing, translation, documentation and maintenance. Small contributions matter. So do people willing to question an assumption, find an error or improve something another person has started.
 
+The reusable [video-analysis skill](.agents/skills/youtube-video-analysis/SKILL.md) includes executable tools for authorized local videos and normally accessible public video sources. It extracts timestamped frames and silent adjacent clips, records source hashes, and keeps visual observations separate from metadata, captions and inference. Python, ffmpeg and ffprobe are required; the optional public-source extractor is pinned in the skill requirements. Run its `doctor` command first. Network, login and geographic restrictions remain explicit limitations; installing the skill does not grant access to restricted videos.
+
 I am looking for collaborators who want to put their abilities to work in the struggle for dignity, accountability and change. Help build a place where people can tell their stories, show their evidence, create together and challenge the state structures that continue to create victims on both sides of the wall.
 
 ## Website and contributor source — 11 November 2026
