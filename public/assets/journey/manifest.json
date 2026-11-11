@@ -1,6 +1,32 @@
 {
   "scenes": [
     {
+      "id": "big-bang",
+      "enabled": true,
+      "video": "/assets/journey/big-bang.mp4",
+      "poster": "/assets/journey/big-bang.webp",
+      "mode": "play",
+      "fit": "cover",
+      "title": {
+        "no": "Fra et lite punkt",
+        "en": "From a single point",
+        "zh": "从一个光点开始"
+      },
+      "description": {
+        "no": "En visuell prøve på begynnelsen av reisen.",
+        "en": "A visual draft of the beginning of the journey.",
+        "zh": "旅程开端的视觉草稿。"
+      },
+      "reviewStatus": "draft",
+      "provenance": {
+        "provider": "Higgsfield",
+        "model": "seedance_2_5",
+        "jobId": "c86e6fc8-5c11-4041-bc63-5d146c62e7f5",
+        "durationSeconds": 8,
+        "resolution": "720p"
+      }
+    },
+    {
       "id": "galaxy",
       "enabled": true,
       "video": "/assets/journey/galaxy.mp4",

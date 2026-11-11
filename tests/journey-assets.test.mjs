@@ -11,7 +11,7 @@ test('published journey assets are local and available to the contributor previe
   const scenes = manifest.scenes.filter(scene => scene.enabled);
   assert.ok(scenes.length >= 15);
   assert.equal(new Set(scenes.map(scene => scene.id)).size, scenes.length);
-  assert.deepEqual(scenes.slice(0, 6).map(scene => scene.id), ['galaxy', 'brains', 'impulses', 'vortex', 'supernova', 'dna']);
+  assert.deepEqual(scenes.slice(0, 7).map(scene => scene.id), ['big-bang', 'galaxy', 'brains', 'impulses', 'vortex', 'supernova', 'dna']);
   for (const scene of scenes) {
     for (const file of [scene.video, scene.poster]) {
       assert.match(file, /^\/assets\/journey\/[a-z0-9-]+\.(mp4|webp)$/);
