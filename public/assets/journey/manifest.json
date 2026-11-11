@@ -69,6 +69,33 @@
       "mode": "scrub"
     },
     {
+      "id": "prison-arrival",
+      "enabled": true,
+      "video": "/assets/journey/prison-arrival.mp4",
+      "poster": "/assets/journey/prison-arrival.webp",
+      "mode": "play",
+      "fit": "cover",
+      "title": {
+        "no": "Innenfor murene",
+        "en": "Inside the walls",
+        "zh": "高墙之内"
+      },
+      "description": {
+        "no": "En fiktiv reise fra verden utenfor til en fengselskorridor.",
+        "en": "A fictional journey from the world outside into a prison corridor.",
+        "zh": "从外界走入监狱走廊的虚构旅程。"
+      },
+      "reviewStatus": "draft",
+      "provenance": {
+        "provider": "Higgsfield",
+        "model": "seedance_2_5",
+        "jobId": "8abd0c17-e8b4-4d85-b375-992073795c03",
+        "durationSeconds": 12,
+        "resolution": "720p",
+        "geography": "fictional_unverified"
+      }
+    },
+    {
       "id": "painter",
       "enabled": true,
       "video": "/assets/journey/painter.mp4",
