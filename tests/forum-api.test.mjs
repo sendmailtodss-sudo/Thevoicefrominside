@@ -77,3 +77,22 @@ test('logout clears the HttpOnly cookie even for invalid sessions or an unavaila
 test('an insecure-local flag cannot weaken cookies on a deployed preview',async()=>{
  for(const mode of ['preview','development']){const p=providerStub();const r=await handleForumRequest(req('/login',{method:'POST',body:{email:'member@forum.invalid',password:'example'},headers:{Origin:'https://preview.example.invalid'}}),{env:{...env,VERCEL_ENV:mode,FORUM_ALLOW_INSECURE_LOCAL:'1'},fetcher:p.fetcher});assert.equal(r.status,200);assert.match(r.headers.get('Set-Cookie'),/__Host-sfi_forum=/);assert.match(r.headers.get('Set-Cookie'),/; Secure/);}
 });
+
+test('Vercel adapter handles parsed JSON, raw bytes and consumed streams without losing body bounds',async()=>{
+ const {forumWebRequest}=await import('../api/forum.mjs');
+ const headers={'content-type':'application/json',origin:'https://preview.example.invalid'};
+ const b={email:'member@forum.invalid',password:'keep spaces '};
+ for(const body of [b,JSON.stringify(b),Buffer.from(JSON.stringify(b))]){
+  const p=providerStub();const r=await handleForumRequest(forumWebRequest({url:'/api/forum/login',method:'POST',headers,body}),{env,fetcher:p.fetcher});assert.equal(r.status,200);assert.equal(JSON.parse(p.calls[0].init.body).password,b.password);
+ }
+ const {Readable}=await import('node:stream');const raw=Readable.from([JSON.stringify(b)]);Object.assign(raw,{url:'/api/forum/login',method:'POST',headers});
+ assert.equal((await handleForumRequest(forumWebRequest(raw),{env,fetcher:providerStub().fetcher})).status,200);
+ for(const item of [{body:{padding:'x'.repeat(17000)},headers},{body:b,headers:{...headers,'content-length':'17000'}},{body:b,headers:{...headers,'content-length':['1','1']}}]){
+  const p=providerStub();const r=await handleForumRequest(forumWebRequest({url:'/api/forum/login',method:'POST',...item}),{env,fetcher:p.fetcher});assert.equal(r.status,413);assert.equal(p.calls.length,0);
+ }
+});
+
+test('Supabase Auth session-not-found denial normalizes to 401 and cannot reach database RPC',async()=>{
+ let calls=0;const r=await handleForumRequest(req('/rooms',{headers:cookie}),{env,fetcher:async()=>{calls++;return Response.json({code:403,error_code:'session_not_found'},{status:403});}});
+ assert.equal(r.status,401);assert.equal((await r.json()).error.code,'invalid_session');assert.equal(calls,1);
+});

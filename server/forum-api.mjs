@@ -82,6 +82,7 @@ function verifiedClaims(token, user) {
 }
 function providerError(value, status) {
   const code = value?.code;
+  if (['session_not_found','session_expired','bad_jwt'].includes(value?.error_code || code)) fail(401, 'invalid_session');
   if (['invalid_credentials','invalid_grant','user_not_found'].includes(code)) fail(401, 'invalid_credentials');
   if (status === 401 || code === '28000' || code === 'PGRST301') fail(401, 'invalid_session');
   if (status === 403 || code === '42501') fail(403, 'access_denied');
