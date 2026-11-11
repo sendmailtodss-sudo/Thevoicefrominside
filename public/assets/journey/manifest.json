@@ -287,7 +287,7 @@
     },
     {
       "id": "new-york",
-      "enabled": true,
+      "enabled": false,
       "video": "/assets/journey/new-york.mp4",
       "poster": "/assets/journey/new-york.webp",
       "mode": "play",
@@ -300,7 +300,8 @@
         "no": "Midlertidig KI-illustrasjon. Kunsttrykkene bearbeides videre.",
         "en": "Temporary AI illustration. The artwork prints are being refined.",
         "zh": "临时 AI 插图。衣服上的艺术图案仍在完善中。"
-      }
+      },
+      "reviewStatus": "superseded"
     },
     {
       "id": "interior",
