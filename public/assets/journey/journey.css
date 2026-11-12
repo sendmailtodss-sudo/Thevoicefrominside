@@ -110,3 +110,57 @@ body:has([data-primary-language]) .sj-language{display:none}
 .sj[data-quiet=true] .sj-copy{visibility:visible}
 
 @media(prefers-reduced-motion:reduce){.sj[data-origin=true] .sj-copy{visibility:visible}}
+
+/* Paused decoders are composited at the requested scroll position. Their
+   browser loading/seek paints must never leak beneath the retained frame. */
+.sj-video-peer{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none;opacity:0!important}
+.sj[data-compositor=true] .sj-video,.sj[data-compositor=true] .sj-poster{opacity:0!important}
+.sj[data-compositor=true] .sj-frame-hold{object-fit:fill;object-position:center}
+.sj[data-origin=true] .sj-video-peer,.sj[data-quiet=true] .sj-video-peer{display:none}
+
+/* Section entries stay in a compact bottom dock. The persistent site header
+   owns top-right navigation and language; the middle belongs to the scene. */
+.sj[data-enhanced=true] .sj-top{display:none}
+.sj[data-enhanced=true] .sj-bottom{position:absolute;left:clamp(16px,3vw,48px);right:clamp(16px,3vw,48px);bottom:max(14px,env(safe-area-inset-bottom));display:grid;grid-template-columns:minmax(0,1fr) auto;gap:9px 18px;align-items:end;z-index:5}
+.sj-dock{grid-column:1/-1;display:flex;align-items:center;flex-wrap:wrap;gap:4px 14px;min-width:0;font:11px/1.4 Arial,sans-serif}
+.sj-dock .sj-brand{font-size:9px;letter-spacing:.08em;min-height:44px;display:flex;align-items:center}
+.sj-dock .sj-brand span{display:none}
+.sj-dock .sj-entrances{margin:0;gap:5px;max-width:none;flex:1 1 auto;justify-content:center}
+.sj-dock .sj-entrances a{font-size:11px;padding:6px 10px;background:#02050d80;backdrop-filter:blur(6px)}
+.sj-dock .sj-skip,.sj-dock .sj-invitation,.sj-dock .sj-gallery-entry{display:inline-flex;align-items:center;justify-content:center;min-height:44px;margin:0;padding:6px 8px;font:11px/1.4 Arial,sans-serif;text-align:center}
+.sj-dock .sj-invitation{display:none}
+.sj[data-scene=gallery] .sj-dock .sj-invitation,.sj[data-quiet=true] .sj-dock .sj-invitation{display:inline-flex}
+.sj-dock .sj-gallery-entry{border-color:#b0c9f66b;background:#02050d99}
+.sj[data-enhanced=true]:not([data-quiet=true]):not([data-scene=gallery]) .sj-copy{visibility:hidden}
+.sj[data-quiet=true] .sj-dock .sj-entrances{display:flex!important}
+.sj[data-quiet=true] .sj-bottom{position:relative;left:auto;right:auto;bottom:auto;width:100%;margin-top:18px}
+@media(max-width:700px){
+ .sj[data-enhanced=true] .sj-bottom{left:12px;right:12px;bottom:max(10px,env(safe-area-inset-bottom));gap:5px 8px;grid-template-columns:minmax(0,1fr) auto}
+ .sj[data-enhanced=true] .sj-scene{gap:0 7px;max-width:none;align-self:center}.sj[data-enhanced=true] .sj-count{font-size:8px}.sj[data-enhanced=true] .sj-scene-title{font-size:11px}
+ .sj[data-enhanced=true] .sj-hint{display:none}.sj[data-enhanced=true] .sj-controls{gap:3px;flex-wrap:nowrap}.sj[data-enhanced=true] .sj-controls button{padding:6px 8px;font-size:9px}
+ .sj-dock{gap:0 8px;justify-content:center}.sj-dock .sj-brand{display:none}.sj-dock .sj-entrances{width:100%;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:3px;flex:none}
+ .sj-dock .sj-entrances a{min-width:0;padding:5px 4px;justify-content:center;text-align:center;font-size:10px;overflow-wrap:anywhere}
+ .sj-dock .sj-skip,.sj-dock .sj-invitation,.sj-dock .sj-gallery-entry{font-size:10px;max-width:100%;padding:5px 4px}
+ .sj[data-quiet=true] .sj-dock .sj-entrances{display:grid!important}
+ .sj[data-scene=gallery] .sj-dock .sj-skip{display:none}
+ .sj[data-quiet=true] .sj-bottom{left:auto;right:auto;bottom:auto}
+}
+@media(max-height:500px){.sj[data-enhanced=true] .sj-hint{display:none}.sj-dock .sj-brand{display:none}.sj[data-enhanced=true] .sj-bottom{gap:3px 10px;bottom:max(5px,env(safe-area-inset-bottom))}}
+
+/* Operator-code typography is part of the neural space. Every transform,
+   emergence, depth and absorption below is assigned from absolute scroll. */
+.sj .sj-thoughts{perspective:1000px;perspective-origin:50% 45%;transform-style:preserve-3d;overflow:hidden;font:500 clamp(22px,2.7vw,38px)/1.13 ui-monospace,"Cascadia Code","SFMono-Regular",Consolas,"Liberation Mono",monospace;letter-spacing:-.045em;color:#81ff9b}
+.sj .sj-thoughts span[data-expression]{width:33%;max-width:520px;top:auto;left:auto;font:inherit;letter-spacing:inherit;color:#81ff9b;text-align:center;text-wrap:balance;text-shadow:0 0 2px #a1ffb7,0 0 12px #43ff7899,0 0 28px #0dbb4c80;transform-origin:center;will-change:transform,opacity,filter;backface-visibility:hidden}
+.sj .sj-thoughts span[data-slot="1"],.sj .sj-thoughts span[data-slot="2"]{color:#81ff9b}
+.sj .sj-binary-flow{color:#63ff89;border-top-color:#50ff7d66;font-family:ui-monospace,"SFMono-Regular",Consolas,monospace;text-shadow:0 0 7px #1af65b,0 0 16px #1af65b77;opacity:.62}
+@media(max-width:700px){.sj .sj-thoughts{font-size:clamp(18px,5.4vw,27px);letter-spacing:-.055em}.sj .sj-thoughts span[data-expression],.sj .sj-thoughts span[data-slot="1"],.sj .sj-thoughts span[data-slot="2"]{width:43%;font-size:inherit;left:auto;top:auto}.sj .sj-binary-flow{font-size:9px}}
+
+/* The opt-in film launch shares the dock with the gallery entry. Reserve the
+   measured dock height so the six artwork frames do not sit under controls. */
+.sj-film-dock{display:contents}
+.sj .sj-dock .sj-film-launch{margin:0;min-height:44px;font-size:11px;padding:6px 10px}
+.sj[data-enhanced=true]:not([data-quiet=true])[data-scene=gallery] .sj-copy{position:absolute;left:clamp(20px,3.8vw,60px);right:clamp(20px,3.8vw,60px);top:22px;bottom:calc(var(--sj-bottom-height,140px) + 26px);max-width:none;margin:0;display:flex;flex-direction:column;justify-content:center}
+.sj[data-enhanced=true]:not([data-quiet=true])[data-scene=gallery] .sj-art-grid{margin:0;height:min(390px,100%);grid-template-rows:repeat(2,minmax(0,1fr))}
+.sj[data-enhanced=true]:not([data-quiet=true])[data-scene=gallery] .sj-art-grid a{min-height:0;display:flex;flex-direction:column}
+.sj[data-enhanced=true]:not([data-quiet=true])[data-scene=gallery] .sj-art-frame{height:auto;min-height:0;flex:1}
+@media(max-width:700px){.sj .sj-dock .sj-film-launch{font-size:10px}.sj[data-enhanced=true]:not([data-quiet=true])[data-scene=gallery] .sj-copy{left:20px;right:20px;top:18px;bottom:calc(var(--sj-bottom-height,170px) + 18px)}.sj[data-enhanced=true]:not([data-quiet=true])[data-scene=gallery] .sj-art-grid{height:min(390px,100%)}}
