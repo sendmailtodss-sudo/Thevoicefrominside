@@ -1,0 +1,231 @@
+{
+  "checkedUtc": "2026-11-12T00:15:08.420002+00:00",
+  "skillCount": 6,
+  "skills": [
+    {
+      "name": "cinematic-production",
+      "frontmatterValid": true,
+      "sourceHashesValid": false,
+      "instructionOnly": true
+    },
+    {
+      "name": "cinematography",
+      "frontmatterValid": true,
+      "sourceHashesValid": true,
+      "instructionOnly": true
+    },
+    {
+      "name": "scroll-world-storytelling",
+      "frontmatterValid": true,
+      "sourceHashesValid": true,
+      "instructionOnly": true
+    },
+    {
+      "name": "scroll-scrubbed-visual-sequence",
+      "frontmatterValid": true,
+      "sourceHashesValid": true,
+      "instructionOnly": true
+    },
+    {
+      "name": "build-threejs-scroll-worlds",
+      "frontmatterValid": true,
+      "sourceHashesValid": true,
+      "instructionOnly": true
+    },
+    {
+      "name": "threejs-particles-trails-and-effects",
+      "frontmatterValid": true,
+      "sourceHashesValid": true,
+      "instructionOnly": true
+    }
+  ],
+  "unexpectedExecutableFiles": [],
+  "files": [
+    {
+      "path": ".agents/skills/cinematic-production/SOURCES.md",
+      "bytes": 4338,
+      "sha256": "a8af43ed58e7445273ef1b50d5dac4c70a5d75da232b032194eb24c1a70d5fcc"
+    },
+    {
+      "path": ".agents/skills/cinematic-production/ADOPTION.md",
+      "bytes": 1975,
+      "sha256": "b58a5f60f2d15fdaaaa24de32e1423aeab895edc712c9dc0c90f58ad9639c7d7"
+    },
+    {
+      "path": ".agents/skills/cinematic-production/SKILL.md",
+      "bytes": 7033,
+      "sha256": "32651fed39e014200f8d423e4dc1868d20f8a2c16ec47bea347b2ba25a11117f"
+    },
+    {
+      "path": ".agents/skills/cinematic-production/references/editing-and-finishing.md",
+      "bytes": 3224,
+      "sha256": "5afe912fd10ee49fa1246b3e5481fe461664487432dd51179784a1dab01275da"
+    },
+    {
+      "path": ".agents/skills/cinematic-production/references/web-direction.md",
+      "bytes": 2835,
+      "sha256": "436bd83ce9d01c7f075edc06f987ce554dc8f1ed7c4276e496b07af94ae3dcee"
+    },
+    {
+      "path": ".agents/skills/cinematic-production/references/higgsfield-control.md",
+      "bytes": 3883,
+      "sha256": "21d7abcd005e9b70565bc327453a1359c2093857ab2e01a062f7db7c39223b9e"
+    },
+    {
+      "path": ".agents/skills/cinematography/SOURCE.json",
+      "bytes": 4714,
+      "sha256": "0aa4dc19519a81d7c07bc0b25e3cdf9f7ea9423c75537281840f81d3ca0b18e6"
+    },
+    {
+      "path": ".agents/skills/cinematography/ADOPTION.md",
+      "bytes": 4367,
+      "sha256": "4c8d0a5299c1b831e5c3158c73ce79966653b66918f4c2cc60f4b0f24ebb1850"
+    },
+    {
+      "path": ".agents/skills/cinematography/LICENSE",
+      "bytes": 1063,
+      "sha256": "c8758c0a3b859614b7acc251766fe1f313502f23dd2b933f4dd2b44dc2c3c7e7"
+    },
+    {
+      "path": ".agents/skills/cinematography/SKILL.md",
+      "bytes": 4925,
+      "sha256": "8d23b4836a7621e1c9715def480d95e3b4b2135bfd7995e2800013949fc8eba7"
+    },
+    {
+      "path": ".agents/skills/cinematography/references/examples.md",
+      "bytes": 1674,
+      "sha256": "e143734e15f79411240056f22b9def4d8053b11cb54958213e68eec9899778c8"
+    },
+    {
+      "path": ".agents/skills/cinematography/references/lighting-lens-color.md",
+      "bytes": 1995,
+      "sha256": "e9bbe4c61c98c0cf98cb652101b0e16f670184d7236e5509e9abc2e8de195f2a"
+    },
+    {
+      "path": ".agents/skills/cinematography/references/shot-language.md",
+      "bytes": 1901,
+      "sha256": "21ca47d38ae6388293c410c4181fd2d84f8058fbcd36bf3db5d1643179e3faaf"
+    },
+    {
+      "path": ".agents/skills/scroll-world-storytelling/SOURCE.json",
+      "bytes": 6064,
+      "sha256": "52a39dddbdf3f12a2e2f4c0e121655dac188fc3501dc0814807c6f8afc951b8b"
+    },
+    {
+      "path": ".agents/skills/scroll-world-storytelling/REFERENCES.md",
+      "bytes": 610,
+      "sha256": "13eb9828382d2aff33f7bec37ecae92dc02e91efc3f8a4bb4f29304bb6f3fc21"
+    },
+    {
+      "path": ".agents/skills/scroll-world-storytelling/ADOPTION.md",
+      "bytes": 5758,
+      "sha256": "abed1e801604418b748ae057f1db1ccf9beaffec5dc61aa6b892bb49179ffcbe"
+    },
+    {
+      "path": ".agents/skills/scroll-world-storytelling/LICENSE",
+      "bytes": 1064,
+      "sha256": "b2a071ba22fefd803f4e9d1f5c777dd79c62d191695586a1a73fd4d0ebd051c6"
+    },
+    {
+      "path": ".agents/skills/scroll-world-storytelling/SKILL.md",
+      "bytes": 11889,
+      "sha256": "505caf90b92ac6d9e6aecda1d79df36adc96fe5cbeb8eaac5c45b6cdefee7eab"
+    },
+    {
+      "path": ".agents/skills/scroll-scrubbed-visual-sequence/SOURCE.json",
+      "bytes": 4194,
+      "sha256": "a187b68f49f5fed33dd21f44baffdfa7fd1bc6b2f3af668d2316af86cc476e6a"
+    },
+    {
+      "path": ".agents/skills/scroll-scrubbed-visual-sequence/REFERENCES.md",
+      "bytes": 507,
+      "sha256": "a7d61327736c0fdba803b61b9c5ff0505cb4c682c2899cf95621018f8192d139"
+    },
+    {
+      "path": ".agents/skills/scroll-scrubbed-visual-sequence/ADOPTION.md",
+      "bytes": 4505,
+      "sha256": "4fc12b99c05b16cd3e7a18d261e6dcead3aec85e7a48f7e908f2ab5253af91a1"
+    },
+    {
+      "path": ".agents/skills/scroll-scrubbed-visual-sequence/LICENSE",
+      "bytes": 1064,
+      "sha256": "b2a071ba22fefd803f4e9d1f5c777dd79c62d191695586a1a73fd4d0ebd051c6"
+    },
+    {
+      "path": ".agents/skills/scroll-scrubbed-visual-sequence/SKILL.md",
+      "bytes": 4640,
+      "sha256": "a98df66caf5861caf04ccd109dae86d45f7b4aa280540dac4827a7081630cd5a"
+    },
+    {
+      "path": ".agents/skills/build-threejs-scroll-worlds/SOURCE.json",
+      "bytes": 6605,
+      "sha256": "f95e317446f43324b454e4f594bb42b7da00602653dc69e8403716c1f67475c9"
+    },
+    {
+      "path": ".agents/skills/build-threejs-scroll-worlds/ADOPTION.md",
+      "bytes": 4914,
+      "sha256": "b5fe331a18683c791fa1b9e6f36ca24c9a4ce1adda883d194f4eef95551fc725"
+    },
+    {
+      "path": ".agents/skills/build-threejs-scroll-worlds/LICENSE",
+      "bytes": 1064,
+      "sha256": "b2a071ba22fefd803f4e9d1f5c777dd79c62d191695586a1a73fd4d0ebd051c6"
+    },
+    {
+      "path": ".agents/skills/build-threejs-scroll-worlds/SKILL.md",
+      "bytes": 18658,
+      "sha256": "bb36c79ff435045f57a7f3ec3f50c27d37087c2e5a5ab1b17b6ba219d3f2c091"
+    },
+    {
+      "path": ".agents/skills/build-threejs-scroll-worlds/references/quality-and-qa.md",
+      "bytes": 11414,
+      "sha256": "4f422973f46d4ec3a9eead3e4816998a33fd5ba78ddff0c3dbd17b5ebf204eaf"
+    },
+    {
+      "path": ".agents/skills/build-threejs-scroll-worlds/references/kage-anatomy.md",
+      "bytes": 7732,
+      "sha256": "0f14a21eef2fcac4d9e43be42ca93c049d82e2fdf3430857d7fe5b0d8080651e"
+    },
+    {
+      "path": ".agents/skills/build-threejs-scroll-worlds/references/realtime-architecture.md",
+      "bytes": 15791,
+      "sha256": "1f4bcb2ed0f1bbf5f48d8b7372e1296894f1e99148b5376455eada0c51ad5c63"
+    },
+    {
+      "path": ".agents/skills/build-threejs-scroll-worlds/references/world-bible.md",
+      "bytes": 12682,
+      "sha256": "292600301358e93e20794eae093f539348358aa0db433fab84633fdae9d08f65"
+    },
+    {
+      "path": ".agents/skills/threejs-particles-trails-and-effects/SOURCE.json",
+      "bytes": 4628,
+      "sha256": "b1676b64151e83cc2fa38322df639b161f19760f428e6005a51c88ebc42575ee"
+    },
+    {
+      "path": ".agents/skills/threejs-particles-trails-and-effects/ADOPTION.md",
+      "bytes": 5227,
+      "sha256": "203ffef33208b902999b6292a6ed20b142d2fe3a353833a7e3f575cc4d4a9758"
+    },
+    {
+      "path": ".agents/skills/threejs-particles-trails-and-effects/LICENSE",
+      "bytes": 770,
+      "sha256": "2eb819c7a3aab1b2989c392124b5f2d8a3db266ccc886d9c92148a9cecd0aa65"
+    },
+    {
+      "path": ".agents/skills/threejs-particles-trails-and-effects/SKILL.md",
+      "bytes": 9907,
+      "sha256": "c8c7d3b34203fe980d6bdcb5337099ee1bfb7fd0b835b8f4c9840782df9e3867"
+    },
+    {
+      "path": ".agents/skills/threejs-particles-trails-and-effects/references/particles-trails-and-effects-system.md",
+      "bytes": 24428,
+      "sha256": "a4dba29df24bc958bf29e5854f19e660b64020b2456b74fd67db6978e0aaec2c"
+    }
+  ],
+  "fileCount": 36,
+  "bytes": 208042,
+  "pass": true,
+  "applicationRuntimeChanged": false,
+  "newGenerationCalls": 0,
+  "scope": "Six repo instruction skills; official private companion installed separately. Optional runtimes/demos not installed."
+}

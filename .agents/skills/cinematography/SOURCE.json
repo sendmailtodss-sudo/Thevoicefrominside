@@ -1,0 +1,102 @@
+{
+  "schemaVersion": 1,
+  "name": "cinematography",
+  "kind": "static-instruction-package",
+  "installedAtUtc": "2026-11-12T00:13:50.411329+00:00",
+  "upstream": {
+    "repository": "https://github.com/fal-ai-community/skills",
+    "commit": "ca79376d624d244e601f9182fa80b5bf66efec9c",
+    "skillPath": "skills/cinematography",
+    "license": "MIT",
+    "licenseCommit": "ca79376d624d244e601f9182fa80b5bf66efec9c",
+    "licensePath": "LICENSE"
+  },
+  "upstreamFiles": [
+    {
+      "path": "SKILL.md",
+      "upstreamPath": "skills/cinematography/SKILL.md",
+      "role": "skill",
+      "bytes": 4925,
+      "sha256": "8d23b4836a7621e1c9715def480d95e3b4b2135bfd7995e2800013949fc8eba7",
+      "rawUrl": "https://raw.githubusercontent.com/fal-ai-community/skills/ca79376d624d244e601f9182fa80b5bf66efec9c/skills/cinematography/SKILL.md",
+      "blobUrl": "https://github.com/fal-ai-community/skills/blob/ca79376d624d244e601f9182fa80b5bf66efec9c/skills/cinematography/SKILL.md",
+      "commit": "ca79376d624d244e601f9182fa80b5bf66efec9c",
+      "license": "MIT"
+    },
+    {
+      "path": "references/shot-language.md",
+      "upstreamPath": "skills/cinematography/references/shot-language.md",
+      "role": "markdown-reference",
+      "bytes": 1901,
+      "sha256": "21ca47d38ae6388293c410c4181fd2d84f8058fbcd36bf3db5d1643179e3faaf",
+      "rawUrl": "https://raw.githubusercontent.com/fal-ai-community/skills/ca79376d624d244e601f9182fa80b5bf66efec9c/skills/cinematography/references/shot-language.md",
+      "blobUrl": "https://github.com/fal-ai-community/skills/blob/ca79376d624d244e601f9182fa80b5bf66efec9c/skills/cinematography/references/shot-language.md",
+      "commit": "ca79376d624d244e601f9182fa80b5bf66efec9c",
+      "license": "MIT"
+    },
+    {
+      "path": "references/lighting-lens-color.md",
+      "upstreamPath": "skills/cinematography/references/lighting-lens-color.md",
+      "role": "markdown-reference",
+      "bytes": 1995,
+      "sha256": "e9bbe4c61c98c0cf98cb652101b0e16f670184d7236e5509e9abc2e8de195f2a",
+      "rawUrl": "https://raw.githubusercontent.com/fal-ai-community/skills/ca79376d624d244e601f9182fa80b5bf66efec9c/skills/cinematography/references/lighting-lens-color.md",
+      "blobUrl": "https://github.com/fal-ai-community/skills/blob/ca79376d624d244e601f9182fa80b5bf66efec9c/skills/cinematography/references/lighting-lens-color.md",
+      "commit": "ca79376d624d244e601f9182fa80b5bf66efec9c",
+      "license": "MIT"
+    },
+    {
+      "path": "references/examples.md",
+      "upstreamPath": "skills/cinematography/references/examples.md",
+      "role": "markdown-reference",
+      "bytes": 1674,
+      "sha256": "e143734e15f79411240056f22b9def4d8053b11cb54958213e68eec9899778c8",
+      "rawUrl": "https://raw.githubusercontent.com/fal-ai-community/skills/ca79376d624d244e601f9182fa80b5bf66efec9c/skills/cinematography/references/examples.md",
+      "blobUrl": "https://github.com/fal-ai-community/skills/blob/ca79376d624d244e601f9182fa80b5bf66efec9c/skills/cinematography/references/examples.md",
+      "commit": "ca79376d624d244e601f9182fa80b5bf66efec9c",
+      "license": "MIT"
+    },
+    {
+      "path": "LICENSE",
+      "upstreamPath": "LICENSE",
+      "role": "license",
+      "bytes": 1063,
+      "sha256": "c8758c0a3b859614b7acc251766fe1f313502f23dd2b933f4dd2b44dc2c3c7e7",
+      "rawUrl": "https://raw.githubusercontent.com/fal-ai-community/skills/ca79376d624d244e601f9182fa80b5bf66efec9c/LICENSE",
+      "blobUrl": "https://github.com/fal-ai-community/skills/blob/ca79376d624d244e601f9182fa80b5bf66efec9c/LICENSE",
+      "commit": "ca79376d624d244e601f9182fa80b5bf66efec9c",
+      "license": "MIT"
+    }
+  ],
+  "localFiles": [
+    {
+      "path": "ADOPTION.md",
+      "origin": "project-authored adoption/precedence rules",
+      "bytes": 4367,
+      "sha256": "4c8d0a5299c1b831e5c3158c73ce79966653b66918f4c2cc60f4b0f24ebb1850"
+    }
+  ],
+  "omittedResources": [],
+  "uninstalledOrUnverifiedDependencies": [
+    "model-routing",
+    "storytelling (conditional)",
+    "character/product domain skills (conditional)",
+    "genmedia CLI (upstream example, not installed or authorized)"
+  ],
+  "projectOrchestrator": "../cinematic-production/SKILL.md",
+  "review": {
+    "allInstalledMarkdownRead": true,
+    "upstreamFilesByteForByte": true,
+    "externalReadingListNotFullyFetched": true,
+    "codeFencesExecuted": false
+  },
+  "execution": {
+    "packageManagerRun": false,
+    "executablesInstalled": false,
+    "runtimeDependenciesInstalled": false,
+    "rendererChanged": false,
+    "generationStarted": false,
+    "creditsSpent": 0
+  },
+  "sourceJsonSelfHash": "Excluded to avoid a recursive self-checksum; all copied upstream files and ADOPTION.md are enumerated."
+}

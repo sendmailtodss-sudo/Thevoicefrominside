@@ -1,0 +1,128 @@
+{
+  "schemaVersion": 1,
+  "name": "scroll-world-storytelling",
+  "kind": "static-instruction-package",
+  "installedAtUtc": "2026-11-12T00:13:50.411329+00:00",
+  "upstream": {
+    "repository": "https://github.com/MengTo/Skills",
+    "commit": "d6324a05ca03ce5f6cdba519318d92176dbc43d2",
+    "skillPath": "agent-skills/web-design/scroll-world-storytelling",
+    "license": "MIT",
+    "licenseCommit": "d6324a05ca03ce5f6cdba519318d92176dbc43d2",
+    "licensePath": "LICENSE"
+  },
+  "upstreamFiles": [
+    {
+      "path": "SKILL.md",
+      "upstreamPath": "agent-skills/web-design/scroll-world-storytelling/SKILL.md",
+      "role": "skill",
+      "bytes": 11889,
+      "sha256": "505caf90b92ac6d9e6aecda1d79df36adc96fe5cbeb8eaac5c45b6cdefee7eab",
+      "rawUrl": "https://raw.githubusercontent.com/MengTo/Skills/d6324a05ca03ce5f6cdba519318d92176dbc43d2/agent-skills/web-design/scroll-world-storytelling/SKILL.md",
+      "blobUrl": "https://github.com/MengTo/Skills/blob/d6324a05ca03ce5f6cdba519318d92176dbc43d2/agent-skills/web-design/scroll-world-storytelling/SKILL.md",
+      "commit": "d6324a05ca03ce5f6cdba519318d92176dbc43d2",
+      "license": "MIT"
+    },
+    {
+      "path": "REFERENCES.md",
+      "upstreamPath": "agent-skills/web-design/scroll-world-storytelling/REFERENCES.md",
+      "role": "markdown-reference",
+      "bytes": 610,
+      "sha256": "13eb9828382d2aff33f7bec37ecae92dc02e91efc3f8a4bb4f29304bb6f3fc21",
+      "rawUrl": "https://raw.githubusercontent.com/MengTo/Skills/d6324a05ca03ce5f6cdba519318d92176dbc43d2/agent-skills/web-design/scroll-world-storytelling/REFERENCES.md",
+      "blobUrl": "https://github.com/MengTo/Skills/blob/d6324a05ca03ce5f6cdba519318d92176dbc43d2/agent-skills/web-design/scroll-world-storytelling/REFERENCES.md",
+      "commit": "d6324a05ca03ce5f6cdba519318d92176dbc43d2",
+      "license": "MIT"
+    },
+    {
+      "path": "LICENSE",
+      "upstreamPath": "LICENSE",
+      "role": "license",
+      "bytes": 1064,
+      "sha256": "b2a071ba22fefd803f4e9d1f5c777dd79c62d191695586a1a73fd4d0ebd051c6",
+      "rawUrl": "https://raw.githubusercontent.com/MengTo/Skills/d6324a05ca03ce5f6cdba519318d92176dbc43d2/LICENSE",
+      "blobUrl": "https://github.com/MengTo/Skills/blob/d6324a05ca03ce5f6cdba519318d92176dbc43d2/LICENSE",
+      "commit": "d6324a05ca03ce5f6cdba519318d92176dbc43d2",
+      "license": "MIT"
+    }
+  ],
+  "localFiles": [
+    {
+      "path": "ADOPTION.md",
+      "origin": "project-authored adoption/precedence rules",
+      "bytes": 5758,
+      "sha256": "abed1e801604418b748ae057f1db1ccf9beaffec5dc61aa6b892bb49179ffcbe"
+    }
+  ],
+  "omittedResources": [
+    {
+      "path": "demo/index.html",
+      "installed": false,
+      "executed": false,
+      "reason": "Optional executable/demo resources excluded from static instruction-only installation",
+      "upstreamUrl": "https://github.com/MengTo/Skills/blob/d6324a05ca03ce5f6cdba519318d92176dbc43d2/agent-skills/web-design/scroll-world-storytelling/demo/index.html"
+    },
+    {
+      "path": "demo/video/index.html",
+      "installed": false,
+      "executed": false,
+      "reason": "Optional executable/demo resources excluded from static instruction-only installation",
+      "upstreamUrl": "https://github.com/MengTo/Skills/blob/d6324a05ca03ce5f6cdba519318d92176dbc43d2/agent-skills/web-design/scroll-world-storytelling/demo/video/index.html"
+    },
+    {
+      "path": "demo/video/PROMPT.md",
+      "installed": false,
+      "executed": false,
+      "reason": "Optional executable/demo resources excluded from static instruction-only installation",
+      "upstreamUrl": "https://github.com/MengTo/Skills/blob/d6324a05ca03ce5f6cdba519318d92176dbc43d2/agent-skills/web-design/scroll-world-storytelling/demo/video/PROMPT.md"
+    },
+    {
+      "path": "demo/threejs/index.html",
+      "installed": false,
+      "executed": false,
+      "reason": "Optional executable/demo resources excluded from static instruction-only installation",
+      "upstreamUrl": "https://github.com/MengTo/Skills/blob/d6324a05ca03ce5f6cdba519318d92176dbc43d2/agent-skills/web-design/scroll-world-storytelling/demo/threejs/index.html"
+    },
+    {
+      "path": "demo/threejs/PROMPT.md",
+      "installed": false,
+      "executed": false,
+      "reason": "Optional executable/demo resources excluded from static instruction-only installation",
+      "upstreamUrl": "https://github.com/MengTo/Skills/blob/d6324a05ca03ce5f6cdba519318d92176dbc43d2/agent-skills/web-design/scroll-world-storytelling/demo/threejs/PROMPT.md"
+    },
+    {
+      "path": "demo/html-data/index.html",
+      "installed": false,
+      "executed": false,
+      "reason": "Optional executable/demo resources excluded from static instruction-only installation",
+      "upstreamUrl": "https://github.com/MengTo/Skills/blob/d6324a05ca03ce5f6cdba519318d92176dbc43d2/agent-skills/web-design/scroll-world-storytelling/demo/html-data/index.html"
+    },
+    {
+      "path": "demo/html-data/PROMPT.md",
+      "installed": false,
+      "executed": false,
+      "reason": "Optional executable/demo resources excluded from static instruction-only installation",
+      "upstreamUrl": "https://github.com/MengTo/Skills/blob/d6324a05ca03ce5f6cdba519318d92176dbc43d2/agent-skills/web-design/scroll-world-storytelling/demo/html-data/PROMPT.md"
+    }
+  ],
+  "uninstalledOrUnverifiedDependencies": [
+    "Three.js, optional renderer mode only (not installed)",
+    "GSAP or generator services, optional examples only (not installed)"
+  ],
+  "projectOrchestrator": "../cinematic-production/SKILL.md",
+  "review": {
+    "allInstalledMarkdownRead": true,
+    "upstreamFilesByteForByte": true,
+    "externalReadingListNotFullyFetched": true,
+    "codeFencesExecuted": false
+  },
+  "execution": {
+    "packageManagerRun": false,
+    "executablesInstalled": false,
+    "runtimeDependenciesInstalled": false,
+    "rendererChanged": false,
+    "generationStarted": false,
+    "creditsSpent": 0
+  },
+  "sourceJsonSelfHash": "Excluded to avoid a recursive self-checksum; all copied upstream files and ADOPTION.md are enumerated."
+}

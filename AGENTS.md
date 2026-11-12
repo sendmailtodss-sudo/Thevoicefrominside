@@ -11,5 +11,6 @@ This is the public developer distribution of Stemmen fra innsiden / The Voice fr
 - Preserve approved editorial text and redactions. Keep changes to application code separate from requests to change writing or artwork rights.
 - Explain what changed, why, and which checks actually ran. Report limitations directly.
 - For video references, use `.agents/skills/youtube-video-analysis/SKILL.md` and its executable helper. Inspect actual timestamped frames before describing a scene; preserve access failures and distinguish stills, playback, captions and inference.
+- For cinematic journeys, film production, editing, VFX, spatial web design or Higgsfield operation, read `.agents/skills/cinematic-production/SKILL.md` and the relevant specialist's `ADOPTION.md` before planning or implementation. These instruction packages do not authorize spending, install a renderer or override the user's current production hold.
 
 Historical private operational instructions and launch logs are intentionally outside this repository. They are not required to develop with its example data.
