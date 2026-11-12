@@ -183,8 +183,113 @@
       "duration": 5.0
     },
     {
-      "id": "prison-arrival",
+      "id": "earth-gate",
       "enabled": true,
+      "video": "/assets/journey/ui-20261112/s04-earth-gate-1280-g12.mp4",
+      "poster": "/assets/journey/ui-20261112/s04-earth-gate-1280-g12.webp",
+      "mode": "scrub",
+      "fit": "cover",
+      "title": {
+        "no": "Ned mot Bergen fengsel",
+        "en": "Down to Bergen prison",
+        "zh": "降落至卑尔根监狱"
+      },
+      "description": {
+        "no": "Fra jorden, gjennom skyene og frem til porten. Midlertidig utkast. Bygget og antrekket er ikke riktige ennå og byttes ut senere.",
+        "en": "From Earth, through the clouds and up to the gate. Temporary draft. The building and the outfit are not correct yet and will be replaced.",
+        "zh": "从地球穿过云层，来到大门前。 临时草稿。建筑和服装尚不正确，之后会替换。"
+      },
+      "reviewStatus": "draft",
+      "provenance": {
+        "provider": "Higgsfield",
+        "model": "kling4_0",
+        "jobId": "68a93d06-472e-4cde-b604-ee3af4d6c3f9",
+        "generatedBy": "Codex 2026-11-12",
+        "resolution": "1080p source, 1280x720 scrub encode",
+        "keyframeIntervalSeconds": 0.5,
+        "videoSha256": "550fd2eddcd50da2c0fdfa8e06fe54736c2bb34449b6c3162b11ca5b4cdffdd4",
+        "geography": "user_rejected_temporarily_published",
+        "publishedOnUserInstruction": "2026-11-12: wrong C building and wrong outfit stay in until replaced"
+      },
+      "width": 1280,
+      "height": 720,
+      "frameRate": 24,
+      "frameCount": 193,
+      "duration": 8.041666666666666
+    },
+    {
+      "id": "c7-arrival",
+      "enabled": true,
+      "video": "/assets/journey/ui-20261112/s05-c7-arrival-1280-g12.mp4",
+      "poster": "/assets/journey/ui-20261112/s05-c7-arrival-1280-g12.webp",
+      "mode": "scrub",
+      "fit": "cover",
+      "title": {
+        "no": "Gjennom porten",
+        "en": "Through the gate",
+        "zh": "穿过大门"
+      },
+      "description": {
+        "no": "Gjennom porten og opp mot vinduet i C-bygget. Midlertidig utkast. Bygget og antrekket er ikke riktige ennå og byttes ut senere.",
+        "en": "Through the gate and up to the window in the C building. Temporary draft. The building and the outfit are not correct yet and will be replaced.",
+        "zh": "穿过大门，飞向C楼的窗户。 临时草稿。建筑和服装尚不正确，之后会替换。"
+      },
+      "reviewStatus": "draft",
+      "provenance": {
+        "provider": "Higgsfield",
+        "model": "kling4_0",
+        "jobId": "9e6d9abe-5e04-4dda-9d93-307e56f98c27",
+        "generatedBy": "Codex 2026-11-12",
+        "resolution": "1080p source, 1280x720 scrub encode",
+        "keyframeIntervalSeconds": 0.5,
+        "videoSha256": "559510a96600743c68031a2bfd41b4026f61bdbc1e9873887a88cd58b88bccd5",
+        "geography": "user_rejected_temporarily_published",
+        "publishedOnUserInstruction": "2026-11-12: wrong C building and wrong outfit stay in until replaced"
+      },
+      "width": 1280,
+      "height": 720,
+      "frameRate": 24,
+      "frameCount": 241,
+      "duration": 10.041666666666666
+    },
+    {
+      "id": "man-wink",
+      "enabled": true,
+      "video": "/assets/journey/ui-20261112/s06a-man-wink-1280-g12.mp4",
+      "poster": "/assets/journey/ui-20261112/s06a-man-wink-1280-g12.webp",
+      "mode": "scrub",
+      "fit": "cover",
+      "title": {
+        "no": "Et smil på vei inn",
+        "en": "A smile on the way in",
+        "zh": "进门时的微笑"
+      },
+      "description": {
+        "no": "En fiktiv mann smiler mens kameraet passerer og fortsetter gjennom døren og gangen. Midlertidig utkast. Bygget og antrekket er ikke riktige ennå og byttes ut senere.",
+        "en": "A fictional man smiles as the camera passes and continues through the door and corridor. Temporary draft. The building and the outfit are not correct yet and will be replaced.",
+        "zh": "镜头经过时，一位虚构男子微笑，随后穿过门和走廊。 临时草稿。建筑和服装尚不正确，之后会替换。"
+      },
+      "reviewStatus": "draft",
+      "provenance": {
+        "provider": "Higgsfield",
+        "model": "kling4_0",
+        "jobId": "7f9c2f0c-e82c-4c00-8b07-82bc7221bc1b",
+        "generatedBy": "Codex 2026-11-12",
+        "resolution": "1080p source, 1280x720 scrub encode",
+        "keyframeIntervalSeconds": 0.5,
+        "videoSha256": "3643bfbfbfa0315d031b359546efa2593f2c5634720d3c445eb05c11a0c2e5ca",
+        "geography": "user_rejected_temporarily_published",
+        "publishedOnUserInstruction": "2026-11-12: wrong C building and wrong outfit stay in until replaced"
+      },
+      "width": 1280,
+      "height": 720,
+      "frameRate": 24,
+      "frameCount": 193,
+      "duration": 8.041666666666666
+    },
+    {
+      "id": "prison-arrival",
+      "enabled": false,
       "video": "/assets/journey/prison-arrival.mp4",
       "poster": "/assets/journey/prison-arrival.webp",
       "mode": "scrub",
@@ -212,7 +317,8 @@
       "height": 720,
       "frameRate": 24,
       "frameCount": 289,
-      "duration": 12.041666666666666
+      "duration": 12.041666666666666,
+      "disabledReason": "Replaced 2026-11-12 by earth-gate, c7-arrival and man-wink on user instruction; kept for rollback."
     },
     {
       "id": "painter",
@@ -772,7 +878,7 @@
     }
   ],
   "requestedMediaReplacements": {
-    "status": "replacement_drafts_rejected_existing_illustration_retained",
+    "status": "temporary_drafts_published_on_user_instruction",
     "sequence": [
       "earth-clouds",
       "bergen-prison-gate",
@@ -789,12 +895,13 @@
     "firstPainterArtwork": {
       "id": "lar-bak-murene",
       "status": "original_selected_not_composited_on_easel"
-    }
+    },
+    "userDecision20261112": "Wrong C building (S05) and wrong outfit (S06A) are included until corrected replacements exist."
   },
   "releaseScope": {
-    "state": "bounded_neural_update_preserving_public_V7_remainder",
+    "state": "neural_update_with_temporary_arrival_drafts",
     "opening": "Point/galaxy and dense collective neural field with frame-registered phrases.",
-    "locationReconstruction": "No new S03–S12 footage. Rejected S05 route/building and S06A wardrobe remain excluded. Existing V7 illustrative clips remain as previously public.",
+    "locationReconstruction": "S04 earth/gate, S05 route to C building and S06A man are temporarily published on direct user instruction (12 Nov 2026) although the building and outfit are known to be wrong. The V7 prison-arrival clip is disabled but kept.",
     "transitions": "Native-scroll presentation is reversible; the opening uses explicit editorial cuts, not a newly completed seamless geographic camera journey."
   }
 }

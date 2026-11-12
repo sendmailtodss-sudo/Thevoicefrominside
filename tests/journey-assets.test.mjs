@@ -8,7 +8,7 @@ const read = file => readFile(path.join(root, file), 'utf8');
 const manifest = async () => JSON.parse(await read('assets/journey/manifest.json'));
 const enabledOrder = [
   'origin', 'big-bang', 'brains', 'impulses', 'vortex', 'supernova', 'dna',
-  'prison-arrival', 'painter', 'metal', 'streetart', 'poet', 'music-room',
+  'earth-gate', 'c7-arrival', 'man-wink', 'painter', 'metal', 'streetart', 'poet', 'music-room',
   'collective-portal', 'gallery', 'bergen', 'paris', 'interior', 'stencil',
 ];
 
@@ -67,16 +67,25 @@ test('the complete journey keeps the origin, dense collective minds and every cr
     assert.equal(scene.frameRate, 30);
     assert.equal(scene.frameCount, 301);
   }
-  for (const id of ['prison-arrival','painter','metal','poet','music-room']) {
+  for (const id of ['painter','metal','poet','music-room']) {
     const scene = scenes.find(item => item.id === id);
     assert.ok(!scene.video.includes('/ui-20261112/'), `${id} preserves the public V7 footage`);
   }
-  assert.equal(scenes.find(scene => scene.id === 'prison-arrival').video, '/assets/journey/prison-arrival.mp4');
+  // User decision 12 Nov 2026: the known-wrong C building (S05) and outfit (S06A)
+  // stay public as labelled temporary drafts until corrected media replaces them.
+  for (const [id, shot] of [['earth-gate','s04'],['c7-arrival','s05'],['man-wink','s06a']]) {
+    const scene = scenes.find(item => item.id === id);
+    assert.match(scene.video, new RegExp(`/ui-20261112/${shot}-`));
+    assert.equal(scene.reviewStatus, 'draft');
+    assert.match(scene.description.en, /Temporary draft/);
+  }
+  const retired = data.scenes.find(scene => scene.id === 'prison-arrival');
+  assert.equal(retired.enabled, false);
+  assert.equal(retired.video, '/assets/journey/prison-arrival.mp4');
   assert.equal(scenes.find(scene => scene.id === 'music-room').video, '/assets/journey/prison-music.mp4');
-  assert.ok(scenes.every(scene => !/s0[2-9]-|s06a-|s1[0-2]-/.test(scene.video || '')));
-  assert.ok(!scenes.some(scene => scene.id === 'man-wink'));
-  assert.equal(data.requestedMediaReplacements.status, 'replacement_drafts_rejected_existing_illustration_retained');
-  assert.equal(data.releaseScope.state, 'bounded_neural_update_preserving_public_V7_remainder');
+  assert.ok(scenes.every(scene => !/s0[236-9]-|s1[0-2]-/.test(scene.video || '')));
+  assert.equal(data.requestedMediaReplacements.status, 'temporary_drafts_published_on_user_instruction');
+  assert.equal(data.releaseScope.state, 'neural_update_with_temporary_arrival_drafts');
 });
 
 test('enabled media stays local, nested asset paths exist, and exact artwork remains inspectable', async () => {

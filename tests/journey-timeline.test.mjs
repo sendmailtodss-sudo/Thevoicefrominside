@@ -33,9 +33,10 @@ test('homepage migration preserves unrelated original text and is idempotent',()
  assert.ok(after.endsWith('<article>Original voice, humour, metaphor: æøå.</article></main>'));assert.ok(after.includes('Original head'));
  assert.match(after,/data-origin="true"/);assert.match(after,/origin\.svg/);
 });
-test('new location and actor media remain explicit dependencies rather than invented footage',async()=>{
+test('location and actor media stay explicit dependencies; temporary drafts are labelled as such',async()=>{
  const m=JSON.parse(await readFile('public/assets/journey/manifest.json','utf8'));
- assert.equal(m.requestedMediaReplacements.status,'replacement_drafts_rejected_existing_illustration_retained');
+ assert.equal(m.requestedMediaReplacements.status,'temporary_drafts_published_on_user_instruction');
+ assert.match(m.requestedMediaReplacements.userDecision20261112,/until corrected replacements exist/);
  assert.ok(m.requestedMediaReplacements.sequence.includes('c7-window-arrival'));
  for(const scene of m.scenes.filter(s=>s.enabled))assert.equal(scene.mode,'scrub');
 });
