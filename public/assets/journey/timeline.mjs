@@ -1,4 +1,5 @@
 /* A reversible, input-driven timeline. No clock or frame scheduler belongs here. */
+import { frameRequest } from './frame-runtime.mjs';
 export const clamp = (value, min = 0, max = 1) => Math.min(max, Math.max(min, Number.isFinite(value) ? value : min));
 export const weight = scene => Number.isFinite(scene?.scrollWeight) && scene.scrollWeight > 0 ? scene.scrollWeight : 1;
 export function position(progress, scenes) {
@@ -16,19 +17,22 @@ export function progressAt(index, fraction, scenes) {
   if (!total) return 0;
   return clamp((scenes.slice(0, index).reduce((sum, scene) => sum + weight(scene), 0) + weight(scenes[index]) * clamp(fraction)) / total);
 }
-export function mediaTime(fraction, duration) {
-  if (!Number.isFinite(duration) || duration <= 0) return 0;
-  return clamp(fraction) * Math.max(0, duration - 1 / 30);
+export function mediaTime(fraction, duration, scene) {
+  return frameRequest(fraction, duration, scene)?.time ?? 0;
 }
-// The source is still a star field at brains=0. Words begin only once the
-// brains appear, and are absorbed before the vortex becomes empty nebula.
+// Frame inspection: a source/destination pair is visible in the portrait crop
+// from impulses=0.44. At 0.72 the actual second cable changes identity; complete
+// four lifecycles before that handoff, then three before the plate cut, and four
+// in vortex through 0.50. No half-formed word is carried across unrelated paths.
+// Scroll controls the duration without any imposed pause.
 export function networkProgress(index, fraction, scenes) {
-  const indices = scenes.map((scene, i) => ['brains', 'impulses', 'vortex'].includes(scene.id) ? i : -1).filter(i => i >= 0);
-  const offset = indices.indexOf(index);
-  if (offset < 0) return null;
-  const start = .22, end = indices.length - .35, cursor = offset + clamp(fraction);
-  if (cursor < start || cursor > end) return null;
-  return clamp((cursor - start) / (end - start));
+  const id = scenes[index]?.id, phase = clamp(fraction), handoff = 4 / 11, cut = 7 / 11;
+  if (id === 'impulses' && phase >= .44) {
+    if (phase < .72) return clamp((phase - .44) / .28) * handoff;
+    return handoff + clamp((phase - .72) / .28) * (cut - handoff);
+  }
+  if (id === 'vortex' && phase <= .5) return cut + clamp(phase / .5) * (1 - cut);
+  return null;
 }
 const mix = (a, b, p) => a + (b - a) * p;
 const ease = p => { const n = clamp(p); return n * n * (3 - 2 * n); };
@@ -85,7 +89,7 @@ export function decoration(progress, fraction) {
 
 // A scene boundary occupies a small, symmetric part of its neighbouring
 // scroll ranges. Both media times and opacity are functions of position only.
-export function transition(progress, scenes, { span = .14, enabled = true } = {}) {
+export function transition(progress, scenes, { span = .08, enabled = true } = {}) {
   const state = position(progress, scenes);
   if (state.index < 0) return { ...state, left: null, right: null, mix: 0 };
   const single = () => ({ ...state, left: { index: state.index, fraction: state.fraction, opacity: 1 }, right: null, mix: 0 });
@@ -98,7 +102,10 @@ export function transition(progress, scenes, { span = .14, enabled = true } = {}
     const leftWeight = weight(scenes[i]), rightWeight = weight(scenes[i + 1]);
     boundary += leftWeight;
     if (!scenes[i]?.video || !scenes[i + 1]?.video || scenes[i]?.type === 'point' || scenes[i + 1]?.type === 'point' || scenes[i]?.type === 'art' || scenes[i + 1]?.type === 'art') continue;
-    const half = Math.min(leftWeight, rightWeight) * extent;
+    const authored = scenes[i].transitionOut || scenes[i + 1].transitionIn;
+    if (authored?.treatment === 'cut') continue;
+    const half = Math.min(leftWeight, rightWeight) * clamp(authored?.span ?? extent, 0, .45);
+    if (!half) continue;
     if (cursor < boundary - half || cursor > boundary + half) continue;
     const phase = clamp((cursor - boundary + half) / (2 * half));
     const mix = phase * phase * (3 - 2 * phase);
@@ -107,6 +114,11 @@ export function transition(progress, scenes, { span = .14, enabled = true } = {}
       left: { index: i, fraction: clamp((leftWeight - half + phase * half) / leftWeight), opacity: 1 - mix },
       right: { index: i + 1, fraction: clamp(phase * half / rightWeight), opacity: mix },
       mix,
+      // A boundary may opt into a verified matched cut or a short blend.
+      // Otherwise open a depth aperture rather than double-exposing places.
+      treatment: scenes[i].transitionOut?.treatment || scenes[i + 1].transitionIn?.treatment || 'aperture',
+      centerX: scenes[i + 1].transitionIn?.centerX ?? .5,
+      centerY: scenes[i + 1].transitionIn?.centerY ?? .46,
     };
   }
   return single();
@@ -119,4 +131,16 @@ export function coverRect(sourceWidth, sourceHeight, targetWidth, targetHeight, 
   const scale = Math.max(targetWidth / sourceWidth, targetHeight / sourceHeight);
   const width = targetWidth / scale, height = targetHeight / scale;
   return { x: (sourceWidth - width) * clamp(focusX / 100), y: (sourceHeight - height) * clamp(focusY / 100), width, height };
+}
+
+// The same authored focal point must drive both the displayed plate and any
+// registered effects. A narrow portrait crop may need a distinct composition.
+export function focusFor(scene, width, height) {
+  const portrait = width < height;
+  const narrow = portrait && width / height < (scene.narrowPortraitMaxAspect ?? .42);
+  const x = narrow
+    ? (scene.narrowPortraitFocusX ?? scene.portraitFocusX ?? scene.focusX ?? 50)
+    : (portrait ? (scene.portraitFocusX ?? scene.focusX ?? 50) : (scene.focusX ?? 50));
+  const y = portrait ? (scene.portraitFocusY ?? scene.focusY ?? 50) : (scene.focusY ?? 50);
+  return { x: clamp(x, 0, 100), y: clamp(y, 0, 100) };
 }

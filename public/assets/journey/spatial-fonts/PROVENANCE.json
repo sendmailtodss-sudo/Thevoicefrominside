@@ -1,0 +1,12 @@
+{
+  "revision": "journey-spatial-glyphs-1",
+  "runtime": "Existing Three.js r170, WebGL2; no added browser dependency",
+  "fontLicense": "SIL Open Font License 1.1; source package notices retained alongside this file",
+  "latinFamily": "Noto Sans Mono",
+  "chineseFamily": "Noto Sans Mono CJK SC, collection face 7",
+  "glyphPreparation": "Exact current journey catalog, full codepoint coverage checked, 96px offline masks sampled at a fixed two-pixel pitch. Font versions, source SHA-256 hashes, string hashes and raw mask hashes are in spatial-glyphs.json.",
+  "mechanism": "Fixed seed 260146. Stable glyph particle identities, frame-registered incoming/outgoing filament paths and analytically reconstructed trails. Emissive body and deterministic spatial blur; no autonomous timer or history simulation.",
+  "occlusion": "Current presented plate pixels provide conservative bright neutral/blue connected silhouettes. Apparent component size infers three depth bands. This is an RGB-derived approximation, not measured depth, camera recovery, anatomical geometry or tracked segmentation.",
+  "color": "Particle emission and sRGB output are owned once by the existing Three renderer. Mask bytes and depth bands are non-color data.",
+  "accessibility": "The integration retains the same exact semantic phrase catalog; resource failure presents the active exact phrases as static HTML. Reduced motion is controlled by the parent journey."
+}
