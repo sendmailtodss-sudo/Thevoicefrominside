@@ -17,7 +17,7 @@
   async function init(){
     dispose();
     const serial=++initSerial;
-    let timeline,frames;try{[timeline,frames]=await Promise.all([import('/assets/journey/timeline.mjs'),import('/assets/journey/frame-runtime.mjs')])}catch{return}
+    let timeline,frames,finale;try{[timeline,frames,finale]=await Promise.all([import('/assets/journey/timeline.mjs'),import('/assets/journey/frame-runtime.mjs'),import('/assets/journey/finale.mjs')])}catch{return}
     if(serial!==initSerial)return;
     const root=document.querySelector('[data-journey]');if(!root)return;
     const q=s=>root.querySelector(s), video=q('.sj-video'), poster=q('.sj-poster'), controls=q('.sj-controls');
@@ -65,7 +65,7 @@
     function clearMedia(){buffers.forEach(clearBuffer)}
     function holdFrame(){pauseMedia();hold.style.opacity=retainedFrame?'1':'0'}
     function releaseFrame(){if(quiet||scenes[index]?.type==='point'||scenes[index]?.type==='art'){hold.style.opacity='0';root.dataset.compositor='false';root.dataset.pending='false';retainedFrame=false;view=null;presentedProgress=globalProgress}commitScene()}
-    function requestedFrame(slot){const scene=scenes[slot.sceneIndex];return frames.frameRequest(slot.fraction,scene?.duration||slot.element.duration,scene)}
+    function requestedFrame(slot){const scene=scenes[slot.sceneIndex];return frames.frameRequest(scene?.holdLastFrame?1:slot.fraction,scene?.duration||slot.element.duration,scene)}
     function sampleFor(slot){const request=requestedFrame(slot);return request?cache.get(frames.frameKey(slot.source,request)):null}
     function drawComposite(input=false){
       if(!view||!canSeek()||!presentation.canPresent(requestEpoch,requestKey,input))return;
@@ -86,15 +86,31 @@
       const draw=input=>{
         const {slot,source}=input,scene=scenes[slot.sceneIndex],sw=source.width||source.naturalWidth,sh=source.height||source.naturalHeight;
         const focus=timeline.focusFor(scene,width,height);
-        const crop=timeline.coverRect(sw,sh,width,height,focus.x,focus.y);if(!crop)throw Error('undecoded source');
+        const portraitContain=scene.portraitFit==='contain'&&width<height;
+        const crop=portraitContain?{x:0,y:0,width:sw,height:sh}:timeline.coverRect(sw,sh,width,height,focus.x,focus.y);if(!crop)throw Error('undecoded source');
         sourceCrops.push({...crop,sourceWidth:sw,sourceHeight:sh});
-        context.drawImage(source,crop.x,crop.y,crop.width,crop.height,0,0,width,height);
+        if(portraitContain){
+          const scale=Math.min(width/sw,height/sh),dw=sw*scale,dh=sh*scale;
+          context.fillStyle='#02050d';context.fillRect(0,0,width,height);
+          context.drawImage(source,0,0,sw,sh,(width-dw)/2,(height-dh)/2,dw,dh);
+        }else context.drawImage(source,crop.x,crop.y,crop.width,crop.height,0,0,width,height);
       };
       try{
         context.globalAlpha=1;draw(inputs[0]);
         if(inputs[1]){
           context.save();
-          if(view.treatment==='aperture'){
+          if(view.treatment==='luminous-veil'){
+            // One plate at a time. A fully opaque scroll-indexed veil at the
+            // handoff prevents two locations/figures being double-exposed.
+            if(view.mix>=.5)draw(inputs[1]);
+            const authored=scenes[view.left.index].transitionOut||{},color=authored.color||'#f6f0df';
+            const pulse=Math.pow(Math.sin(Math.PI*view.mix),4);
+            context.globalAlpha=pulse;context.fillStyle=color;context.fillRect(0,0,width,height);
+            // Deterministic depth light under the veil, never an elapsed clock.
+            const cx=width*(authored.centerX??.52),cy=height*(authored.centerY??.46),r=Math.hypot(width,height)*(.12+.8*view.mix);
+            const glow=context.createRadialGradient(cx,cy,0,cx,cy,r);glow.addColorStop(0,'#ffffff');glow.addColorStop(1,'rgba(255,255,255,0)');
+            context.globalAlpha=pulse*(1-pulse)*.5;context.fillStyle=glow;context.fillRect(0,0,width,height);
+          }else if(view.treatment==='aperture'){
             // A depth opening replaces pixels under an expanding aperture;
             // the outgoing plate always covers the rest of the viewport.
             const x=width*(view.centerX??.5),y=height*(view.centerY??.46),radius=Math.hypot(Math.max(x,width-x),Math.max(y,height-y))*view.mix;
@@ -320,7 +336,13 @@
       root.style.setProperty('--sj-phase',phase);root.style.setProperty('--sj-global',shown.progress);
       const d=timeline.decoration(shown.progress,phase);root.style.setProperty('--sj-stars-opacity',d.stars);root.style.setProperty('--sj-binary-x',d.binary+'%');
       root.style.setProperty('--sj-portal-opacity',scene?.type==='point'?'0':d.portal);root.style.setProperty('--sj-portal-scale',d.portalScale);
-      root.style.setProperty('--sj-origin-size',(3+phase*12)+'px');
+      const ending=Boolean(scene?.finale),end=finale.finaleState(phase);
+      root.dataset.ending=String(ending);
+      root.style.setProperty('--sj-ending-scale',String(ending?end.plateScale:1));
+      root.style.setProperty('--sj-ending-opacity',String(ending?end.plateOpacity:1));
+      root.style.setProperty('--sj-ending-point',String(ending?end.pointOpacity:0));
+      root.style.setProperty('--sj-ending-radius',(ending?end.cornerRadius:0)+'%');
+      root.style.setProperty('--sj-origin-size',(ending?end.pointSize:3+phase*12)+'px');
       invitation.style.opacity=String(1-clamp(phase/.2,0,1));invitation.hidden=quiet||shown.index!==0||phase>=.2;
       const network=retainedFrame&&view?timeline.networkProgress(shown.index,phase,scenes):null;root.dataset.thoughts=String(network!==null&&!quiet);
       const rect=q('.sj-media').getBoundingClientRect(),states=timeline.thoughtStates(network,EXPRESSION_TEXT.no.length,{width:rect.width,height:rect.height});
@@ -359,7 +381,7 @@
     on(window,'sfi-before-language-change',e=>{lang=e.detail.locale==='zh-Hans'?'zh':e.detail.locale;const rect=root.getBoundingClientRect(),visible=rect.bottom>navHeight&&rect.top<innerHeight;e.detail.restoreJourney=visible;restoreHash=location.hash;save(visible,visible?'language':'navigation');silence()});
     on(root,'keydown',e=>{if(e.target.closest('input,select,textarea'))return;if(e.key==='ArrowLeft'||e.key==='ArrowRight'){e.preventDefault();go(index+(e.key==='ArrowRight'?1:-1))}});
     on(root,'click',e=>{const artwork=e.target.closest('a');if(artwork?._art&&openArt(artwork._art,artwork)){e.preventDefault();return}if(e.target.closest('a')){save(true,'navigation');silence()}});on(window,'pagehide',()=>{save(true);silence()});on(window,'pageshow',()=>{silence();schedule()});on(document,'visibilitychange',()=>{if(document.hidden){pauseMedia();clearMedia();silence()}else schedule()});
-    dispose=()=>{disposed=true;spatial?.dispose();thoughtSemantics.remove();delete root.dataset.spatialThoughts;delete document.body.dataset.journeyActive;if(siteHeader)delete siteHeader.dataset.journeyHeader;presentation.dispose();cache.clear();dockObserver.disconnect();bottomObserver?.disconnect();controller.abort();clean.forEach(f=>f());cancelAnimationFrame(raf);clearMedia();clearTransition();oscillators.forEach(o=>{try{o.stop()}catch{}});ctx?.close().catch(()=>{});artGrid?.remove();galleryEntry?.remove();if(artDialog){artDialog.close();artDialog?.remove();document.body.style.overflow=oldOverflow}hold.width=hold.height=scratch.width=scratch.height=1;hold.remove();video.style.display=originalVideoDisplay;peer.remove();portal.remove();origin.remove();invitation.remove();backdrop.remove();thoughts.remove();moved.reverse().forEach(({node,parent,next})=>parent.insertBefore(node,next?.parentNode===parent?next:null));dock.remove();root.querySelectorAll('.sj-entrances a').forEach(a=>{a.style.opacity='';a.style.transform='';a.style.pointerEvents='';a.tabIndex=0;a.removeAttribute('aria-hidden')});root.removeAttribute('data-compositor');root.removeAttribute('data-blend');root.removeAttribute('data-frame-scenes');root.removeAttribute('data-frame-fractions');for(const key of ['frameSourceCrops','frameIndices','frameEvidence','frameMediaTimes','frameCachePixels','frameCacheEntries','pending','requestedScene','requestedEpoch','requestedProgress','presentedEpoch','presentedProgress'])delete root.dataset[key];root.removeAttribute('data-enhanced');root.removeAttribute('data-video');root.removeAttribute('data-quiet');root.removeAttribute('data-scrub');root.removeAttribute('data-visible-scene');controls.hidden=true};
+    dispose=()=>{delete root.dataset.ending;disposed=true;spatial?.dispose();thoughtSemantics.remove();delete root.dataset.spatialThoughts;delete document.body.dataset.journeyActive;if(siteHeader)delete siteHeader.dataset.journeyHeader;presentation.dispose();cache.clear();dockObserver.disconnect();bottomObserver?.disconnect();controller.abort();clean.forEach(f=>f());cancelAnimationFrame(raf);clearMedia();clearTransition();oscillators.forEach(o=>{try{o.stop()}catch{}});ctx?.close().catch(()=>{});artGrid?.remove();galleryEntry?.remove();if(artDialog){artDialog.close();artDialog?.remove();document.body.style.overflow=oldOverflow}hold.width=hold.height=scratch.width=scratch.height=1;hold.remove();video.style.display=originalVideoDisplay;peer.remove();portal.remove();origin.remove();invitation.remove();backdrop.remove();thoughts.remove();moved.reverse().forEach(({node,parent,next})=>parent.insertBefore(node,next?.parentNode===parent?next:null));dock.remove();root.querySelectorAll('.sj-entrances a').forEach(a=>{a.style.opacity='';a.style.transform='';a.style.pointerEvents='';a.tabIndex=0;a.removeAttribute('aria-hidden')});root.removeAttribute('data-compositor');root.removeAttribute('data-blend');root.removeAttribute('data-frame-scenes');root.removeAttribute('data-frame-fractions');for(const key of ['frameSourceCrops','frameIndices','frameEvidence','frameMediaTimes','frameCachePixels','frameCacheEntries','pending','requestedScene','requestedEpoch','requestedProgress','presentedEpoch','presentedProgress'])delete root.dataset[key];root.removeAttribute('data-enhanced');root.removeAttribute('data-video');root.removeAttribute('data-quiet');root.removeAttribute('data-scrub');root.removeAttribute('data-visible-scene');controls.hidden=true};
     paintText();
     fetch(root.dataset.manifest||'/assets/journey/manifest.json',{signal:controller.signal}).then(r=>{if(!r.ok)throw Error('manifest');return r.json()}).then(data=>{
       if(disposed)return;scenes=(data.scenes||[]).filter(s=>s.enabled===true&&typeof s.id==='string'&&(s.type==='art'||s.type==='point'||(typeof s.video==='string'&&s.video.startsWith('/assets/journey/'))));if(!scenes.length)return;

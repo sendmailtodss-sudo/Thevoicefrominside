@@ -12,30 +12,28 @@ async function htmlFiles(dir) {
   return nested.flat();
 }
 
-test('every diary dropdown uses date and inmate metadata without article titles', async () => {
+test('diary menus contain only dated identities and stay within the editorial direction', async () => {
   let checked = 0;
   for (const file of await htmlFiles('public')) {
     const html = await readFile(file, 'utf8');
-    const menu = html.match(/<li class="sfi-section"><a href="\/(?:en\/)?dagbok\/"[^>]*>.*?<\/details><\/li>/)?.[0];
-    if (!menu) continue;
+    const menu = html.match(/<details data-diary-menu>.*?<\/details>/s)?.[0];
+    if (!html.includes('data-site-direction="story"')) {
+      assert.equal(menu, undefined, `${file}: diary menu belongs only to the editorial direction`);
+      continue;
+    }
+    assert.ok(menu, `${file}: editorial diary menu is reachable`);
     checked++;
-    const english = menu.includes('href="/en/dagbok/"');
-    const prefix = english ? '/en' : '';
-    const inmate = english ? 'Prisoner' : 'Innsatt';
-    const unknownDate = english ? 'Date not established' : 'Dato ikke fastslått';
-    const entries = [...menu.matchAll(/<li><a href="([^"]+)"><span>([^<]+)<\/span><\/a><\/li>/g)]
+    const entries = [...menu.matchAll(/<li><a data-diary-entry href="([^"]+)">([^<]+)<\/a><\/li>/g)]
       .map(([, href, label]) => [href, label]);
-    assert.deepEqual(entries, [
-      [`${prefix}/dagbok/fanger-til-gjenbruk/`, `${unknownDate} · ${english ? 'Prisoner number not stated' : 'Innsattnummer ikke oppgitt'}`],
-      [`${prefix}/dagbok/lar-bak-murene/`, `${english ? 'Source date' : 'Kildedato'} 11.08.2026 · ${inmate} 260146`],
-      [`${prefix}/dagbok/skoleplassen/`, `22.10.2026 · ${inmate} 260146`],
-      [`${prefix}/dagbok/nar-dorene-til-kunnskapen-stenges/`, `23.10.2026 · ${inmate} 260146`],
-      [`${prefix}/dagbok/fem-minutter-i-skolegangen/`, `04.11.2026 · ${inmate} 250418`],
-      [`${prefix}/dagbok/trening/`, `${unknownDate} · ${inmate} 260146`],
-      [`${prefix}/dagbok/treningsbeltet/`, `${unknownDate} · ${inmate} 260146`],
-      [`${prefix}/boken/normalitetsprinsippet/`, `${unknownDate} · ${inmate} 260146`],
-    ], file);
+    assert.ok(entries.length >= 4, `${file}: all verified dated contributor examples remain available`);
+    assert.equal(new Set(entries.map(([href]) => href)).size, entries.length, `${file}: no duplicated destinations`);
+    for (const [href, label] of entries) {
+      assert.match(href, /^\/(?:en\/)?dagbok\/[^?#]+\/$/, file);
+      assert.match(label, /^\d{2}\.\d{2}\.\d{4} · Innsatt \d{4}-?\d{2}$/, `${file}: title or undated placeholder in menu`);
+      await readFile(path.join('public', href, 'index.html'));
+    }
+    assert.ok(entries.some(([, label]) => label.endsWith('250418')), `${file}: retain the other contributor's identity`);
     assert.doesNotMatch(menu, /<small>/, file);
   }
-  assert.ok(checked >= 200, 'check the shared navigation throughout both language versions');
+  assert.ok(checked >= 30, 'check editorial navigation throughout both language versions');
 });

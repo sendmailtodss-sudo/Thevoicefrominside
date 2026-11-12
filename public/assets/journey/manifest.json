@@ -48,10 +48,49 @@
       "focusX": 50,
       "focusY": 50,
       "transitionOut": {
-        "treatment": "cut"
+        "treatment": "blend",
+        "span": 0.045
       },
       "portraitFocusX": 50,
       "portraitFocusY": 50
+    },
+    {
+      "id": "galaxy-descent",
+      "enabled": true,
+      "mode": "scrub",
+      "scrollWeight": 1.2,
+      "title": {
+        "no": "Inn i et univers av muligheter",
+        "en": "Into a universe of possibilities",
+        "zh": "进入充满可能的宇宙"
+      },
+      "description": {
+        "no": "En visuell tolkning av felles skaperkraft.",
+        "en": "A visual interpretation of collective creativity.",
+        "zh": "共同创造力的视觉表达。"
+      },
+      "width": 1280,
+      "height": 720,
+      "frameCount": 193,
+      "frameRate": 24.0,
+      "duration": 8.041666666666666,
+      "video": "/assets/journey/finished/galaxy-descent-be3b0b370f702ef6.mp4",
+      "poster": "/assets/journey/finished/galaxy-descent-be3b0b370f702ef6.webp",
+      "provenance": {
+        "sourceSha256": "be3b0b370f702ef61ea34d6b4c9142cd83fd28bc61b438f607af788f990dc28f",
+        "videoSha256": "be3b0b370f702ef61ea34d6b4c9142cd83fd28bc61b438f607af788f990dc28f",
+        "posterSha256": "83dc0c4c67cc0436c5c652b26a179274254ea6405252cb506cd17887c2251852",
+        "localImportCostCredits": 0,
+        "upstreamGenerationCost": "not_inferred",
+        "importMethod": "Reviewed local video, full decode and measured frame timestamps; no transcoding"
+      },
+      "transitionOut": {
+        "treatment": "luminous-veil",
+        "span": 0.04,
+        "color": "#d9f6ef",
+        "centerX": 0.52,
+        "centerY": 0.46
+      }
     },
     {
       "id": "brains",
@@ -151,18 +190,43 @@
     {
       "id": "supernova",
       "enabled": true,
-      "video": "/assets/journey/supernova.mp4",
-      "poster": "/assets/journey/supernova.webp",
+      "video": "/assets/journey/finished/supernova-aa82b3674df0b241.mp4",
+      "poster": "/assets/journey/finished/supernova-aa82b3674df0b241.webp",
       "mode": "scrub",
       "width": 1280,
       "height": 720,
-      "frameRate": 30,
-      "frameCount": 301,
-      "duration": 10.033333333333333
+      "frameCount": 193,
+      "frameRate": 24.0,
+      "duration": 8.041666666666666,
+      "provenance": {
+        "sourceSha256": "aa82b3674df0b24145e8401ea0628afea10186d7c9bae81fd6fc55deb961aec3",
+        "videoSha256": "aa82b3674df0b24145e8401ea0628afea10186d7c9bae81fd6fc55deb961aec3",
+        "posterSha256": "d41de96bc345e461c188ae35359d88a8f0e29e0056ddf094b82b2415a5916a69",
+        "localImportCostCredits": 0,
+        "upstreamGenerationCost": "not_inferred",
+        "importMethod": "Reviewed local video, full decode and measured frame timestamps; no transcoding"
+      },
+      "title": {
+        "no": "Når alle bidrar",
+        "en": "When everyone contributes",
+        "zh": "当每个人都参与"
+      },
+      "description": {
+        "no": "Felles impulser åpner veien videre.",
+        "en": "Shared impulses open the way ahead.",
+        "zh": "共同的脉动开启前行之路。"
+      },
+      "transitionOut": {
+        "treatment": "luminous-veil",
+        "span": 0.04,
+        "color": "#ecf8ee",
+        "centerX": 0.52,
+        "centerY": 0.46
+      }
     },
     {
       "id": "dna",
-      "enabled": true,
+      "enabled": false,
       "video": "/assets/journey/dna-before-arrival-gop1s-726caffae9c01f9e.mp4",
       "poster": "/assets/journey/dna.webp",
       "mode": "scrub",
@@ -185,8 +249,8 @@
     {
       "id": "earth-gate",
       "enabled": true,
-      "video": "/assets/journey/ui-20261112/s04-earth-gate-1280-g12.mp4",
-      "poster": "/assets/journey/ui-20261112/s04-earth-gate-1280-g12.webp",
+      "video": "/assets/journey/finished/earth-gate-9119c30e8da69db4.mp4",
+      "poster": "/assets/journey/finished/earth-gate-9119c30e8da69db4.webp",
       "mode": "scrub",
       "fit": "cover",
       "title": {
@@ -201,21 +265,18 @@
       },
       "reviewStatus": "draft",
       "provenance": {
-        "provider": "Higgsfield",
-        "model": "kling4_0",
-        "jobId": "68a93d06-472e-4cde-b604-ee3af4d6c3f9",
-        "generatedBy": "Codex 2026-11-12",
-        "resolution": "1080p source, 1280x720 scrub encode",
-        "keyframeIntervalSeconds": 0.5,
-        "videoSha256": "550fd2eddcd50da2c0fdfa8e06fe54736c2bb34449b6c3162b11ca5b4cdffdd4",
-        "geography": "user_rejected_temporarily_published",
-        "publishedOnUserInstruction": "2026-11-12: wrong C building and wrong outfit stay in until replaced"
+        "sourceSha256": "9119c30e8da69db446c0695ccacca376aa0945b228f102976a1b1ea260767264",
+        "videoSha256": "9119c30e8da69db446c0695ccacca376aa0945b228f102976a1b1ea260767264",
+        "posterSha256": "92370e26d3bb65998ce7dd070696b653a9ead435ce9372bf4ad6741e0543ce6a",
+        "localImportCostCredits": 0,
+        "upstreamGenerationCost": "not_inferred",
+        "importMethod": "Reviewed local video, full decode and measured frame timestamps; no transcoding"
       },
       "width": 1280,
       "height": 720,
-      "frameRate": 24,
-      "frameCount": 193,
-      "duration": 8.041666666666666
+      "frameCount": 181,
+      "frameRate": 24.0,
+      "duration": 7.541666666666667
     },
     {
       "id": "c7-arrival",
@@ -356,7 +417,14 @@
       "frameRate": 24,
       "frameCount": 193,
       "duration": 8.041666666666666,
-      "portraitFocusX": 30
+      "portraitFocusX": 30,
+      "transitionOut": {
+        "treatment": "luminous-veil",
+        "span": 0.045,
+        "color": "#dfddd7",
+        "centerX": 0.52,
+        "centerY": 0.46
+      }
     },
     {
       "id": "man-luxe",
@@ -394,7 +462,14 @@
       "frameRate": 24,
       "frameCount": 193,
       "duration": 8.041666666666666,
-      "portraitFocusX": 36
+      "portraitFocusX": 36,
+      "transitionOut": {
+        "treatment": "luminous-veil",
+        "span": 0.045,
+        "color": "#d0cec8",
+        "centerX": 0.52,
+        "centerY": 0.46
+      }
     },
     {
       "id": "corridor-to-painter",
@@ -428,7 +503,14 @@
       "height": 720,
       "frameRate": 24,
       "frameCount": 145,
-      "duration": 6.041666666666667
+      "duration": 6.041666666666667,
+      "transitionOut": {
+        "treatment": "luminous-veil",
+        "span": 0.045,
+        "color": "#e8e4dc",
+        "centerX": 0.52,
+        "centerY": 0.46
+      }
     },
     {
       "id": "lar-painter-transfer",
@@ -462,7 +544,14 @@
       "height": 720,
       "frameRate": 24,
       "frameCount": 193,
-      "duration": 8.041666666666666
+      "duration": 8.041666666666666,
+      "transitionOut": {
+        "treatment": "luminous-veil",
+        "span": 0.045,
+        "color": "#f4eddb",
+        "centerX": 0.52,
+        "centerY": 0.46
+      }
     },
     {
       "id": "metal-workshop",
@@ -496,41 +585,14 @@
       "height": 720,
       "frameRate": 24,
       "frameCount": 193,
-      "duration": 8.041666666666666
-    },
-    {
-      "id": "courtyard-graffiti",
-      "enabled": true,
-      "video": "/assets/journey/ui-20261112/s10-courtyard-graffiti-1280-g12.mp4",
-      "poster": "/assets/journey/ui-20261112/s10-courtyard-graffiti-1280-g12.webp",
-      "mode": "scrub",
-      "fit": "cover",
-      "title": {
-        "no": "Et uttrykk innenfor murene",
-        "en": "Expression within the walls",
-        "zh": "高墙内的表达"
-      },
-      "description": {
-        "no": "Graffiti i luftegården, med høye murer, himmel og overvåkningskamera. Utkast laget med KI; rom og personer er fiktive rekonstruksjoner.",
-        "en": "Graffiti in the exercise yard, with high walls, sky and a surveillance camera. AI-generated draft; rooms and people are fictional reconstructions.",
-        "zh": "放风庭院里的涂鸦，四周是高墙、天空和监控摄像头。 AI生成的草稿；房间和人物均为虚构重建。"
-      },
-      "reviewStatus": "draft",
-      "provenance": {
-        "provider": "Higgsfield",
-        "model": "kling4_0",
-        "jobId": "a7a3643f-a15a-4bf2-a8e3-783ca6618937",
-        "generatedBy": "Codex 2026-11-12",
-        "resolution": "1080p source, 1280x720 scrub encode",
-        "keyframeIntervalSeconds": 0.5,
-        "videoSha256": "fa70c1ab07eabf6f7615392ca33313364307c1ec1cb11565c4703a70da10d916",
-        "publishedOnUserInstruction": "2026-11-12: publish all available Bergen prison sequence media"
-      },
-      "width": 1280,
-      "height": 720,
-      "frameRate": 24,
-      "frameCount": 193,
-      "duration": 8.041666666666666
+      "duration": 8.041666666666666,
+      "transitionOut": {
+        "treatment": "luminous-veil",
+        "span": 0.045,
+        "color": "#ece6d9",
+        "centerX": 0.52,
+        "centerY": 0.46
+      }
     },
     {
       "id": "literature",
@@ -564,13 +626,20 @@
       "height": 720,
       "frameRate": 24,
       "frameCount": 193,
-      "duration": 8.041666666666666
+      "duration": 8.041666666666666,
+      "transitionOut": {
+        "treatment": "luminous-veil",
+        "span": 0.045,
+        "color": "#e6e1d8",
+        "centerX": 0.52,
+        "centerY": 0.46
+      }
     },
     {
       "id": "music-send",
       "enabled": true,
-      "video": "/assets/journey/ui-20261112/s12-music-send-1280-g12.mp4",
-      "poster": "/assets/journey/ui-20261112/s12-music-send-1280-g12.webp",
+      "video": "/assets/journey/finished/music-send-521ce423fe482771.mp4",
+      "poster": "/assets/journey/finished/music-send-521ce423fe482771.webp",
       "mode": "scrub",
       "fit": "cover",
       "title": {
@@ -585,20 +654,64 @@
       },
       "reviewStatus": "draft",
       "provenance": {
-        "provider": "Higgsfield",
-        "model": "kling4_0",
-        "jobId": "8c7da8be-dc40-425c-97bb-8fdb435857c3",
-        "generatedBy": "Codex 2026-11-12",
-        "resolution": "1080p source, 1280x720 scrub encode",
-        "keyframeIntervalSeconds": 0.5,
-        "videoSha256": "633092d7f11659e1d6d8e20ac1b6df32064d70fa79291cfa8e149e5a51a0c703",
-        "publishedOnUserInstruction": "2026-11-12: publish all available Bergen prison sequence media"
+        "sourceSha256": "521ce423fe482771d693175d3c0bf02a8a91bb9419b7df4cc7a19137ab98311a",
+        "videoSha256": "521ce423fe482771d693175d3c0bf02a8a91bb9419b7df4cc7a19137ab98311a",
+        "posterSha256": "70de7800a5359e6200393868001f02e910d462659b3b2f807fc6c70fbad45aa1",
+        "localImportCostCredits": 0,
+        "upstreamGenerationCost": "not_inferred",
+        "importMethod": "Reviewed local video, full decode and measured frame timestamps; no transcoding"
       },
       "width": 1280,
       "height": 720,
-      "frameRate": 24,
-      "frameCount": 193,
-      "duration": 8.041666666666666
+      "frameCount": 144,
+      "frameRate": 24.0,
+      "duration": 6.0,
+      "transitionOut": {
+        "treatment": "luminous-veil",
+        "span": 0.055,
+        "color": "#dbe9e4",
+        "centerX": 0.52,
+        "centerY": 0.46
+      }
+    },
+    {
+      "id": "courtyard-graffiti",
+      "enabled": true,
+      "video": "/assets/journey/finished/courtyard-graffiti-7d97e2f232c5fb6d.mp4",
+      "poster": "/assets/journey/finished/courtyard-graffiti-7d97e2f232c5fb6d.webp",
+      "mode": "scrub",
+      "fit": "cover",
+      "title": {
+        "no": "Et uttrykk innenfor murene",
+        "en": "Expression within the walls",
+        "zh": "高墙内的表达"
+      },
+      "description": {
+        "no": "Graffiti i luftegården, med høye murer, himmel og overvåkningskamera. Utkast laget med KI; rom og personer er fiktive rekonstruksjoner.",
+        "en": "Graffiti in the exercise yard, with high walls, sky and a surveillance camera. AI-generated draft; rooms and people are fictional reconstructions.",
+        "zh": "放风庭院里的涂鸦，四周是高墙、天空和监控摄像头。 AI生成的草稿；房间和人物均为虚构重建。"
+      },
+      "reviewStatus": "draft",
+      "provenance": {
+        "sourceSha256": "7d97e2f232c5fb6d9874f9913a1021b5b3efdaa1e30b36829ab90eb7650ee4b9",
+        "videoSha256": "7d97e2f232c5fb6d9874f9913a1021b5b3efdaa1e30b36829ab90eb7650ee4b9",
+        "posterSha256": "45e012effc048ae35b1b45cc34a7f63b5adaf001e2d77f4c8ef4d46b87a84b1f",
+        "localImportCostCredits": 0,
+        "upstreamGenerationCost": "not_inferred",
+        "importMethod": "Reviewed local video, full decode and measured frame timestamps; no transcoding"
+      },
+      "width": 1280,
+      "height": 720,
+      "frameCount": 144,
+      "frameRate": 24.0,
+      "duration": 6.0,
+      "transitionOut": {
+        "treatment": "luminous-veil",
+        "span": 0.06,
+        "color": "#f8f6eb",
+        "centerX": 0.52,
+        "centerY": 0.46
+      }
     },
     {
       "id": "prison-arrival",
@@ -772,7 +885,7 @@
     },
     {
       "id": "collective-portal",
-      "enabled": true,
+      "enabled": false,
       "video": "/assets/journey/collective-portal.mp4",
       "poster": "/assets/journey/collective-portal.webp",
       "mode": "scrub",
@@ -803,8 +916,8 @@
     {
       "id": "gallery",
       "enabled": true,
-      "poster": "/assets/journey/gallery.webp",
-      "video": "/assets/journey/gallery.mp4",
+      "poster": "/assets/journey/finished/gallery-e4628a5769149a8a.webp",
+      "video": "/assets/journey/finished/gallery-e4628a5769149a8a.mp4",
       "mode": "scrub",
       "artworks": [
         {
@@ -850,17 +963,33 @@
           "artistName": "Innsatt 2601-46"
         }
       ],
-      "width": 1280,
-      "height": 720,
-      "frameRate": 30,
-      "frameCount": 300,
-      "duration": 10
+      "transitionOut": {
+        "treatment": "luminous-veil",
+        "span": 0.045,
+        "color": "#fbf8eb",
+        "centerX": 0.52,
+        "centerY": 0.46
+      },
+      "width": 1920,
+      "height": 1080,
+      "frameCount": 289,
+      "frameRate": 24.0,
+      "duration": 12.041666666666666,
+      "provenance": {
+        "sourceSha256": "e4628a5769149a8aeed759cfe02216e41db5b5c4082179df87e3946653105e8c",
+        "videoSha256": "e4628a5769149a8aeed759cfe02216e41db5b5c4082179df87e3946653105e8c",
+        "posterSha256": "ffc54c0f78e40c41f56469f27d87bf4c3a6c36c80b0989941ec6d4eeae3e9f2b",
+        "localImportCostCredits": 0,
+        "upstreamGenerationCost": "not_inferred",
+        "importMethod": "Reviewed local video, full decode and measured frame timestamps; no transcoding"
+      },
+      "scrollWeight": 2.4
     },
     {
       "id": "bergen",
       "enabled": true,
-      "video": "/assets/journey/ui-20261112/bergen-woman-v2-1280-g12.mp4",
-      "poster": "/assets/journey/ui-20261112/bergen-woman-v2-1280-g12.webp",
+      "video": "/assets/journey/finished/bergen-66eb70a076c86467.mp4",
+      "poster": "/assets/journey/finished/bergen-66eb70a076c86467.webp",
       "mode": "scrub",
       "title": {
         "no": "Motestudie i Bergen",
@@ -874,21 +1003,25 @@
       },
       "reviewStatus": "draft",
       "provenance": {
-        "provider": "Higgsfield",
-        "model": "seedance_2_5",
-        "videoSha256": "818e7dfe511dae24d2634090b88da7f854f5a090c2c0af3afa5808bdaa3e189e",
-        "durationSeconds": 8.041667,
-        "originalArtworkSha256": "80643262351fb9d6e4de954d72707ed2fb72610c7d8a3e6296027439d3b07136",
-        "process": "Perspective tracked original print and fabric luminance modulation; not full3Dfabricsimulation",
-        "productionProof": false,
-        "priorEncodedSha256": "a85a7dc8e087b0ceec0a4f8fdc732b3f3320a95565c0d35fe676081b7a487702",
-        "keyframeIntervalSeconds": 1
+        "sourceSha256": "66eb70a076c86467603be7e50d674cb44c1042434e4853730c5c44eed77c69ea",
+        "videoSha256": "66eb70a076c86467603be7e50d674cb44c1042434e4853730c5c44eed77c69ea",
+        "posterSha256": "9023cf2a18231b5a1f3c2e731dd5c9467348f2fe1c28f549f05ea80bc467f172",
+        "localImportCostCredits": 0,
+        "upstreamGenerationCost": "not_inferred",
+        "importMethod": "Reviewed local video, full decode and measured frame timestamps; no transcoding"
+      },
+      "transitionOut": {
+        "treatment": "luminous-veil",
+        "span": 0.04,
+        "color": "#faf0dd",
+        "centerX": 0.52,
+        "centerY": 0.46
       },
       "width": 1280,
       "height": 720,
-      "frameRate": 24,
-      "frameCount": 193,
-      "duration": 8.041666666666666
+      "frameCount": 145,
+      "frameRate": 24.0,
+      "duration": 6.041666666666667
     },
     {
       "id": "paris",
@@ -912,7 +1045,14 @@
       "frameCount": 193,
       "duration": 8.041666666666666,
       "frameTimingNote": "Measured V7 presentation timestamps; this video is variable cadence and is not treated as constant 24 fps.",
-      "frameRate": 24
+      "frameRate": 24,
+      "transitionOut": {
+        "treatment": "luminous-veil",
+        "span": 0.065,
+        "color": "#fff1cf",
+        "centerX": 0.52,
+        "centerY": 0.46
+      }
     },
     {
       "id": "new-york",
@@ -933,10 +1073,49 @@
       "reviewStatus": "superseded"
     },
     {
+      "id": "la-arrival",
+      "enabled": true,
+      "mode": "scrub",
+      "scrollWeight": 1.8,
+      "title": {
+        "no": "Et nytt utsyn",
+        "en": "A new outlook",
+        "zh": "新的视野"
+      },
+      "description": {
+        "no": "KI-skapt arkitektur- og livsstilsstudie med Los Angeles som bakgrunn.",
+        "en": "AI-generated architecture and lifestyle study against Los Angeles.",
+        "zh": "以洛杉矶为背景的人工智能建筑与生活方式研究。"
+      },
+      "reviewStatus": "illustrative",
+      "width": 1280,
+      "height": 720,
+      "frameCount": 289,
+      "frameRate": 24.0,
+      "duration": 12.041666666666666,
+      "video": "/assets/journey/finished/la-arrival-2372949f1f11f872.mp4",
+      "poster": "/assets/journey/finished/la-arrival-2372949f1f11f872.webp",
+      "provenance": {
+        "sourceSha256": "2372949f1f11f872fe718d3fb064080a1198c73ff21ad17d1740aab37d9e5a51",
+        "videoSha256": "2372949f1f11f872fe718d3fb064080a1198c73ff21ad17d1740aab37d9e5a51",
+        "posterSha256": "d72304cedc4aca6527ffde67af3a8e1025478fb1c202b1c628e9d112cf4f9baa",
+        "localImportCostCredits": 0,
+        "upstreamGenerationCost": "not_inferred",
+        "importMethod": "Reviewed local video, full decode and measured frame timestamps; no transcoding"
+      },
+      "transitionOut": {
+        "treatment": "luminous-veil",
+        "span": 0.08,
+        "color": "#fff6e2",
+        "centerX": 0.52,
+        "centerY": 0.46
+      }
+    },
+    {
       "id": "interior",
       "enabled": true,
-      "video": "/assets/journey/la-interior-study-gjenbruk-gop1s-5aea9c2b5b554657.mp4",
-      "poster": "/assets/journey/la-interior-study-gjenbruk-df689cc1545ebcc0-poster.webp",
+      "video": "/assets/journey/finished/interior-5383d5d8959c4ab3.mp4",
+      "poster": "/assets/journey/finished/interior-5383d5d8959c4ab3.webp",
       "mode": "scrub",
       "artworks": [
         {
@@ -959,25 +1138,26 @@
       },
       "reviewStatus": "draft",
       "provenance": {
-        "provider": "Higgsfield",
-        "model": "seedance_2_5",
-        "videoSha256": "5aea9c2b5b55465780c385a889575c70a14875e71fe1721f80e8173e3c528c4a",
-        "artworkSha256": "16872400f1db5e2c943824b4540506faf285e00bbc1e056b30cc09573a1b36e9",
-        "durationSeconds": 12.041667,
-        "resolution": "720p",
-        "fullBriefCompleted": false,
-        "priorEncodedSha256": "df689cc1545ebcc057e8a91fcaf791dece36efb513c10f60c50ca1d6e5caf689",
-        "keyframeIntervalSeconds": 1
+        "sourceSha256": "5383d5d8959c4ab321f8a4ee403938b6b6a8cf35c43752c44d62bbf3344dee42",
+        "videoSha256": "5383d5d8959c4ab321f8a4ee403938b6b6a8cf35c43752c44d62bbf3344dee42",
+        "posterSha256": "464ce48b4f4c393429d450ee3904e83617a69646ba8bbc93c63ef6462c32ab7a",
+        "localImportCostCredits": 0,
+        "upstreamGenerationCost": "not_inferred",
+        "importMethod": "Reviewed local video, full decode and measured frame timestamps; no transcoding"
       },
-      "width": 1280,
-      "height": 720,
-      "frameRate": 24,
-      "frameCount": 289,
-      "duration": 12.041666666666666
+      "transitionOut": {
+        "treatment": "cut"
+      },
+      "width": 1920,
+      "height": 1080,
+      "frameCount": 193,
+      "frameRate": 24.0,
+      "duration": 8.041666666666666,
+      "portraitFit": "contain"
     },
     {
       "id": "stencil",
-      "enabled": true,
+      "enabled": false,
       "video": "/assets/journey/stencil.mp4",
       "poster": "/assets/journey/stencil.webp",
       "mode": "scrub",
@@ -1003,7 +1183,7 @@
     },
     {
       "id": "gallery-return",
-      "enabled": true,
+      "enabled": false,
       "poster": "/assets/journey/gallery.webp",
       "video": "/assets/journey/gallery.mp4",
       "mode": "scrub",
@@ -1066,6 +1246,36 @@
         "no": "Reisen ender der den samlet seg: i galleriet, som også kan åpnes med VR-briller.",
         "en": "The journey ends where it gathered: in the gallery, which can also be opened with VR headsets.",
         "zh": "旅程在汇聚之处结束：画廊，也可以用VR头显进入。"
+      }
+    },
+    {
+      "video": "/assets/journey/finished/interior-5383d5d8959c4ab3.mp4",
+      "poster": "/assets/journey/finished/interior-5383d5d8959c4ab3.webp",
+      "width": 1920,
+      "height": 1080,
+      "frameCount": 193,
+      "frameRate": 24.0,
+      "duration": 8.041666666666666,
+      "portraitFit": "contain",
+      "id": "final-point",
+      "sceneRole": "finale",
+      "enabled": true,
+      "mode": "scrub",
+      "holdLastFrame": true,
+      "scrollWeight": 1.1,
+      "finale": true,
+      "transitionIn": {
+        "treatment": "cut"
+      },
+      "title": {
+        "no": "En ny begynnelse",
+        "en": "A new beginning",
+        "zh": "新的开始"
+      },
+      "description": {
+        "no": "",
+        "en": "",
+        "zh": ""
       }
     }
   ],

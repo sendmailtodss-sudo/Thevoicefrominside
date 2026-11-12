@@ -7,10 +7,9 @@ const root = path.resolve('public');
 const read = file => readFile(path.join(root, file), 'utf8');
 const manifest = async () => JSON.parse(await read('assets/journey/manifest.json'));
 const enabledOrder = [
-  'origin', 'big-bang', 'brains', 'impulses', 'vortex', 'supernova', 'dna',
-  'earth-gate', 'c7-route', 'c7-window', 'man-luxe', 'corridor-to-painter', 'lar-painter-transfer', 'metal-workshop',
-  'courtyard-graffiti', 'literature', 'music-send',
-  'collective-portal', 'gallery', 'bergen', 'paris', 'interior', 'stencil', 'gallery-return',
+  'origin','big-bang','galaxy-descent','brains','impulses','vortex','supernova','earth-gate',
+  'c7-route','c7-window','man-luxe','corridor-to-painter','lar-painter-transfer','metal-workshop',
+  'literature','music-send','courtyard-graffiti','gallery','bergen','paris','la-arrival','interior','final-point',
 ];
 
 function boxes(bytes, start = 0, end = bytes.length) {
@@ -78,7 +77,7 @@ test('the complete journey keeps the origin, dense collective minds and every cr
   // stay public as labelled temporary drafts until corrected media replaces them.
   for (const [id, shot] of [['earth-gate','s04'],['c7-route','c7-route'],['c7-window','c7-window'],['man-luxe','man-luxe'],['corridor-to-painter','s07'],['lar-painter-transfer','s08'],['metal-workshop','s09'],['courtyard-graffiti','s10'],['literature','s11'],['music-send','s12']]) {
     const scene = scenes.find(item => item.id === id);
-    assert.match(scene.video, new RegExp(`/ui-20261112/${shot}-`));
+    assert.ok(scene.video.startsWith('/assets/journey/finished/') || new RegExp(`/ui-20261112/${shot}-`).test(scene.video), `${id} has a known source or finished replacement`);
     assert.equal(scene.reviewStatus, 'draft');
     assert.match(scene.description.en, /Temporary draft|AI-generated draft/);
   }
@@ -92,13 +91,14 @@ test('the complete journey keeps the origin, dense collective minds and every cr
   assert.equal(data.releaseScope.state, 'neural_update_with_temporary_arrival_drafts');
 });
 
-test('the journey returns to the same VR-capable gallery at the end', async () => {
+test('the finale holds the actual last interior frame before returning to the opening point', async () => {
   const scenes = (await manifest()).scenes.filter(scene => scene.enabled);
-  const first = scenes.find(scene => scene.id === 'gallery'), last = scenes.at(-1);
-  assert.equal(last.id, 'gallery-return');
-  assert.equal(last.sceneRole, 'gallery');
-  assert.equal(last.video, first.video);
-  assert.deepEqual(last.artworks.map(art => art.id), first.artworks.map(art => art.id));
+  const interior = scenes.find(scene => scene.id === 'interior'), last = scenes.at(-1);
+  assert.equal(last.id, 'final-point');
+  assert.equal(last.holdLastFrame, true);
+  assert.equal(last.video, interior.video);
+  assert.equal(last.frameCount, interior.frameCount);
+  assert.equal(last.frameRate, interior.frameRate);
 });
 
 test('enabled media stays local, nested asset paths exist, and exact artwork remains inspectable', async () => {
@@ -149,13 +149,16 @@ test('every enabled video declares actual MP4 frames and measured constant or va
   }
 });
 
-test('the bounded neural opening preserves explicit cuts and leaves V7 transition settings intact', async () => {
+test('authored handovers preserve neural registration and exclude removed chapters', async () => {
   const scenes = (await manifest()).scenes.filter(scene => scene.enabled);
-  for (const id of ['big-bang','brains','impulses','vortex']) {
+  for (const id of ['brains','impulses','vortex']) {
     assert.equal(scenes.find(scene => scene.id === id).transitionOut.treatment, 'cut', `${id} registered plate boundary`);
   }
-  for (const scene of scenes.slice(5)) {
-    assert.equal(scene.transitionOut, undefined, `${scene.id} keeps its existing V7 default`);
-    assert.equal(scene.transitionIn, undefined, `${scene.id} keeps its existing V7 default`);
+  for (const id of ['gallery','bergen','paris']) {
+    const transition=scenes.find(scene => scene.id === id).transitionOut;
+    assert.equal(transition.treatment,'luminous-veil');
+    assert.ok(transition.span>0 && transition.span<.1);
   }
+  assert.equal(scenes.find(scene=>scene.id==='interior').transitionOut.treatment,'cut');
+  assert.ok(!scenes.some(scene => ['dna','stencil'].includes(scene.id)));
 });

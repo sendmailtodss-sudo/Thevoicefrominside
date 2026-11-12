@@ -1,0 +1,17 @@
+(()=>{'use strict';
+ function paintNavigation(){const lang=new URL(location.href).searchParams.get('lang');const selected=document.querySelector('[data-sj-language]')?.value;const l=(selected==='zh-Hans'||lang==='zh-Hans'||document.documentElement.lang.startsWith('zh'))?'zh':location.pathname.startsWith('/en/')?'en':'no';document.querySelectorAll('[data-nav-'+l+']').forEach(x=>x.textContent=x.getAttribute('data-nav-'+l));}
+ function placeDirectionMenu(){const header=document.querySelector('[data-site-navigation]');if(header)document.documentElement.style.setProperty('--direction-panel-top',Math.max(8,Math.min(header.getBoundingClientRect().bottom+8,innerHeight-240))+'px')}
+ document.querySelectorAll('[data-direction-menu]').forEach(d=>d.addEventListener('toggle',placeDirectionMenu));addEventListener('resize',placeDirectionMenu);placeDirectionMenu();
+ paintNavigation();document.addEventListener('change',e=>{if(e.target.matches('[data-sj-language],[data-opening-language]'))queueMicrotask(paintNavigation)});new MutationObserver(paintNavigation).observe(document.documentElement,{attributes:true,attributeFilter:['lang']});
+ document.addEventListener('keydown',e=>{if(e.key==='Escape')document.querySelectorAll('#sfi-navigation details[open]').forEach(d=>d.removeAttribute('open'))});
+ const story=new Set(['fengslene-vest-for-loven','dagbok','boken','kapitler','kapittel-9','kapittel-10','kapittel-11','presse','juridisk-motvekt','inmaite','innsyn','rettsspeil','klagehjelp','analyse','analyseverksted','maite','analysis','counsel-choice','lawyer-account','gjennomgang','review','innsyn-i-makt','den-trojanske-hesten','fight-for-whats-right','stemmer','advokatkonto','advokatvalg','nytt','statistikk']);
+ const art=new Set(['forebygging-og-forum','kunstfellesskap','kunstsamfunnet','galleri-3d','butikk','musikk','bidrag','collaborate','originalverk','for-oss-alle','forum','art-community','creative-community','kunstner','artist','music','shop','original-art','verksted']);
+ function category(url){let p;try{p=new URL(url,location.href)}catch{return null}if(p.origin!==location.origin)return null;let parts=p.pathname.split('/').filter(Boolean);if(parts[0]==='en')parts.shift();if(!parts.length)return 'home';return story.has(parts[0])?'story':art.has(parts[0])?'art':null}
+ const current=category(location.href);if(!['story','art'].includes(current))return;
+ function cross(a){let to=category(a.getAttribute('href'));return to&&['story','art'].includes(to)&&to!==current}
+ function neutralize(a){if(!a.isConnected||!cross(a)||a.closest('[data-site-navigation]'))return;let span=document.createElement('span');for(const attr of a.attributes)if(!['href','target','rel','download','onclick','onkeydown'].includes(attr.name.toLowerCase()))span.setAttribute(attr.name,attr.value);span.classList.add('split-separated-reference');while(a.firstChild)span.append(a.firstChild);a.replaceWith(span)}
+ function scan(node){if(node.nodeType!==1)return;if(node.matches?.('a[href]'))neutralize(node);node.querySelectorAll?.('a[href]').forEach(neutralize)}
+ scan(document.body);
+ const observer=new MutationObserver(records=>{for(const r of records){if(r.type==='attributes')scan(r.target);else r.addedNodes.forEach(scan)}});observer.observe(document.body,{subtree:true,childList:true,attributes:true,attributeFilter:['href']});
+ document.addEventListener('click',e=>{const a=e.target.closest?.('a[href]');if(a&&cross(a)&&!a.closest('[data-site-navigation]')){e.preventDefault();neutralize(a)}},true);
+})();
