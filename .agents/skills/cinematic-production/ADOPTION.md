@@ -29,3 +29,20 @@ without silently changing the user's creative decisions or service permissions.
 The source inventory in [SOURCES.md](SOURCES.md) distinguishes installed text
 from read-only external references. No publication or runtime behavior changes
 are implied by installing this package.
+
+## Fresh-review corrections, 12 November 2026
+
+The first router frontmatter was invalid YAML despite its old manifest's positive
+flag. The new package uses a real YAML parser and refreshed file hashes. Integrity,
+valid syntax, client discovery, explicit loading, runtime readiness and artistic
+acceptance are recorded separately. Older positive flags are not activation proof.
+
+The five pinned community specialists remain optional references. New project
+specialists own the exact task contracts; disable implicit invocation of broad
+specialists in clients that support that policy. Claude uses thin `.claude/skills`
+entry points and an explicit `@AGENTS.md` import, with target-session verification.
+
+The complete fresh primary-source review covers film direction, editing, VFX,
+cloth/particle integration, deterministic media presentation, inclusive spatial web,
+provider control, award calibration and the visible Grill. Read the relevant new
+specialists rather than importing their entire research corpus into every task.

@@ -1,9 +1,32 @@
-# Verified production references
+# Fresh production knowledge and provenance
 
-Reviewed on 12 November 2026. The five specialist instruction packages are
-locally installed with pinned sources, licenses and file hashes in their own
-`SOURCE.json`. The runtime libraries and commercial editors are not installed
-by this package.
+Fresh primary-source restart: 12 November 2026, explicitly requested by the user.
+Six research roles were run with gpt-6-astra, reasoning ultra. Earlier conclusions
+were rechecked; that model setting is provenance, not proof of quality. This is a
+reviewed instruction installation, not a new renderer, trained model, authenticated
+Claude session, passed visual mechanism or award result.
+
+## Current original specialist knowledge
+
+- Film direction: [cinematic continuity](../cinematic-continuity-direction/SKILL.md).
+- Postproduction: [camera/matte/color integration](../plate-matchmove-compositing/SKILL.md).
+- VFX and product art: [particle/fabric integration](../scene-anchored-particles-and-fabric/SKILL.md).
+- Editing and delivery: [reversible media finishing](../reversible-media-finishing/SKILL.md).
+- Web: [state/presentation](../deterministic-scroll-presentation/SKILL.md), [spatial words](../spatial-particle-typography/SKILL.md), [access and languages](../inclusive-cinematic-web/SKILL.md).
+- Provider operation: [Higgsfield control](../higgsfield-production-control/SKILL.md).
+- Creative calibration: [award evidence and rubric](../award-calibrated-art-direction/SKILL.md).
+- Interview: [visible Grill review](../visual-grill-review/SKILL.md).
+
+Each original specialist links to its fresh primary-source register. Current
+provider schemas outrank marketing or another API surface. Current award records
+must retain cycle, category, date and inspection limits. A reference's existence
+is not a successful live interaction or proof that this site outperforms it.
+
+## Pinned supplementary instruction sources
+
+All twenty upstream files, including their five licenses, were freshly retrieved
+at the exact commits and byte/hash-verified in this restart. The source text is
+unchanged; local adoption rules and implicit-invocation policy are separate.
 
 | Source | Role | Treatment |
 | --- | --- | --- |
@@ -12,26 +35,27 @@ by this package.
 | [MengTo Scroll-Scrubbed Visual Sequence](https://github.com/MengTo/Skills/blob/d6324a05ca03ce5f6cdba519318d92176dbc43d2/agent-skills/web-design/scroll-scrubbed-visual-sequence/SKILL.md) | Native reversible media timeline | MIT instruction package; no implicit smoothing |
 | [MengTo Build Three.js Scroll Worlds](https://github.com/MengTo/Skills/blob/d6324a05ca03ce5f6cdba519318d92176dbc43d2/agent-skills/web-design/build-threejs-scroll-worlds/SKILL.md) | Shared camera, space, materials, lighting and depth | MIT instruction package; damping/ambient/pointer motion excluded by project contract |
 | [Three.js particles, trails and effects](https://github.com/linegel/threejs-complete-set-of-skill/blob/e3c9563a070b214aa73b84d1ea6026c9ec4db6cb/skills/threejs-particles-trails-and-effects/SKILL.md) | Analytic particles, representation, depth, transparency and HDR ownership | ISC instruction package; its r185 WebGPU path is a specialist prerequisite, not a universal installed runtime |
-| [Official Remotion skills](https://github.com/remotion-dev/skills/tree/7e541aa4d7361dfaca0780a565a47307eb7bdfbb) | Frame-based editing, sequencing, transitions, matting and 3D | Read-only external reference; no skill text/runtime copied or render license assumed |
-| [Official GSAP ScrollTrigger skill](https://github.com/greensock/gsap-skills/blob/aed9cfd3277740755f6bfc1155c7aa645403b760/skills/gsap-scrolltrigger/SKILL.md) | Optional scroll/timeline implementation guidance | Read-only reference; no GSAP dependency added |
-| [Higgsfield Cinema Studio](https://higgsfield.ai/creator-hub/help-center/tools/how-do-i-use-cinema-studio) | Director controls, shot settings, references and global style | Official product guide; web capability is not proof of MCP access |
-| [Higgsfield storyboard and shot list](https://higgsfield.ai/blog/script-to-ai-storyboard-shot-list) | Visual beats and shot planning | Official production guide |
-| [Higgsfield camera control](https://higgsfield.ai/blog/ai-video-camera-control) | Camera path, movement, optics and endpoints | Official production guide; generative repeatability does not establish browser determinism |
-| [Higgsfield footage VFX](https://higgsfield.ai/blog/vfx_4k) | Source-plate preservation and timed editing direction | Official VFX guide; tool and export capabilities must be verified |
 
-The official article's `seedance-footage-vfx` instruction package was also read
-and installed in the operator's private user-skill directory for its advertised
-Skills use. Its original text is not redistributed in this public repository.
-The package refers to two absent upstream files (`dialogue-timing.md` and
-`first-frame.md`); those procedures are not claimed as installed. Current model
-schemas, the main journey's motion contract and any production hold take
-priority over its Seedance 2.0 examples and optional ambient action.
+The visual Grill adapter additionally retains the MIT Hermes source and notice,
+with exact upstream hashes in its SOURCE.json. No optional demos or external
+executables were installed. Any older Remotion, GSAP, frontend-design or private
+VFX research remains historical source material; it is not silently promoted to
+freshly verified or active guidance by this package.
 
-Other search candidates were not installed: the retrieved storyboard-cheatcode
-file uses outdated Higgsfield example calls and conflicting workflow defaults;
-the indexed muapi cinema-director file returned HTTP 404 at the cited commit;
-unverified license or runtime claims are not treated as an installed capability.
+## Instruction-client sources
 
-The project-owned editing, web-direction and Higgsfield-control references are
-original operational checklists. They do not reproduce Remotion skill text or
-grant new rights to any project code, writing or artwork.
+- https://learn.chatgpt.com/docs/agent-configuration/agents-md
+- https://learn.chatgpt.com/docs/build-skills
+- https://agentskills.io/specification
+- https://code.claude.com/docs/en/memory
+- https://code.claude.com/docs/en/skills
+
+AGENTS.md routes cinematic work to the canonical body. CLAUDE.md imports AGENTS.md;
+three small .claude/skills entries explicitly read canonical files. Actual discovery
+and loading still require evidence in the target client/session. The root session
+reads files explicitly because its working directory is outside this checkout.
+
+The previous manifest incorrectly marked malformed YAML valid. The renewed
+manifest records parser checks and hashes separately and does not certify automatic
+activation or runtime capability. No credit use or website publication occurred
+in this instruction-only change.

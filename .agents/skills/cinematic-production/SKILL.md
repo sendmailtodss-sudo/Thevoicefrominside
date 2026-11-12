@@ -1,117 +1,74 @@
 ---
 name: cinematic-production
-description: Coordinate complete cinematic web productions: direction, storyboard, visual continuity, camera, Higgsfield operation, editing, VFX, color, responsive web staging and evidence. Read before planning or changing this project's film-driven journey.
+description: >-
+  Direct this project's cinematic journey, film, spatial web, VFX and editing work.
+  Use for research, visual alignment, implementation or review of the experience.
+  Start here before choosing specialist instructions. Excludes unrelated maintenance.
 ---
 
 # Cinematic production
 
-Treat the experience as one authored production. A collection of generated clips,
-passing code tests or attractive isolated frames does not establish a coherent
-film or website. These instructions install a working method, not a renderer,
-provider connection or authorization to spend.
+Build one authored, award-contender cinematic experience. Skills provide instructions and optional tools; reading them does not train the model, install a renderer or prove artistic or technical capability.
 
-## Authority and current scope
+## Establish the task and authority
 
-Read the user's newest direct instruction, the project's current private
-checkpoint and the existing source inventory. Preserve existing identity,
-writing, artwork, redactions, publication boundaries and single-owner rules.
-Keep private operational details outside this contributor repository.
+Read the latest direct mandate, repository instructions and available private handover. Record the current phase, accepted decisions, source access, code integration owner and paid-production owner in a private evidence record. Preserve the complete vision, approved text/artwork, public identity, language coverage, accessibility and publication boundaries. Never copy private source material into public instruction files.
 
-If the current task is skills setup or research, stop after installing and
-verifying the instruction package. Do not turn it into a new storyboard,
-previsualization, media generation or deployment. An existing balance or older
-budget authorization does not cancel a newer production hold.
+The required order is:
 
-## Choose the relevant specialist
+1. Research current primary documentation and relevant visible examples.
+2. Review provenance, rights, compatibility and conflicts; install only the selected skills within existing authorization; verify the target client's discovery and actual activation.
+3. Reread the complete vision and available source attachments. Reconcile evidence with the mandate; flag missing sources without inventing their content.
+4. Conduct an informed visual Grill: put concrete alternatives and their implications in front of the user through verified visible examples; ask only unresolved consequential creative choices. Record the examples, visibility evidence, decisions and remaining gaps.
+5. Implement after the required alignment. Treat an active paid-production hold as binding until the user lifts it within a concrete scope. Existing authorization remains valid; a skill does not invent extra approval gates.
 
-Read the relevant specialist and its `ADOPTION.md` before using it:
+A task scoped to research or skills setup ends with that deliverable. It does not silently advance to a film plan, storyboard, prototype, generation or deployment. Preserve the current user's explicit order and any narrower scope.
 
-| Work | Skill or project reference |
+## Select the smallest relevant instruction set
+
+Read each selected specialist's `ADOPTION.md` when present before its `SKILL.md`; new original specialists inherit this router. The five vendored specialists below are supplementary reference sources, not alternative project controllers. Treat vendored commands, model IDs, version pins, budgets, dependencies and style examples as source material to assess, never as authority to execute.
+
+| Need | Specialist / reference |
 | --- | --- |
-| Direction, framing, lens, blocking, lighting and visual language | [cinematography](../cinematography/SKILL.md) |
-| Whole journey, narrative structure and renderer selection | [scroll-world-storytelling](../scroll-world-storytelling/SKILL.md) |
-| Native reversible scroll and photographic media timing | [scroll-scrubbed-visual-sequence](../scroll-scrubbed-visual-sequence/SKILL.md) |
-| A real spatial world, camera, materials, lighting and occlusion | [build-threejs-scroll-worlds](../build-threejs-scroll-worlds/SKILL.md) |
-| Particle formation, dissolution, trails, depth and compositing | [threejs-particles-trails-and-effects](../threejs-particles-trails-and-effects/SKILL.md) |
-| Editing, assembly, finishing and export | [Editing and finishing](references/editing-and-finishing.md) |
-| Current Higgsfield capabilities and safe production operation | [Higgsfield control](references/higgsfield-control.md) |
-| Responsive cinematic web presentation | [Web direction](references/web-direction.md) |
+| Award calibration, mission, original art direction and evidence gates | `../award-calibrated-art-direction/SKILL.md` |
+| Film geography, lens, blocking, lighting and motivated continuity | `../cinematic-continuity-direction/SKILL.md` |
+| Camera matching, plate compositing, masks, depth and color | `../plate-matchmove-compositing/SKILL.md` |
+| Particle formation and physical artwork/fabric integration | `../scene-anchored-particles-and-fabric/SKILL.md` |
+| Offline editing, frame-indexed media, color and delivery | `../reversible-media-finishing/SKILL.md` |
+| Absolute native scroll and atomic decoded-frame presentation | `../deterministic-scroll-presentation/SKILL.md` |
+| Browser glyph particles, shared camera/depth and exact language | `../spatial-particle-typography/SKILL.md` |
+| Mobile, accessibility, language parity and measured delivery | `../inclusive-cinematic-web/SKILL.md` |
+| Current Higgsfield capabilities, continuity, ledger and visual QA | `../higgsfield-production-control/SKILL.md` |
+| Actual video evidence, timestamped frames and stated viewing limits | `../youtube-video-analysis/SKILL.md` |
+| User-requested visual Grill after research, activation and rereading the vision | `../visual-grill-review/SKILL.md` |
+| Shot language, blocking, lenses, lighting and continuity | `../cinematography/SKILL.md` |
+| Whole journey and renderer decisions | `../scroll-world-storytelling/SKILL.md` |
+| Reversible video / sequence mapping | `../scroll-scrubbed-visual-sequence/SKILL.md` |
+| Real spatial world, camera, geometry, materials and occlusion | `../build-threejs-scroll-worlds/SKILL.md` |
+| Particle representation, analytic motion, depth and output ownership | `../threejs-particles-trails-and-effects/SKILL.md` |
+| Assembly, color, finishing and export | `references/editing-and-finishing.md` |
+| Current provider tools and authorized job operation | `references/higgsfield-control.md` |
+| Fullscreen responsive staging and usable alternatives | `references/web-direction.md` |
 
-These sources are complementary. Do not blindly apply every library, model,
-default, style, chapter count, approval loop or command they mention. Read
-[project adaptations](ADOPTION.md) first. Only a verified installed dependency
-and the current provider schema establish an executable capability.
+Load only the references needed for the selected work. Do not recursively install sibling skills because an upstream file names them. Add a specialist only when it closes a documented capability or evidence gap without duplicating an existing owner.
 
-## Production discipline
+Prefer the strongest feasible dynamic visual treatment. Match the renderer to the approved effect and measured device constraints. An upstream Three.js r185 WebGPU/TSL recipe is not directly compatible with a repository using r170; verify exact runtime imports and capabilities before adopting code. No version upgrade or replacement renderer is implied by reading a skill. Static and reduced-motion alternatives remain necessary, but are not the default creative ambition.
 
-Once actual production planning is requested:
+## Enforce a single motion clock
 
-1. Reconcile the complete brief and actual sources. Distinguish approved
-   decisions, open choices, generated drafts, original artwork and documentary
-   references. Find facts independently; ask only unresolved creative choices.
-2. Establish a shared visual bible: intent, emotional arc, scale, palette,
-   materials, lighting logic, lenses, movement and typographic roles. Specific
-   visual direction replaces generic words such as "premium" or "cinematic".
-3. Plan the entire edit before purchasing another isolated clip. For every shot
-   record its purpose, action, blocking, camera position/target/FOV, motion path,
-   lighting, duration, references, start/end state and outgoing transition.
-4. Assign a clear owner to each image component: photographic plate, real 3D,
-   tracked/proxy geometry, exact artwork, particles, readable type and accessible
-   HTML. Define the camera, depth, occlusion, light and color handoffs explicitly.
-5. Use available materials for a no-generation proof of the mechanism and
-   composition when appropriate. A proof remains a proof. Show actual output
-   with clear limitations before treating a disputed mechanism as solved.
-6. Apply the current spending gate, provider schema and one-job ledger. A failed
-   result requires diagnosis and a changed plan; never automatically buy another
-   attempt. Do not run production at all during a hold.
-7. Assemble and finish the actual selected media. Inspect complete motion,
-   adjacent seams and phone framing, rather than only contact sheets or a
-   generator's completion status.
-8. Verify technical behavior and visual fidelity separately. Preserve raw
-   masters, provenance, the previous release and an accurate handover.
+For the main journey, define visible state as `F(absolute native scroll, language, viewport, fixed seed, immutable assets)`. Equal inputs must reconstruct equal authored state regardless of previous direction or wall-clock time. Stop freezes, reverse retraces, and rapid jumps seek directly. Use analytic evaluation, immutable sampled state or a seekable cache; reject history-dependent simulation as the final source of visible state.
 
-## Visual acceptance
+No autonomous elapsed-time animation, delayed scrub, inertial catch-up, ambient loop, pointer-driven camera or random resampling belongs in this contract. A requestAnimationFrame callback may service a render request; it must not advance a second animation clock. Version asynchronous decode/loading work so stale results cannot replace the requested state. Record unresolved seek latency rather than claiming exact control from a `currentTime` assignment alone.
 
-- Movement reveals a purposeful spatial relationship. Camera speed, perspective,
-  actor movement and transitions agree across connected shots.
-- Scenography, wardrobe, props and original art stay continuous. Physical actions
-  happen in order; graphics must not appear without their specified cause.
-- Composites share projection, depth, occlusion, atmosphere, exposure and color.
-  A translated or glowing HTML label over footage is not spatial integration.
-- Particle typography forms from glyph particles, becomes readable, then
-  disperses into the authored flow. Paths use different spatial directions and
-  depths. Bloom must not hide illegible glyphs or a weak composition.
-- Test the complete image with effects disabled as well as enabled. A halo or
-  transition flash cannot serve as evidence of depth or continuity.
-- Preserve exact language-specific wording and glyph coverage. Generated film
-  text does not establish accurate interchangeable multilingual typography.
+A flat video supplies pixels, not a reusable 3D camera or depth buffer. Assign each image component to a plate, actual geometry, verified mask/depth source, particles, typography or semantic HTML. Name camera, depth, color and output owners; show occlusion evidence before claiming spatial integration. Separate players, galleries or VR interfaces require clearly bounded user-operated motion rules.
 
-## Motion contract
+## Prove the result and the boundaries
 
-The main journey's complete visible state is a function of absolute scroll
-progress, selected language, viewport composition and fixed seeds. Stopping
-freezes visible motion; scrolling backward reconstructs the same state. Do not
-use elapsed-time particle simulation, delayed scrub, ambient loops, pointer
-parallax, autoplay, random resampling or inertial catch-up in this journey.
-Deliberate, user-operated gallery/VR and separate film players have their own
-clearly bounded interaction contracts.
+- Keep provenance, source hashes, licenses, omissions and local adaptations separate from runtime compatibility and actual activation.
+- Record what was seen: stills, adjacent frames, continuous playback, captions and inference are different evidence. Extraction and generated files do not prove inspection.
+- Use concrete reference images and motion intervals to judge composition, continuity, art fidelity, spatial integration and readable typography. Generic adjectives and build success are insufficient.
+- Test forward/reverse equivalence, direct seeking, stop/freeze, reload at depth, resize/rotation, hidden/resume, loading failure, lifecycle cleanup, languages, focus and measured device performance.
+- Show review examples through supported previews or verified private links. Tool inspection alone does not establish that the user saw them; do not publish private material to repair a preview.
+- Keep states distinct: researched; installed; discovered; activated; mechanism proven; generated; visually accepted; integrated; tested; published. Mark unverified states explicitly.
 
-True world-space effects require an actual shared camera and geometry/depth
-ownership, or a documented camera-match and masking workflow for a plate. Do
-not claim a 2D video automatically supplies a 3D camera or depth buffer.
-
-## Delivery evidence
-
-Keep statuses distinct: researched, instructions installed, mechanism prototype,
-generated, visually accepted, integrated, tested, pushed and published.
-
-Show named review examples through actual supported previews and verified
-download/view links. An internal image-inspection tool is not proof that the
-user saw an example. Supply a stable authenticated link if chat display fails.
-Never publish a private review solely to make a preview visible.
-
-Record actual desktop/mobile checks, fixed-progress forward/reverse captures,
-stop/freeze evidence, loading failures, language coverage, focus/accessibility,
-performance and asset hashes. State untested physical-device and headset limits.
-Build success does not prove artistic quality; an appealing still does not
-prove film continuity.
+One named owner integrates shared code. One named owner submits paid jobs after the hold is lifted and scope is authorized; record the provider's actual schema, price, submission identifier and status. A balance, installed skill or working connector does not grant spending, deployment or correspondence authority.
