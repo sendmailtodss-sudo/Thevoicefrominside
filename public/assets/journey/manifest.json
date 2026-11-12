@@ -180,7 +180,7 @@
       "height": 720,
       "frameRate": 30,
       "frameCount": 150,
-      "duration": 5.0
+      "duration": 5
     },
     {
       "id": "earth-gate",
@@ -292,8 +292,8 @@
     {
       "id": "c7-route",
       "enabled": true,
-      "video": "/assets/journey/ui-20261112/c7-route-gate-to-c7-1280-g12.mp4",
-      "poster": "/assets/journey/ui-20261112/c7-route-gate-to-c7-1280-g12.webp",
+      "video": "/assets/journey/ui-20261112/c7-route-real-c7-v2-1280-g12.mp4",
+      "poster": "/assets/journey/ui-20261112/c7-route-real-c7-v2-1280-g12.webp",
       "mode": "scrub",
       "fit": "cover",
       "title": {
@@ -302,9 +302,9 @@
         "zh": "穿过大门"
       },
       "description": {
-        "no": "Gjennom porten, over anlegget og frem til C7-bygget ved muren. Utkast laget med KI; rom og personer er fiktive rekonstruksjoner.",
-        "en": "Through the gate, over the grounds and on to the C7 building by the wall. AI-generated draft; rooms and people are fictional reconstructions.",
-        "zh": "穿过大门，飞越园区，来到墙边的C7楼。 AI生成的草稿；房间和人物均为虚构重建。"
+        "no": "Dronekamera inn porten, over anlegget og frem til C7-bygget ved muren, slik det ser ut i virkeligheten. Utkast laget med KI.",
+        "en": "Drone camera in through the gate, over the grounds and up to the real C7 building by the wall. AI-generated draft.",
+        "zh": "无人机镜头穿过大门，掠过场区，抵达围墙旁真实的C7楼。AI草稿。"
       },
       "reviewStatus": "draft",
       "provenance": {
@@ -326,8 +326,8 @@
     {
       "id": "c7-window",
       "enabled": true,
-      "video": "/assets/journey/ui-20261112/c7-window-to-man-1280-g12.mp4",
-      "poster": "/assets/journey/ui-20261112/c7-window-to-man-1280-g12.webp",
+      "video": "/assets/journey/ui-20261112/c7-window-real-cell-v2-1280-g12.mp4",
+      "poster": "/assets/journey/ui-20261112/c7-window-real-cell-v2-1280-g12.webp",
       "mode": "scrub",
       "fit": "cover",
       "title": {
@@ -336,9 +336,9 @@
         "zh": "穿窗而入"
       },
       "description": {
-        "no": "Kameraet går inn gjennom tredje vindu fra venstre i øverste etasje, til en mann som ikke hører hjemme der. Utkast laget med KI; rom og personer er fiktive rekonstruksjoner.",
-        "en": "The camera enters through the third upper window from the left, to a man who does not belong there. AI-generated draft; rooms and people are fictional reconstructions.",
-        "zh": "镜头从顶层左数第三扇窗进入，遇见一个与此地格格不入的男人。 AI生成的草稿；房间和人物均为虚构重建。"
+        "no": "Kameraet går inn gjennom et vindu i 2. etasje på C7 og inn i cellen, slik cellene faktisk ser ut. Utkast laget med KI; personer er fiktive.",
+        "en": "The camera enters through a second-floor window of C7 into the cell as the cells really look. AI-generated draft; the person is fictional.",
+        "zh": "镜头从C7二楼窗户进入牢房，还原真实牢房。AI草稿；人物为虚构。"
       },
       "reviewStatus": "draft",
       "provenance": {
@@ -361,8 +361,8 @@
     {
       "id": "man-luxe",
       "enabled": true,
-      "video": "/assets/journey/ui-20261112/man-luxe-wink-1280-g12.mp4",
-      "poster": "/assets/journey/ui-20261112/man-luxe-wink-1280-g12.webp",
+      "video": "/assets/journey/ui-20261112/man-luxe-gold-v2-1280-g12.mp4",
+      "poster": "/assets/journey/ui-20261112/man-luxe-gold-v2-1280-g12.webp",
       "mode": "scrub",
       "fit": "cover",
       "title": {
@@ -371,9 +371,9 @@
         "zh": "进门时的微笑"
       },
       "description": {
-        "no": "En fiktiv mann i overdådige gullkjeder og pels gliser mot kameraet. Han er så pyntet at han tydelig ikke hører hjemme her. Utkast laget med KI; rom og personer er fiktive rekonstruksjoner.",
-        "en": "A fictional man in extravagant gold chains and fur grins at the camera. He is so dressed up that he clearly does not belong here. AI-generated draft; rooms and people are fictional reconstructions.",
-        "zh": "一位戴着夸张金链、身披皮草的虚构男子对着镜头咧嘴而笑。他打扮得如此浮夸，显然不属于这里。 AI生成的草稿；房间和人物均为虚构重建。"
+        "no": "En fiktiv mann i overdådige gullkjeder og fargerik luksusjakke gliser og blunker. Han er så pyntet at han tydelig ikke hører hjemme her. Utkast laget med KI.",
+        "en": "A fictional man in lavish gold chains and a colourful luxury jacket grins and winks. He is so decked out he clearly does not belong here. AI-generated draft.",
+        "zh": "一名虚构男子戴着浮夸金链、穿着彩色奢华夹克，咧嘴眨眼。他盛装打扮，显然格格不入。AI草稿。"
       },
       "reviewStatus": "draft",
       "provenance": {
@@ -670,7 +670,7 @@
       "height": 720,
       "frameRate": 30,
       "frameCount": 150,
-      "duration": 5.0,
+      "duration": 5,
       "disabledReason": "Replaced 2026-11-12 by Codex S08–S12 media on user instruction; kept for rollback."
     },
     {
@@ -728,7 +728,7 @@
       "height": 720,
       "frameRate": 30,
       "frameCount": 150,
-      "duration": 5.0,
+      "duration": 5,
       "disabledReason": "Replaced 2026-11-12 by Codex S08–S12 media on user instruction; kept for rollback."
     },
     {
@@ -854,7 +854,7 @@
       "height": 720,
       "frameRate": 30,
       "frameCount": 300,
-      "duration": 10.0
+      "duration": 10
     },
     {
       "id": "bergen",
@@ -912,7 +912,7 @@
       "frameCount": 192,
       "duration": 7.983333333333333,
       "frameTimes": [
-        0.0,
+        0,
         0.05,
         0.08333333333333333,
         0.13333333333333333,
@@ -936,7 +936,7 @@
         0.8833333333333333,
         0.9166666666666666,
         0.9666666666666667,
-        1.0,
+        1,
         1.05,
         1.0833333333333333,
         1.1333333333333333,
@@ -960,7 +960,7 @@
         1.8833333333333333,
         1.9166666666666667,
         1.9666666666666666,
-        2.0,
+        2,
         2.05,
         2.0833333333333335,
         2.1333333333333333,
@@ -984,7 +984,7 @@
         2.8833333333333333,
         2.9166666666666665,
         2.966666666666667,
-        3.0,
+        3,
         3.05,
         3.0833333333333335,
         3.1333333333333333,
@@ -1008,7 +1008,7 @@
         3.8833333333333333,
         3.9166666666666665,
         3.966666666666667,
-        4.0,
+        4,
         4.05,
         4.083333333333333,
         4.133333333333334,
@@ -1032,7 +1032,7 @@
         4.883333333333334,
         4.916666666666667,
         4.966666666666667,
-        5.0,
+        5,
         5.05,
         5.083333333333333,
         5.133333333333334,
@@ -1056,7 +1056,7 @@
         5.883333333333334,
         5.916666666666667,
         5.966666666666667,
-        6.0,
+        6,
         6.05,
         6.083333333333333,
         6.133333333333334,
@@ -1080,7 +1080,7 @@
         6.883333333333334,
         6.916666666666667,
         6.966666666666667,
-        7.0,
+        7,
         7.05,
         7.083333333333333,
         7.133333333333334,
@@ -1248,7 +1248,7 @@
       "height": 720,
       "frameRate": 30,
       "frameCount": 300,
-      "duration": 10.0,
+      "duration": 10,
       "sceneRole": "gallery",
       "title": {
         "no": "Tilbake i galleriet",
