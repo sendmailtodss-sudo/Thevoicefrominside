@@ -15,7 +15,7 @@ test('scroll positions round-trip and reversing input reverses the same media ti
  assert.deepEqual(position(0,scenes),{index:0,fraction:0,progress:0});
  assert.equal(position(1,scenes).fraction,1);
  assert.ok(mediaTime(.25,8)<mediaTime(.75,8));assert.equal(mediaTime(.25,8),mediaTime(.25,8));
- assert.equal(mediaTime(1,8),8-1/30);
+ assert.equal(mediaTime(1,8,{frameRate:24,frameCount:192}),191/24);
 });
 test('the neural sequence shows two or three readable expressions and includes all eleven',()=>{
  const seen=new Set();
@@ -35,7 +35,7 @@ test('homepage migration preserves unrelated original text and is idempotent',()
 });
 test('new location and actor media remain explicit dependencies rather than invented footage',async()=>{
  const m=JSON.parse(await readFile('public/assets/journey/manifest.json','utf8'));
- assert.equal(m.requestedMediaReplacements.status,'not_produced_not_location_verified');
+ assert.equal(m.requestedMediaReplacements.status,'replacement_drafts_rejected_existing_illustration_retained');
  assert.ok(m.requestedMediaReplacements.sequence.includes('c7-window-arrival'));
  for(const scene of m.scenes.filter(s=>s.enabled))assert.equal(scene.mode,'scrub');
 });

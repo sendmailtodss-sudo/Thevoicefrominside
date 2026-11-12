@@ -1,10 +1,24 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { transition, progressAt, coverRect, mediaTime, networkProgress, thoughtStates } from '../public/assets/journey/timeline.mjs';
+import { transition, progressAt, coverRect, focusFor, mediaTime, networkProgress, thoughtStates } from '../public/assets/journey/timeline.mjs';
 
 const scenes = [{ id: 'origin', type: 'point', scrollWeight: .3 }, { id: 'one', video: '/one.mp4' }, { id: 'two', video: '/two.mp4', scrollWeight: 1.4 }, { id: 'three', video: '/three.mp4' }, { id: 'art', type: 'art' }];
 const near = (a, b, message) => assert.ok(Math.abs(a - b) < 1e-8, `${message}: ${a} vs ${b}`);
 const visible = state => [state.left, state.right].filter(layer => layer && layer.opacity > 1e-8);
+
+test('narrow portrait composition keeps the observed cable end inside the actual cover crop', () => {
+  const scene = { focusX:50, focusY:50, narrowPortraitFocusX:47, narrowPortraitMaxAspect:.42 };
+  assert.deepEqual(focusFor(scene,1440,900),{x:50,y:50});
+  assert.deepEqual(focusFor(scene,390,844),{x:50,y:50});
+  assert.deepEqual(focusFor(scene,320,568),{x:50,y:50});
+  const focus = focusFor(scene,320,844);
+  assert.deepEqual(focus,{x:47,y:50});
+  const centered = coverRect(1280,720,320,844,50,50);
+  const authored = coverRect(1280,720,320,844,focus.x,focus.y);
+  assert.ok(centered.x > 499,'known end is truly outside the centered crop');
+  assert.ok(authored.x < 490 && authored.x + authored.width > 516,'observed cable ends remain within the tailored crop');
+  assert.deepEqual(focusFor({},320,844),{x:50,y:50});
+});
 
 test('both clips and their opacity are continuous at the logical scene boundary', () => {
   const boundary = progressAt(2, 0, scenes);
@@ -59,6 +73,18 @@ test('quiet or zero-span transitions select exactly one deterministic frame', ()
   assert.equal(transition(10, scenes).index, scenes.length - 1);
 });
 
+test('authored matched cuts bypass compositing and depth openings retain complete coverage', () => {
+  const cut = [{ id: 'a', video: '/a.mp4', transitionOut: { treatment: 'cut' } }, { id: 'b', video: '/b.mp4' }];
+  assert.equal(transition(.5, cut).right, null);
+  const aperture = [{ id: 'a', video: '/a.mp4' }, { id: 'b', video: '/b.mp4', transitionIn: { treatment: 'aperture', span: .04, centerX: .62, centerY: .45 } }];
+  const state = transition(.5, aperture);
+  assert.equal(state.treatment, 'aperture');
+  assert.equal(state.centerX, .62); assert.equal(state.centerY, .45);
+  assert.equal(transition(.47, aperture).right, null);
+  assert.deepEqual(transition(.5, aperture), state);
+  near(state.left.opacity + state.right.opacity, 1, 'viewport coverage');
+});
+
 test('blend endpoints meet the ordinary timeline without jumping a clip frame', () => {
   const total = 4.7, boundary = progressAt(2, 0, scenes), half = .14 / total;
   for (const p of [boundary - half, boundary + half]) {
@@ -93,17 +119,18 @@ test('invalid durations and rapid jumps cannot request a time outside a media re
 });
 
 
-test('words wait for visible brains and dissolve before the empty vortex frames', () => {
+test('words use observed connecting strands and finish phrase groups at the network cut', () => {
   const sequence = [{id:'galaxy'}, {id:'brains'}, {id:'impulses'}, {id:'vortex'}, {id:'warp'}];
   assert.equal(networkProgress(0,.9,sequence),null);
-  assert.equal(networkProgress(1,.219,sequence),null);
-  assert.equal(networkProgress(1,.22,sequence),0);
-  assert.equal(networkProgress(3,.651,sequence),null);
+  for (const fraction of [0,.22,.5,1]) assert.equal(networkProgress(1,fraction,sequence),null);
+  assert.equal(networkProgress(2,.439,sequence),null);
+  assert.equal(networkProgress(2,.44,sequence),0);
+  assert.equal(networkProgress(3,.501,sequence),null);
   assert.equal(networkProgress(4,0,sequence),null);
-  assert.ok(Math.abs(networkProgress(3,.65,sequence)-1)<1e-12);
-  for (const index of [2,3]) {
-    near(networkProgress(index-1,1,sequence),networkProgress(index,0,sequence),'network boundary');
-  }
+  near(networkProgress(3,.5,sequence),1,'all eleven phrases complete before empty warp');
+  near(networkProgress(2,.72,sequence),4/11,'four complete lifecycles before actual cable identity changes');
+  near(networkProgress(2,1,sequence),7/11,'first seven cycles finish with outgoing plate');
+  near(networkProgress(2,1,sequence),networkProgress(3,0,sequence),'network cut');
 });
 
 test('neural words enter from three directions at distinct depths and reverse exactly', () => {

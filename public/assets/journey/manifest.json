@@ -16,63 +16,149 @@
     {
       "id": "big-bang",
       "enabled": true,
-      "video": "/assets/journey/big-bang.mp4",
-      "poster": "/assets/journey/big-bang.webp",
+      "video": "/assets/journey/ui-20261112/s01-point-galaxy-1280-g12.mp4",
+      "poster": "/assets/journey/ui-20261112/s01-point-galaxy-1280-g12.webp",
       "mode": "scrub",
       "fit": "cover",
       "title": {
-        "no": "Fra et lite punkt",
-        "en": "From a single point",
-        "zh": "从一个光点开始"
+        "no": "Fra et punkt til en galakse",
+        "en": "From a point to a galaxy",
+        "zh": "从光点到星系"
       },
       "description": {
-        "no": "En visuell prøve på begynnelsen av reisen.",
-        "en": "A visual draft of the beginning of the journey.",
-        "zh": "旅程开端的视觉草稿。"
+        "no": "En KI-skapt begynnelse. Galaksen blir synlig før reisen fortsetter mellom mange hjerner.",
+        "en": "An AI-generated opening. The galaxy appears before the journey continues among many minds.",
+        "zh": "人工智能生成的开场。星系显现后，旅程进入众多大脑之间。"
       },
       "reviewStatus": "draft",
       "provenance": {
-        "provider": "Higgsfield",
-        "model": "seedance_2_5",
-        "jobId": "c86e6fc8-5c11-4041-bc63-5d146c62e7f5",
-        "durationSeconds": 8,
-        "resolution": "720p"
-      }
-    },
-    {
-      "id": "galaxy",
-      "enabled": true,
-      "video": "/assets/journey/galaxy.mp4",
-      "poster": "/assets/journey/galaxy.webp",
-      "mode": "scrub"
+        "sourceSha256": "a027968665df921ecbee5495cef47c4bc68aadb4022259d889d4bbb0a3980cd9",
+        "videoSha256": "4a9ab3a870fd789d23d48fc7f3f48258e97bbc2eb87b9987584d97f8bb1a90ae",
+        "sourceTrimInFrame": 0,
+        "sourceTrimOutFrameExclusive": 193,
+        "keyframeIntervalFrames": 12,
+        "localGenerationCost": 0
+      },
+      "width": 1280,
+      "height": 714,
+      "frameRate": 24,
+      "frameCount": 193,
+      "duration": 8.041666666666666,
+      "scrollWeight": 1,
+      "focusX": 50,
+      "focusY": 50,
+      "transitionOut": {
+        "treatment": "cut"
+      },
+      "portraitFocusX": 50,
+      "portraitFocusY": 50
     },
     {
       "id": "brains",
       "enabled": true,
-      "video": "/assets/journey/brains.mp4",
-      "poster": "/assets/journey/brains.webp",
-      "mode": "scrub"
+      "video": "/assets/journey/ui-20261112/legacy-brains-1280-g15.mp4",
+      "poster": "/assets/journey/ui-20261112/legacy-brains-1280-g15.webp",
+      "mode": "scrub",
+      "fit": "cover",
+      "width": 1280,
+      "height": 720,
+      "frameRate": 30,
+      "frameCount": 301,
+      "duration": 10.033333333333333,
+      "scrollWeight": 1,
+      "focusX": 50,
+      "focusY": 50,
+      "reviewStatus": "draft",
+      "transitionOut": {
+        "treatment": "cut"
+      },
+      "provenance": {
+        "sourceSha256": "5318d27ba74ea814b86e3e4ecf94d7510f12f0adb081c15dacd7954c07cd07b1",
+        "videoSha256": "7aeff6b9f5de28e1d325961f3badb33db4ddf5d9fcd7668197adf4708ff7039b",
+        "sourceTrimInFrame": 0,
+        "sourceTrimOutFrameExclusive": 301,
+        "keyframeIntervalFrames": 15,
+        "localGenerationCost": 0
+      },
+      "portraitFocusX": 50,
+      "portraitFocusY": 50,
+      "portraitCropLimit": "A portrait cover crop shows only part of the dense collective field."
     },
     {
       "id": "impulses",
       "enabled": true,
-      "video": "/assets/journey/impulses.mp4",
-      "poster": "/assets/journey/impulses.webp",
-      "mode": "scrub"
+      "video": "/assets/journey/ui-20261112/legacy-impulses-1280-g15.mp4",
+      "poster": "/assets/journey/ui-20261112/legacy-impulses-1280-g15.webp",
+      "mode": "scrub",
+      "fit": "cover",
+      "width": 1280,
+      "height": 720,
+      "frameRate": 30,
+      "frameCount": 301,
+      "duration": 10.033333333333333,
+      "scrollWeight": 4,
+      "focusX": 50,
+      "focusY": 50,
+      "narrowPortraitFocusX": 47,
+      "narrowPortraitMaxAspect": 0.42,
+      "reviewStatus": "draft",
+      "transitionOut": {
+        "treatment": "cut"
+      },
+      "provenance": {
+        "sourceSha256": "74bee4fc8345bd89f75ad13602065367ff879c86544348c13602fd6d928e32e5",
+        "videoSha256": "c15ee91d42492140594925d176eae2b102c86ba138167e026f47c5740c0452cd",
+        "sourceTrimInFrame": 0,
+        "sourceTrimOutFrameExclusive": 301,
+        "keyframeIntervalFrames": 15,
+        "localGenerationCost": 0
+      },
+      "portraitFocusX": 50,
+      "portraitFocusY": 50,
+      "portraitCropLimit": "A portrait cover crop shows only part of the dense collective field."
     },
     {
       "id": "vortex",
       "enabled": true,
-      "video": "/assets/journey/vortex.mp4",
-      "poster": "/assets/journey/vortex.webp",
-      "mode": "scrub"
+      "video": "/assets/journey/ui-20261112/legacy-vortex-1280-g15.mp4",
+      "poster": "/assets/journey/ui-20261112/legacy-vortex-1280-g15.webp",
+      "mode": "scrub",
+      "fit": "cover",
+      "width": 1280,
+      "height": 720,
+      "frameRate": 30,
+      "frameCount": 301,
+      "duration": 10.033333333333333,
+      "scrollWeight": 3,
+      "focusX": 50,
+      "focusY": 50,
+      "reviewStatus": "draft",
+      "transitionOut": {
+        "treatment": "cut"
+      },
+      "provenance": {
+        "sourceSha256": "fbe1deb62597bf1986bea962a1af264a17c18f1d5ac8f5c806095f24ab75aaaa",
+        "videoSha256": "4569e5c4be108f7b9200c71795ceacd7179b2a3ddefc5915e3741a772d7f636d",
+        "sourceTrimInFrame": 0,
+        "sourceTrimOutFrameExclusive": 301,
+        "keyframeIntervalFrames": 15,
+        "localGenerationCost": 0
+      },
+      "portraitFocusX": 50,
+      "portraitFocusY": 50,
+      "portraitCropLimit": "Outer brains and threads leave the portrait crop as the field becomes a whirl."
     },
     {
       "id": "supernova",
       "enabled": true,
       "video": "/assets/journey/supernova.mp4",
       "poster": "/assets/journey/supernova.webp",
-      "mode": "scrub"
+      "mode": "scrub",
+      "width": 1280,
+      "height": 720,
+      "frameRate": 30,
+      "frameCount": 301,
+      "duration": 10.033333333333333
     },
     {
       "id": "dna",
@@ -89,7 +175,12 @@
         "videoSha256": "726caffae9c01f9e04d73c82005faee6b9770d0d0a3b9728cae52307adf2d0b5",
         "priorEncodedSha256": "fe9591bab212cfe1ec4e93712723c09dda456fa75cdaee4673553a0d2bccdfaf",
         "keyframeIntervalSeconds": 1
-      }
+      },
+      "width": 1280,
+      "height": 720,
+      "frameRate": 30,
+      "frameCount": 150,
+      "duration": 5.0
     },
     {
       "id": "prison-arrival",
@@ -116,7 +207,12 @@
         "durationSeconds": 12,
         "resolution": "720p",
         "geography": "fictional_unverified"
-      }
+      },
+      "width": 1280,
+      "height": 720,
+      "frameRate": 24,
+      "frameCount": 289,
+      "duration": 12.041666666666666
     },
     {
       "id": "painter",
@@ -129,7 +225,12 @@
         "no": "En illustrativ cellescene. Ny C7-ankomst og LAR-originalen på staffeliet er ikke ferdigstilt.",
         "en": "An illustrative cell scene. The new C7 arrival and original LAR artwork on the easel are not finished.",
         "zh": "这是示意性的牢房场景。新的C7入场片段及画架上的LAR原作尚未完成。"
-      }
+      },
+      "width": 1280,
+      "height": 720,
+      "frameRate": 30,
+      "frameCount": 234,
+      "duration": 7.8
     },
     {
       "id": "rapper",
@@ -144,7 +245,12 @@
       "enabled": true,
       "video": "/assets/journey/metal.mp4",
       "poster": "/assets/journey/metal.webp",
-      "mode": "scrub"
+      "mode": "scrub",
+      "width": 1280,
+      "height": 720,
+      "frameRate": 30,
+      "frameCount": 150,
+      "duration": 5.0
     },
     {
       "id": "ai",
@@ -177,7 +283,12 @@
         "jobId": "bdeb85ec-c535-4d50-a405-8bd0fd69987d",
         "durationSeconds": 10,
         "resolution": "720p"
-      }
+      },
+      "width": 1280,
+      "height": 720,
+      "frameRate": 24,
+      "frameCount": 241,
+      "duration": 10.041666666666666
     },
     {
       "id": "poet",
@@ -190,7 +301,12 @@
         "no": "En illustrativ leseprøve. Opptak og sending av diktet er ikke ferdigstilt.",
         "en": "An illustrative reading draft. Recording and sending the poem remain unfinished.",
         "zh": "朗读场景草稿。诗歌的录制与发送尚未完成。"
-      }
+      },
+      "width": 1280,
+      "height": 720,
+      "frameRate": 30,
+      "frameCount": 150,
+      "duration": 5.0
     },
     {
       "id": "filmmaker",
@@ -223,7 +339,12 @@
         "jobId": "5934c943-ca83-4003-80e3-5571c2b3d70c",
         "durationSeconds": 12,
         "resolution": "720p"
-      }
+      },
+      "width": 1280,
+      "height": 720,
+      "frameRate": 24,
+      "frameCount": 289,
+      "duration": 12.041666666666666
     },
     {
       "id": "collective-portal",
@@ -248,7 +369,12 @@
         "jobId": "e1a359b1-68d3-442c-ad61-8a668324934c",
         "durationSeconds": 8,
         "resolution": "720p"
-      }
+      },
+      "width": 1280,
+      "height": 720,
+      "frameRate": 24,
+      "frameCount": 193,
+      "duration": 8.041666666666666
     },
     {
       "id": "gallery",
@@ -299,7 +425,12 @@
           "src": "/design-assets/approved-illustrations/lar-bak-murene-80643262351fb9d6e4de954d72707ed2fb72610c7d8a3e6296027439d3b07136.webp",
           "artistName": "Innsatt 2601-46"
         }
-      ]
+      ],
+      "width": 1280,
+      "height": 720,
+      "frameRate": 30,
+      "frameCount": 300,
+      "duration": 10.0
     },
     {
       "id": "bergen",
@@ -328,7 +459,12 @@
         "productionProof": false,
         "priorEncodedSha256": "a85a7dc8e087b0ceec0a4f8fdc732b3f3320a95565c0d35fe676081b7a487702",
         "keyframeIntervalSeconds": 1
-      }
+      },
+      "width": 1280,
+      "height": 720,
+      "frameRate": 24,
+      "frameCount": 193,
+      "duration": 8.041666666666666
     },
     {
       "id": "paris",
@@ -346,7 +482,206 @@
         "en": "Temporary AI illustration. The artwork prints are being refined.",
         "zh": "临时 AI 插图。衣服上的艺术图案仍在完善中。"
       },
-      "reviewStatus": "draft"
+      "reviewStatus": "draft",
+      "width": 1280,
+      "height": 720,
+      "frameCount": 192,
+      "duration": 7.983333333333333,
+      "frameTimes": [
+        0.0,
+        0.05,
+        0.08333333333333333,
+        0.13333333333333333,
+        0.16666666666666666,
+        0.21666666666666667,
+        0.25,
+        0.3,
+        0.3333333333333333,
+        0.38333333333333336,
+        0.4166666666666667,
+        0.4666666666666667,
+        0.5,
+        0.55,
+        0.5833333333333334,
+        0.6333333333333333,
+        0.6666666666666666,
+        0.7166666666666667,
+        0.75,
+        0.8,
+        0.8333333333333334,
+        0.8833333333333333,
+        0.9166666666666666,
+        0.9666666666666667,
+        1.0,
+        1.05,
+        1.0833333333333333,
+        1.1333333333333333,
+        1.1666666666666667,
+        1.2166666666666666,
+        1.25,
+        1.3,
+        1.3333333333333333,
+        1.3833333333333333,
+        1.4166666666666667,
+        1.4666666666666666,
+        1.5,
+        1.55,
+        1.5833333333333333,
+        1.6333333333333333,
+        1.6666666666666667,
+        1.7166666666666666,
+        1.75,
+        1.8,
+        1.8333333333333333,
+        1.8833333333333333,
+        1.9166666666666667,
+        1.9666666666666666,
+        2.0,
+        2.05,
+        2.0833333333333335,
+        2.1333333333333333,
+        2.1666666666666665,
+        2.216666666666667,
+        2.25,
+        2.3,
+        2.3333333333333335,
+        2.3833333333333333,
+        2.4166666666666665,
+        2.466666666666667,
+        2.5,
+        2.55,
+        2.5833333333333335,
+        2.6333333333333333,
+        2.6666666666666665,
+        2.716666666666667,
+        2.75,
+        2.8,
+        2.8333333333333335,
+        2.8833333333333333,
+        2.9166666666666665,
+        2.966666666666667,
+        3.0,
+        3.05,
+        3.0833333333333335,
+        3.1333333333333333,
+        3.1666666666666665,
+        3.216666666666667,
+        3.25,
+        3.3,
+        3.3333333333333335,
+        3.3833333333333333,
+        3.4166666666666665,
+        3.466666666666667,
+        3.5,
+        3.55,
+        3.5833333333333335,
+        3.6333333333333333,
+        3.6666666666666665,
+        3.716666666666667,
+        3.75,
+        3.8,
+        3.8333333333333335,
+        3.8833333333333333,
+        3.9166666666666665,
+        3.966666666666667,
+        4.0,
+        4.05,
+        4.083333333333333,
+        4.133333333333334,
+        4.166666666666667,
+        4.216666666666667,
+        4.25,
+        4.3,
+        4.333333333333333,
+        4.383333333333334,
+        4.416666666666667,
+        4.466666666666667,
+        4.5,
+        4.55,
+        4.583333333333333,
+        4.633333333333334,
+        4.666666666666667,
+        4.716666666666667,
+        4.75,
+        4.8,
+        4.833333333333333,
+        4.883333333333334,
+        4.916666666666667,
+        4.966666666666667,
+        5.0,
+        5.05,
+        5.083333333333333,
+        5.133333333333334,
+        5.166666666666667,
+        5.216666666666667,
+        5.25,
+        5.3,
+        5.333333333333333,
+        5.383333333333334,
+        5.416666666666667,
+        5.466666666666667,
+        5.5,
+        5.55,
+        5.583333333333333,
+        5.633333333333334,
+        5.666666666666667,
+        5.716666666666667,
+        5.75,
+        5.8,
+        5.833333333333333,
+        5.883333333333334,
+        5.916666666666667,
+        5.966666666666667,
+        6.0,
+        6.05,
+        6.083333333333333,
+        6.133333333333334,
+        6.166666666666667,
+        6.216666666666667,
+        6.25,
+        6.3,
+        6.333333333333333,
+        6.383333333333334,
+        6.416666666666667,
+        6.466666666666667,
+        6.5,
+        6.55,
+        6.583333333333333,
+        6.633333333333334,
+        6.666666666666667,
+        6.716666666666667,
+        6.75,
+        6.8,
+        6.833333333333333,
+        6.883333333333334,
+        6.916666666666667,
+        6.966666666666667,
+        7.0,
+        7.05,
+        7.083333333333333,
+        7.133333333333334,
+        7.166666666666667,
+        7.216666666666667,
+        7.25,
+        7.3,
+        7.333333333333333,
+        7.383333333333334,
+        7.416666666666667,
+        7.466666666666667,
+        7.5,
+        7.55,
+        7.583333333333333,
+        7.633333333333334,
+        7.666666666666667,
+        7.716666666666667,
+        7.75,
+        7.8,
+        7.833333333333333,
+        7.883333333333334,
+        7.916666666666667,
+        7.966666666666667
+      ],
+      "frameTimingNote": "Measured V7 presentation timestamps; this video is variable cadence and is not treated as constant 24 fps."
     },
     {
       "id": "new-york",
@@ -402,7 +737,12 @@
         "fullBriefCompleted": false,
         "priorEncodedSha256": "df689cc1545ebcc057e8a91fcaf791dece36efb513c10f60c50ca1d6e5caf689",
         "keyframeIntervalSeconds": 1
-      }
+      },
+      "width": 1280,
+      "height": 720,
+      "frameRate": 24,
+      "frameCount": 289,
+      "duration": 12.041666666666666
     },
     {
       "id": "stencil",
@@ -423,11 +763,16 @@
           }
         }
       ],
-      "reviewStatus": "draft"
+      "reviewStatus": "draft",
+      "width": 1280,
+      "height": 720,
+      "frameRate": 30,
+      "frameCount": 518,
+      "duration": 17.266666666666666
     }
   ],
   "requestedMediaReplacements": {
-    "status": "not_produced_not_location_verified",
+    "status": "replacement_drafts_rejected_existing_illustration_retained",
     "sequence": [
       "earth-clouds",
       "bergen-prison-gate",
@@ -445,5 +790,11 @@
       "id": "lar-bak-murene",
       "status": "original_selected_not_composited_on_easel"
     }
+  },
+  "releaseScope": {
+    "state": "bounded_neural_update_preserving_public_V7_remainder",
+    "opening": "Point/galaxy and dense collective neural field with frame-registered phrases.",
+    "locationReconstruction": "No new S03–S12 footage. Rejected S05 route/building and S06A wardrobe remain excluded. Existing V7 illustrative clips remain as previously public.",
+    "transitions": "Native-scroll presentation is reversible; the opening uses explicit editorial cuts, not a newly completed seamless geographic camera journey."
   }
 }
