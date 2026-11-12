@@ -19,13 +19,13 @@ export function spatialPhraseStates(progress, count = 11) {
     return { index, slot: index % 2, phase, visible: belongs&&phase>1e-10&&phase<1-1e-10, readable: belongs&&phase>=.40&&phase<=.59 };
   });
 }
-export function spatialBudget(width, height, dpr = 1, compact = false) {
+export function spatialBudget(width, height, dpr = 1, compact = false, ios = false) {
   const portrait = width / height < .85;
-  const limit = compact || portrait ? 1100000 : 2100000;
+  const limit = ios ? 700000 : compact || portrait ? 1100000 : 2100000;
   return {
     portrait, maskWidth: compact || portrait ? 224 : 448,
-    pixelRatio: Math.max(.5, Math.min(dpr || 1, compact || portrait ? 1.25 : 1.5, Math.sqrt(limit / Math.max(1, width * height)))),
-    trailStride: compact || portrait ? 48 : 30, trailSamples: compact || portrait ? 3 : 5,
+    pixelRatio: Math.max(.5, Math.min(dpr || 1, ios ? 1 : compact || portrait ? 1.25 : 1.5, Math.sqrt(limit / Math.max(1, width * height)))),
+    trailStride: ios || compact || portrait ? 48 : 30, trailSamples: ios || compact || portrait ? 3 : 5,
   };
 }
 const seeded = n => {
@@ -242,7 +242,8 @@ function observedStrands(input,width,height) {
   const sceneId=input.sceneId||input.scene,keys=FILAMENT_KEYS[sceneId];
   if(!keys?.length)return [];
   // An unquantized scroll fraction is not evidence of a committed video PTS.
-  // Root supplies the actual presented rVFC time; without it no path is claimed.
+  // Root supplies either an actual rVFC time or a separately labelled seek-time estimate.
+  // The latter is not a verified PTS; registration remains tied to the sampled plate RGB.
   if(!Number.isFinite(input.sceneTime))return [];
   const seconds=input.sceneTime;
   return [...new Set(keys.flatMap(key=>key.paths.map(path=>path.id)))].flatMap(id=>{
@@ -255,7 +256,7 @@ function observedStrands(input,width,height) {
     let upper=samples.findIndex(key=>key.at>=seconds);if(upper<0)upper=samples.length-1;
     let lower=Math.max(0,upper-1);if(samples.length>1&&upper===0)upper=1;
     const from=samples[lower],to=samples[upper],path=from.paths.find(path=>path.id===id),next=to.paths.find(path=>path.id===id),t=from===to?0:(seconds-from.at)/(to.at-from.at);
-    return[{id,points:path.points.map((p,index)=>sourceToPlate({x:mix(p[0],next.points[index][0],t),y:mix(p[1],next.points[index][1],t),z:mix(mix(path.depths[0],path.depths[1],index/(path.points.length-1)),mix(next.depths[0],next.depths[1],index/(path.points.length-1)),t)},width,height,1280,720,input.sourceCrop)),sourceEvidence:{type:'observed-2d-filament',sceneId,observedPTS:[from.at,to.at],currentPTS:seconds,sourceSize:[1280,720],interpolation:t<0||t>1?'bounded observed-path extrapolation; current RGB must confirm':'between observed 2D paths; current RGB must confirm'}}];
+    return[{id,points:path.points.map((p,index)=>sourceToPlate({x:mix(p[0],next.points[index][0],t),y:mix(p[1],next.points[index][1],t),z:mix(mix(path.depths[0],path.depths[1],index/(path.points.length-1)),mix(next.depths[0],next.depths[1],index/(path.points.length-1)),t)},width,height,1280,720,input.sourceCrop)),sourceEvidence:{type:'observed-2d-filament',sceneId,observedPTS:[from.at,to.at],currentTimeEstimate:seconds,timeBasis:input.sceneTimeEvidence||'unspecified',sourceSize:[1280,720],interpolation:t<0||t>1?'bounded observed-path extrapolation; current RGB must confirm':'between observed 2D paths; current RGB must confirm'}}];
   });
 }
 
@@ -369,6 +370,8 @@ export function createSpatialThoughts({ parent, words = [], onReady = () => {} }
   let renderCount = 0, lastCPUms = 0, components = [], lastMaskPlate = null, lastMaskKey = '';
   let readyState = 'loading', selected = [], geometryBytes = 0, maskCount = 0;
   let registeredStrands=[],activeRecords=[],strandStatus='awaiting-plate',currentPlateKey=null;
+  let lastRenderKey = null, lastRenderPlate = null;
+  const ios = /iPhone|iPad|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
   const compact = (navigator.deviceMemory && navigator.deviceMemory <= 4) || (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4);
   const vec = (x, y, z) => new THREE.Vector3(x, y, z);
   const inferLocale = () => Object.keys(data?.locales || {}).find(key => data.locales[key].length === currentWords.length && data.locales[key].every((entry, i) => entry.text === currentWords[i])) || null;
@@ -392,6 +395,7 @@ export function createSpatialThoughts({ parent, words = [], onReady = () => {} }
   }
   function compose() {
     if (disposed || !renderer || !data || !width || !height) return;
+    lastRenderKey = null; lastRenderPlate = null;
     freeGroups();
     locale = inferLocale(); selected = data.locales[locale] || [];
     if (!selected.length) { readyState = 'fallback'; return; }
@@ -426,7 +430,7 @@ export function createSpatialThoughts({ parent, words = [], onReady = () => {} }
   }
   function resize(nextWidth, nextHeight) {
     if (width === nextWidth && height === nextHeight && lastDPR === devicePixelRatio) return;
-    width = nextWidth; height = nextHeight; lastDPR = devicePixelRatio; budget = spatialBudget(width, height, lastDPR, compact);
+    width = nextWidth; height = nextHeight; lastDPR = devicePixelRatio; budget = spatialBudget(width, height, lastDPR, compact, ios);
     renderer.setPixelRatio(budget.pixelRatio); renderer.setSize(width, height, false);
     camera.aspect = width / height; camera.updateProjectionMatrix();
     sampleCanvas.width = budget.maskWidth; sampleCanvas.height = Math.max(1, Math.round(budget.maskWidth * height / width));
@@ -452,7 +456,7 @@ export function createSpatialThoughts({ parent, words = [], onReady = () => {} }
       components = inferred.components; depthTexture.image.data.set(inferred.pixels); depthTexture.needsUpdate = true; maskCount++;
       strandContext.drawImage(input.plate,0,0,strandCanvas.width,strandCanvas.height);
       registeredStrands=registerNeuralStrands(strandContext.getImageData(0,0,strandCanvas.width,strandCanvas.height),observedStrands(input,width,height),{width,height,sourceCrop:input.sourceCrop});
-      strandStatus=!Number.isFinite(input.sceneTime)&&!input.strands?'awaiting-committed-PTS':registeredStrands.length>=2?'registered-current-plate':'awaiting-two-visible-strands';
+      strandStatus=!Number.isFinite(input.sceneTime)&&!input.strands?'awaiting-committed-PTS':registeredStrands.length>=2?(input.sceneTimeEvidence==='estimated-seeked-fallback'?'registered-current-plate-estimated-time':'registered-current-plate'):'awaiting-two-visible-strands';
       if(!plateTexture){plateTexture=new THREE.CanvasTexture(input.plate);plateTexture.colorSpace=THREE.SRGBColorSpace;plateTexture.generateMipmaps=false;plateTexture.minFilter=THREE.LinearFilter;relight.material.uniforms.uPlate.value=plateTexture;}
       plateTexture.image=input.plate;plateTexture.needsUpdate=true;
       masks.forEach(mask => { mask.visible = components.length > 0 && input.occlusion !== false; });
@@ -493,10 +497,21 @@ export function createSpatialThoughts({ parent, words = [], onReady = () => {} }
   function render(input = {}) {
     if (disposed) return;
     lastInput = { ...input };
-    if (input.progress === null || !Number.isFinite(input.progress)) { activeRecords=[];groups.forEach(group=>{group.visible=false;});canvas.style.display = fallback.style.display = 'none'; return; }
+    if (input.progress === null || !Number.isFinite(input.progress)) { lastRenderKey = null; lastRenderPlate = null; activeRecords=[];groups.forEach(group=>{group.visible=false;});canvas.style.display = fallback.style.display = 'none'; return; }
     if (!renderer || failed || readyState === 'fallback') { if (failed || readyState === 'fallback') visibleFallback(input); return; }
+    const nextWidth = Math.max(1, Math.round(input.width || parent.clientWidth || innerWidth));
+    const nextHeight = Math.max(1, Math.round(input.height || parent.clientHeight || innerHeight));
+    // Repeated paintPhase calls for the same committed plate and story state
+    // must not submit the five-pass graph again. Without a plate key we cannot
+    // prove that a mutable canvas still contains the same pixels.
+    const renderKey = input.plateKey == null ? null : JSON.stringify([
+      input.plateKey, input.progress, nextWidth, nextHeight, devicePixelRatio,
+      input.scene, input.sceneId, input.sceneFraction, input.sceneTime, input.sceneTimeEvidence,
+      input.sourceCrop, input.strands, input.occlusion, input.particlesOnly, input.presence
+    ]);
+    if (renderKey !== null && renderKey === lastRenderKey && input.plate === lastRenderPlate && readyState === 'ready') return;
     const began = performance.now();
-    resize(Math.max(1, Math.round(input.width || parent.clientWidth || innerWidth)), Math.max(1, Math.round(input.height || parent.clientHeight || innerHeight)));
+    resize(nextWidth, nextHeight);
     if (inferLocale() !== locale) compose();
     if (readyState !== 'ready') { visibleFallback(input); return; }
     setCamera(clamp(input.progress)); updateMask(input);
@@ -546,19 +561,20 @@ export function createSpatialThoughts({ parent, words = [], onReady = () => {} }
     screenQuad.material=compositeMaterial;compositeMaterial.uniforms.uCore.value=coreTarget.texture;compositeMaterial.uniforms.uGlow.value=glowTarget.texture;compositeMaterial.uniforms.uGlowGain.value=.90;
     renderer.setRenderTarget(null);renderer.render(screenScene,screenCamera);
     renderCount++; lastCPUms = performance.now() - began;
+    lastRenderKey = renderKey; lastRenderPlate = input.plate;
   }
   function setWords(nextWords) {
     if(disposed)return;
     if (nextWords.length === currentWords.length && nextWords.every((word, i) => word === currentWords[i])) return;
-    currentWords = [...nextWords]; if (renderer && data) compose();
+    currentWords = [...nextWords]; lastRenderKey = null; lastRenderPlate = null; if (renderer && data) compose();
   }
-  function contextLost(event) { event.preventDefault(); failed = true; readyState = 'context-lost'; visibleFallback(lastInput); }
-  function contextRestored() { if (disposed) return; failed = false; compose(); lastMaskKey = ''; onReady(); }
+  function contextLost(event) { event.preventDefault(); lastRenderKey = null; lastRenderPlate = null; failed = true; readyState = 'context-lost'; visibleFallback(lastInput); }
+  function contextRestored() { if (disposed) return; lastRenderKey = null; lastRenderPlate = null; failed = false; compose(); lastMaskKey = ''; onReady(); }
   canvas.addEventListener('webglcontextlost', contextLost); canvas.addEventListener('webglcontextrestored', contextRestored);
   const ready = loadAssets().then(([runtime, catalog]) => {
     if (disposed) return;
     THREE = runtime; data = catalog;
-    renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true, preserveDrawingBuffer: true, powerPreference: compact ? 'low-power' : 'high-performance' });
+    renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: !ios, preserveDrawingBuffer: true, powerPreference: compact || ios ? 'low-power' : 'high-performance' });
     renderer.outputColorSpace = THREE.SRGBColorSpace; renderer.setClearColor(0x000000, 0);
     const targetType=renderer.extensions.has('EXT_color_buffer_float')?THREE.HalfFloatType:THREE.UnsignedByteType;
     const target=depthBuffer=>{const value=new THREE.WebGLRenderTarget(1,1,{type:targetType,depthBuffer,minFilter:THREE.LinearFilter,magFilter:THREE.LinearFilter,generateMipmaps:false});value.texture.colorSpace=THREE.LinearSRGBColorSpace;return value;};
@@ -593,7 +609,7 @@ export function createSpatialThoughts({ parent, words = [], onReady = () => {} }
     freeGroups(); masks.forEach(mask => { mask.geometry.dispose(); mask.material.dispose(); });relight?.geometry.dispose();relight?.material.dispose();plateTexture?.dispose(); depthTexture?.dispose();
     [coreTarget,emissionTarget,blurTarget,glowTarget].forEach(target=>target?.dispose());screenQuad?.geometry.dispose();blurMaterial?.dispose();compositeMaterial?.dispose();renderer?.dispose();
     if (sampleCanvas) sampleCanvas.width = sampleCanvas.height = 1;if(strandCanvas)strandCanvas.width=strandCanvas.height=1;canvas.width=canvas.height=1; canvas.remove(); fallback.remove();
-    components = [];registeredStrands=[];activeRecords=[];strandStatus='disposed';currentPlateKey=null; lastInput = { progress: null }; lastMaskPlate = null;
+    components = [];registeredStrands=[];activeRecords=[];strandStatus='disposed';currentPlateKey=null; lastInput = { progress: null }; lastMaskPlate = null; lastRenderKey = null; lastRenderPlate = null;
   }
   return { setWords, render, dispose, debug, ready, canvas };
 }

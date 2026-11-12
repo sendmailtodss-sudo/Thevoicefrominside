@@ -362,3 +362,6 @@ body.minds-home:has(.sj[data-enhanced=true]) #dev-preview-notice{background:#071
 
 /* Authored white film gallery; no legacy tile dimming. */
 .sj[data-enhanced=true]:not([data-quiet=true])[data-scene=gallery] .sj-media{filter:none!important}
+
+/* Main presentation: no production labels over the authored scene. */
+.sj .sj-scene{display:none!important}

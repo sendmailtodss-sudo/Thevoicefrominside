@@ -988,8 +988,8 @@
     {
       "id": "bergen",
       "enabled": true,
-      "video": "/assets/journey/finished/bergen-66eb70a076c86467.mp4",
-      "poster": "/assets/journey/finished/bergen-66eb70a076c86467.webp",
+      "video": "/assets/journey/ui-20261112/bergen-woman-v2-1280-g12.mp4",
+      "poster": "/assets/journey/ui-20261112/bergen-woman-v2-1280-g12.webp",
       "mode": "scrub",
       "title": {
         "no": "Motestudie i Bergen",
@@ -1003,25 +1003,28 @@
       },
       "reviewStatus": "draft",
       "provenance": {
-        "sourceSha256": "66eb70a076c86467603be7e50d674cb44c1042434e4853730c5c44eed77c69ea",
-        "videoSha256": "66eb70a076c86467603be7e50d674cb44c1042434e4853730c5c44eed77c69ea",
-        "posterSha256": "9023cf2a18231b5a1f3c2e731dd5c9467348f2fe1c28f549f05ea80bc467f172",
-        "localImportCostCredits": 0,
-        "upstreamGenerationCost": "not_inferred",
-        "importMethod": "Reviewed local video, full decode and measured frame timestamps; no transcoding"
+        "provider": "Higgsfield",
+        "model": "seedance_2_5",
+        "videoSha256": "818e7dfe511dae24d2634090b88da7f854f5a090c2c0af3afa5808bdaa3e189e",
+        "durationSeconds": 8.041667,
+        "originalArtworkSha256": "80643262351fb9d6e4de954d72707ed2fb72610c7d8a3e6296027439d3b07136",
+        "process": "Perspective tracked original print and fabric luminance modulation; not full3Dfabricsimulation",
+        "productionProof": false,
+        "priorEncodedSha256": "a85a7dc8e087b0ceec0a4f8fdc732b3f3320a95565c0d35fe676081b7a487702",
+        "keyframeIntervalSeconds": 1
       },
+      "width": 1280,
+      "height": 720,
+      "frameRate": 24,
+      "frameCount": 193,
+      "duration": 8.041666666666666,
       "transitionOut": {
         "treatment": "luminous-veil",
         "span": 0.04,
         "color": "#faf0dd",
         "centerX": 0.52,
         "centerY": 0.46
-      },
-      "width": 1280,
-      "height": 720,
-      "frameCount": 145,
-      "frameRate": 24.0,
-      "duration": 6.041666666666667
+      }
     },
     {
       "id": "paris",
