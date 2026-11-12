@@ -1,0 +1,602 @@
+{
+  "schemaVersion": 2,
+  "checkedUtc": "2026-11-12T00:54:13.159552+00:00",
+  "scope": "Seventeen canonical skills including one unchanged existing executable video-analysis skill, three thin Claude entries; no application runtime change.",
+  "skillCount": 17,
+  "claudeEntryWrappers": 3,
+  "skills": [
+    {
+      "name": "award-calibrated-art-direction",
+      "frontmatterValid": true,
+      "instructionOnly": true,
+      "automaticClientActivationVerified": false
+    },
+    {
+      "name": "build-threejs-scroll-worlds",
+      "frontmatterValid": true,
+      "instructionOnly": true,
+      "automaticClientActivationVerified": false
+    },
+    {
+      "name": "cinematic-continuity-direction",
+      "frontmatterValid": true,
+      "instructionOnly": true,
+      "automaticClientActivationVerified": false
+    },
+    {
+      "name": "cinematic-production",
+      "frontmatterValid": true,
+      "instructionOnly": true,
+      "automaticClientActivationVerified": false
+    },
+    {
+      "name": "cinematography",
+      "frontmatterValid": true,
+      "instructionOnly": true,
+      "automaticClientActivationVerified": false
+    },
+    {
+      "name": "deterministic-scroll-presentation",
+      "frontmatterValid": true,
+      "instructionOnly": true,
+      "automaticClientActivationVerified": false
+    },
+    {
+      "name": "higgsfield-production-control",
+      "frontmatterValid": true,
+      "instructionOnly": true,
+      "automaticClientActivationVerified": false
+    },
+    {
+      "name": "inclusive-cinematic-web",
+      "frontmatterValid": true,
+      "instructionOnly": true,
+      "automaticClientActivationVerified": false
+    },
+    {
+      "name": "plate-matchmove-compositing",
+      "frontmatterValid": true,
+      "instructionOnly": true,
+      "automaticClientActivationVerified": false
+    },
+    {
+      "name": "reversible-media-finishing",
+      "frontmatterValid": true,
+      "instructionOnly": true,
+      "automaticClientActivationVerified": false
+    },
+    {
+      "name": "scene-anchored-particles-and-fabric",
+      "frontmatterValid": true,
+      "instructionOnly": true,
+      "automaticClientActivationVerified": false
+    },
+    {
+      "name": "scroll-scrubbed-visual-sequence",
+      "frontmatterValid": true,
+      "instructionOnly": true,
+      "automaticClientActivationVerified": false
+    },
+    {
+      "name": "scroll-world-storytelling",
+      "frontmatterValid": true,
+      "instructionOnly": true,
+      "automaticClientActivationVerified": false
+    },
+    {
+      "name": "spatial-particle-typography",
+      "frontmatterValid": true,
+      "instructionOnly": true,
+      "automaticClientActivationVerified": false
+    },
+    {
+      "name": "threejs-particles-trails-and-effects",
+      "frontmatterValid": true,
+      "instructionOnly": true,
+      "automaticClientActivationVerified": false
+    },
+    {
+      "name": "visual-grill-review",
+      "frontmatterValid": true,
+      "instructionOnly": true,
+      "automaticClientActivationVerified": false
+    },
+    {
+      "name": "youtube-video-analysis",
+      "frontmatterValid": true,
+      "instructionOnly": false,
+      "automaticClientActivationVerified": false
+    }
+  ],
+  "files": [
+    {
+      "path": ".agents/skills/award-calibrated-art-direction/SKILL.md",
+      "bytes": 9978,
+      "sha256": "345c6d66e5261249dd54d3a267deadad38273bb232192e2459bf923be3a75bcc"
+    },
+    {
+      "path": ".agents/skills/award-calibrated-art-direction/SOURCE.json",
+      "bytes": 1233,
+      "sha256": "e6b4e0d487f961b06885308bd5ccc648a211973955ee9b60c4d3366957451c13"
+    },
+    {
+      "path": ".agents/skills/award-calibrated-art-direction/agents/openai.yaml",
+      "bytes": 43,
+      "sha256": "a1499d95abd8447558c535fe5554adcc3c9b988a0a39264a6283d430effe1e94"
+    },
+    {
+      "path": ".agents/skills/award-calibrated-art-direction/references/BROWSER-NOTE.md",
+      "bytes": 3087,
+      "sha256": "6d4938ce51065179af4022578c8b75a1f4c7a31c57db0c16c9acc122d4630905"
+    },
+    {
+      "path": ".agents/skills/award-calibrated-art-direction/references/RESEARCH.md",
+      "bytes": 15460,
+      "sha256": "c8f022b1ce006e68caa84bccd44a6d5645adda6b5c7b1686c6510c9047ca47b9"
+    },
+    {
+      "path": ".agents/skills/award-calibrated-art-direction/references/SOURCES.md",
+      "bytes": 6633,
+      "sha256": "6e49f300da8dd1421bd8369dd5d0484c6ea8e2b57571efe216985c4267fcfb98"
+    },
+    {
+      "path": ".agents/skills/build-threejs-scroll-worlds/ADOPTION.md",
+      "bytes": 4914,
+      "sha256": "b5fe331a18683c791fa1b9e6f36ca24c9a4ce1adda883d194f4eef95551fc725"
+    },
+    {
+      "path": ".agents/skills/build-threejs-scroll-worlds/LICENSE",
+      "bytes": 1064,
+      "sha256": "b2a071ba22fefd803f4e9d1f5c777dd79c62d191695586a1a73fd4d0ebd051c6"
+    },
+    {
+      "path": ".agents/skills/build-threejs-scroll-worlds/SKILL.md",
+      "bytes": 18658,
+      "sha256": "bb36c79ff435045f57a7f3ec3f50c27d37087c2e5a5ab1b17b6ba219d3f2c091"
+    },
+    {
+      "path": ".agents/skills/build-threejs-scroll-worlds/SOURCE.json",
+      "bytes": 6605,
+      "sha256": "f95e317446f43324b454e4f594bb42b7da00602653dc69e8403716c1f67475c9"
+    },
+    {
+      "path": ".agents/skills/build-threejs-scroll-worlds/agents/openai.yaml",
+      "bytes": 43,
+      "sha256": "a1499d95abd8447558c535fe5554adcc3c9b988a0a39264a6283d430effe1e94"
+    },
+    {
+      "path": ".agents/skills/build-threejs-scroll-worlds/references/kage-anatomy.md",
+      "bytes": 7732,
+      "sha256": "0f14a21eef2fcac4d9e43be42ca93c049d82e2fdf3430857d7fe5b0d8080651e"
+    },
+    {
+      "path": ".agents/skills/build-threejs-scroll-worlds/references/quality-and-qa.md",
+      "bytes": 11414,
+      "sha256": "4f422973f46d4ec3a9eead3e4816998a33fd5ba78ddff0c3dbd17b5ebf204eaf"
+    },
+    {
+      "path": ".agents/skills/build-threejs-scroll-worlds/references/realtime-architecture.md",
+      "bytes": 15791,
+      "sha256": "1f4bcb2ed0f1bbf5f48d8b7372e1296894f1e99148b5376455eada0c51ad5c63"
+    },
+    {
+      "path": ".agents/skills/build-threejs-scroll-worlds/references/world-bible.md",
+      "bytes": 12682,
+      "sha256": "292600301358e93e20794eae093f539348358aa0db433fab84633fdae9d08f65"
+    },
+    {
+      "path": ".agents/skills/cinematic-continuity-direction/SKILL.md",
+      "bytes": 8014,
+      "sha256": "687658d9f59a769a09d736e87fd1961f5867575b20190f2c7d4d893b65a50f97"
+    },
+    {
+      "path": ".agents/skills/cinematic-continuity-direction/SOURCE.json",
+      "bytes": 914,
+      "sha256": "b521282985e34681f38b7e57845543d3b59524b122925fe25383775cf177cd4f"
+    },
+    {
+      "path": ".agents/skills/cinematic-continuity-direction/agents/openai.yaml",
+      "bytes": 43,
+      "sha256": "a1499d95abd8447558c535fe5554adcc3c9b988a0a39264a6283d430effe1e94"
+    },
+    {
+      "path": ".agents/skills/cinematic-continuity-direction/references/SOURCES.md",
+      "bytes": 6965,
+      "sha256": "f3d623dde6db68f5c490277448509991d3c23f84cdc2b7177f7a45d62eb4e0bc"
+    },
+    {
+      "path": ".agents/skills/cinematic-production/ADOPTION.md",
+      "bytes": 3003,
+      "sha256": "9875f6db82cf5f98f01eeee98bf93398496c8cbf733b29f99f29a32532d1ce02"
+    },
+    {
+      "path": ".agents/skills/cinematic-production/SKILL.md",
+      "bytes": 8159,
+      "sha256": "116717886e5a7598a4147f194057c1477312afc9e8d755b736271aa777d9c666"
+    },
+    {
+      "path": ".agents/skills/cinematic-production/SOURCES.md",
+      "bytes": 4780,
+      "sha256": "2ce9d83a2d83a731d2f18a37d45020a904c0bf237507b640c50e0b2b5292e76e"
+    },
+    {
+      "path": ".agents/skills/cinematic-production/references/editing-and-finishing.md",
+      "bytes": 801,
+      "sha256": "0d66f7dbbf1752f09c2f7b6bad2b6f4f823eb25a92b68dedc165cee2ffbdc764"
+    },
+    {
+      "path": ".agents/skills/cinematic-production/references/higgsfield-control.md",
+      "bytes": 971,
+      "sha256": "80527a2d54a46d3470f2b81d149a928a2bd2c140103ec59daf13cda55c643ff4"
+    },
+    {
+      "path": ".agents/skills/cinematic-production/references/web/ARCHITECTURE-DECISION-MATRIX.md",
+      "bytes": 8233,
+      "sha256": "ad35cd2956d0c55789796b33086f3ae88103b9ae63fbb875feb98cf890bd2cfc"
+    },
+    {
+      "path": ".agents/skills/cinematic-production/references/web/BROWSER-TESTS-AND-BUDGETS.md",
+      "bytes": 9234,
+      "sha256": "e7024b519931758a00c74106b1ab078f1b50a5e538973f073eb708eb8d4848fd"
+    },
+    {
+      "path": ".agents/skills/cinematic-production/references/web/MEDIA-DELIVERY-AND-PRIVATE-STAGING.md",
+      "bytes": 6867,
+      "sha256": "3bf28c69e0c2c4aa2cbace32d0e8f752a217e3ed378c33aad25faff591e1be52"
+    },
+    {
+      "path": ".agents/skills/cinematic-production/references/web/REPOSITORY-OBSERVATIONS.md",
+      "bytes": 3447,
+      "sha256": "608a647f5e9dbad28eaa3b42fc402d1beaacb5d7ec8ea4f2ba9cc8c03a4fb518"
+    },
+    {
+      "path": ".agents/skills/cinematic-production/references/web/SOURCE-REGISTER.md",
+      "bytes": 28255,
+      "sha256": "7b2e7025809a5e51903886e1c9cdeb8dbab0210302f90494febe94274df33ebe"
+    },
+    {
+      "path": ".agents/skills/cinematic-production/references/web-direction.md",
+      "bytes": 888,
+      "sha256": "4719c718aee493d825e16fcf5a2039aa0015e62a732cf1877014b470613aedaa"
+    },
+    {
+      "path": ".agents/skills/cinematography/ADOPTION.md",
+      "bytes": 4367,
+      "sha256": "4c8d0a5299c1b831e5c3158c73ce79966653b66918f4c2cc60f4b0f24ebb1850"
+    },
+    {
+      "path": ".agents/skills/cinematography/LICENSE",
+      "bytes": 1063,
+      "sha256": "c8758c0a3b859614b7acc251766fe1f313502f23dd2b933f4dd2b44dc2c3c7e7"
+    },
+    {
+      "path": ".agents/skills/cinematography/SKILL.md",
+      "bytes": 4925,
+      "sha256": "8d23b4836a7621e1c9715def480d95e3b4b2135bfd7995e2800013949fc8eba7"
+    },
+    {
+      "path": ".agents/skills/cinematography/SOURCE.json",
+      "bytes": 4714,
+      "sha256": "0aa4dc19519a81d7c07bc0b25e3cdf9f7ea9423c75537281840f81d3ca0b18e6"
+    },
+    {
+      "path": ".agents/skills/cinematography/agents/openai.yaml",
+      "bytes": 43,
+      "sha256": "a1499d95abd8447558c535fe5554adcc3c9b988a0a39264a6283d430effe1e94"
+    },
+    {
+      "path": ".agents/skills/cinematography/references/examples.md",
+      "bytes": 1674,
+      "sha256": "e143734e15f79411240056f22b9def4d8053b11cb54958213e68eec9899778c8"
+    },
+    {
+      "path": ".agents/skills/cinematography/references/lighting-lens-color.md",
+      "bytes": 1995,
+      "sha256": "e9bbe4c61c98c0cf98cb652101b0e16f670184d7236e5509e9abc2e8de195f2a"
+    },
+    {
+      "path": ".agents/skills/cinematography/references/shot-language.md",
+      "bytes": 1901,
+      "sha256": "21ca47d38ae6388293c410c4181fd2d84f8058fbcd36bf3db5d1643179e3faaf"
+    },
+    {
+      "path": ".agents/skills/deterministic-scroll-presentation/SKILL.md",
+      "bytes": 7305,
+      "sha256": "76a6e1e947ed471365de9282eba39b773797d81a94734b8f5b442f4c69a2056d"
+    },
+    {
+      "path": ".agents/skills/deterministic-scroll-presentation/SOURCE.json",
+      "bytes": 758,
+      "sha256": "9663a5fff7bae2a0a2876f5e3b1b159c19fbe0b02fac166d25af69eaade7711c"
+    },
+    {
+      "path": ".agents/skills/deterministic-scroll-presentation/agents/openai.yaml",
+      "bytes": 43,
+      "sha256": "a1499d95abd8447558c535fe5554adcc3c9b988a0a39264a6283d430effe1e94"
+    },
+    {
+      "path": ".agents/skills/higgsfield-production-control/SKILL.md",
+      "bytes": 8606,
+      "sha256": "b6cc6473a68f00ee57e33b72f9a7327cb605e4e0b6e3228a2c501672267b1524"
+    },
+    {
+      "path": ".agents/skills/higgsfield-production-control/SOURCE.json",
+      "bytes": 914,
+      "sha256": "9afeaa7d951d855ae263336be15c7a04cfacb362fd0304f30e5875d8377e3a49"
+    },
+    {
+      "path": ".agents/skills/higgsfield-production-control/agents/openai.yaml",
+      "bytes": 43,
+      "sha256": "a1499d95abd8447558c535fe5554adcc3c9b988a0a39264a6283d430effe1e94"
+    },
+    {
+      "path": ".agents/skills/higgsfield-production-control/references/SOURCES.md",
+      "bytes": 5687,
+      "sha256": "16c89d37d82ffcbcbdda35e1368697c191df7da7c4892548350850de205c8460"
+    },
+    {
+      "path": ".agents/skills/inclusive-cinematic-web/SKILL.md",
+      "bytes": 7045,
+      "sha256": "9399849bf1b51d2f3677a55294d50e12e6161b53d754715a45f733d8da6e8905"
+    },
+    {
+      "path": ".agents/skills/inclusive-cinematic-web/SOURCE.json",
+      "bytes": 758,
+      "sha256": "1893428b4379b79b057facd29c01755d3ad23a9670f35cfc2daccc22d04fd562"
+    },
+    {
+      "path": ".agents/skills/inclusive-cinematic-web/agents/openai.yaml",
+      "bytes": 43,
+      "sha256": "a1499d95abd8447558c535fe5554adcc3c9b988a0a39264a6283d430effe1e94"
+    },
+    {
+      "path": ".agents/skills/plate-matchmove-compositing/SKILL.md",
+      "bytes": 9151,
+      "sha256": "26a3c8cc320a876c06c2e1326c755a0660002ee17266100c9dce1f43b8168513"
+    },
+    {
+      "path": ".agents/skills/plate-matchmove-compositing/SOURCE.json",
+      "bytes": 914,
+      "sha256": "edfa7b595bf2a4381563b46efbcdae0d84ef3d89bd913036b35f01216222d996"
+    },
+    {
+      "path": ".agents/skills/plate-matchmove-compositing/agents/openai.yaml",
+      "bytes": 43,
+      "sha256": "a1499d95abd8447558c535fe5554adcc3c9b988a0a39264a6283d430effe1e94"
+    },
+    {
+      "path": ".agents/skills/plate-matchmove-compositing/references/SOURCES.md",
+      "bytes": 8770,
+      "sha256": "ca40ec64c27a68f7f8b76975fe16cec14267d45140d1fd94b8afd2074b5c7411"
+    },
+    {
+      "path": ".agents/skills/reversible-media-finishing/SKILL.md",
+      "bytes": 10969,
+      "sha256": "927da29ec6d6c90c95cf4dbfcbd9cf76ebc50fa6026e9398a596e416d2d124e7"
+    },
+    {
+      "path": ".agents/skills/reversible-media-finishing/SOURCE.json",
+      "bytes": 915,
+      "sha256": "a320db0da08c982772204ad4d4e0889fd7adc073a626364b108ee578001abb74"
+    },
+    {
+      "path": ".agents/skills/reversible-media-finishing/agents/openai.yaml",
+      "bytes": 43,
+      "sha256": "a1499d95abd8447558c535fe5554adcc3c9b988a0a39264a6283d430effe1e94"
+    },
+    {
+      "path": ".agents/skills/reversible-media-finishing/references/SOURCES.md",
+      "bytes": 9370,
+      "sha256": "9faf0fb4cda702136c54358f235533d0cf719dda5ff7d3ab51c43cbfc3886bb1"
+    },
+    {
+      "path": ".agents/skills/scene-anchored-particles-and-fabric/SKILL.md",
+      "bytes": 9400,
+      "sha256": "e9f5651246b9cb87eb253f47e5b283beec2ba22e51d9453e840c6ec262c6464b"
+    },
+    {
+      "path": ".agents/skills/scene-anchored-particles-and-fabric/SOURCE.json",
+      "bytes": 914,
+      "sha256": "51bff25e860523d98f90e05f5610a7c84565e978c7cd3ec8e8b5937b397f9aee"
+    },
+    {
+      "path": ".agents/skills/scene-anchored-particles-and-fabric/agents/openai.yaml",
+      "bytes": 43,
+      "sha256": "a1499d95abd8447558c535fe5554adcc3c9b988a0a39264a6283d430effe1e94"
+    },
+    {
+      "path": ".agents/skills/scene-anchored-particles-and-fabric/references/SOURCES.md",
+      "bytes": 7277,
+      "sha256": "8cc75894aeb5335a00edc26d5a747c367b9fceefde760e3812dfd3460cb1e4e6"
+    },
+    {
+      "path": ".agents/skills/scroll-scrubbed-visual-sequence/ADOPTION.md",
+      "bytes": 4505,
+      "sha256": "4fc12b99c05b16cd3e7a18d261e6dcead3aec85e7a48f7e908f2ab5253af91a1"
+    },
+    {
+      "path": ".agents/skills/scroll-scrubbed-visual-sequence/LICENSE",
+      "bytes": 1064,
+      "sha256": "b2a071ba22fefd803f4e9d1f5c777dd79c62d191695586a1a73fd4d0ebd051c6"
+    },
+    {
+      "path": ".agents/skills/scroll-scrubbed-visual-sequence/REFERENCES.md",
+      "bytes": 507,
+      "sha256": "a7d61327736c0fdba803b61b9c5ff0505cb4c682c2899cf95621018f8192d139"
+    },
+    {
+      "path": ".agents/skills/scroll-scrubbed-visual-sequence/SKILL.md",
+      "bytes": 4640,
+      "sha256": "a98df66caf5861caf04ccd109dae86d45f7b4aa280540dac4827a7081630cd5a"
+    },
+    {
+      "path": ".agents/skills/scroll-scrubbed-visual-sequence/SOURCE.json",
+      "bytes": 4194,
+      "sha256": "a187b68f49f5fed33dd21f44baffdfa7fd1bc6b2f3af668d2316af86cc476e6a"
+    },
+    {
+      "path": ".agents/skills/scroll-scrubbed-visual-sequence/agents/openai.yaml",
+      "bytes": 43,
+      "sha256": "a1499d95abd8447558c535fe5554adcc3c9b988a0a39264a6283d430effe1e94"
+    },
+    {
+      "path": ".agents/skills/scroll-world-storytelling/ADOPTION.md",
+      "bytes": 5758,
+      "sha256": "abed1e801604418b748ae057f1db1ccf9beaffec5dc61aa6b892bb49179ffcbe"
+    },
+    {
+      "path": ".agents/skills/scroll-world-storytelling/LICENSE",
+      "bytes": 1064,
+      "sha256": "b2a071ba22fefd803f4e9d1f5c777dd79c62d191695586a1a73fd4d0ebd051c6"
+    },
+    {
+      "path": ".agents/skills/scroll-world-storytelling/REFERENCES.md",
+      "bytes": 610,
+      "sha256": "13eb9828382d2aff33f7bec37ecae92dc02e91efc3f8a4bb4f29304bb6f3fc21"
+    },
+    {
+      "path": ".agents/skills/scroll-world-storytelling/SKILL.md",
+      "bytes": 11889,
+      "sha256": "505caf90b92ac6d9e6aecda1d79df36adc96fe5cbeb8eaac5c45b6cdefee7eab"
+    },
+    {
+      "path": ".agents/skills/scroll-world-storytelling/SOURCE.json",
+      "bytes": 6064,
+      "sha256": "52a39dddbdf3f12a2e2f4c0e121655dac188fc3501dc0814807c6f8afc951b8b"
+    },
+    {
+      "path": ".agents/skills/scroll-world-storytelling/agents/openai.yaml",
+      "bytes": 43,
+      "sha256": "a1499d95abd8447558c535fe5554adcc3c9b988a0a39264a6283d430effe1e94"
+    },
+    {
+      "path": ".agents/skills/spatial-particle-typography/SKILL.md",
+      "bytes": 8442,
+      "sha256": "04e5b0250432d25395b597fc49f8a98660b27667267a4a3add5745b428aa2fe5"
+    },
+    {
+      "path": ".agents/skills/spatial-particle-typography/SOURCE.json",
+      "bytes": 758,
+      "sha256": "a2a1c6554e77dd2f74a73d31e6963de037b24e0fa32728ca432c712feecd51ae"
+    },
+    {
+      "path": ".agents/skills/spatial-particle-typography/agents/openai.yaml",
+      "bytes": 43,
+      "sha256": "a1499d95abd8447558c535fe5554adcc3c9b988a0a39264a6283d430effe1e94"
+    },
+    {
+      "path": ".agents/skills/threejs-particles-trails-and-effects/ADOPTION.md",
+      "bytes": 5227,
+      "sha256": "203ffef33208b902999b6292a6ed20b142d2fe3a353833a7e3f575cc4d4a9758"
+    },
+    {
+      "path": ".agents/skills/threejs-particles-trails-and-effects/LICENSE",
+      "bytes": 770,
+      "sha256": "2eb819c7a3aab1b2989c392124b5f2d8a3db266ccc886d9c92148a9cecd0aa65"
+    },
+    {
+      "path": ".agents/skills/threejs-particles-trails-and-effects/SKILL.md",
+      "bytes": 9907,
+      "sha256": "c8c7d3b34203fe980d6bdcb5337099ee1bfb7fd0b835b8f4c9840782df9e3867"
+    },
+    {
+      "path": ".agents/skills/threejs-particles-trails-and-effects/SOURCE.json",
+      "bytes": 4628,
+      "sha256": "b1676b64151e83cc2fa38322df639b161f19760f428e6005a51c88ebc42575ee"
+    },
+    {
+      "path": ".agents/skills/threejs-particles-trails-and-effects/agents/openai.yaml",
+      "bytes": 43,
+      "sha256": "a1499d95abd8447558c535fe5554adcc3c9b988a0a39264a6283d430effe1e94"
+    },
+    {
+      "path": ".agents/skills/threejs-particles-trails-and-effects/references/particles-trails-and-effects-system.md",
+      "bytes": 24428,
+      "sha256": "a4dba29df24bc958bf29e5854f19e660b64020b2456b74fd67db6978e0aaec2c"
+    },
+    {
+      "path": ".agents/skills/visual-grill-review/LICENSE",
+      "bytes": 1070,
+      "sha256": "821556e6336796450ab852d375117b48a4887e71d255794fd6318d99982a5ab6"
+    },
+    {
+      "path": ".agents/skills/visual-grill-review/SKILL.md",
+      "bytes": 3816,
+      "sha256": "33de1785a7cf89088b55d004299032520930c99bc4be1a4b7ba6e765ff9026a3"
+    },
+    {
+      "path": ".agents/skills/visual-grill-review/SOURCE.json",
+      "bytes": 2103,
+      "sha256": "9ebbbb230f9604021cdac04eb45a20ff84de24cb06b4003ac7999f34a841c4a9"
+    },
+    {
+      "path": ".agents/skills/visual-grill-review/references/grill-me.md",
+      "bytes": 4689,
+      "sha256": "6e3b3b81c1ad3a0b3ba3d36ec725e376d225e7867bfbf23a5129cf245e94bb0c"
+    },
+    {
+      "path": ".agents/skills/youtube-video-analysis/PACKAGE-MANIFEST.json",
+      "bytes": 1202,
+      "sha256": "5c463a28a1bd5529334e440f3df74d98baa23c980c301776aa1e1bfb74f44658"
+    },
+    {
+      "path": ".agents/skills/youtube-video-analysis/README.md",
+      "bytes": 2278,
+      "sha256": "182ae05c871fa1275d93a7973ddfe5603988e2cef0079e7dff481d34072bba78"
+    },
+    {
+      "path": ".agents/skills/youtube-video-analysis/SKILL.md",
+      "bytes": 6758,
+      "sha256": "06999ea5fb4fb86ce88ca846c84c640f64cb461b739ebf11c2632598f12d0530"
+    },
+    {
+      "path": ".agents/skills/youtube-video-analysis/requirements-contact.txt",
+      "bytes": 15,
+      "sha256": "41b54a6fb2918667ca47a61d73b522629d84490f3d78f0f20b21135faba10d35"
+    },
+    {
+      "path": ".agents/skills/youtube-video-analysis/requirements.txt",
+      "bytes": 19,
+      "sha256": "32dcdaa12efdfaac60de5b0a23fca0349e95ebc6d2d70a4e2b30ecaf9958f2a1"
+    },
+    {
+      "path": ".agents/skills/youtube-video-analysis/scripts/video_evidence.py",
+      "bytes": 26032,
+      "sha256": "b700241156f51102eae578aa962ce452412a956c9451f8dec1e658fecd2b2454"
+    },
+    {
+      "path": ".agents/skills/youtube-video-analysis/tests/test_video_evidence.py",
+      "bytes": 8923,
+      "sha256": "c14c93cac3dc3ebeedda476a2009494b003f506340d03e4b05d8283451b36743"
+    },
+    {
+      "path": ".claude/skills/cinematic-production/SKILL.md",
+      "bytes": 566,
+      "sha256": "1e36339159728f90dd67e50adf603f76a43124d95a7f2efcfb593a59fcc6cd58"
+    },
+    {
+      "path": ".claude/skills/visual-grill-review/SKILL.md",
+      "bytes": 591,
+      "sha256": "01e81bd71d47f192e568a6efef8073fa3febc3690e10568e356f7f1b018012cc"
+    },
+    {
+      "path": ".claude/skills/youtube-video-analysis/SKILL.md",
+      "bytes": 589,
+      "sha256": "c920bb891e40bebdc1aa0e3a9263ede5188268834aec353bcd0fea14b7794547"
+    }
+  ],
+  "fileCount": 95,
+  "bytes": 468882,
+  "applicationRuntimeChanged": false,
+  "newGenerationCalls": 0,
+  "previousManifestCorrection": "Previous v1 frontmatterValid flag was false evidence: router YAML was malformed. Superseded by parser-validated v2; valid hashes never establish discovery/activation.",
+  "notVerified": [
+    "automatic target-client discovery",
+    "Claude account/session connection",
+    "renderer mechanism",
+    "artistic acceptance",
+    "physical mobile or headset delivery",
+    "publication"
+  ],
+  "staticParserChecksPassed": true
+}

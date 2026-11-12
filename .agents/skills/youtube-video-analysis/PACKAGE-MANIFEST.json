@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "name": "youtube-video-analysis",
+  "built_utc": "2026-11-11T21:05:37.403320+00:00",
+  "files": [
+    {
+      "path": "README.md",
+      "bytes": 2278,
+      "sha256": "182ae05c871fa1275d93a7973ddfe5603988e2cef0079e7dff481d34072bba78"
+    },
+    {
+      "path": "SKILL.md",
+      "bytes": 6758,
+      "sha256": "06999ea5fb4fb86ce88ca846c84c640f64cb461b739ebf11c2632598f12d0530"
+    },
+    {
+      "path": "requirements-contact.txt",
+      "bytes": 15,
+      "sha256": "41b54a6fb2918667ca47a61d73b522629d84490f3d78f0f20b21135faba10d35"
+    },
+    {
+      "path": "requirements.txt",
+      "bytes": 19,
+      "sha256": "32dcdaa12efdfaac60de5b0a23fca0349e95ebc6d2d70a4e2b30ecaf9958f2a1"
+    },
+    {
+      "path": "scripts/video_evidence.py",
+      "bytes": 26032,
+      "sha256": "b700241156f51102eae578aa962ce452412a956c9451f8dec1e658fecd2b2454"
+    },
+    {
+      "path": "tests/test_video_evidence.py",
+      "bytes": 8923,
+      "sha256": "c14c93cac3dc3ebeedda476a2009494b003f506340d03e4b05d8283451b36743"
+    }
+  ],
+  "helper_sha256": "b700241156f51102eae578aa962ce452412a956c9451f8dec1e658fecd2b2454",
+  "contains_private_media": false,
+  "contains_credentials": false
+}

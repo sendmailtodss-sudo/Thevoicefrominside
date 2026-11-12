@@ -1,0 +1,449 @@
+{
+  "scenes": [
+    {
+      "id": "origin",
+      "enabled": true,
+      "type": "point",
+      "poster": "/assets/journey/origin.svg",
+      "scrollWeight": 0.3,
+      "title": {
+        "no": "Før begynnelsen",
+        "en": "Before the beginning",
+        "zh": "开始之前"
+      },
+      "mode": "scrub"
+    },
+    {
+      "id": "big-bang",
+      "enabled": true,
+      "video": "/assets/journey/big-bang.mp4",
+      "poster": "/assets/journey/big-bang.webp",
+      "mode": "scrub",
+      "fit": "cover",
+      "title": {
+        "no": "Fra et lite punkt",
+        "en": "From a single point",
+        "zh": "从一个光点开始"
+      },
+      "description": {
+        "no": "En visuell prøve på begynnelsen av reisen.",
+        "en": "A visual draft of the beginning of the journey.",
+        "zh": "旅程开端的视觉草稿。"
+      },
+      "reviewStatus": "draft",
+      "provenance": {
+        "provider": "Higgsfield",
+        "model": "seedance_2_5",
+        "jobId": "c86e6fc8-5c11-4041-bc63-5d146c62e7f5",
+        "durationSeconds": 8,
+        "resolution": "720p"
+      }
+    },
+    {
+      "id": "galaxy",
+      "enabled": true,
+      "video": "/assets/journey/galaxy.mp4",
+      "poster": "/assets/journey/galaxy.webp",
+      "mode": "scrub"
+    },
+    {
+      "id": "brains",
+      "enabled": true,
+      "video": "/assets/journey/brains.mp4",
+      "poster": "/assets/journey/brains.webp",
+      "mode": "scrub"
+    },
+    {
+      "id": "impulses",
+      "enabled": true,
+      "video": "/assets/journey/impulses.mp4",
+      "poster": "/assets/journey/impulses.webp",
+      "mode": "scrub"
+    },
+    {
+      "id": "vortex",
+      "enabled": true,
+      "video": "/assets/journey/vortex.mp4",
+      "poster": "/assets/journey/vortex.webp",
+      "mode": "scrub"
+    },
+    {
+      "id": "supernova",
+      "enabled": true,
+      "video": "/assets/journey/supernova.mp4",
+      "poster": "/assets/journey/supernova.webp",
+      "mode": "scrub"
+    },
+    {
+      "id": "dna",
+      "enabled": true,
+      "video": "/assets/journey/dna-before-arrival-gop1s-726caffae9c01f9e.mp4",
+      "poster": "/assets/journey/dna.webp",
+      "mode": "scrub",
+      "provenance": {
+        "edit": "First5secondsbeforeembeddedcell",
+        "sourceSha256": "b5cb5f5928c4f957468dfb5b4c4c639f53a2b9f91880074b8ef98f4f871382c9",
+        "sha256": "fe9591bab212cfe1ec4e93712723c09dda456fa75cdaee4673553a0d2bccdfaf",
+        "durationSeconds": 5,
+        "generationCost": 0,
+        "videoSha256": "726caffae9c01f9e04d73c82005faee6b9770d0d0a3b9728cae52307adf2d0b5",
+        "priorEncodedSha256": "fe9591bab212cfe1ec4e93712723c09dda456fa75cdaee4673553a0d2bccdfaf",
+        "keyframeIntervalSeconds": 1
+      }
+    },
+    {
+      "id": "prison-arrival",
+      "enabled": true,
+      "video": "/assets/journey/prison-arrival.mp4",
+      "poster": "/assets/journey/prison-arrival.webp",
+      "mode": "scrub",
+      "fit": "cover",
+      "title": {
+        "no": "Innenfor murene",
+        "en": "Inside the walls",
+        "zh": "高墙之内"
+      },
+      "description": {
+        "no": "En fiktiv reise fra verden utenfor til en fengselskorridor.",
+        "en": "A fictional journey from the world outside into a prison corridor.",
+        "zh": "从外界走入监狱走廊的虚构旅程。"
+      },
+      "reviewStatus": "draft",
+      "provenance": {
+        "provider": "Higgsfield",
+        "model": "seedance_2_5",
+        "jobId": "8abd0c17-e8b4-4d85-b375-992073795c03",
+        "durationSeconds": 12,
+        "resolution": "720p",
+        "geography": "fictional_unverified"
+      }
+    },
+    {
+      "id": "painter",
+      "enabled": true,
+      "video": "/assets/journey/painter.mp4",
+      "poster": "/assets/journey/painter.webp",
+      "mode": "scrub",
+      "reviewStatus": "draft",
+      "description": {
+        "no": "En illustrativ cellescene. Ny C7-ankomst og LAR-originalen på staffeliet er ikke ferdigstilt.",
+        "en": "An illustrative cell scene. The new C7 arrival and original LAR artwork on the easel are not finished.",
+        "zh": "这是示意性的牢房场景。新的C7入场片段及画架上的LAR原作尚未完成。"
+      }
+    },
+    {
+      "id": "rapper",
+      "enabled": false,
+      "video": "/assets/journey/rapper.mp4",
+      "poster": "/assets/journey/rapper.webp",
+      "mode": "scrub",
+      "reviewStatus": "superseded"
+    },
+    {
+      "id": "metal",
+      "enabled": true,
+      "video": "/assets/journey/metal.mp4",
+      "poster": "/assets/journey/metal.webp",
+      "mode": "scrub"
+    },
+    {
+      "id": "ai",
+      "enabled": false,
+      "video": "/assets/journey/ai.mp4",
+      "poster": "/assets/journey/ai.webp",
+      "mode": "scrub",
+      "reviewStatus": "superseded"
+    },
+    {
+      "id": "streetart",
+      "enabled": true,
+      "video": "/assets/journey/prison-courtyard.mp4",
+      "poster": "/assets/journey/prison-courtyard.webp",
+      "mode": "scrub",
+      "title": {
+        "no": "Et uttrykk innenfor murene",
+        "en": "Expression within the walls",
+        "zh": "高墙内的表达"
+      },
+      "description": {
+        "no": "En fiktiv luftegård. Kunstmotivet legges inn i en senere kompositt.",
+        "en": "A fictional exercise yard. The artwork will be added in a later composite.",
+        "zh": "虚构的放风庭院。作品将在后续合成中加入。"
+      },
+      "reviewStatus": "draft",
+      "provenance": {
+        "provider": "Higgsfield",
+        "model": "seedance_2_5",
+        "jobId": "bdeb85ec-c535-4d50-a405-8bd0fd69987d",
+        "durationSeconds": 10,
+        "resolution": "720p"
+      }
+    },
+    {
+      "id": "poet",
+      "enabled": true,
+      "video": "/assets/journey/poet.mp4",
+      "poster": "/assets/journey/poet.webp",
+      "mode": "scrub",
+      "reviewStatus": "draft",
+      "description": {
+        "no": "En illustrativ leseprøve. Opptak og sending av diktet er ikke ferdigstilt.",
+        "en": "An illustrative reading draft. Recording and sending the poem remain unfinished.",
+        "zh": "朗读场景草稿。诗歌的录制与发送尚未完成。"
+      }
+    },
+    {
+      "id": "filmmaker",
+      "enabled": false,
+      "video": "/assets/journey/filmmaker.mp4",
+      "poster": "/assets/journey/filmmaker.webp",
+      "mode": "scrub",
+      "reviewStatus": "superseded"
+    },
+    {
+      "id": "music-room",
+      "enabled": true,
+      "video": "/assets/journey/prison-music.mp4",
+      "poster": "/assets/journey/prison-music.webp",
+      "mode": "scrub",
+      "reviewStatus": "draft",
+      "title": {
+        "no": "Musikkrommet",
+        "en": "The music room",
+        "zh": "音乐室"
+      },
+      "description": {
+        "no": "Et fiktivt musikkrom. Opptaks- og sendehandlingen bearbeides videre.",
+        "en": "A fictional music room. The recording and sending sequence is being refined.",
+        "zh": "虚构的音乐室。录制和发送的动作仍在完善中。"
+      },
+      "provenance": {
+        "provider": "Higgsfield",
+        "model": "seedance_2_5",
+        "jobId": "5934c943-ca83-4003-80e3-5571c2b3d70c",
+        "durationSeconds": 12,
+        "resolution": "720p"
+      }
+    },
+    {
+      "id": "collective-portal",
+      "enabled": true,
+      "video": "/assets/journey/collective-portal.mp4",
+      "poster": "/assets/journey/collective-portal.webp",
+      "mode": "scrub",
+      "reviewStatus": "draft",
+      "title": {
+        "no": "Mange uttrykk. Ett møte.",
+        "en": "Many expressions. One meeting.",
+        "zh": "多种表达，在此相遇。"
+      },
+      "description": {
+        "no": "En visuell overgang fra tanker og tråder til kunsten.",
+        "en": "A visual transition from thoughts and threads to the art.",
+        "zh": "从思想与丝线走向艺术的视觉过渡。"
+      },
+      "provenance": {
+        "provider": "Higgsfield",
+        "model": "seedance_2_5",
+        "jobId": "e1a359b1-68d3-442c-ad61-8a668324934c",
+        "durationSeconds": 8,
+        "resolution": "720p"
+      }
+    },
+    {
+      "id": "gallery",
+      "enabled": true,
+      "poster": "/assets/journey/gallery.webp",
+      "video": "/assets/journey/gallery.mp4",
+      "mode": "scrub",
+      "artworks": [
+        {
+          "id": "fri-presse",
+          "no": "Fri presse",
+          "en": "Free press",
+          "src": "/design-assets/approved-illustrations/fri-presse-c2082aa9b1401973757fc9f9520dada4c4e36ac98651a99a03fe2059e0c37a58.webp",
+          "artistName": "Innsatt 2601-46"
+        },
+        {
+          "id": "gjenbruk",
+          "no": "Gjenbruk",
+          "en": "Reuse",
+          "src": "/design-assets/approved-illustrations/gjenbruk-16872400f1db5e2c943824b4540506faf285e00bbc1e056b30cc09573a1b36e9.png",
+          "artistName": "Innsatt 2601-46"
+        },
+        {
+          "id": "book-page-256",
+          "no": "Samme rett til å bli hørt",
+          "en": "The same right to be heard",
+          "src": "/design-assets/approved-illustrations/book-page-256-833c62843bc2418bd1283e402d6bfd8b390899e46fd43a3eeb1a1495f423730c.webp",
+          "artistName": "Innsatt 2601-46"
+        },
+        {
+          "id": "book-page-22",
+          "no": "Pappa … pappa",
+          "en": "Dad … dad",
+          "src": "/design-assets/approved-illustrations/book-page-22-9a9eaf8c27821b9709d200f3bd9e1050ace73944bb9b7ce00a58ba5d69e61829.webp",
+          "artistName": "Innsatt 2601-46"
+        },
+        {
+          "id": "book-page-34",
+          "no": "Årsaken blir borte",
+          "en": "The cause disappears",
+          "src": "/design-assets/approved-illustrations/book-page-34-b8e7de61b34475404b4fe2ba72352c8e500428dfafee03f201ec377daf36ab9f.webp",
+          "artistName": "Innsatt 2601-46"
+        },
+        {
+          "id": "lar-bak-murene",
+          "no": "LAR bak murene",
+          "en": "LAR behind the walls",
+          "src": "/design-assets/approved-illustrations/lar-bak-murene-80643262351fb9d6e4de954d72707ed2fb72610c7d8a3e6296027439d3b07136.webp",
+          "artistName": "Innsatt 2601-46"
+        }
+      ]
+    },
+    {
+      "id": "bergen",
+      "enabled": true,
+      "video": "/assets/journey/bergen-fashion-study-lar-gop1s-818e7dfe511dae24.mp4",
+      "poster": "/assets/journey/bergen-fashion-study-lar-a85a7dc8e087b0ce-poster.webp",
+      "mode": "scrub",
+      "title": {
+        "no": "Motestudie i Bergen",
+        "en": "Bergen fashion study",
+        "zh": "卑尔根服装设计研究"
+      },
+      "description": {
+        "no": "Voksen modell i Bergen med knyttet topp. Hele LAR-originalen, domenet og artistaliaset er satt inn digitalt. En klesstudie, ikke dokumentasjon av et produsert plagg.",
+        "en": "Adult model in Bergen wearing a knotted top. The whole original LAR artwork, domain and artist alias are composited digitally. A fashion study, not evidence of a manufactured garment.",
+        "zh": "卑尔根的一位成年模特身穿系结上衣。完整的LAR原作、域名和艺术家署名均为数字合成。这是服装设计研究，并非成衣生产的证明。"
+      },
+      "reviewStatus": "draft",
+      "provenance": {
+        "provider": "Higgsfield",
+        "model": "seedance_2_5",
+        "videoSha256": "818e7dfe511dae24d2634090b88da7f854f5a090c2c0af3afa5808bdaa3e189e",
+        "durationSeconds": 8.041667,
+        "originalArtworkSha256": "80643262351fb9d6e4de954d72707ed2fb72610c7d8a3e6296027439d3b07136",
+        "process": "Perspective tracked original print and fabric luminance modulation; not full3Dfabricsimulation",
+        "productionProof": false,
+        "priorEncodedSha256": "a85a7dc8e087b0ceec0a4f8fdc732b3f3320a95565c0d35fe676081b7a487702",
+        "keyframeIntervalSeconds": 1
+      }
+    },
+    {
+      "id": "paris",
+      "enabled": true,
+      "video": "/assets/journey/paris.mp4",
+      "poster": "/assets/journey/paris.webp",
+      "mode": "scrub",
+      "title": {
+        "no": "Paris · prøve",
+        "en": "Paris · preview",
+        "zh": "巴黎 · 预览"
+      },
+      "description": {
+        "no": "Midlertidig KI-illustrasjon. Kunsttrykkene bearbeides videre.",
+        "en": "Temporary AI illustration. The artwork prints are being refined.",
+        "zh": "临时 AI 插图。衣服上的艺术图案仍在完善中。"
+      },
+      "reviewStatus": "draft"
+    },
+    {
+      "id": "new-york",
+      "enabled": false,
+      "video": "/assets/journey/new-york.mp4",
+      "poster": "/assets/journey/new-york.webp",
+      "mode": "scrub",
+      "title": {
+        "no": "New York · prøve",
+        "en": "New York · preview",
+        "zh": "纽约 · 预览"
+      },
+      "description": {
+        "no": "Midlertidig KI-illustrasjon. Kunsttrykkene bearbeides videre.",
+        "en": "Temporary AI illustration. The artwork prints are being refined.",
+        "zh": "临时 AI 插图。衣服上的艺术图案仍在完善中。"
+      },
+      "reviewStatus": "superseded"
+    },
+    {
+      "id": "interior",
+      "enabled": true,
+      "video": "/assets/journey/la-interior-study-gjenbruk-gop1s-5aea9c2b5b554657.mp4",
+      "poster": "/assets/journey/la-interior-study-gjenbruk-df689cc1545ebcc0-poster.webp",
+      "mode": "scrub",
+      "artworks": [
+        {
+          "id": "gjenbruk",
+          "no": "Gjenbruk",
+          "en": "Reuse",
+          "src": "/design-assets/approved-illustrations/gjenbruk-16872400f1db5e2c943824b4540506faf285e00bbc1e056b30cc09573a1b36e9.png",
+          "artistName": "Innsatt 2601-46"
+        }
+      ],
+      "title": {
+        "no": "Interiørstudie i Los Angeles",
+        "en": "Los Angeles interior study",
+        "zh": "洛杉矶室内场景研究"
+      },
+      "description": {
+        "no": "Fiktiv KI-scene med originalverket Gjenbruk satt inn digitalt. Originalens format er bevart med mørke sidefelt. Den avtalte helveggscenen er fortsatt under utvikling.",
+        "en": "Fictional AI scene with the original artwork Gjenbruk composited digitally. Dark side panels preserve its original proportions. The full-wall scene remains in development.",
+        "zh": "虚构的人工智能场景，数字合成了原作Gjenbruk。深色侧边保留了原作比例。所要求的整面墙展示场景仍在开发中。"
+      },
+      "reviewStatus": "draft",
+      "provenance": {
+        "provider": "Higgsfield",
+        "model": "seedance_2_5",
+        "videoSha256": "5aea9c2b5b55465780c385a889575c70a14875e71fe1721f80e8173e3c528c4a",
+        "artworkSha256": "16872400f1db5e2c943824b4540506faf285e00bbc1e056b30cc09573a1b36e9",
+        "durationSeconds": 12.041667,
+        "resolution": "720p",
+        "fullBriefCompleted": false,
+        "priorEncodedSha256": "df689cc1545ebcc057e8a91fcaf791dece36efb513c10f60c50ca1d6e5caf689",
+        "keyframeIntervalSeconds": 1
+      }
+    },
+    {
+      "id": "stencil",
+      "enabled": true,
+      "video": "/assets/journey/stencil.mp4",
+      "poster": "/assets/journey/stencil.webp",
+      "mode": "scrub",
+      "artworks": [
+        {
+          "id": "redhood",
+          "no": "Rødhette i gangen",
+          "en": "Little Red Riding Hood in the corridor",
+          "src": "/design-assets/merch/redhood.jpeg",
+          "artistName": "Innsatt 2601-46",
+          "details": {
+            "no": "/butikk/?art=redhood",
+            "en": "/en/shop/?art=redhood"
+          }
+        }
+      ],
+      "reviewStatus": "draft"
+    }
+  ],
+  "requestedMediaReplacements": {
+    "status": "not_produced_not_location_verified",
+    "sequence": [
+      "earth-clouds",
+      "bergen-prison-gate",
+      "c7-window-arrival",
+      "fictional-confident-adult-introduction",
+      "lar-painter-cell"
+    ],
+    "note": {
+      "no": "Ny port-/C7-/rollefigursekvens og LAR på staffeliet krever nye kontrollerte medier. Eksisterende fiktive klipp dokumenterer ikke disse stedene eller handlingene.",
+      "en": "The new gate/C7/fictional-character sequence and LAR on the easel require reviewed new media. Existing fictional clips do not verify these locations or actions.",
+      "zh": "新的大门、C7、虚构人物片段及画架上的LAR作品仍需经过核验的新素材。现有虚构片段并不能证实这些地点或动作。"
+    },
+    "higherDetailGalaxy": "native_higher_detail_asset_pending",
+    "firstPainterArtwork": {
+      "id": "lar-bak-murene",
+      "status": "original_selected_not_composited_on_easel"
+    }
+  }
+}

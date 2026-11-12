@@ -69,8 +69,13 @@
   if(root.nodeType===Node.ELEMENT_NODE){for(const element of [root,...root.querySelectorAll('[placeholder],[aria-label],[title],[alt]')]){if(!safe(element)||element.closest(excluded)||element.matches('input[type="file"]'))continue;for(const attr of ['placeholder','aria-label','title','alt']){const value=element.getAttribute(attr);if(!value)continue;const result=window.SFITranslate(value);if(result!==value)element.setAttribute(attr,result)}}}
  }
  const script=document.createElement('script');script.src='/i18n/'+selected+'.js';script.onload=()=>{
+  const startTranslation=()=>{
   apply(document.body);document.title=window.SFITranslate(document.title);
   const observer=new MutationObserver(records=>{for(const record of records){if(record.type==='characterData')apply(record.target);else for(const node of record.addedNodes)apply(node)}});
   observer.observe(document.body,{childList:true,subtree:true,characterData:true});window.dispatchEvent(new Event('sfi-language-ready'));
+  };
+  if(selected==='zh-Hans'){
+   const supplement=document.createElement('script');supplement.src='/i18n/zh-Hans-navigation.js';const loadJourney=()=>{const journey=document.createElement('script');journey.src='/i18n/zh-Hans-journey.js';journey.onload=startTranslation;journey.onerror=startTranslation;document.head.append(journey)};supplement.onload=loadJourney;supplement.onerror=loadJourney;document.head.append(supplement);
+  }else startTranslation();
  };script.onerror=()=>{notice.textContent=selected==='zh-Hans'?'暂时无法载入翻译；内容仍以原语言显示。PDF、Word、图片文字和音频不会自动翻译。':'暫時載入唔到翻譯；內容會繼續以原文顯示。PDF、Word、圖片文字同音訊唔會自動翻譯。'};document.head.append(script);
 })();

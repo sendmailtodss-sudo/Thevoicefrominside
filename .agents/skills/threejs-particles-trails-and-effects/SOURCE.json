@@ -1,0 +1,91 @@
+{
+  "schemaVersion": 1,
+  "name": "threejs-particles-trails-and-effects",
+  "kind": "static-instruction-package",
+  "installedAtUtc": "2026-11-12T00:13:50.411329+00:00",
+  "upstream": {
+    "repository": "https://github.com/linegel/threejs-complete-set-of-skill",
+    "commit": "e3c9563a070b214aa73b84d1ea6026c9ec4db6cb",
+    "skillPath": "skills/threejs-particles-trails-and-effects",
+    "license": "ISC",
+    "licenseCommit": "e3c9563a070b214aa73b84d1ea6026c9ec4db6cb",
+    "licensePath": "skills/threejs-particles-trails-and-effects/LICENSE"
+  },
+  "upstreamFiles": [
+    {
+      "path": "SKILL.md",
+      "upstreamPath": "skills/threejs-particles-trails-and-effects/SKILL.md",
+      "role": "skill",
+      "bytes": 9907,
+      "sha256": "c8c7d3b34203fe980d6bdcb5337099ee1bfb7fd0b835b8f4c9840782df9e3867",
+      "rawUrl": "https://raw.githubusercontent.com/linegel/threejs-complete-set-of-skill/e3c9563a070b214aa73b84d1ea6026c9ec4db6cb/skills/threejs-particles-trails-and-effects/SKILL.md",
+      "blobUrl": "https://github.com/linegel/threejs-complete-set-of-skill/blob/e3c9563a070b214aa73b84d1ea6026c9ec4db6cb/skills/threejs-particles-trails-and-effects/SKILL.md",
+      "commit": "e3c9563a070b214aa73b84d1ea6026c9ec4db6cb",
+      "license": "ISC"
+    },
+    {
+      "path": "references/particles-trails-and-effects-system.md",
+      "upstreamPath": "skills/threejs-particles-trails-and-effects/references/particles-trails-and-effects-system.md",
+      "role": "markdown-reference",
+      "bytes": 24428,
+      "sha256": "a4dba29df24bc958bf29e5854f19e660b64020b2456b74fd67db6978e0aaec2c",
+      "rawUrl": "https://raw.githubusercontent.com/linegel/threejs-complete-set-of-skill/e3c9563a070b214aa73b84d1ea6026c9ec4db6cb/skills/threejs-particles-trails-and-effects/references/particles-trails-and-effects-system.md",
+      "blobUrl": "https://github.com/linegel/threejs-complete-set-of-skill/blob/e3c9563a070b214aa73b84d1ea6026c9ec4db6cb/skills/threejs-particles-trails-and-effects/references/particles-trails-and-effects-system.md",
+      "commit": "e3c9563a070b214aa73b84d1ea6026c9ec4db6cb",
+      "license": "ISC"
+    },
+    {
+      "path": "LICENSE",
+      "upstreamPath": "skills/threejs-particles-trails-and-effects/LICENSE",
+      "role": "license",
+      "bytes": 770,
+      "sha256": "2eb819c7a3aab1b2989c392124b5f2d8a3db266ccc886d9c92148a9cecd0aa65",
+      "rawUrl": "https://raw.githubusercontent.com/linegel/threejs-complete-set-of-skill/e3c9563a070b214aa73b84d1ea6026c9ec4db6cb/skills/threejs-particles-trails-and-effects/LICENSE",
+      "blobUrl": "https://github.com/linegel/threejs-complete-set-of-skill/blob/e3c9563a070b214aa73b84d1ea6026c9ec4db6cb/skills/threejs-particles-trails-and-effects/LICENSE",
+      "commit": "e3c9563a070b214aa73b84d1ea6026c9ec4db6cb",
+      "license": "ISC"
+    }
+  ],
+  "localFiles": [
+    {
+      "path": "ADOPTION.md",
+      "origin": "project-authored adoption/precedence rules",
+      "bytes": 5227,
+      "sha256": "203ffef33208b902999b6292a6ed20b142d2fe3a353833a7e3f575cc4d4a9758"
+    }
+  ],
+  "omittedResources": [
+    {
+      "path": "scripts/trail-ring-oracle.mjs",
+      "installed": false,
+      "executed": false,
+      "reason": "Optional executable/demo resources excluded from static instruction-only installation",
+      "upstreamUrl": "https://github.com/linegel/threejs-complete-set-of-skill/blob/e3c9563a070b214aa73b84d1ea6026c9ec4db6cb/skills/threejs-particles-trails-and-effects/scripts/trail-ring-oracle.mjs"
+    }
+  ],
+  "uninstalledOrUnverifiedDependencies": [
+    "Three.js r185 WebGPURenderer + TSL and genuine WebGPU backend (canonical path; not installed or capability-tested)",
+    "threejs-choose-skills (not installed)",
+    "threejs-dynamic-surface-effects (conditional; not installed)",
+    "threejs-rain-snow-and-wet-surfaces (conditional; not installed)",
+    "threejs-procedural-motion-systems (conditional; not installed)",
+    "threejs-image-pipeline / threejs-bloom (conditional; not installed)",
+    "threejs-compatibility-fallbacks (not installed)"
+  ],
+  "projectOrchestrator": "../cinematic-production/SKILL.md",
+  "review": {
+    "allInstalledMarkdownRead": true,
+    "upstreamFilesByteForByte": true,
+    "externalReadingListNotFullyFetched": true,
+    "codeFencesExecuted": false
+  },
+  "execution": {
+    "packageManagerRun": false,
+    "executablesInstalled": false,
+    "runtimeDependenciesInstalled": false,
+    "rendererChanged": false,
+    "generationStarted": false,
+    "creditsSpent": 0
+  },
+  "sourceJsonSelfHash": "Excluded to avoid a recursive self-checksum; all copied upstream files and ADOPTION.md are enumerated."
+}

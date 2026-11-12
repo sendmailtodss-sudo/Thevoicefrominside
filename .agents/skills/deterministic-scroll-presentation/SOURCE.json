@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "kind": "original-project-instructions",
+  "researchedUtcDate": "2026-11-12",
+  "researchModel": "gpt-6-astra",
+  "researchReasoning": "ultra",
+  "reviewedUtc": "2026-11-12T00:47:32.571264+00:00",
+  "upstreamTextCopied": false,
+  "localFiles": [
+    {
+      "path": "SKILL.md",
+      "bytes": 7305,
+      "sha256": "76a6e1e947ed471365de9282eba39b773797d81a94734b8f5b442f4c69a2056d"
+    },
+    {
+      "path": "agents/openai.yaml",
+      "bytes": 43,
+      "sha256": "a1499d95abd8447558c535fe5554adcc3c9b988a0a39264a6283d430effe1e94"
+    }
+  ],
+  "runtimeInstalledByThisPackage": false,
+  "paidJobsSubmitted": 0,
+  "sourceReferences": "Linked primary-source register in SKILL.md; sources independently retrieved in fresh restart."
+}

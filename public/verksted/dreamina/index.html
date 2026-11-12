@@ -1,0 +1,10 @@
+<!doctype html>
+<html lang="no"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Dreamina | Stemmen fra innsiden</title><link rel="stylesheet" href="/design-20261029.css">
+<main><a href="/verksted/">← Verksted</a><h1>Dreamina</h1>
+<p>Manuelt medieverksted. Eksporter teksten, generer hos Dreamina og importer den nedlastede filen. Importer lagres privat i denne nettleseren.</p>
+<label for="prompt">Prompt</label><br><textarea id="prompt" rows="5" maxlength="8000"></textarea><br>
+<button id="export">Last ned prompt</button> <a href="https://dreamina.capcut.com/" target="_blank" rel="noopener noreferrer">Åpne Dreamina</a>
+<h2>Importer resultat</h2><label for="file">PNG, JPEG eller MP4, opptil 50 MiB</label><br><input id="file" type="file" accept="image/png,image/jpeg,video/mp4,.media">
+<p role="status" id="status"></p><section id="gallery" aria-label="Importerte filer"></section></main>
+<script type="module" src="./studio.mjs"></script></html>

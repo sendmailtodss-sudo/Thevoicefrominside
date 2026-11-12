@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "kind": "original-project-instructions",
+  "researchedUtcDate": "2026-11-12",
+  "researchModel": "gpt-6-astra",
+  "researchReasoning": "ultra",
+  "reviewedUtc": "2026-11-12T00:47:32.571264+00:00",
+  "upstreamTextCopied": false,
+  "localFiles": [
+    {
+      "path": "SKILL.md",
+      "bytes": 9978,
+      "sha256": "345c6d66e5261249dd54d3a267deadad38273bb232192e2459bf923be3a75bcc"
+    },
+    {
+      "path": "agents/openai.yaml",
+      "bytes": 43,
+      "sha256": "a1499d95abd8447558c535fe5554adcc3c9b988a0a39264a6283d430effe1e94"
+    },
+    {
+      "path": "references/BROWSER-NOTE.md",
+      "bytes": 3087,
+      "sha256": "6d4938ce51065179af4022578c8b75a1f4c7a31c57db0c16c9acc122d4630905"
+    },
+    {
+      "path": "references/RESEARCH.md",
+      "bytes": 15460,
+      "sha256": "c8f022b1ce006e68caa84bccd44a6d5645adda6b5c7b1686c6510c9047ca47b9"
+    },
+    {
+      "path": "references/SOURCES.md",
+      "bytes": 6633,
+      "sha256": "6e49f300da8dd1421bd8369dd5d0484c6ea8e2b57571efe216985c4267fcfb98"
+    }
+  ],
+  "runtimeInstalledByThisPackage": false,
+  "paidJobsSubmitted": 0,
+  "sourceReferences": "Linked primary-source register in SKILL.md; sources independently retrieved in fresh restart."
+}

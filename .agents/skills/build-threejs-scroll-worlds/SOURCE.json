@@ -1,0 +1,127 @@
+{
+  "schemaVersion": 1,
+  "name": "build-threejs-scroll-worlds",
+  "kind": "static-instruction-package",
+  "installedAtUtc": "2026-11-12T00:13:50.411329+00:00",
+  "upstream": {
+    "repository": "https://github.com/MengTo/Skills",
+    "commit": "d6324a05ca03ce5f6cdba519318d92176dbc43d2",
+    "skillPath": "agent-skills/web-design/build-threejs-scroll-worlds",
+    "license": "MIT",
+    "licenseCommit": "d6324a05ca03ce5f6cdba519318d92176dbc43d2",
+    "licensePath": "LICENSE"
+  },
+  "upstreamFiles": [
+    {
+      "path": "SKILL.md",
+      "upstreamPath": "agent-skills/web-design/build-threejs-scroll-worlds/SKILL.md",
+      "role": "skill",
+      "bytes": 18658,
+      "sha256": "bb36c79ff435045f57a7f3ec3f50c27d37087c2e5a5ab1b17b6ba219d3f2c091",
+      "rawUrl": "https://raw.githubusercontent.com/MengTo/Skills/d6324a05ca03ce5f6cdba519318d92176dbc43d2/agent-skills/web-design/build-threejs-scroll-worlds/SKILL.md",
+      "blobUrl": "https://github.com/MengTo/Skills/blob/d6324a05ca03ce5f6cdba519318d92176dbc43d2/agent-skills/web-design/build-threejs-scroll-worlds/SKILL.md",
+      "commit": "d6324a05ca03ce5f6cdba519318d92176dbc43d2",
+      "license": "MIT"
+    },
+    {
+      "path": "references/world-bible.md",
+      "upstreamPath": "agent-skills/web-design/build-threejs-scroll-worlds/references/world-bible.md",
+      "role": "markdown-reference",
+      "bytes": 12682,
+      "sha256": "292600301358e93e20794eae093f539348358aa0db433fab84633fdae9d08f65",
+      "rawUrl": "https://raw.githubusercontent.com/MengTo/Skills/d6324a05ca03ce5f6cdba519318d92176dbc43d2/agent-skills/web-design/build-threejs-scroll-worlds/references/world-bible.md",
+      "blobUrl": "https://github.com/MengTo/Skills/blob/d6324a05ca03ce5f6cdba519318d92176dbc43d2/agent-skills/web-design/build-threejs-scroll-worlds/references/world-bible.md",
+      "commit": "d6324a05ca03ce5f6cdba519318d92176dbc43d2",
+      "license": "MIT"
+    },
+    {
+      "path": "references/realtime-architecture.md",
+      "upstreamPath": "agent-skills/web-design/build-threejs-scroll-worlds/references/realtime-architecture.md",
+      "role": "markdown-reference",
+      "bytes": 15791,
+      "sha256": "1f4bcb2ed0f1bbf5f48d8b7372e1296894f1e99148b5376455eada0c51ad5c63",
+      "rawUrl": "https://raw.githubusercontent.com/MengTo/Skills/d6324a05ca03ce5f6cdba519318d92176dbc43d2/agent-skills/web-design/build-threejs-scroll-worlds/references/realtime-architecture.md",
+      "blobUrl": "https://github.com/MengTo/Skills/blob/d6324a05ca03ce5f6cdba519318d92176dbc43d2/agent-skills/web-design/build-threejs-scroll-worlds/references/realtime-architecture.md",
+      "commit": "d6324a05ca03ce5f6cdba519318d92176dbc43d2",
+      "license": "MIT"
+    },
+    {
+      "path": "references/quality-and-qa.md",
+      "upstreamPath": "agent-skills/web-design/build-threejs-scroll-worlds/references/quality-and-qa.md",
+      "role": "markdown-reference",
+      "bytes": 11414,
+      "sha256": "4f422973f46d4ec3a9eead3e4816998a33fd5ba78ddff0c3dbd17b5ebf204eaf",
+      "rawUrl": "https://raw.githubusercontent.com/MengTo/Skills/d6324a05ca03ce5f6cdba519318d92176dbc43d2/agent-skills/web-design/build-threejs-scroll-worlds/references/quality-and-qa.md",
+      "blobUrl": "https://github.com/MengTo/Skills/blob/d6324a05ca03ce5f6cdba519318d92176dbc43d2/agent-skills/web-design/build-threejs-scroll-worlds/references/quality-and-qa.md",
+      "commit": "d6324a05ca03ce5f6cdba519318d92176dbc43d2",
+      "license": "MIT"
+    },
+    {
+      "path": "references/kage-anatomy.md",
+      "upstreamPath": "agent-skills/web-design/build-threejs-scroll-worlds/references/kage-anatomy.md",
+      "role": "markdown-reference",
+      "bytes": 7732,
+      "sha256": "0f14a21eef2fcac4d9e43be42ca93c049d82e2fdf3430857d7fe5b0d8080651e",
+      "rawUrl": "https://raw.githubusercontent.com/MengTo/Skills/d6324a05ca03ce5f6cdba519318d92176dbc43d2/agent-skills/web-design/build-threejs-scroll-worlds/references/kage-anatomy.md",
+      "blobUrl": "https://github.com/MengTo/Skills/blob/d6324a05ca03ce5f6cdba519318d92176dbc43d2/agent-skills/web-design/build-threejs-scroll-worlds/references/kage-anatomy.md",
+      "commit": "d6324a05ca03ce5f6cdba519318d92176dbc43d2",
+      "license": "MIT"
+    },
+    {
+      "path": "LICENSE",
+      "upstreamPath": "LICENSE",
+      "role": "license",
+      "bytes": 1064,
+      "sha256": "b2a071ba22fefd803f4e9d1f5c777dd79c62d191695586a1a73fd4d0ebd051c6",
+      "rawUrl": "https://raw.githubusercontent.com/MengTo/Skills/d6324a05ca03ce5f6cdba519318d92176dbc43d2/LICENSE",
+      "blobUrl": "https://github.com/MengTo/Skills/blob/d6324a05ca03ce5f6cdba519318d92176dbc43d2/LICENSE",
+      "commit": "d6324a05ca03ce5f6cdba519318d92176dbc43d2",
+      "license": "MIT"
+    }
+  ],
+  "localFiles": [
+    {
+      "path": "ADOPTION.md",
+      "origin": "project-authored adoption/precedence rules",
+      "bytes": 4914,
+      "sha256": "b5fe331a18683c791fa1b9e6f36ca24c9a4ce1adda883d194f4eef95551fc725"
+    }
+  ],
+  "omittedResources": [
+    {
+      "path": "demo/index.html",
+      "installed": false,
+      "executed": false,
+      "reason": "Optional executable/demo resources excluded from static instruction-only installation",
+      "upstreamUrl": "https://github.com/MengTo/Skills/blob/d6324a05ca03ce5f6cdba519318d92176dbc43d2/agent-skills/web-design/build-threejs-scroll-worlds/demo/index.html"
+    },
+    {
+      "path": "references/scroll-conductor.js",
+      "installed": false,
+      "executed": false,
+      "reason": "Optional executable/demo resources excluded from static instruction-only installation",
+      "upstreamUrl": "https://github.com/MengTo/Skills/blob/d6324a05ca03ce5f6cdba519318d92176dbc43d2/agent-skills/web-design/build-threejs-scroll-worlds/references/scroll-conductor.js"
+    }
+  ],
+  "uninstalledOrUnverifiedDependencies": [
+    "Three.js runtime/loaders/compressed asset decoders, future version-specific choice (not installed)",
+    "threejs (sibling skill, not installed)",
+    "cinematic-scroll-storytelling (sibling skill, not installed)"
+  ],
+  "projectOrchestrator": "../cinematic-production/SKILL.md",
+  "review": {
+    "allInstalledMarkdownRead": true,
+    "upstreamFilesByteForByte": true,
+    "externalReadingListNotFullyFetched": true,
+    "codeFencesExecuted": false
+  },
+  "execution": {
+    "packageManagerRun": false,
+    "executablesInstalled": false,
+    "runtimeDependenciesInstalled": false,
+    "rendererChanged": false,
+    "generationStarted": false,
+    "creditsSpent": 0
+  },
+  "sourceJsonSelfHash": "Excluded to avoid a recursive self-checksum; all copied upstream files and ADOPTION.md are enumerated."
+}

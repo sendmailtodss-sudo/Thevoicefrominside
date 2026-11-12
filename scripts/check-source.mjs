@@ -18,7 +18,8 @@ let scripts = 0;
 for (const file of walk(root)) {
   const relative = path.relative(root, file);
   const text = fs.readFileSync(file, 'utf8');
-  if (/\.(?:pdf|docx|zip|sqlite|db|pem|key)$/i.test(file) || /(?:^|[/\\])(?:\.env(?:\..*)?|\.openai)(?:[/\\]|$)/.test(relative)) {
+  const safeExample = relative === '.env.example' && text.split(/\r?\n/).every(line => !line || line.startsWith('#') || /^DREAMINA_(?:BIN=dreamina-canvas|(?:PROJECT_ID|IMAGE_MODEL|VIDEO_MODEL)=|RATIO=16:9|IMAGE_RESOLUTION=1K|VIDEO_RESOLUTION=720P)$/.test(line));
+  if (!safeExample && (/\.(?:pdf|docx|zip|sqlite|db|pem|key)$/i.test(file) || /(?:^|[/\\])(?:\.env(?:\..*)?|\.openai)(?:[/\\]|$)/.test(relative))) {
     failures.push(`${relative}: restricted file type or configuration`);
   }
   if (/-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----/.test(text) || /(?:ghp_|github_pat_)[A-Za-z0-9_]{25,}/.test(text)) {

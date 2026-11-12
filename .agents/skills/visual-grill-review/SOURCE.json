@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "name": "visual-grill-review",
+  "kind": "project-adapter-with-pinned-upstream-reference",
+  "reviewedAtUtc": "2026-11-12T00:40:45.404384+00:00",
+  "upstream": {
+    "repository": "https://github.com/NousResearch/hermes-agent",
+    "commit": "818c13be1dc4fd28987e1e881a9408224afd4535",
+    "skillPath": "optional-skills/software-development/grill-me",
+    "license": "MIT",
+    "licensePath": "LICENSE",
+    "licenseCommit": "818c13be1dc4fd28987e1e881a9408224afd4535"
+  },
+  "upstreamFiles": [
+    {
+      "path": "references/grill-me.md",
+      "upstreamPath": "optional-skills/software-development/grill-me/SKILL.md",
+      "role": "upstream-reference",
+      "bytes": 4689,
+      "sha256": "6e3b3b81c1ad3a0b3ba3d36ec725e376d225e7867bfbf23a5129cf245e94bb0c",
+      "rawUrl": "https://raw.githubusercontent.com/NousResearch/hermes-agent/818c13be1dc4fd28987e1e881a9408224afd4535/optional-skills/software-development/grill-me/SKILL.md",
+      "commit": "818c13be1dc4fd28987e1e881a9408224afd4535",
+      "license": "MIT"
+    },
+    {
+      "path": "LICENSE",
+      "upstreamPath": "LICENSE",
+      "role": "license",
+      "bytes": 1070,
+      "sha256": "821556e6336796450ab852d375117b48a4887e71d255794fd6318d99982a5ab6",
+      "rawUrl": "https://raw.githubusercontent.com/NousResearch/hermes-agent/818c13be1dc4fd28987e1e881a9408224afd4535/LICENSE",
+      "commit": "818c13be1dc4fd28987e1e881a9408224afd4535",
+      "license": "MIT"
+    }
+  ],
+  "localFiles": [
+    {
+      "path": "SKILL.md",
+      "origin": "Project adaptation for requested visual Grill; upstream attribution retained",
+      "bytes": 3816,
+      "sha256": "33de1785a7cf89088b55d004299032520930c99bc4be1a4b7ba6e765ff9026a3"
+    }
+  ],
+  "execution": {
+    "upstreamCommandsExecuted": false,
+    "runtimeInstalled": false,
+    "providerSubmissions": 0,
+    "creditsSpent": 0
+  },
+  "limitations": [
+    "Installed instruction adapter; target-client discovery/activation not verified.",
+    "Original Hermes-specific metadata is preserved as reference; portable adapter uses AgentSkills-standard fields."
+  ]
+}

@@ -40,20 +40,25 @@ The project includes existing writing and website development alongside unfinish
 
 We welcome help with frontend and backend development, security, accessibility, design, testing, translation, documentation and maintenance. Small contributions matter. So do people willing to question an assumption, find an error or improve something another person has started.
 
+The reusable [video-analysis skill](.agents/skills/youtube-video-analysis/SKILL.md) includes executable tools for authorized local videos and normally accessible public video sources. It extracts timestamped frames and silent adjacent clips, records source hashes, and keeps visual observations separate from metadata, captions and inference. Python, ffmpeg and ffprobe are required; the optional public-source extractor is pinned in the skill requirements. Run its `doctor` command first. Network, login and geographic restrictions remain explicit limitations; installing the skill does not grant access to restricted videos.
+
 I am looking for collaborators who want to put their abilities to work in the struggle for dignity, accountability and change. Help build a place where people can tell their stories, show their evidence, create together and challenge the state structures that continue to create victims on both sides of the wall.
 
-## Website development status — 4 November 2026
+## Website and contributor source — 11 November 2026
 
-The existing website is at <https://stemmen-fra-innsiden.sendmailtodss.chatgpt.site>. Version 34 was published on 4 November 2026. This repository now contains a contributor development export of that application, based on source commit `702bbcce8e4883f74f5bbcd521ebe97177c4bb17`. Production hosting remains separately managed. The export uses example editorial content and artwork; it does not include private manuscripts, case files, operational records or credentials.
+The public website is [thevoicefrominside.dev](https://thevoicefrominside.dev), hosted on Vercel. Its reading pages, gallery and browser experience run independently of ChatGPT. The former ChatGPT Sites deployment is a historical rollback reference; use the project domain for current links.
 
-This release brings clearer navigation, direct entrances to Rettspeilet and the LAR documentation, a unified [Kunstsamfunnet](https://stemmen-fra-innsiden.sendmailtodss.chatgpt.site/kunstsamfunnet/), 22 approved artworks with individual Norwegian and English pages, larger previews and links carrying the selected artwork into the 3D gallery and clothing preview. The landing page includes an optional galaxy-to-gallery experience with reduced-motion, keyboard and no-JavaScript alternatives. Diary, book, practical tools and [collaboration](https://stemmen-fra-innsiden.sendmailtodss.chatgpt.site/collaborate/) entrances are easier to find.
+This repository is the sanitized contributor distribution. It includes application code, example editorial content and approved public media. The full production source and its approved writing are managed separately; private manuscripts, case files, operational records, service credentials and private uploads are excluded here. A checkout of this repository is therefore not a complete production backup.
 
-Approved writing and media have been preserved. Clothing images are virtual previews. Submissions, creative accounts, original-art sales and checkout remain closed where the required production services have not been enabled. Backend tests and prototype screens do not mean that a service is open. Chinese and Cantonese interface support retains explicit fallback where translation is incomplete. Unfinished research is withheld from the public release.
+The current site includes Norwegian and English reading routes, the curated [gallery](https://thevoicefrominside.dev/galleri-3d/), original-artwork clothing studies and [collaboration](https://thevoicefrominside.dev/collaborate/) entrances. Accounts, identity verification, payments and public submissions remain closed until their independent services and agreements are in place. Prototype screens and backend tests do not establish that a service is open.
 
-Everyone is welcome to help with coding, design, translation, accessibility, testing, documentation, research, legal expertise, art, writing and music. No prison connection is required. Please keep contributions focused and describe what was tested. Use public or synthetic examples; never post private manuscripts, case files, credentials or private contact information in issues, pull requests or repository history.
+You can develop with Node 24 and any editor, without a ChatGPT subscription. Codex and other AI assistants can work with the same files and Git branches when their own account access permits; they are optional development tools. Hosting, domain ownership and any optional AI service have their own account and pricing terms.
 
-Artwork ownership, permission to display a photograph and permission for commercial reproductions remain separate. Existing approved text and redactions must be preserved.
+The main journey uses a reversible scroll timeline: stopping freezes its visible motion. Its controls support Norwegian, English and Simplified Chinese. New location-specific media remain separately reviewed drafts. The [private synthetic forum backend](docs/forum-api-contract.md) and [explicit erasure operator](docs/forum-erasure-operator.md) are separate opt-in development tools; the public website does not expose those private routes or enable real membership, KYC or payments.
 
+The frontend consists of ordinary HTML, CSS, JavaScript and media files. See the [development guide](docs/development.md) for local work and the [independent hosting guide](docs/independent-hosting.md) for the portable frontend output, production-content boundary and release process. A local commit, GitHub push and Vercel publication are separate actions; this document does not certify that a local change has been pushed or deployed.
+
+Everyone is welcome to help with code, design, translation, accessibility, testing, legal expertise, art, writing and music. Use public or synthetic examples. Preserve approved writing, redactions and artwork; display permission and commercial reproduction rights remain separate.
 
 ## Run the contributor preview
 
@@ -97,6 +102,6 @@ Current needs include mobile accessibility, articulated character animation usin
 This repository is a developer distribution with examples wherever original writing or media has not been released. Use synthetic cases in development and bug reports. Keep private case files, manuscripts, contact details and credentials out of GitHub. Prototype screens and passing tests do not mean submissions, accounts, payments or legal services are open. Read the current terms for code, writing, artwork and commercial reproductions separately.
 
 
-## Contributor source update — 5 November 2026
+## Export history — 5 November 2026
 
 The application code, generic interface, navigation and gallery in this contributor export were updated from website source commit `d9de7e2954f4a790fc6f12257f1e6c8d46389096`. The 27 approved gallery images and depth resources are included. Editorial reading pages still use example material; private manuscripts and case documents are excluded. This repository is not a complete content mirror or a deployment receipt. See [source provenance](docs/source-provenance.json).
