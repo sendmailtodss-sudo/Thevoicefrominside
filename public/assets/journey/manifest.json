@@ -288,6 +288,176 @@
       "duration": 8.041666666666666
     },
     {
+      "id": "lar-painter-transfer",
+      "enabled": true,
+      "video": "/assets/journey/ui-20261112/s08-lar-painter-transfer-1280-g12.mp4",
+      "poster": "/assets/journey/ui-20261112/s08-lar-painter-transfer-1280-g12.webp",
+      "mode": "scrub",
+      "fit": "cover",
+      "title": {
+        "no": "Maleren",
+        "en": "The painter",
+        "zh": "画家"
+      },
+      "description": {
+        "no": "Maleren legger fra seg penselen og fotograferer LAR-verket. Blitsen gjør bildet om til tegn som forlater cellen, og staffeliet står tomt igjen. Utkast laget med KI; rom og personer er fiktive rekonstruksjoner. Verket på staffeliet er gjengitt av videomodellen og er ikke en eksakt kopi av originalen.",
+        "en": "The painter puts down the brush and photographs the LAR work. The flash turns the image into characters that leave the cell, and the easel is left empty. AI-generated draft; rooms and people are fictional reconstructions. The work on the easel is rendered by the video model and is not an exact copy of the original.",
+        "zh": "画家放下画笔，为LAR作品拍照。闪光将画面化为字符离开牢房，画架上只剩空白。 AI生成的草稿；房间和人物均为虚构重建。 画架上的作品由视频模型生成，并非原作的精确复制。"
+      },
+      "reviewStatus": "draft",
+      "provenance": {
+        "provider": "Higgsfield",
+        "model": "kling4_0",
+        "jobId": "5a0e29ed-9211-44b6-ab48-f7f924dde8d8",
+        "generatedBy": "Codex 2026-11-12",
+        "resolution": "1080p source, 1280x720 scrub encode",
+        "keyframeIntervalSeconds": 0.5,
+        "videoSha256": "c10153c1366f775ea83af042443fbe31aaddff70f100c99d4ce569efa3c48f82",
+        "publishedOnUserInstruction": "2026-11-12: publish all available Bergen prison sequence media"
+      },
+      "width": 1280,
+      "height": 720,
+      "frameRate": 24,
+      "frameCount": 193,
+      "duration": 8.041666666666666
+    },
+    {
+      "id": "metal-workshop",
+      "enabled": true,
+      "video": "/assets/journey/ui-20261112/s09-metal-workshop-1280-g12.mp4",
+      "poster": "/assets/journey/ui-20261112/s09-metal-workshop-1280-g12.webp",
+      "mode": "scrub",
+      "fit": "cover",
+      "title": {
+        "no": "Skrapmetall blir kunst",
+        "en": "Scrap metal becomes art",
+        "zh": "废金属化为艺术"
+      },
+      "description": {
+        "no": "En kvinne fullfører en skulptur i verkstedet, fotograferer den og sender den videre. Utkast laget med KI; rom og personer er fiktive rekonstruksjoner.",
+        "en": "A woman finishes a sculpture in the workshop, photographs it and sends it on. AI-generated draft; rooms and people are fictional reconstructions.",
+        "zh": "一位女性在工坊完成雕塑，拍照后将其传送出去。 AI生成的草稿；房间和人物均为虚构重建。"
+      },
+      "reviewStatus": "draft",
+      "provenance": {
+        "provider": "Higgsfield",
+        "model": "kling4_0",
+        "jobId": "554372e3-9348-4cb8-b2bd-479b3574cc1e",
+        "generatedBy": "Codex 2026-11-12",
+        "resolution": "1080p source, 1280x720 scrub encode",
+        "keyframeIntervalSeconds": 0.5,
+        "videoSha256": "9691d26ab8561ca4da0959cfe2dfb7d5d8ceee0cd5787cec10cc61fb7e5ccaa3",
+        "publishedOnUserInstruction": "2026-11-12: publish all available Bergen prison sequence media"
+      },
+      "width": 1280,
+      "height": 720,
+      "frameRate": 24,
+      "frameCount": 193,
+      "duration": 8.041666666666666
+    },
+    {
+      "id": "courtyard-graffiti",
+      "enabled": true,
+      "video": "/assets/journey/ui-20261112/s10-courtyard-graffiti-1280-g12.mp4",
+      "poster": "/assets/journey/ui-20261112/s10-courtyard-graffiti-1280-g12.webp",
+      "mode": "scrub",
+      "fit": "cover",
+      "title": {
+        "no": "Et uttrykk innenfor murene",
+        "en": "Expression within the walls",
+        "zh": "高墙内的表达"
+      },
+      "description": {
+        "no": "Graffiti i luftegården, med høye murer, himmel og overvåkningskamera. Utkast laget med KI; rom og personer er fiktive rekonstruksjoner.",
+        "en": "Graffiti in the exercise yard, with high walls, sky and a surveillance camera. AI-generated draft; rooms and people are fictional reconstructions.",
+        "zh": "放风庭院里的涂鸦，四周是高墙、天空和监控摄像头。 AI生成的草稿；房间和人物均为虚构重建。"
+      },
+      "reviewStatus": "draft",
+      "provenance": {
+        "provider": "Higgsfield",
+        "model": "kling4_0",
+        "jobId": "a7a3643f-a15a-4bf2-a8e3-783ca6618937",
+        "generatedBy": "Codex 2026-11-12",
+        "resolution": "1080p source, 1280x720 scrub encode",
+        "keyframeIntervalSeconds": 0.5,
+        "videoSha256": "fa70c1ab07eabf6f7615392ca33313364307c1ec1cb11565c4703a70da10d916",
+        "publishedOnUserInstruction": "2026-11-12: publish all available Bergen prison sequence media"
+      },
+      "width": 1280,
+      "height": 720,
+      "frameRate": 24,
+      "frameCount": 193,
+      "duration": 8.041666666666666
+    },
+    {
+      "id": "literature",
+      "enabled": true,
+      "video": "/assets/journey/ui-20261112/s11-literature-1280-g12.mp4",
+      "poster": "/assets/journey/ui-20261112/s11-literature-1280-g12.webp",
+      "mode": "scrub",
+      "fit": "cover",
+      "title": {
+        "no": "Ord som får reise",
+        "en": "Words that travel",
+        "zh": "远行的文字"
+      },
+      "description": {
+        "no": "En forfatter leser fra cellen. Ordene blir tegn som går gjennom telefonen og ut. Utkast laget med KI; rom og personer er fiktive rekonstruksjoner.",
+        "en": "A writer reads from the cell. The words become characters that travel through the phone and out. AI-generated draft; rooms and people are fictional reconstructions.",
+        "zh": "一位作者在牢房里朗读。文字化为字符，经由手机传向外界。 AI生成的草稿；房间和人物均为虚构重建。"
+      },
+      "reviewStatus": "draft",
+      "provenance": {
+        "provider": "Higgsfield",
+        "model": "kling4_0",
+        "jobId": "11b88f18-b974-4b72-a176-bbe1b0393473",
+        "generatedBy": "Codex 2026-11-12",
+        "resolution": "1080p source, 1280x720 scrub encode",
+        "keyframeIntervalSeconds": 0.5,
+        "videoSha256": "dcfe89ed85e8ae21ffad16bd9fb59967f00817e9c29a23fe4f2a341657189bfc",
+        "publishedOnUserInstruction": "2026-11-12: publish all available Bergen prison sequence media"
+      },
+      "width": 1280,
+      "height": 720,
+      "frameRate": 24,
+      "frameCount": 193,
+      "duration": 8.041666666666666
+    },
+    {
+      "id": "music-send",
+      "enabled": true,
+      "video": "/assets/journey/ui-20261112/s12-music-send-1280-g12.mp4",
+      "poster": "/assets/journey/ui-20261112/s12-music-send-1280-g12.webp",
+      "mode": "scrub",
+      "fit": "cover",
+      "title": {
+        "no": "Musikkrommet",
+        "en": "The music room",
+        "zh": "音乐室"
+      },
+      "description": {
+        "no": "Opptaket i musikkrommet sendes, og scenen løses opp i det felles nettverket. Utkast laget med KI; rom og personer er fiktive rekonstruksjoner.",
+        "en": "The recording in the music room is sent, and the scene dissolves into the shared network. AI-generated draft; rooms and people are fictional reconstructions.",
+        "zh": "音乐室里的录音被发送出去，场景随之融入共同的网络。 AI生成的草稿；房间和人物均为虚构重建。"
+      },
+      "reviewStatus": "draft",
+      "provenance": {
+        "provider": "Higgsfield",
+        "model": "kling4_0",
+        "jobId": "8c7da8be-dc40-425c-97bb-8fdb435857c3",
+        "generatedBy": "Codex 2026-11-12",
+        "resolution": "1080p source, 1280x720 scrub encode",
+        "keyframeIntervalSeconds": 0.5,
+        "videoSha256": "633092d7f11659e1d6d8e20ac1b6df32064d70fa79291cfa8e149e5a51a0c703",
+        "publishedOnUserInstruction": "2026-11-12: publish all available Bergen prison sequence media"
+      },
+      "width": 1280,
+      "height": 720,
+      "frameRate": 24,
+      "frameCount": 193,
+      "duration": 8.041666666666666
+    },
+    {
       "id": "prison-arrival",
       "enabled": false,
       "video": "/assets/journey/prison-arrival.mp4",
@@ -322,7 +492,7 @@
     },
     {
       "id": "painter",
-      "enabled": true,
+      "enabled": false,
       "video": "/assets/journey/painter.mp4",
       "poster": "/assets/journey/painter.webp",
       "mode": "scrub",
@@ -336,7 +506,8 @@
       "height": 720,
       "frameRate": 30,
       "frameCount": 234,
-      "duration": 7.8
+      "duration": 7.8,
+      "disabledReason": "Replaced 2026-11-12 by Codex S08–S12 media on user instruction; kept for rollback."
     },
     {
       "id": "rapper",
@@ -348,7 +519,7 @@
     },
     {
       "id": "metal",
-      "enabled": true,
+      "enabled": false,
       "video": "/assets/journey/metal.mp4",
       "poster": "/assets/journey/metal.webp",
       "mode": "scrub",
@@ -356,7 +527,8 @@
       "height": 720,
       "frameRate": 30,
       "frameCount": 150,
-      "duration": 5.0
+      "duration": 5.0,
+      "disabledReason": "Replaced 2026-11-12 by Codex S08–S12 media on user instruction; kept for rollback."
     },
     {
       "id": "ai",
@@ -368,7 +540,7 @@
     },
     {
       "id": "streetart",
-      "enabled": true,
+      "enabled": false,
       "video": "/assets/journey/prison-courtyard.mp4",
       "poster": "/assets/journey/prison-courtyard.webp",
       "mode": "scrub",
@@ -394,11 +566,12 @@
       "height": 720,
       "frameRate": 24,
       "frameCount": 241,
-      "duration": 10.041666666666666
+      "duration": 10.041666666666666,
+      "disabledReason": "Replaced 2026-11-12 by Codex S08–S12 media on user instruction; kept for rollback."
     },
     {
       "id": "poet",
-      "enabled": true,
+      "enabled": false,
       "video": "/assets/journey/poet.mp4",
       "poster": "/assets/journey/poet.webp",
       "mode": "scrub",
@@ -412,7 +585,8 @@
       "height": 720,
       "frameRate": 30,
       "frameCount": 150,
-      "duration": 5.0
+      "duration": 5.0,
+      "disabledReason": "Replaced 2026-11-12 by Codex S08–S12 media on user instruction; kept for rollback."
     },
     {
       "id": "filmmaker",
@@ -424,7 +598,7 @@
     },
     {
       "id": "music-room",
-      "enabled": true,
+      "enabled": false,
       "video": "/assets/journey/prison-music.mp4",
       "poster": "/assets/journey/prison-music.webp",
       "mode": "scrub",
@@ -450,7 +624,8 @@
       "height": 720,
       "frameRate": 24,
       "frameCount": 289,
-      "duration": 12.041666666666666
+      "duration": 12.041666666666666,
+      "disabledReason": "Replaced 2026-11-12 by Codex S08–S12 media on user instruction; kept for rollback."
     },
     {
       "id": "collective-portal",
@@ -902,6 +1077,7 @@
     "state": "neural_update_with_temporary_arrival_drafts",
     "opening": "Point/galaxy and dense collective neural field with frame-registered phrases.",
     "locationReconstruction": "S04 earth/gate, S05 route to C building and S06A man are temporarily published on direct user instruction (12 Nov 2026) although the building and outfit are known to be wrong. The V7 prison-arrival clip is disabled but kept.",
-    "transitions": "Native-scroll presentation is reversible; the opening uses explicit editorial cuts, not a newly completed seamless geographic camera journey."
+    "transitions": "Native-scroll presentation is reversible; the opening uses explicit editorial cuts, not a newly completed seamless geographic camera journey.",
+    "creators": "S08 painter, S09 metal, S10 graffiti, S11 literature and S12 music/send published as AI drafts on user instruction (12 Nov 2026). V7 creator clips are disabled but kept."
   }
 }

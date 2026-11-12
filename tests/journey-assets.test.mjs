@@ -8,7 +8,8 @@ const read = file => readFile(path.join(root, file), 'utf8');
 const manifest = async () => JSON.parse(await read('assets/journey/manifest.json'));
 const enabledOrder = [
   'origin', 'big-bang', 'brains', 'impulses', 'vortex', 'supernova', 'dna',
-  'earth-gate', 'c7-arrival', 'man-wink', 'painter', 'metal', 'streetart', 'poet', 'music-room',
+  'earth-gate', 'c7-arrival', 'man-wink', 'lar-painter-transfer', 'metal-workshop',
+  'courtyard-graffiti', 'literature', 'music-send',
   'collective-portal', 'gallery', 'bergen', 'paris', 'interior', 'stencil',
 ];
 
@@ -67,23 +68,25 @@ test('the complete journey keeps the origin, dense collective minds and every cr
     assert.equal(scene.frameRate, 30);
     assert.equal(scene.frameCount, 301);
   }
-  for (const id of ['painter','metal','poet','music-room']) {
-    const scene = scenes.find(item => item.id === id);
-    assert.ok(!scene.video.includes('/ui-20261112/'), `${id} preserves the public V7 footage`);
+  // V7 creator clips stay in the manifest, disabled, for rollback.
+  for (const id of ['painter','metal','streetart','poet','music-room']) {
+    const scene = data.scenes.find(item => item.id === id);
+    assert.equal(scene.enabled, false, `${id} retired`);
+    assert.ok(!scene.video.includes('/ui-20261112/'), `${id} keeps its V7 footage`);
   }
   // User decision 12 Nov 2026: the known-wrong C building (S05) and outfit (S06A)
   // stay public as labelled temporary drafts until corrected media replaces them.
-  for (const [id, shot] of [['earth-gate','s04'],['c7-arrival','s05'],['man-wink','s06a']]) {
+  for (const [id, shot] of [['earth-gate','s04'],['c7-arrival','s05'],['man-wink','s06a'],['lar-painter-transfer','s08'],['metal-workshop','s09'],['courtyard-graffiti','s10'],['literature','s11'],['music-send','s12']]) {
     const scene = scenes.find(item => item.id === id);
     assert.match(scene.video, new RegExp(`/ui-20261112/${shot}-`));
     assert.equal(scene.reviewStatus, 'draft');
-    assert.match(scene.description.en, /Temporary draft/);
+    assert.match(scene.description.en, /Temporary draft|AI-generated draft/);
   }
   const retired = data.scenes.find(scene => scene.id === 'prison-arrival');
   assert.equal(retired.enabled, false);
   assert.equal(retired.video, '/assets/journey/prison-arrival.mp4');
-  assert.equal(scenes.find(scene => scene.id === 'music-room').video, '/assets/journey/prison-music.mp4');
-  assert.ok(scenes.every(scene => !/s0[236-9]-|s1[0-2]-/.test(scene.video || '')));
+  assert.equal(data.scenes.find(scene => scene.id === 'music-room').video, '/assets/journey/prison-music.mp4');
+  assert.ok(scenes.every(scene => !/s0[2367]-/.test(scene.video || '')), 'rejected three-brain and superseded corridor shots stay out');
   assert.equal(data.requestedMediaReplacements.status, 'temporary_drafts_published_on_user_instruction');
   assert.equal(data.releaseScope.state, 'neural_update_with_temporary_arrival_drafts');
 });
@@ -101,10 +104,10 @@ test('enabled media stays local, nested asset paths exist, and exact artwork rem
       assert.ok((await stat(path.join(root, art.src))).size > 0, `${art.id} is available`);
     }
   }
-  const painter = scenes.find(scene => scene.id === 'painter');
+  const painter = scenes.find(scene => scene.id === 'lar-painter-transfer');
   const gallery = scenes.find(scene => scene.id === 'gallery');
   assert.ok(gallery.artworks.some(art => art.id === 'lar-bak-murene'));
-  assert.match(painter.description.en, /not finished/);
+  assert.match(painter.description.en, /not an exact copy of the original/);
   for (const route of ['index.html', 'en/index.html']) {
     const html = await read(route);
     assert.match(html, /data-journey/);
