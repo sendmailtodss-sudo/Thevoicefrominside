@@ -219,7 +219,7 @@
     },
     {
       "id": "c7-arrival",
-      "enabled": true,
+      "enabled": false,
       "video": "/assets/journey/ui-20261112/s05-c7-arrival-1280-g12.mp4",
       "poster": "/assets/journey/ui-20261112/s05-c7-arrival-1280-g12.webp",
       "mode": "scrub",
@@ -250,11 +250,12 @@
       "height": 720,
       "frameRate": 24,
       "frameCount": 241,
-      "duration": 10.041666666666666
+      "duration": 10.041666666666666,
+      "disabledReason": "Replaced 2026-11-12 by the corrected C7 route (building 9, window 3) and the restyled man; kept for rollback."
     },
     {
       "id": "man-wink",
-      "enabled": true,
+      "enabled": false,
       "video": "/assets/journey/ui-20261112/s06a-man-wink-1280-g12.mp4",
       "poster": "/assets/journey/ui-20261112/s06a-man-wink-1280-g12.webp",
       "mode": "scrub",
@@ -285,7 +286,149 @@
       "height": 720,
       "frameRate": 24,
       "frameCount": 193,
-      "duration": 8.041666666666666
+      "duration": 8.041666666666666,
+      "disabledReason": "Replaced 2026-11-12 by the corrected C7 route (building 9, window 3) and the restyled man; kept for rollback."
+    },
+    {
+      "id": "c7-route",
+      "enabled": true,
+      "video": "/assets/journey/ui-20261112/c7-route-gate-to-c7-1280-g12.mp4",
+      "poster": "/assets/journey/ui-20261112/c7-route-gate-to-c7-1280-g12.webp",
+      "mode": "scrub",
+      "fit": "cover",
+      "title": {
+        "no": "Gjennom porten",
+        "en": "Through the gate",
+        "zh": "穿过大门"
+      },
+      "description": {
+        "no": "Gjennom porten, over anlegget og frem til C7-bygget ved muren. Utkast laget med KI; rom og personer er fiktive rekonstruksjoner.",
+        "en": "Through the gate, over the grounds and on to the C7 building by the wall. AI-generated draft; rooms and people are fictional reconstructions.",
+        "zh": "穿过大门，飞越园区，来到墙边的C7楼。 AI生成的草稿；房间和人物均为虚构重建。"
+      },
+      "reviewStatus": "draft",
+      "provenance": {
+        "provider": "Higgsfield",
+        "model": "kling4_0",
+        "jobId": "b4c9c049-19f5-4e5d-b539-8dfb7d1fb9d0",
+        "generatedBy": "Claude 2026-11-12",
+        "resolution": "1080p source, 1280x720 scrub encode",
+        "keyframeIntervalSeconds": 0.5,
+        "videoSha256": "09ad7bc3dfe21c35309e70dee3cc0953b4ccfbf4a9f61314e3076d5cc7b5964e",
+        "location": "C7 = building 9 identified by the user on the official aerial; window 3 from left, upper floor"
+      },
+      "width": 1280,
+      "height": 720,
+      "frameRate": 24,
+      "frameCount": 241,
+      "duration": 10.041666666666666
+    },
+    {
+      "id": "c7-window",
+      "enabled": true,
+      "video": "/assets/journey/ui-20261112/c7-window-to-man-1280-g12.mp4",
+      "poster": "/assets/journey/ui-20261112/c7-window-to-man-1280-g12.webp",
+      "mode": "scrub",
+      "fit": "cover",
+      "title": {
+        "no": "Inn gjennom vinduet",
+        "en": "In through the window",
+        "zh": "穿窗而入"
+      },
+      "description": {
+        "no": "Kameraet går inn gjennom tredje vindu fra venstre i øverste etasje, til en mann som ikke hører hjemme der. Utkast laget med KI; rom og personer er fiktive rekonstruksjoner.",
+        "en": "The camera enters through the third upper window from the left, to a man who does not belong there. AI-generated draft; rooms and people are fictional reconstructions.",
+        "zh": "镜头从顶层左数第三扇窗进入，遇见一个与此地格格不入的男人。 AI生成的草稿；房间和人物均为虚构重建。"
+      },
+      "reviewStatus": "draft",
+      "provenance": {
+        "provider": "Higgsfield",
+        "model": "kling4_0",
+        "jobId": "b52ca7e5-f3c0-4333-adb2-63dd72a1affa",
+        "generatedBy": "Claude 2026-11-12",
+        "resolution": "1080p source, 1280x720 scrub encode",
+        "keyframeIntervalSeconds": 0.5,
+        "videoSha256": "edc20cf0cc0509d11f9d4c8b9efc209e9fec414e282e87271d14a1140ac9319f",
+        "location": "C7 = building 9 identified by the user on the official aerial; window 3 from left, upper floor"
+      },
+      "width": 1280,
+      "height": 720,
+      "frameRate": 24,
+      "frameCount": 193,
+      "duration": 8.041666666666666,
+      "portraitFocusX": 30
+    },
+    {
+      "id": "man-luxe",
+      "enabled": true,
+      "video": "/assets/journey/ui-20261112/man-luxe-wink-1280-g12.mp4",
+      "poster": "/assets/journey/ui-20261112/man-luxe-wink-1280-g12.webp",
+      "mode": "scrub",
+      "fit": "cover",
+      "title": {
+        "no": "Et smil på vei inn",
+        "en": "A smile on the way in",
+        "zh": "进门时的微笑"
+      },
+      "description": {
+        "no": "En fiktiv mann i overdådige gullkjeder og pels gliser mot kameraet. Han er så pyntet at han tydelig ikke hører hjemme her. Utkast laget med KI; rom og personer er fiktive rekonstruksjoner.",
+        "en": "A fictional man in extravagant gold chains and fur grins at the camera. He is so dressed up that he clearly does not belong here. AI-generated draft; rooms and people are fictional reconstructions.",
+        "zh": "一位戴着夸张金链、身披皮草的虚构男子对着镜头咧嘴而笑。他打扮得如此浮夸，显然不属于这里。 AI生成的草稿；房间和人物均为虚构重建。"
+      },
+      "reviewStatus": "draft",
+      "provenance": {
+        "provider": "Higgsfield",
+        "model": "kling4_0",
+        "jobId": "70a34b33-e011-4228-9c83-d3c240a442c7",
+        "generatedBy": "Claude 2026-11-12",
+        "resolution": "1080p source, 1280x720 scrub encode",
+        "keyframeIntervalSeconds": 0.5,
+        "videoSha256": "6984a1d8f49db489747ae133afbe431779e082221e5e5d348efa4fa634b90f11",
+        "keyframes": {
+          "outfitStill": "3dd40b1b-5705-4a57-9652-f3caf605e827"
+        },
+        "knownLimit": "one-eye wink not clearly visible; both eyes squint"
+      },
+      "width": 1280,
+      "height": 720,
+      "frameRate": 24,
+      "frameCount": 193,
+      "duration": 8.041666666666666,
+      "portraitFocusX": 36
+    },
+    {
+      "id": "corridor-to-painter",
+      "enabled": true,
+      "video": "/assets/journey/ui-20261112/s07-corridor-to-painter-1280-g12.mp4",
+      "poster": "/assets/journey/ui-20261112/s07-corridor-to-painter-1280-g12.webp",
+      "mode": "scrub",
+      "fit": "cover",
+      "title": {
+        "no": "Gangen",
+        "en": "The corridor",
+        "zh": "走廊"
+      },
+      "description": {
+        "no": "Videre gjennom gangen til en lignende celle der en maler arbeider. Utkast laget med KI; rom og personer er fiktive rekonstruksjoner.",
+        "en": "On through the corridor to a similar cell where a painter is working. AI-generated draft; rooms and people are fictional reconstructions.",
+        "zh": "穿过走廊，来到一间相似的牢房，一位画家正在作画。 AI生成的草稿；房间和人物均为虚构重建。"
+      },
+      "reviewStatus": "draft",
+      "provenance": {
+        "provider": "Higgsfield",
+        "model": "kling4_0",
+        "jobId": "54b9a56c-c73e-4b3d-8512-0a2e12b75477",
+        "generatedBy": "Codex 2026-11-12",
+        "resolution": "1080p source, 1280x720 scrub encode",
+        "keyframeIntervalSeconds": 0.5,
+        "videoSha256": "283233ced4df06f2ecd53a24f5e912fe2b698d7e72f3e10a43a2ae0df7e77f4d",
+        "location": "C7 = building 9 identified by the user on the official aerial; window 3 from left, upper floor"
+      },
+      "width": 1280,
+      "height": 720,
+      "frameRate": 24,
+      "frameCount": 145,
+      "duration": 6.041666666666667
     },
     {
       "id": "lar-painter-transfer",
@@ -1143,7 +1286,7 @@
   "releaseScope": {
     "state": "neural_update_with_temporary_arrival_drafts",
     "opening": "Point/galaxy and dense collective neural field with frame-registered phrases.",
-    "locationReconstruction": "S04 earth/gate, S05 route to C building and S06A man are temporarily published on direct user instruction (12 Nov 2026) although the building and outfit are known to be wrong. The V7 prison-arrival clip is disabled but kept.",
+    "locationReconstruction": "Corrected 12 Nov 2026: S04 earth/gate, then gate to C7 (building 9 on the official aerial, identified by the user), in through the third upper window from the left, the restyled fictional man, and Codex S07 corridor to the painter. Earlier S05/S06A drafts are disabled but kept.",
     "transitions": "Native-scroll presentation is reversible; the opening uses explicit editorial cuts, not a newly completed seamless geographic camera journey.",
     "creators": "S08 painter, S09 metal, S10 graffiti, S11 literature and S12 music/send published as AI drafts on user instruction (12 Nov 2026). V7 creator clips are disabled but kept."
   }

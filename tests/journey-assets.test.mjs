@@ -8,7 +8,7 @@ const read = file => readFile(path.join(root, file), 'utf8');
 const manifest = async () => JSON.parse(await read('assets/journey/manifest.json'));
 const enabledOrder = [
   'origin', 'big-bang', 'brains', 'impulses', 'vortex', 'supernova', 'dna',
-  'earth-gate', 'c7-arrival', 'man-wink', 'lar-painter-transfer', 'metal-workshop',
+  'earth-gate', 'c7-route', 'c7-window', 'man-luxe', 'corridor-to-painter', 'lar-painter-transfer', 'metal-workshop',
   'courtyard-graffiti', 'literature', 'music-send',
   'collective-portal', 'gallery', 'bergen', 'paris', 'interior', 'stencil', 'gallery-return',
 ];
@@ -76,7 +76,7 @@ test('the complete journey keeps the origin, dense collective minds and every cr
   }
   // User decision 12 Nov 2026: the known-wrong C building (S05) and outfit (S06A)
   // stay public as labelled temporary drafts until corrected media replaces them.
-  for (const [id, shot] of [['earth-gate','s04'],['c7-arrival','s05'],['man-wink','s06a'],['lar-painter-transfer','s08'],['metal-workshop','s09'],['courtyard-graffiti','s10'],['literature','s11'],['music-send','s12']]) {
+  for (const [id, shot] of [['earth-gate','s04'],['c7-route','c7-route'],['c7-window','c7-window'],['man-luxe','man-luxe'],['corridor-to-painter','s07'],['lar-painter-transfer','s08'],['metal-workshop','s09'],['courtyard-graffiti','s10'],['literature','s11'],['music-send','s12']]) {
     const scene = scenes.find(item => item.id === id);
     assert.match(scene.video, new RegExp(`/ui-20261112/${shot}-`));
     assert.equal(scene.reviewStatus, 'draft');
@@ -86,7 +86,8 @@ test('the complete journey keeps the origin, dense collective minds and every cr
   assert.equal(retired.enabled, false);
   assert.equal(retired.video, '/assets/journey/prison-arrival.mp4');
   assert.equal(data.scenes.find(scene => scene.id === 'music-room').video, '/assets/journey/prison-music.mp4');
-  assert.ok(scenes.every(scene => !/s0[2367]-/.test(scene.video || '')), 'rejected three-brain and superseded corridor shots stay out');
+  assert.ok(scenes.every(scene => !/s0[236]-|s05-|s06a-/.test(scene.video || '')), 'rejected and superseded shots stay out');
+  for (const id of ['c7-arrival','man-wink']) assert.equal(data.scenes.find(scene => scene.id === id).enabled, false, `${id} retired`);
   assert.equal(data.requestedMediaReplacements.status, 'temporary_drafts_published_on_user_instruction');
   assert.equal(data.releaseScope.state, 'neural_update_with_temporary_arrival_drafts');
 });
