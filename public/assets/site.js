@@ -96,7 +96,7 @@
           const values=[label,number.format(data.channels[channel]||0),number.format(data.sources[channel]||0)];
           for(const value of values){const cell=document.createElement('td');cell.textContent=value;row.append(cell);}tbody.append(row);
         }
-        statusEl.textContent=(data.since ? text('Måling startet ','Measurement started ')+new Intl.DateTimeFormat(en?'en-GB':'nb-NO',{dateStyle:'medium',timeZone:'Europe/Oslo'}).format(new Date(data.since))+'. ' : text('Ingen besøk er registrert ennå. ','No visits have been recorded yet. '))+text('Oppdatert ','Updated ')+new Intl.DateTimeFormat(en?'en-GB':'nb-NO',{timeStyle:'short',timeZone:'Europe/Oslo'}).format(new Date())+' (Europe/Oslo).';
+        statusEl.textContent=(data.since ? text('Måling startet ','Measurement started ')+new Intl.DateTimeFormat(en?'en-GB':'nb-NO',{dateStyle:'medium',timeZone:'Europe/Oslo'}).format(new Date(data.since))+'. ' : text('Ingen besøk er registrert ennå. ','No visits have been recorded yet. '));
       } catch {
         for(const name of ['pageviews','visits','shares'])document.getElementById('total-'+name).textContent='—';
         document.getElementById('channel-rows').replaceChildren();
