@@ -43,7 +43,7 @@ function publicArtwork(row){
  return {id:row.id,src:expected,full:expected,no:row.title,en:row.title,tagNo:'Kunstnerverk',tagEn:'Artist work',creative:true,artistId:row.artistId,artistName:row.artistName,origin:row.origin,original,reproductionAllowed:permitted};
 }
 function originalText(item,en){
- if(!item.creative)return ui(en?'Original: not listed · No price or bidding available.':'Original: ikke lagt ut · Ingen pris eller budgivning tilgjengelig.');
+ if(!item.creative)return ui(en?'Buy and bid: coming soon.':'Kjøp og bud: kommer snart.');
  const words=en?{available:'Available',reserved:'Reserved',sold:'Sold',not_listed:'Not listed'}:{available:'Tilgjengelig',reserved:'Reservert',sold:'Solgt',not_listed:'Ikke lagt ut'};
  let result=ui('Original:')+' '+ui(words[item.original.status]);
  if(item.original.status==='available'&&item.original.priceMinor!==null)result+=' · '+new Intl.NumberFormat(en?'en-GB':'nb-NO',{style:'currency',currency:'NOK',maximumFractionDigits:2}).format(item.original.priceMinor/100);

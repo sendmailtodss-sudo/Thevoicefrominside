@@ -10,7 +10,7 @@ const enabledOrder = [
   'origin', 'big-bang', 'brains', 'impulses', 'vortex', 'supernova', 'dna',
   'earth-gate', 'c7-arrival', 'man-wink', 'lar-painter-transfer', 'metal-workshop',
   'courtyard-graffiti', 'literature', 'music-send',
-  'collective-portal', 'gallery', 'bergen', 'paris', 'interior', 'stencil',
+  'collective-portal', 'gallery', 'bergen', 'paris', 'interior', 'stencil', 'gallery-return',
 ];
 
 function boxes(bytes, start = 0, end = bytes.length) {
@@ -89,6 +89,15 @@ test('the complete journey keeps the origin, dense collective minds and every cr
   assert.ok(scenes.every(scene => !/s0[2367]-/.test(scene.video || '')), 'rejected three-brain and superseded corridor shots stay out');
   assert.equal(data.requestedMediaReplacements.status, 'temporary_drafts_published_on_user_instruction');
   assert.equal(data.releaseScope.state, 'neural_update_with_temporary_arrival_drafts');
+});
+
+test('the journey returns to the same VR-capable gallery at the end', async () => {
+  const scenes = (await manifest()).scenes.filter(scene => scene.enabled);
+  const first = scenes.find(scene => scene.id === 'gallery'), last = scenes.at(-1);
+  assert.equal(last.id, 'gallery-return');
+  assert.equal(last.sceneRole, 'gallery');
+  assert.equal(last.video, first.video);
+  assert.deepEqual(last.artworks.map(art => art.id), first.artworks.map(art => art.id));
 });
 
 test('enabled media stays local, nested asset paths exist, and exact artwork remains inspectable', async () => {

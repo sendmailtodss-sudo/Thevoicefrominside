@@ -1050,6 +1050,73 @@
       "frameRate": 30,
       "frameCount": 518,
       "duration": 17.266666666666666
+    },
+    {
+      "id": "gallery-return",
+      "enabled": true,
+      "poster": "/assets/journey/gallery.webp",
+      "video": "/assets/journey/gallery.mp4",
+      "mode": "scrub",
+      "artworks": [
+        {
+          "id": "fri-presse",
+          "no": "Fri presse",
+          "en": "Free press",
+          "src": "/design-assets/approved-illustrations/fri-presse-c2082aa9b1401973757fc9f9520dada4c4e36ac98651a99a03fe2059e0c37a58.webp",
+          "artistName": "Innsatt 2601-46"
+        },
+        {
+          "id": "gjenbruk",
+          "no": "Gjenbruk",
+          "en": "Reuse",
+          "src": "/design-assets/approved-illustrations/gjenbruk-16872400f1db5e2c943824b4540506faf285e00bbc1e056b30cc09573a1b36e9.png",
+          "artistName": "Innsatt 2601-46"
+        },
+        {
+          "id": "book-page-256",
+          "no": "Samme rett til å bli hørt",
+          "en": "The same right to be heard",
+          "src": "/design-assets/approved-illustrations/book-page-256-833c62843bc2418bd1283e402d6bfd8b390899e46fd43a3eeb1a1495f423730c.webp",
+          "artistName": "Innsatt 2601-46"
+        },
+        {
+          "id": "book-page-22",
+          "no": "Pappa … pappa",
+          "en": "Dad … dad",
+          "src": "/design-assets/approved-illustrations/book-page-22-9a9eaf8c27821b9709d200f3bd9e1050ace73944bb9b7ce00a58ba5d69e61829.webp",
+          "artistName": "Innsatt 2601-46"
+        },
+        {
+          "id": "book-page-34",
+          "no": "Årsaken blir borte",
+          "en": "The cause disappears",
+          "src": "/design-assets/approved-illustrations/book-page-34-b8e7de61b34475404b4fe2ba72352c8e500428dfafee03f201ec377daf36ab9f.webp",
+          "artistName": "Innsatt 2601-46"
+        },
+        {
+          "id": "lar-bak-murene",
+          "no": "LAR bak murene",
+          "en": "LAR behind the walls",
+          "src": "/design-assets/approved-illustrations/lar-bak-murene-80643262351fb9d6e4de954d72707ed2fb72610c7d8a3e6296027439d3b07136.webp",
+          "artistName": "Innsatt 2601-46"
+        }
+      ],
+      "width": 1280,
+      "height": 720,
+      "frameRate": 30,
+      "frameCount": 300,
+      "duration": 10.0,
+      "sceneRole": "gallery",
+      "title": {
+        "no": "Tilbake i galleriet",
+        "en": "Back in the gallery",
+        "zh": "回到画廊"
+      },
+      "description": {
+        "no": "Reisen ender der den samlet seg: i galleriet, som også kan åpnes med VR-briller.",
+        "en": "The journey ends where it gathered: in the gallery, which can also be opened with VR headsets.",
+        "zh": "旅程在汇聚之处结束：画廊，也可以用VR头显进入。"
+      }
     }
   ],
   "requestedMediaReplacements": {

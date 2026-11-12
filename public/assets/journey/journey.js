@@ -293,12 +293,12 @@
       artGrid=document.createElement('div');artGrid.className='sj-art-grid';artGrid.setAttribute('aria-label',lang==='zh'?'精选作品':lang==='en'?'Selected artworks':'Utvalgte kunstverk');
       for(const art of works){const a=document.createElement('a');a._art=art;const frame=document.createElement('span');frame.className='sj-art-frame';const img=document.createElement('img');img.src=art.src;img.alt=artLabel(art);img.loading='lazy';img.width=600;img.height=800;const name=document.createElement('strong'),by=document.createElement('small');by.textContent=art.artistName||'Innsatt 2601-46';frame.append(img);a.append(frame,name,by);artGrid.append(a)}
       q('.sj-copy').append(artGrid);
-      if(scene.id==='gallery'){galleryEntry=document.createElement('a');galleryEntry.className='sj-gallery-entry';galleryEntry.href=galleryRoomUrl();galleryEntry.textContent=t('gallery');dock.append(galleryEntry)}
+      if((scene.sceneRole||scene.id)==='gallery'){galleryEntry=document.createElement('a');galleryEntry.className='sj-gallery-entry';galleryEntry.href=galleryRoomUrl();galleryEntry.textContent=t('gallery');dock.append(galleryEntry)}
     }
     function commitScene(){
       if(index<0)return;
       const scene=scenes[index];
-      root.dataset.scene=scene.id;root.dataset.sceneType=scene.type||'video';root.dataset.scrub=String(!!scene.video);root.dataset.origin=String(scene.type==='point');root.dataset.framing=scene.type==='art'?'contain':'cover';
+      root.dataset.scene=scene.sceneRole||scene.id;root.dataset.sceneType=scene.type||'video';root.dataset.scrub=String(!!scene.video);root.dataset.origin=String(scene.type==='point');root.dataset.framing=scene.type==='art'?'contain':'cover';
       const rect=q('.sj-media').getBoundingClientRect(),focus=timeline.focusFor(scene,rect.width,rect.height);
       root.style.setProperty('--sj-focus-x',focus.x+'%');root.style.setProperty('--sj-focus-y',focus.y+'%');
       if(visibleIndex===index)return;

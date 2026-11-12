@@ -160,6 +160,8 @@ Object.assign(window.SFI_TRANSLATIONS['zh-Hans']=window.SFI_TRANSLATIONS['zh-Han
   "Created without generative AI": "未使用生成式人工智能创作",
   "Original: ikke lagt ut · Ingen pris eller budgivning tilgjengelig.": "原作尚未上架，暂无价格或竞价功能。",
   "Original: not listed · No price or bidding available.": "原作尚未上架，暂无价格或竞价功能。",
+  "Kjøp og bud: kommer snart.": "购买与竞价：即将开放。",
+  "Buy and bid: coming soon.": "购买与竞价：即将开放。",
   "Original:": "原作：",
   "Tilgjengelig": "可售",
   "Available": "可售",
