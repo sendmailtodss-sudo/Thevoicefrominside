@@ -399,8 +399,8 @@
     {
       "id": "corridor-to-painter",
       "enabled": true,
-      "video": "/assets/journey/ui-20261112/s07-corridor-to-painter-1280-g12.mp4",
-      "poster": "/assets/journey/ui-20261112/s07-corridor-to-painter-1280-g12.webp",
+      "video": "/assets/journey/ui-20261112/s07-corridor-closed-door-v2-1280-g12.mp4",
+      "poster": "/assets/journey/ui-20261112/s07-corridor-closed-door-v2-1280-g12.webp",
       "mode": "scrub",
       "fit": "cover",
       "title": {
@@ -433,8 +433,8 @@
     {
       "id": "lar-painter-transfer",
       "enabled": true,
-      "video": "/assets/journey/ui-20261112/s08-lar-painter-transfer-1280-g12.mp4",
-      "poster": "/assets/journey/ui-20261112/s08-lar-painter-transfer-1280-g12.webp",
+      "video": "/assets/journey/ui-20261112/s08-painter-flash-v2-1280-g12.mp4",
+      "poster": "/assets/journey/ui-20261112/s08-painter-flash-v2-1280-g12.webp",
       "mode": "scrub",
       "fit": "cover",
       "title": {
