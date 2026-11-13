@@ -40,7 +40,7 @@
         '向下滚动，一段旅程将展示拥有创造力的你可以做到什么。许多人充满创造力，但成长环境发错了牌，这些能力一直被引向既不利于你也不利于社会的方向。<small>挪威在押者生活状况调查（Friestad与Skog Hansen，Fafo 2004）发现，十分之三的人在16岁前接触过儿童福利机构。一项荟萃分析（Young等，Psychological Medicine 2015）发现约四分之一的成年在押者患有ADHD。</small>',
         '这是一次新的机会：创造可能，把ADHD用于建设性的、有创造力的、鲜活而鼓舞人心的事情，改变人生的方向。改变一切。'],
       sig:'– 在押者 2601-46'}};
-  const currentLang=()=>location.pathname.startsWith('/en')?'en':document.documentElement.lang.toLowerCase().startsWith('zh')?'zh':'no';
+  const currentLang=()=>location.pathname.startsWith('/en')?'en':(new URLSearchParams(location.search).get('lang')||document.documentElement.lang||'').toLowerCase().startsWith('zh')?'zh':'no';
   let lang=currentLang();
   const el=(tag,cls,html)=>{const node=document.createElement(tag);if(cls)node.className=cls;if(html!=null)node.innerHTML=html;return node};
   const star=(cx,cy,r,rot)=>{let d='';for(let i=0;i<10;i++){const a=rot+i*Math.PI/5,q=i%2?r*.382:r;d+=(i?'L':'M')+(cx+q*Math.sin(a)).toFixed(2)+' '+(cy-q*Math.cos(a)).toFixed(2)}return `<path d="${d}Z" fill="#FFDE00"/>`};
@@ -74,7 +74,7 @@
   const zone=el('div','sj-hero-zone'),core=el('div','sj-hero-core');
   const symbol=el('button','sj-hero-symbol','<span class="sj-hero-disc"></span><canvas class="sj-hero-matrix" width="160" height="160"></canvas><span class="sj-hero-ring"></span><svg class="sj-hero-star" viewBox="0 0 100 100" aria-hidden="true"><defs><linearGradient id="sjHeroGold" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff6c8"/><stop offset=".3" stop-color="#f8d76a"/><stop offset=".55" stop-color="#c9952a"/><stop offset=".75" stop-color="#fbe7a1"/><stop offset="1" stop-color="#9c6a14"/></linearGradient></defs><path d="M50 0C54 34 66 46 100 50C66 54 54 66 50 100C46 66 34 54 0 50C34 46 46 34 50 0Z" fill="url(#sjHeroGold)" stroke="#fff3c0" stroke-width=".8"/></svg>');
   symbol.type='button';symbol.setAttribute('aria-expanded','false');symbol.setAttribute('aria-controls','sj-hero-tablet');
-  const title=el('p','sj-hero-title'),left=el('a','l'),right=el('a','r');title.append(left,right);core.append(symbol,title);
+  const title=el('p','sj-hero-title'),left=el('a','l'),right=el('a','r');title.append(left,right);const halo=el('span','sj-hero-halo');halo.setAttribute('aria-hidden','true');core.append(halo,symbol,title);
   const tablet=el('div','sj-hero-tablet');tablet.id='sj-hero-tablet';tablet.setAttribute('role','region');tablet.tabIndex=-1;
   const tip=el('p','sj-hero-tip');
   hero.append(flags,zone,core,tip,tablet);stage.append(hero);root.dataset.hero='true';
@@ -104,7 +104,7 @@
   symbol.addEventListener('click',()=>{pinned=!pinned;hero.dataset.pinned=String(pinned);setActive(pinned||(hover.matches&&!!hero.querySelector(':hover')));if(pinned)tablet.focus({preventScroll:true})});
   tablet.addEventListener('click',event=>{if(event.target.closest('.sj-hero-close')){pinned=false;hero.dataset.pinned='false';setActive(false);symbol.focus({preventScroll:true})}});
   hero.addEventListener('keydown',event=>{if(event.key==='Escape'&&hero.dataset.state==='active'){pinned=false;hero.dataset.pinned='false';setActive(false);symbol.focus({preventScroll:true});event.stopPropagation()}});
-  flags.addEventListener('click',event=>{const button=event.target.closest('button[data-lang]');if(!button||button.dataset.lang===lang)return;const code=button.dataset.lang,locale=code==='zh'?'zh-Hans':code;
+  flags.addEventListener('click',event=>{const button=event.target.closest('button[data-lang]');if(!button)return;if(button.dataset.lang===lang){pinned=true;hero.dataset.pinned='true';setActive(true);return}try{sessionStorage.setItem('sjHeroOpen','1')}catch{}const code=button.dataset.lang,locale=code==='zh'?'zh-Hans':code;
     if(window.SFISelectLanguage){window.SFISelectLanguage(locale);return}
     const url=new URL(location.href);url.pathname=code==='en'?'/en/':'/';if(code==='zh')url.searchParams.set('lang','zh-Hans');else url.searchParams.delete('lang');location.assign(url.href)});
 
@@ -122,11 +122,11 @@
   const canvas=symbol.querySelector('canvas'),ctx=canvas.getContext('2d'),glyphs='ｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄ0123456789',cols=11,cell=canvas.width/cols,drops=Array.from({length:cols},(_,i)=>(i*7)%cols);
   let rainTimer=0;
   function rain(){
-    if(!ctx)return;ctx.fillStyle='rgba(1,9,5,.2)';ctx.fillRect(0,0,canvas.width,canvas.height);ctx.font=`700 ${Math.round(cell*.95)}px monospace`;ctx.textAlign='center';
+    if(!ctx)return;ctx.globalCompositeOperation='destination-out';ctx.fillStyle='rgba(0,0,0,.22)';ctx.fillRect(0,0,canvas.width,canvas.height);ctx.globalCompositeOperation='source-over';ctx.font=`700 ${Math.round(cell*.95)}px monospace`;ctx.textAlign='center';
     for(let i=0;i<cols;i++){const y=drops[i]*cell;ctx.fillStyle='#d9ffe8';ctx.fillText(glyphs[(Math.random()*glyphs.length)|0],i*cell+cell/2,y);ctx.fillStyle='#3dff8a';ctx.fillText(glyphs[(Math.random()*glyphs.length)|0],i*cell+cell/2,y-cell);drops[i]=y>canvas.height&&Math.random()>.82?0:drops[i]+1}
   }
   function rainOn(on){clearInterval(rainTimer);rainTimer=0;if(on&&!reduce.matches&&root.dataset.quiet!=='true')rainTimer=setInterval(rain,90)}
-  if(ctx){ctx.fillStyle='#010905';ctx.fillRect(0,0,canvas.width,canvas.height);for(let i=0;i<26;i++)rain()}
+  if(ctx){for(let i=0;i<26;i++)rain()}
 
   // Scroll: the hero fades as the visitor leaves the top; everything rests when it is not shown.
   let ticking=false;
@@ -135,11 +135,12 @@
     const progress=Math.min(1,Math.max(0,-rect.top/(innerHeight*.24)));
     root.style.setProperty('--hero-o',(1-progress).toFixed(3));
     const shown=isOrigin&&progress<1&&rect.bottom>0;
-    if(shown!==visible){visible=shown;root.dataset.heroHidden=String(!shown);if(!shown&&!pinned)setActive(false);rainOn(shown);if(shown)startSpin()}
+    document.body.dataset.heroFront=String(shown);if(shown!==visible){visible=shown;root.dataset.heroHidden=String(!shown);if(!shown&&!pinned)setActive(false);rainOn(shown);if(shown)startSpin()}
   }
   const queue=()=>{if(!ticking){ticking=true;requestAnimationFrame(measure)}};
   addEventListener('scroll',queue,{passive:true});addEventListener('resize',()=>{layout();queue()});
   new MutationObserver(()=>{queue();rainOn(visible);if(visible)startSpin()}).observe(root,{attributes:true,attributeFilter:['data-origin','data-quiet']});
   document.addEventListener('visibilitychange',()=>{rainOn(visible&&!document.hidden);if(!document.hidden&&visible)startSpin()});
   layout();measure();rainOn(true);startSpin();
+  try{if(sessionStorage.getItem('sjHeroOpen')){sessionStorage.removeItem('sjHeroOpen');pinned=true;hero.dataset.pinned='true';setActive(true)}}catch{}
 })();
