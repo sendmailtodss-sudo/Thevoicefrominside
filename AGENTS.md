@@ -9,6 +9,7 @@ This is the public developer distribution of Stemmen fra innsiden / The Voice fr
 - Keep live services disabled in the local preview. A screen, mock, test or build is not evidence that a service is operational.
 - Do not deploy, send mail, schedule social posts, purchase services or activate payment/submission integrations as a side effect of development.
 - Preserve approved editorial text and redactions. Keep changes to application code separate from requests to change writing or artwork rights.
+- For navigation, page structure, the landing hero, galleries or the shop, read `.agents/skills/site-direction/SKILL.md` first. It records owner decisions that must not be asked again.
 - Explain what changed, why, and which checks actually ran. Report limitations directly.
 - For video references, use `.agents/skills/youtube-video-analysis/SKILL.md` and its executable helper. Inspect actual timestamped frames before describing a scene; preserve access failures and distinguish stills, playback, captions and inference.
 
