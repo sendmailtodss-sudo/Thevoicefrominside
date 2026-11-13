@@ -14,6 +14,13 @@ This is the public developer distribution of Stemmen fra innsiden / The Voice fr
 
 Historical private operational instructions and launch logs are intentionally outside this repository. They are not required to develop with its example data.
 
+## Additive changes must not alter existing parts
+
+- A new element (page, scene, hero, style sheet, script) may only style and script itself. Its selectors must be scoped to its own class or data attribute; it must not restyle, hide, reorder or disable existing scenes, pages or controls.
+- Performance or responsiveness work changes how content loads, never which content exists. Do not disable, remove or replace a scene, text or feature unless the user asked for that exact removal in the current request.
+- The enabled journey order is locked by `tests/journey-assets.test.mjs`; change it only together with a recorded user decision. `tests/hero-scope.test.mjs` keeps the landing hero scoped.
+- Before publishing, compare the journey before and after the change at several scroll positions; anything that differs outside the new element is a regression to fix, not a side effect to report.
+
 ## Cinematic production
 
 For cinematic journeys, film, spatial web design, VFX, editing or media-provider work, read `.agents/skills/cinematic-production/SKILL.md` before planning or changing the experience. Read only the specialists it selects and their project adoption notes. A skill is workflow guidance; installation does not train a model, install a renderer, connect a provider or establish visual competence.

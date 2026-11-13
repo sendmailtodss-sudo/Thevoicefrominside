@@ -55,7 +55,7 @@
     },
     {
       "id": "brains",
-      "enabled": false,
+      "enabled": true,
       "video": "/assets/journey/ui-20261112/legacy-brains-1280-g15.mp4",
       "poster": "/assets/journey/ui-20261112/legacy-brains-1280-g15.webp",
       "mode": "scrub",
@@ -82,12 +82,11 @@
       },
       "portraitFocusX": 50,
       "portraitFocusY": 50,
-      "portraitCropLimit": "A portrait cover crop shows only part of the dense collective field.",
-      "retiredNote": "Retired 13 Nov 2026 on user instruction: the brain network now lives in the landing hero; the journey goes from the galaxy straight to the warp tunnel."
+      "portraitCropLimit": "A portrait cover crop shows only part of the dense collective field."
     },
     {
       "id": "impulses",
-      "enabled": false,
+      "enabled": true,
       "video": "/assets/journey/ui-20261112/legacy-impulses-1280-g15.mp4",
       "poster": "/assets/journey/ui-20261112/legacy-impulses-1280-g15.webp",
       "mode": "scrub",
@@ -116,12 +115,11 @@
       },
       "portraitFocusX": 50,
       "portraitFocusY": 50,
-      "portraitCropLimit": "A portrait cover crop shows only part of the dense collective field.",
-      "retiredNote": "Retired 13 Nov 2026 on user instruction: the brain network now lives in the landing hero; the journey goes from the galaxy straight to the warp tunnel."
+      "portraitCropLimit": "A portrait cover crop shows only part of the dense collective field."
     },
     {
       "id": "vortex",
-      "enabled": false,
+      "enabled": true,
       "video": "/assets/journey/ui-20261112/legacy-vortex-1280-g15.mp4",
       "poster": "/assets/journey/ui-20261112/legacy-vortex-1280-g15.webp",
       "mode": "scrub",
@@ -148,8 +146,7 @@
       },
       "portraitFocusX": 50,
       "portraitFocusY": 50,
-      "portraitCropLimit": "Outer brains and threads leave the portrait crop as the field becomes a whirl.",
-      "retiredNote": "Retired 13 Nov 2026 on user instruction: the brain network now lives in the landing hero; the journey goes from the galaxy straight to the warp tunnel."
+      "portraitCropLimit": "Outer brains and threads leave the portrait crop as the field becomes a whirl."
     },
     {
       "id": "supernova",

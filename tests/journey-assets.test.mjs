@@ -7,7 +7,7 @@ const root = path.resolve('public');
 const read = file => readFile(path.join(root, file), 'utf8');
 const manifest = async () => JSON.parse(await read('assets/journey/manifest.json'));
 const enabledOrder = [
-  'origin', 'big-bang', 'supernova', 'dna',
+  'origin', 'big-bang', 'brains', 'impulses', 'vortex', 'supernova', 'dna',
   'earth-gate', 'c7-route', 'c7-window', 'man-luxe', 'corridor-to-painter', 'lar-painter-transfer', 'metal-workshop',
   'courtyard-graffiti', 'literature', 'music-send',
   'collective-portal', 'gallery', 'bergen', 'paris', 'interior', 'stencil', 'gallery-return',
@@ -56,18 +56,17 @@ function videoMetadata(bytes) {
   assert.fail('MP4 contains a video track');
 }
 
-test('the complete journey keeps the origin, the galaxy and every creator in order', async () => {
+test('the complete journey keeps the origin, dense collective minds and every creator in order', async () => {
   const data = await manifest(), scenes = data.scenes.filter(scene => scene.enabled);
   assert.deepEqual(scenes.map(scene => scene.id), enabledOrder);
   assert.equal(new Set(data.scenes.map(scene => scene.id)).size, data.scenes.length);
   assert.equal(scenes[0].type, 'point');
   assert.match(scenes[1].video, /s01-point-galaxy-/);
-  // User decision 13 Nov 2026: the brain network lives in the landing hero; the
-  // journey goes from the galaxy straight to the warp tunnel. Clips stay for rollback.
   for (const id of ['brains', 'impulses', 'vortex']) {
-    const scene = data.scenes.find(item => item.id === id);
-    assert.equal(scene.enabled, false, `${id} retired from the journey`);
+    const scene = scenes.find(item => item.id === id);
     assert.match(scene.video, new RegExp(`legacy-${id}-`));
+    assert.equal(scene.frameRate, 30);
+    assert.equal(scene.frameCount, 301);
   }
   // V7 creator clips stay in the manifest, disabled, for rollback.
   for (const id of ['painter','metal','streetart','poet','music-room']) {
@@ -152,8 +151,10 @@ test('every enabled video declares actual MP4 frames and measured constant or va
 
 test('the bounded neural opening preserves explicit cuts and leaves V7 transition settings intact', async () => {
   const scenes = (await manifest()).scenes.filter(scene => scene.enabled);
-  assert.equal(scenes.find(scene => scene.id === 'big-bang').transitionOut.treatment, 'cut', 'big-bang registered plate boundary');
-  for (const scene of scenes.slice(2)) {
+  for (const id of ['big-bang','brains','impulses','vortex']) {
+    assert.equal(scenes.find(scene => scene.id === id).transitionOut.treatment, 'cut', `${id} registered plate boundary`);
+  }
+  for (const scene of scenes.slice(5)) {
     assert.equal(scene.transitionOut, undefined, `${scene.id} keeps its existing V7 default`);
     assert.equal(scene.transitionIn, undefined, `${scene.id} keeps its existing V7 default`);
   }
