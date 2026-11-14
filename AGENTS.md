@@ -20,6 +20,7 @@ Historical private operational instructions and launch logs are intentionally ou
 - A new element (page, scene, hero, style sheet, script) may only style and script itself. Its selectors must be scoped to its own class or data attribute; it must not restyle, hide, reorder or disable existing scenes, pages or controls.
 - Performance or responsiveness work changes how content loads, never which content exists. Do not disable, remove or replace a scene, text or feature unless the user asked for that exact removal in the current request.
 - The enabled journey order is locked by `tests/journey-assets.test.mjs`; change it only together with a recorded user decision. `tests/hero-scope.test.mjs` keeps the landing hero scoped.
+- Never publish from an older local copy. Before every production publish, list the production deployments; if the live one was not built from your working source, download its source and rebuild your change on top of it. Publishing over someone else's newer work is a regression, even when your own tests pass.
 - Before publishing, compare the journey before and after the change at several scroll positions; anything that differs outside the new element is a regression to fix, not a side effect to report.
 
 ## Cinematic production

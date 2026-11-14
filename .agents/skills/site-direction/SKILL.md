@@ -52,6 +52,22 @@ choice below is genuinely open. Never remove or disable existing content as a si
 - Shop: models must match the new films (Paris man, Bergen woman) and the print must sit in the
   fabric exactly as in the films.
 
+## One continuous film (rule for every generated clip)
+- The journey must read as one long film, not as clips. Every new clip starts on the exact last
+  frame of the clip before it (use that frame as the start image) and ends on the exact first frame
+  of the clip after it when one exists.
+- Prefer several short clips with a little development each over one clip that jumps. Sizes,
+  positions and camera direction must carry over across every join.
+- No transition that looks like a hole or iris closing and opening. Where two clips do not join
+  naturally, generate a short bridging clip instead.
+- Before publishing, put the last frame of each clip next to the first frame of the next and look
+  at them; a visible jump is a defect to fix.
+- Image and video quality come first. Do not lower realism, detail or resolution to save credits.
+
+## Publishing base
+- The production source is the latest live deployment, not an older local copy. Rebuild on the
+  live source before publishing (see AGENTS.md).
+
 ## Working method
 - Go through every page proactively against this direction; fix what plainly follows from it.
 - Keep Norwegian, English and Simplified Chinese complete on everything that is built.
