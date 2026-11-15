@@ -1,4 +1,6 @@
-# Developing the website
+# Developing the contributor preview
+
+The current website is <https://thevoicefrominside.dev>. This guide describes the separately managed, privacy-reviewed contributor export, not the current production source. Historical source revisions are recorded in [source provenance](source-provenance.json). Do not deploy this export over the full live website.
 
 Use Node.js 24 LTS. The preview and build use Node's standard library; no frontend framework or paid service is required.
 
@@ -23,7 +25,7 @@ The repository provides this configuration. Creating a hosted Codespace still de
 
 ## What the preview contains
 
-The developer distribution starts from version 34's browser and Worker application code. Selected editorial pages and artwork use explicitly labeled example material. Original manuscripts, case-document downloads, artwork binaries, contact logs and production credentials are not part of this distribution. Missing images display an SVG marked as an example; missing PDFs return 404.
+The developer distribution originated with version 34's browser and Worker code and received later contributor-source updates recorded in [source provenance](source-provenance.json). Selected editorial pages and artwork use explicitly labeled example material. Original manuscripts, case-document downloads, artwork binaries, contact logs and production credentials are not part of this distribution. Missing images display an SVG marked as an example; missing PDFs return 404.
 
 The development server serves browser interfaces only. It does **not** run the Worker backend. Every `/api/` request returns `503` with `error: "development-disabled"`; submissions, login, collaboration delivery, payments and real account data are therefore unavailable. Non-API write requests return `405`. No API request is forwarded to the live website. The browser policy also limits fetch connections to this preview's own origin.
 

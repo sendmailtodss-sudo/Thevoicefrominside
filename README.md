@@ -2,11 +2,11 @@
 
 **Thevoicefrominside** is the public contributor repository for *Stemmen fra innsiden*, a Norwegian project connecting personal stories, art and tools for human dignity and justice.
 
-**Nettside / website:** https://stemmen-fra-innsiden.sendmailtodss.chatgpt.site
+**Nettside / website:** https://thevoicefrominside.dev
 
-**NO:** Nettsiden ble oppdatert 8. november 2026 med en filmatisk reise, nye animasjoner og et illustrert eksempel på hjelp fra en pårørende. Bysekvensene er foreløpige, og flere filmrettinger gjenstår.
+**NO:** Nettsiden drives nå på **thevoicefrominside.dev**. Den filmatiske reisen, galleriveggen og det valgfrie gallerirommet utvikles videre. Overganger, motefilm og fysisk plassering av kunsttrykk er fortsatt arbeid som pågår; dette er ikke en påstand om at hele bestillingen er ferdig.
 
-**EN:** The website was updated on 8 November 2026 with a cinematic journey, section animations and an illustrated example of support from a friend or relative. The city sequences are provisional, and further film work remains.
+**EN:** The live website is now hosted at **thevoicefrominside.dev**. The cinematic journey, gallery wall and optional gallery room remain under development. Film continuity, fashion sequences and physical artwork placement on clothing are unfinished.
 
 This repository is a privacy-reviewed contributor distribution. It uses examples where original writing or media are not released, and it is not an automatic mirror or deployment receipt for the live website. Production services, submissions and payments should not be assumed active merely because prototype code exists.
 
@@ -42,18 +42,21 @@ We welcome help with frontend and backend development, security, accessibility, 
 
 I am looking for collaborators who want to put their abilities to work in the struggle for dignity, accountability and change. Help build a place where people can tell their stories, show their evidence, create together and challenge the state structures that continue to create victims on both sides of the wall.
 
-## Website development status — 4 November 2026
+## Live website and contributor source — 15 November 2026
 
-The existing website is at <https://stemmen-fra-innsiden.sendmailtodss.chatgpt.site>. Version 34 was published on 4 November 2026. This repository now contains a contributor development export of that application, based on source commit `702bbcce8e4883f74f5bbcd521ebe97177c4bb17`. Production hosting remains separately managed. The export uses example editorial content and artwork; it does not include private manuscripts, case files, operational records or credentials.
+The public website is <https://thevoicefrominside.dev>. The former ChatGPT Sites address is historical hosting, not the current website.
 
-This release brings clearer navigation, direct entrances to Rettspeilet and the LAR documentation, a unified [Kunstsamfunnet](https://stemmen-fra-innsiden.sendmailtodss.chatgpt.site/kunstsamfunnet/), 22 approved artworks with individual Norwegian and English pages, larger previews and links carrying the selected artwork into the 3D gallery and clothing preview. The landing page includes an optional galaxy-to-gallery experience with reduced-motion, keyboard and no-JavaScript alternatives. Diary, book, practical tools and [collaboration](https://stemmen-fra-innsiden.sendmailtodss.chatgpt.site/collaborate/) entrances are easier to find.
+The website has two separate directions: [The Voice](https://thevoicefrominside.dev/en/fengslene-vest-for-loven/) for personal writing, the book, press and practical legal tools; and [From Inside](https://thevoicefrominside.dev/en/forebygging-og-forum/) for prevention, aftercare and the art community. [The gallery](https://thevoicefrominside.dev/en/galleri-3d/) opens as a gallery wall with an optional gallery room. Norwegian, English and Simplified Chinese interfaces are available; translation and visual review remain ongoing work.
 
-Approved writing and media have been preserved. Clothing images are virtual previews. Submissions, creative accounts, original-art sales and checkout remain closed where the required production services have not been enabled. Backend tests and prototype screens do not mean that a service is open. Chinese and Cantonese interface support retains explicit fallback where translation is incomplete. Unfinished research is withheld from the public release.
+This public contributor repository is an earlier, privacy-reviewed development export. It contains example material where original writing and media are not released. Its source history and sample galleries must not be presented as the complete current production site. Historical export dates and source commits are recorded in [source provenance](docs/source-provenance.json).
 
-Everyone is welcome to help with coding, design, translation, accessibility, testing, documentation, research, legal expertise, art, writing and music. No prison connection is required. Please keep contributions focused and describe what was tested. Use public or synthetic examples; never post private manuscripts, case files, credentials or private contact information in issues, pull requests or repository history.
+A repository commit does not publish the live website. **Do not deploy this contributor export over the full production website.** Production content and releases are managed separately.
 
-Artwork ownership, permission to display a photograph and permission for commercial reproductions remain separate. Existing approved text and redactions must be preserved.
+Clothing images and layouts are previews, not manufacturing proofs. Accounts, submissions, original-art sales and checkout must not be treated as operating services merely because prototype code or passing tests exist. Original writing, artwork permissions and editorial redactions remain separately controlled.
 
+Everyone is welcome to help with coding, design, translation, accessibility, testing, documentation, research, legal expertise, art, writing and music. No prison connection is required. Use public or synthetic examples; never post private manuscripts, case files, credentials or private contact information in issues, pull requests or repository history.
+
+Artwork ownership, permission to display a photograph and permission for commercial reproductions remain separate.
 
 ## Run the contributor preview
 
@@ -97,6 +100,6 @@ Current needs include mobile accessibility, articulated character animation usin
 This repository is a developer distribution with examples wherever original writing or media has not been released. Use synthetic cases in development and bug reports. Keep private case files, manuscripts, contact details and credentials out of GitHub. Prototype screens and passing tests do not mean submissions, accounts, payments or legal services are open. Read the current terms for code, writing, artwork and commercial reproductions separately.
 
 
-## Contributor source update — 5 November 2026
+## Historical contributor export — 5 November 2026
 
-The application code, generic interface, navigation and gallery in this contributor export were updated from website source commit `d9de7e2954f4a790fc6f12257f1e6c8d46389096`. The 27 approved gallery images and depth resources are included. Editorial reading pages still use example material; private manuscripts and case documents are excluded. This repository is not a complete content mirror or a deployment receipt. See [source provenance](docs/source-provenance.json).
+For the 5 November export, the application code, generic interface, navigation and gallery were taken from source commit `d9de7e2954f4a790fc6f12257f1e6c8d46389096`. That historical export included 27 gallery images and depth resources; this count describes the export, not the current live gallery. Editorial reading pages still use example material; private manuscripts and case documents are excluded. This repository is not a complete content mirror or a deployment receipt. See [source provenance](docs/source-provenance.json).

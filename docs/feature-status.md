@@ -1,6 +1,6 @@
 # Development feature status
 
-This is a public code export from website v34, not a new website release.
+This document describes the privacy-reviewed contributor preview. Its historical source revisions are recorded in [source provenance](source-provenance.json); the table below is not a status report for today's production website. The current website is <https://thevoicefrominside.dev>, with content and releases managed separately. Do not deploy this contributor export over the full live website.
 
 | Area | Contributor preview | Production activation |
 | --- | --- | --- |
