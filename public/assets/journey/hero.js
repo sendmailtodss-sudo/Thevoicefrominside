@@ -17,7 +17,9 @@
         'Et eget forum er for pårørende. Der håper vi å samarbeide med organisasjoner som hjelper dem, slik at de kan møte andre i samme situasjon og finne forståelse, råd og tips.',
         'Blar du nedover, starter en reise som viser hva som er mulig for deg som sitter med kreative evner. Mange er fulle av dem, men oppvekst og omgivelser har delt ut feil kort, og til nå er evnene kanalisert i en retning som verken tjener deg eller samfunnet. <small>Levekårsundersøkelsen blant innsatte (Friestad og Skog Hansen, Fafo 2004) fant at tre av ti hadde vært i kontakt med barnevernet før de fylte 16. En metaanalyse (Young mfl., Psychological Medicine 2015) fant ADHD hos om lag én av fire voksne innsatte.</small>',
         'Dette er en ny sjanse til å skape muligheter, til å bruke ADHD til det konstruktive, det kreative, levende og inspirerende – til å forandre retningen i livet. Til å forandre alt.'],
-      sig:'– Innsatt 2601-46'},
+      sig:'– Innsatt 2601-46',
+      tools:'<a href="/boken/">Boken</a><a href="/presse/">Fri presse</a><a href="/juridisk-motvekt/">Juridisk motvekt</a>',
+      invite:'Bla nedover for å starte reisen'},
     en:{left:'The Voice',right:'From Inside',leftHref:'/en/dagbok/',rightHref:'/en/art-community/',symbol:'Open the stone tablet: what The Voice from Inside is',tip:'Hover the symbol · scroll down for the journey',tipTouch:'Tap the symbol · scroll down for the journey',close:'Close the stone tablet',flags:'Choose language',h:'Written in stone',
       p:[
         'This vision has two sides – for now. The possibilities are endless, and we are looking for partners and people with ideas.',
@@ -28,7 +30,9 @@
         'A separate forum is for relatives. There we hope to work with organisations that support them, so they can meet others in the same situation and find understanding, advice and tips.',
         'Scroll down and a journey begins that shows what is possible for you who carry creative abilities. Many are full of them, but upbringing and surroundings dealt the wrong cards, and until now those abilities have been channelled in a direction that serves neither you nor society. <small>The Norwegian living-conditions survey of prisoners (Friestad and Skog Hansen, Fafo 2004) found that three in ten had been in contact with child welfare before age 16. A meta-analysis (Young et al., Psychological Medicine 2015) found ADHD in about one in four adult prisoners.</small>',
         'This is a new chance to create opportunities, to use ADHD for what is constructive, creative, alive and inspiring – to change the direction of a life. To change everything.'],
-      sig:'– Inmate 2601-46'},
+      sig:'– Inmate 2601-46',
+      tools:'<a href="/en/boken/">The Book</a><a href="/en/presse/">Free Press</a><a href="/en/juridisk-motvekt/">Legal Counterweight</a>',
+      invite:'Scroll down to begin the journey'},
     zh:{left:'声音',right:'来自内部',leftHref:'/dagbok/',rightHref:'/kunstfellesskap/',symbol:'打开石碑：了解“来自内部的声音”',tip:'将鼠标移到标志上 · 向下滚动开始旅程',tipTouch:'点按标志 · 向下滚动开始旅程',close:'关闭石碑',flags:'选择语言',h:'刻在石上',
       p:[
         '这个愿景目前分为两部分。可能性无穷无尽，我们正在寻找合作伙伴和有想法的人。',
@@ -39,7 +43,9 @@
         '另一个论坛面向家属。我们希望与帮助家属的组织合作，让他们遇见处境相同的人，获得理解、建议和经验。',
         '向下滚动，一段旅程将展示拥有创造力的你可以做到什么。许多人充满创造力，但成长环境发错了牌，这些能力一直被引向既不利于你也不利于社会的方向。<small>挪威在押者生活状况调查（Friestad与Skog Hansen，Fafo 2004）发现，十分之三的人在16岁前接触过儿童福利机构。一项荟萃分析（Young等，Psychological Medicine 2015）发现约四分之一的成年在押者患有ADHD。</small>',
         '这是一次新的机会：创造可能，把ADHD用于建设性的、有创造力的、鲜活而鼓舞人心的事情，改变人生的方向。改变一切。'],
-      sig:'– 在押者 2601-46'}};
+      sig:'– 在押者 2601-46',
+      tools:'<a href="/boken/">书</a><a href="/presse/">自由新闻</a><a href="/juridisk-motvekt/">法律抗衡</a>',
+      invite:'向下滚动开始旅程'}};
   const currentLang=()=>location.pathname.startsWith('/en')?'en':(new URLSearchParams(location.search).get('lang')||document.documentElement.lang||'').toLowerCase().startsWith('zh')?'zh':'no';
   let lang=currentLang();
   const el=(tag,cls,html)=>{const node=document.createElement(tag);if(cls)node.className=cls;if(html!=null)node.innerHTML=html;return node};
@@ -82,8 +88,8 @@
   function paint(){
     lang=currentLang();const t=T[lang];
     left.textContent=t.left;right.textContent=t.right;left.href=t.leftHref;right.href=t.rightHref;
-    symbol.setAttribute('aria-label',t.symbol);flags.setAttribute('aria-label',t.flags);tip.textContent=hover.matches?t.tip:t.tipTouch;tablet.setAttribute('aria-label',t.h);
-    tablet.innerHTML=`<button type="button" class="sj-hero-close" aria-label="${t.close}">×</button><h2>${t.h}</h2><div class="sj-hero-cols">${t.p.map(text=>`<p>${text}</p>`).join('')}<p class="sig">${t.sig}</p></div>`;
+    symbol.setAttribute('aria-label',t.symbol);flags.setAttribute('aria-label',t.flags);tablet.setAttribute('aria-label',t.h);
+    tablet.innerHTML=`<button type="button" class="sj-hero-close" aria-label="${t.close}">×</button><h2>${t.h}</h2><div class="sj-hero-cols">${t.p.map(text=>`<p>${text}</p>`).join('')}<p class="sig">${t.sig}</p></div><nav class="sj-hero-tools">${t.tools}</nav><p class="sj-hero-invite">${t.invite} ↓</p>`;
     tablet.querySelectorAll('a[data-go]').forEach(link=>{link.href=link.dataset.go==='l'?t.leftHref:t.rightHref});
     tablet.lang=title.lang=lang==='zh'?'zh-Hans':lang==='en'?'en':'nb';
     flags.querySelectorAll('button').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.lang===lang)));
