@@ -4,7 +4,7 @@ Fortløpende overlevering. Oppdateres etter hver vesentlige deloppgave.
 
 ## Siste oppdatering
 
-**Dato:** 2026-11-15 kl. 12:15 UTC
+**Dato:** 2026-11-15 kl. 12:30 UTC (endelig overlevering)
 **Økt:** Claude Opus 4.6 — session_01FYfbyyYjTJS9NwexSuRc6c
 **Gren:** `claude/voice-inside-research-29akrg`
 **Vercel-teamtilgang:** Godkjent av bruker (team_EcI5cthQzSpR98Q884ESQUaD)
@@ -39,13 +39,12 @@ Arbeidet styres av brukerens samlede beslutninger (dokumentert i
 (team `team_EcI5cthQzSpR98Q884ESQUaD`)
 
 **Kildestatus:** Git-repoet på gren `claude/voice-inside-research-29akrg`
-(HEAD `74b6972d`) ble brukt som arbeidsgrunnlag. Vercel-teamtilgang var ikke
-tilgjengelig ved oppstart og er bedt om autorisasjon fra bruker. Repoet
-inneholder 587 filer i build-output, alle 266 tester bestått.
+(HEAD `23ae2b5`) ble brukt som arbeidsgrunnlag. Vercel-teamtilgang er nå
+godkjent. Repoet inneholder 587 filer i build-output, alle 266 tester bestått.
 
 **Viktig:** Verifisering av om Git-repoet er identisk med live produksjon er
-IKKE fullført fordi Vercel API trenger teamautorisasjon. Arbeid gjøres på
-separat gren og publiseres IKKE før produksjonskilden er bekreftet.
+IKKE fullført ennå, men Vercel API-tilgang er nå tilgjengelig. Arbeid gjøres
+på separat gren og publiseres IKKE før produksjonskilden er bekreftet.
 
 ## Bevaringspakke (Google Drive)
 
@@ -133,7 +132,7 @@ med AI-generert merknad. Tester bekrefter rekkefølge og filreferanser.
 | Hash | Beskrivelse |
 |---|---|
 | `ce5743b` | Hero: skalert symbol/tittel 1,5×, steintavle-verktøy, invitasjon, overleveringsdokument |
-| *(neste)* | Dragsug-grunnlag + oppdatert overlevering |
+| `23ae2b5` | Dragsug scroll-effekt (WIP) + oppdatert overlevering |
 
 ## Mediejobber
 
