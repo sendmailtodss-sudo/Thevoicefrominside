@@ -4,9 +4,10 @@ Fortløpende overlevering. Oppdateres etter hver vesentlige deloppgave.
 
 ## Siste oppdatering
 
-**Dato:** 2026-11-15 kl. 10:30 UTC
+**Dato:** 2026-11-15 kl. 12:15 UTC
 **Økt:** Claude Opus 4.6 — session_01FYfbyyYjTJS9NwexSuRc6c
 **Gren:** `claude/voice-inside-research-29akrg`
+**Vercel-teamtilgang:** Godkjent av bruker (team_EcI5cthQzSpR98Q884ESQUaD)
 
 ## Mål og styrende brukerbeslutning
 
@@ -100,16 +101,23 @@ med AI-generert merknad. Tester bekrefter rekkefølge og filreferanser.
 - [x] Bevaringspakke på Drive kontrollert (alle mapper og filer bekreftet)
 - [x] Manifest og scenerekkefølge verifisert
 - [x] Hero-scope-test bekrefter at hero.css er avgrenset
+- [x] Symbol/tittel skalert ~1,5× (hero.css `--S` og tittel-font)
+- [x] «Scroll»-tekst fjernet fra åpningen
+- [x] Steintavlen viser Boken, Fri presse, Juridisk motvekt + invitasjon (alle 3 språk)
+- [x] Overleveringsdokument lastet opp til Drive (ID `1L5c3eLzFaYxSuXcDeKoHabjZ-N4oYx-t`)
+- [x] Vercel-teamtilgang godkjent
 
 ## Hva som pågår
 
-- [ ] Venter på Vercel-teamautorisasjon for å bekrefte produksjonskilden
+- [~] Dragsug-sekvens: grunnlag i CSS+JS er lagt inn (--hero-sug variabel,
+  data-dragsug attributt, scale/translate/blur på flags/core/zone/halo,
+  tablet skjules umiddelbart, bakgrunnsbilde zoomer inn litt).
+  **Status: uferdig.** Visuell tuning og testing gjenstår. Se «Dragsug-detaljer» nedenfor.
+- [ ] Verifisere at Git-repo matcher live produksjonsdeployment (Vercel-tilgang nå tilgjengelig)
 - [ ] Visuell gjennomgang av lokal forhåndsvisning
-- [ ] Forsidearbeid: hero-forbedringer iht. brukerbeslutninger
 
 ## Hva som ikke er startet
 
-- [ ] Dragsug-sekvens ved skrollstart (innhold strekkes/suges mot midten)
 - [ ] Rød løper / studioscene
 - [ ] Partikkelstrøm fra blits (filmatisk, gjennom stengt celledør)
 - [ ] Modeovergang / fashion-show-overgang
@@ -122,7 +130,10 @@ med AI-generert merknad. Tester bekrefter rekkefølge og filreferanser.
 
 ## Git-commiter i denne økten
 
-*Ingen ennå. Arbeid pågår på `claude/voice-inside-research-29akrg`.*
+| Hash | Beskrivelse |
+|---|---|
+| `ce5743b` | Hero: skalert symbol/tittel 1,5×, steintavle-verktøy, invitasjon, overleveringsdokument |
+| *(neste)* | Dragsug-grunnlag + oppdatert overlevering |
 
 ## Mediejobber
 
@@ -134,15 +145,47 @@ med AI-generert merknad. Tester bekrefter rekkefølge og filreferanser.
 |---|---|---|
 | 2026-11-15 10:20 UTC | `npm test` | 266/266 bestått |
 | 2026-11-15 10:25 UTC | `npm run build` | OK, 587 filer |
+| 2026-11-15 12:10 UTC | `npm test` | 266/266 bestått (etter dragsug) |
 
 ## Neste handling for Codex
 
-1. Godkjenn Vercel-teamtilgang (lenke gitt til bruker).
-2. Etter godkjenning: hent liste over produksjonsdeployments og bekreft at
-   `dpl_39yPscwypdDAxYszhxJTSTRH9vW3` fortsatt er live, eller identifiser
-   den gjeldende deployment.
-3. Sammenlign repokilden med produksjonskilden fil for fil.
-4. Fortsett med hero-forbedringer: universåpning, medaljong, granittplate.
+1. Verifiser produksjonskilden: Vercel-tilgang er nå godkjent
+   (team `team_EcI5cthQzSpR98Q884ESQUaD`). Hent liste over deployments,
+   bekreft at `dpl_39yPscwypdDAxYszhxJTSTRH9vW3` fortsatt er live, og
+   sammenlign repokilden med produksjonskilden.
+2. Fullfør dragsug-effekten (se detaljer nedenfor). Test visuelt i nettleser,
+   inkl. mobil og reduced-motion. Juster timing og kurver.
+3. Webb/Carina-inspirert universåpning (erstatte nåværende bakgrunnsbilde).
+4. Partikkelstrøm fra blits (filmatisk, gjennom stengt celledør).
+5. Nettstedsstruktur: to atskilte menyer iht. site-direction.
+6. Vis kandidat til bruker før publisering.
+
+## Dragsug-detaljer
+
+Brukerens ord: «Ved skrollstart strekkes innholdet og suges mot midten,
+før svart stjernerom og punktet står igjen.»
+
+**Implementert så langt:**
+- `hero.js` linje 141–143: beregner `--hero-sug` (0→1 over de første 55 % av
+  scroll-progress, altså ~13 vh). Setter `data-dragsug=true` på `.sj-hero`.
+- `hero.css` linje 66–72: når `data-dragsug=true`:
+  - Flagg: translateX(-50%) + scale ned + translateY ned mot midten + blur
+  - Core (symbol+tittel): translateY ned + scale ned + blur
+  - Zone (interaksjonsområde): følger core
+  - Tablet: skjules umiddelbart (opacity:0, visibility:hidden)
+  - Halo: scale opp (blåser ut) + fade
+  - Bakgrunnsbilde (plate): zoomer sakte inn (+15 %)
+- Reduced-motion: alle dragsug-transforms fjernet, faller tilbake til enkel fade.
+
+**Gjenstår:**
+- Visuell tuning: kurvene (translateY 40vh, scale .85, blur 6px) er estimater.
+  Åpne i nettleser og skroll sakte for å se om det føles som «sug» eller
+  bare en fade. Juster verdiene til det ser filmatisk ut.
+- Vurder om bakgrunnsbildet også bør blur/darken mot slutten slik at
+  bare svart stjernerom + origin-punkt gjenstår.
+- Sjekk at tablet-pinned-tilstand håndteres riktig under drag (lukker seg
+  ved scroll, ikke bare gjemmes bak blur).
+- Test mobil (700px) og lav høyde (560px).
 
 ## Publisering
 

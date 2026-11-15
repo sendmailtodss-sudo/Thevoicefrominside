@@ -140,6 +140,9 @@
     ticking=false;const rect=root.getBoundingClientRect(),isOrigin=root.dataset.origin==='true';
     const progress=Math.min(1,Math.max(0,-rect.top/(innerHeight*.24)));
     root.style.setProperty('--hero-o',(1-progress).toFixed(3));
+    const sug=Math.min(1,progress/.55);
+    root.style.setProperty('--hero-sug',sug.toFixed(3));
+    hero.dataset.dragsug=sug>.01?'true':'false';
     const shown=isOrigin&&progress<1&&rect.bottom>0;
     document.body.dataset.heroFront=String(shown);if(shown!==visible){visible=shown;root.dataset.heroHidden=String(!shown);if(!shown&&!pinned)setActive(false);rainOn(shown);if(shown)startSpin()}
   }
