@@ -66,7 +66,7 @@
       slot.version++;slot.seekSerial++;cancelFrame(slot);slot.element.pause();slot.listeners.forEach(([name,fn])=>slot.element.removeEventListener(name,fn));slot.listeners=[];
       slot.poster.onload=slot.poster.onerror=null;slot.poster.removeAttribute('src');slot.posterReady=false;
       slot.element.removeAttribute('src');slot.element.load();slot.element.removeAttribute('data-sj-scene');slot.element.removeAttribute('data-sj-needed');slot.element.removeAttribute('data-sj-frame-target');slot.element.removeAttribute('data-sj-decode-target');
-      slot.source='';slot.sceneIndex=-1;slot.needed=false;slot.failed=false;slot.decode=null;
+      slot.source='';slot.stillSource='';slot.sceneIndex=-1;slot.needed=false;slot.failed=false;slot.decode=null;
     }
     function clearMedia(){buffers.forEach(clearBuffer)}
     function holdFrame(){pauseMedia();hold.style.opacity=retainedFrame?'1':'0'}
@@ -131,7 +131,7 @@
         hold.getContext('2d',{alpha:false}).drawImage(scratch,0,0);retainedFrame=true;presentedProgress=view.progress;hold.style.opacity='1';root.dataset.compositor='true';root.dataset.video=inputs.some(input=>input.slot.failed)?'unavailable':'ready';root.dataset.pending='false';
         root.dataset.blend=String(view.mix);root.dataset.frameScenes=layers.map(layer=>scenes[layer.index].id).join(' ');
         root.dataset.frameFractions=layers.map(layer=>layer.fraction.toFixed(6)).join(' ');
-        root.dataset.frameIndices=inputs.map(input=>input.sample?(input.sample.request.index??'unindexed'):'poster').join(' ');root.dataset.frameEvidence=inputs.map(input=>input.sample?.evidence??'poster').join(' ');root.dataset.frameMediaTimes=inputs.map(input=>input.sample?.mediaTime??'unverified').join(' ');root.dataset.frameMediaTimeEstimates=inputs.map(input=>input.sample&&Number.isFinite(input.sample.request?.seekTime)?input.sample.request.seekTime:'unavailable').join(' ');root.dataset.frameMediaTimeEvidence=inputs.map(input=>input.sample?(Number.isFinite(input.sample.mediaTime)?'verified-rvfc':'estimated-seeked-fallback'):'unavailable').join(' ');
+        root.dataset.frameIndices=inputs.map(input=>input.sample?(input.sample.request.index??'unindexed'):'poster').join(' ');root.dataset.frameEvidence=inputs.map(input=>input.sample?.evidence??'poster').join(' ');root.dataset.frameMediaTimes=inputs.map(input=>input.sample?.mediaTime??'unverified').join(' ');root.dataset.frameMediaTimeEstimates=inputs.map(input=>input.sample&&Number.isFinite(input.sample.request?.seekTime)?input.sample.request.seekTime:'unavailable').join(' ');root.dataset.frameMediaTimeEvidence=inputs.map(input=>input.sample?(input.sample.evidence==='source-extracted-frame'?'source-bound-frame':Number.isFinite(input.sample.mediaTime)?'verified-rvfc':'estimated-seeked-fallback'):'unavailable').join(' ');
         root.dataset.frameSourceCrops=JSON.stringify(sourceCrops);
         root.dataset.presentedProgress=String(presentedProgress);root.dataset.presentedEpoch=String(requestEpoch);
         root.dataset.transitioning=String(Boolean(view.right));presentation.presented(requestEpoch);commitScene();settleEntrances();paintPhase();
@@ -181,7 +181,25 @@
         }else el.currentTime=request.seekTime;
       }catch{slot.decode=null;cancelFrame(slot)}
     }
-    function configure(slot,sceneIndex,f,needed){
+    function configureHeldFrame(slot,sceneIndex,f,needed){
+      const scene=scenes[sceneIndex],still=scene.sourceFrameImage,src=still.src;
+      if(slot.sceneIndex===sceneIndex&&slot.source===scene.video&&slot.stillSource===src){slot.fraction=f;slot.needed=needed;slot.element.dataset.sjNeeded=String(needed);if(needed)drawComposite();return}
+      clearBuffer(slot);slot.sceneIndex=sceneIndex;slot.source=scene.video;slot.stillSource=src;slot.fraction=f;slot.needed=needed;slot.element.dataset.sjScene=scene.id;slot.element.dataset.sjNeeded=String(needed);
+      const version=slot.version,relevant=()=>!disposed&&slot.version===version&&slot.stillSource===src;
+      slot.poster.onload=()=>{
+        if(!relevant()||!slot.poster.naturalWidth)return;
+        const request=requestedFrame(slot);if(!request||request.index!==still.frameIndex)return;
+        const image=document.createElement('canvas'),limit=constrained?1024:1280,scale=Math.min(1,limit/slot.poster.naturalWidth,limit/slot.poster.naturalHeight);image.width=Math.round(slot.poster.naturalWidth*scale);image.height=Math.round(slot.poster.naturalHeight*scale);
+        try{image.getContext('2d',{alpha:false}).drawImage(slot.poster,0,0,image.width,image.height)}catch{slot.poster.onerror();return}
+        cache.set(frames.frameKey(slot.source,request),{source:image,width:image.width,height:image.height,request,mediaTime:still.pts,evidence:'source-extracted-frame'});slot.posterReady=true;root.dataset.frameCachePixels=String(cache.pixels);root.dataset.frameCacheEntries=String(cache.entries.size);drawComposite();
+      };
+      // A network failure may fall back to the unchanged source video. The
+      // normal ending uses its exact held source frame, never a generic poster.
+      slot.poster.onerror=()=>{if(relevant()){clearBuffer(slot);configure(slot,sceneIndex,f,needed,true)}};
+      slot.poster.src=src;
+    }
+    function configure(slot,sceneIndex,f,needed,videoFallback=false){
+      const held=scenes[sceneIndex];if(!videoFallback&&held?.holdLastFrame&&held.sourceFrameImage?.src?.startsWith('/assets/journey/')&&Number.isInteger(held.sourceFrameImage.frameIndex)){configureHeldFrame(slot,sceneIndex,f,needed);return}
       const scene=scenes[sceneIndex],source=scene?.video;if(!source)return;
       slot.fraction=f;slot.needed=needed;slot.element.dataset.sjNeeded=String(needed);
       if(slot.sceneIndex===sceneIndex&&slot.source===source){slot.element.preload=needed?'auto':'metadata';pump(slot);return}
@@ -412,7 +430,7 @@
       const verifiedSceneTime=plateIndex<0?NaN:Number((root.dataset.frameMediaTimes||'').split(' ')[plateIndex]);
       const estimatedSceneTime=plateIndex<0?NaN:Number((root.dataset.frameMediaTimeEstimates||'').split(' ')[plateIndex]);
       const sceneTime=Number.isFinite(verifiedSceneTime)?verifiedSceneTime:estimatedSceneTime;
-      const sceneTimeEvidence=Number.isFinite(verifiedSceneTime)?'verified-rvfc':Number.isFinite(estimatedSceneTime)?'estimated-seeked-fallback':'unavailable';
+      const sceneTimeEvidence=Number.isFinite(verifiedSceneTime)?((root.dataset.frameMediaTimeEvidence||'').split(' ')[plateIndex]||'verified-rvfc'):Number.isFinite(estimatedSceneTime)?'estimated-seeked-fallback':'unavailable';
       // Keep estimated seek time separate from provider-reported presentation time.
       if(spatial&&network!==null)thoughts.hidden=Number.isFinite(sceneTime);
       const sourceCrop=plateIndex<0?undefined:JSON.parse(root.dataset.frameSourceCrops||'[]')[plateIndex];
