@@ -123,3 +123,39 @@ skal økes), er neste skritt å forsøke å dempe kildens egen tåke-piksler
 spesifikt og erstatte dem med sterkere flak, i stedet for bare å legge til
 flere oppå. Hvis «feil dør» betyr en annen passasje enn den jeg har brukt,
 sier du fra hvilken, så bytter jeg kilde før jeg går videre.
+
+## Bekreftelse av Works funn på commit 2978fbf (2026-11-17)
+
+Alle fire konkrete funn er kontrollert og bekreftet korrekte:
+
+1. **Additiv-only bekreftet, men bare FØR koding.** Diff mot rå PNG-bilder
+   (`run5/_frames/src_*.png` vs `.../out/f_*.png`) gir `min(out-src)=0` over
+   alle 73 bilder/kanaler – ingen piksel er noen gang lavere enn kilden,
+   nøyaktig som designet. Den leverte H264-filen viser derimot negative
+   avvik ned til -29 mot kilden når man dekoder den tilbake; dette er
+   kvantiseringsstøy fra selve H264-kodingen (crf 14), ikke et avvik fra
+   additiv-designet. Presisert her for å unngå misforståelse.
+2. **`r`-bugen er bekreftet.** I `Debris.draw()` beregnes
+   `r = np.clip(size * sc, 0.5, 5.0)`, men `r` brukes aldri i selve
+   tegningen (`np.add.at` tegner én piksel per partikkel, etterfulgt av en
+   fast `GaussianBlur(…, 0.55)`). Den angitte flakstørrelsen styrer
+   dermed ikke noe synlig. Dette er en reell feil i det committede
+   skriptet, ikke rettet med en ny rendering (per instruks om å bevare
+   prøven som diagnostikk og ikke starte en ny effektrunde), men notert
+   her presist slik at en eventuell videreføring vet nøyaktig hva som må
+   fikses i koden.
+3. **Ingen dybdemasker/okklusjon er bekreftet fraværende.** v3 har bevisst
+   ingen maskering i det hele tatt (det var selve designvalget for å unngå
+   v1/v2s feil) – partikler tegnes additivt uten noen dybdetest mot karm,
+   låsplate, dørhåndtak eller annet inventar i bildet. Dette er korrekt
+   observert og er en reell begrensning, ikke en påstått en.
+4. **Hash-avviket ved lokal gjenskaping er forventet.** Min egen
+   gjenskaping av `render_door_passage_v3.py` mot samme kildefil gir ikke
+   nødvendigvis byte-identisk MP4 på tvers av kjøringer, siden `libx264`
+   med `preset slow` og flertråds koding ikke er garantert
+   bit-deterministisk. De rå PNG-bildene (før koding) er derimot
+   reproduserbare fra samme script+seed+kilde. Dette endrer ikke
+   konklusjonen i punkt 1–3.
+
+Ingen ny rendering er gjort som følge av denne tilbakemeldingen. Prøven
+forblir som levert i `deliverable/` og arkivert i `rejected-v1/`.
