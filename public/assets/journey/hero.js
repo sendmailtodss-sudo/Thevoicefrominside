@@ -57,217 +57,85 @@
     ['zh','简体中文','<svg viewBox="0 0 30 20" role="img" aria-hidden="true"><rect width="30" height="20" fill="#DE2910"/>'+star(5,5,3,0)+star(10,2,1,.9)+star(12,4,1,.4)+star(12,7,1,0)+star(10,9,1,.9)+'</svg>'],
     ['en','English','<svg viewBox="0 0 60 30" role="img" aria-hidden="true"><clipPath id="sjHeroUk"><path d="M30,15h30v15zv15h-30zh-30v-15zv-15h30z"/></clipPath><path d="M0,0v30h60v-30z" fill="#012169"/><path d="M0,0L60,30M60,0L0,30" stroke="#fff" stroke-width="6"/><path d="M0,0L60,30M60,0L0,30" clip-path="url(#sjHeroUk)" stroke="#C8102E" stroke-width="4"/><path d="M30,0v30M0,15h60" stroke="#fff" stroke-width="10"/><path d="M30,0v30M0,15h60" stroke="#C8102E" stroke-width="6"/></svg>']];
 
-  // Backdrop inside the media layer so the journey chrome stays above it.
-  const bg=el('div','sj-hero-bg'),drift=el('div','sj-hero-drift'),plate=el('div','sj-hero-plate');bg.setAttribute('aria-hidden','true');
+  const bg=el('div','sj-hero-bg'),drift=el('div','sj-hero-drift'),plate=el('div','sj-hero-plate');
+  bg.setAttribute('aria-hidden','true');
   const img=new Image();img.alt='';img.decoding='async';plate.append(img);drift.append(plate);bg.append(drift);media.append(bg);
-  // A pinned starfield for the opening: black space only, no Earth, brains,
-  // nebula plate or remote asset. Equal viewport orientation yields equal stars.
-  let orient='';
-  function starfield(portrait){
-    const w=portrait?1080:3840,h=portrait?1935:2143;
-    let seed=260146;const random=()=>((seed=(Math.imul(seed,1664525)+1013904223)>>>0)/4294967296);
-    const stars=Array.from({length:portrait?220:380},()=>{
-      const x=(random()*w).toFixed(2),y=(random()*h).toFixed(2),r=(.8+random()*(portrait?2.4:3.2)).toFixed(2),o=(.25+random()*.65).toFixed(2);
-      return `<circle cx="${x}" cy="${y}" r="${r}" fill="#eef4ff" opacity="${o}"/>`;
-    }).join('');
-    return 'data:image/svg+xml;charset=utf-8,'+encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${w} ${h}"><path fill="#000" d="M0 0h${w}v${h}H0z"/>${stars}</svg>`);
-  }
+  let orientation='';
   function layout(){
     const w=stage.clientWidth,h=stage.clientHeight;if(!w||!h)return;
-    const next=h>w*1.05?'p':'l';
-    if(next!==orient){orient=next;img.src=starfield(next==='p')}
-    const ar=orient==='p'?1080/1935:3840/2143,cover=Math.max(w*1.14,h*1.14*ar);
-    plate.style.width=cover+'px';plate.style.height=cover/ar+'px';
+    const next=h>w?'p':'l';
+    if(next!==orientation){
+      orientation=next;let seed=260146;const random=()=>((seed=(Math.imul(seed,1664525)+1013904223)>>>0)/4294967296);
+      const stars=Array.from({length:260},()=>`<circle cx="${random()*1600}" cy="${random()*1200}" r="${.6+random()*1.5}" fill="#e3e9ed" opacity="${.2+random()*.5}"/>`).join('');
+      img.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1200"><path fill="#050607" d="M0 0h1600v1200H0z"/>${stars}</svg>`);
+    }
+    const width=Math.max(w,h*4/3);plate.style.width=width+'px';plate.style.height=width*3/4+'px';
   }
-
-  const hero=el('div','sj-hero');hero.dataset.state='idle';
+  const C={
+    no:{brand:'Stemmen fra innsiden',home:'Til forsiden',purpose:'To veier. Én ny retning.',storyLabel:'Dokumentasjon · rettssikkerhet',artLabel:'Skapelse · fellesskap',story:'Aktivisme, samfunnskritikk og kampen for systemreform.',art:'Kunst, forebyggende arbeid og livet etter soning.',enter:'Gå inn',read:'Les hele visjonen',film:'Se filmreisen',optional:'Velg en inngang, eller bli med på reisen.',storyLinks:['Dagbok','Boken','Fri presse','Juridiske verktøy'],artLinks:['Galleri','Musikk','Litteratur','Fellesskap']},
+    en:{brand:'The Voice from Inside',home:'Back to the entrance',purpose:'Two paths. A new direction.',storyLabel:'Documentation · legal rights',artLabel:'Creativity · community',story:'Activism, social criticism and the fight for system reform.',art:'Art, prevention and life after release.',enter:'Enter',read:'Read the full vision',film:'Explore the film',optional:'Choose an entrance, or join the journey.',storyLinks:['Diary','The Book','Free Press','Legal tools'],artLinks:['Gallery','Music','Literature','Community']},
+    zh:{brand:'来自内部的声音',home:'返回首页',purpose:'两条道路。新的方向。',storyLabel:'记录 · 法律权利',artLabel:'创作 · 社区',story:'倡议、社会批评与制度改革。',art:'艺术、预防工作与出狱后的生活。',enter:'进入',read:'阅读完整愿景',film:'探索影片',optional:'选择入口，或踏上这段旅程。',storyLinks:['日记','书籍','自由新闻','法律工具'],artLinks:['画廊','音乐','文学','社区']}
+  };
+  const hero=el('div','sj-hero');hero.dataset.gateway='true';hero.dataset.state='idle';
+  const shell=el('div','sj-gateway-shell'),header=el('header','sj-gateway-header'),brand=el('h1','sj-gateway-brand');
   const flags=el('div','sj-hero-flags');flags.setAttribute('role','group');
-  FLAGS.forEach(([code,name,svg],i)=>{const button=el('button','sj-hero-flag',svg);button.type='button';button.dataset.lang=code;button.style.setProperty('--i',i);button.setAttribute('aria-label',name);button.title=name;flags.append(button)});
-  const zone=el('div','sj-hero-zone'),core=el('div','sj-hero-core');
-  const symbol=el('button','sj-hero-symbol',`<svg class="sj-hero-fallback" viewBox="0 0 100 100" aria-hidden="true"><defs><linearGradient id="sjGemGold" x2=".7" y2="1"><stop stop-color="#fff4c4"/><stop offset=".4" stop-color="#d9a845"/><stop offset=".65" stop-color="#ffdf81"/><stop offset="1" stop-color="#946315"/></linearGradient></defs><circle cx="50" cy="50" r="45" fill="rgba(220,245,255,.025)" stroke="rgba(232,248,255,.65)" stroke-width=".7"/><path d="M18 18L50 6L82 18L94 50L82 82L50 94L18 82L6 50Z" fill="none" stroke="rgba(234,248,255,.25)" stroke-width=".6"/><path d="M50 17C53 39 61 47 83 50C61 53 53 61 50 83C47 61 39 53 17 50C39 47 47 39 50 17Z" fill="url(#sjGemGold)"/></svg><canvas class="sj-hero-gem" aria-hidden="true"></canvas>`);
-  symbol.type='button';symbol.setAttribute('aria-expanded','false');symbol.setAttribute('aria-controls','sj-hero-tablet');
-  const title=el('p','sj-hero-title'),left=el('a','l'),right=el('a','r');title.append(left,right);const halo=el('span','sj-hero-halo');halo.setAttribute('aria-hidden','true');core.append(halo,symbol,title);
-  const tablet=el('div','sj-hero-tablet');tablet.id='sj-hero-tablet';tablet.setAttribute('role','region');tablet.tabIndex=-1;
-  const tip=el('p','sj-hero-tip');
-  const access=el('nav','sj-hero-access');
-  const readVision=el('button','sj-hero-read');readVision.type='button';readVision.dataset.openVision='';
-  const skipFilm=el('a','sj-hero-skip');skipFilm.href='#home-directions';access.append(readVision,skipFilm);
-  hero.append(flags,zone,core,tip,tablet,access);stage.append(hero);root.dataset.hero='true';
-
+  FLAGS.forEach(([code,name,svg],i)=>{const button=el('button','sj-hero-flag',svg+`<span>${name}</span>`);button.type='button';button.dataset.lang=code;button.style.setProperty('--i',i);button.setAttribute('aria-label',name);flags.append(button)});
+  const core=el('div','sj-hero-core');
+  const symbol=el('a','sj-hero-symbol',`<svg class="sj-hero-fallback" viewBox="0 0 100 100" aria-hidden="true"><defs><linearGradient id="sjGemGold" x2=".7" y2="1"><stop stop-color="#fff4c4"/><stop offset=".4" stop-color="#d9a845"/><stop offset=".65" stop-color="#ffdf81"/><stop offset="1" stop-color="#946315"/></linearGradient></defs><circle cx="50" cy="50" r="45" fill="#111519" stroke="#89939b" stroke-width=".7"/><path d="M18 18L50 6L82 18L94 50L82 82L50 94L18 82L6 50Z" fill="none" stroke="#b5bfc8" stroke-width=".6"/><path d="M50 17C53 39 61 47 83 50C61 53 53 61 50 83C47 61 39 53 17 50C39 47 47 39 50 17Z" fill="url(#sjGemGold)"/></svg><canvas class="sj-hero-gem" aria-hidden="true"></canvas>`);
+  core.append(symbol);header.append(brand,core,flags);
+  const portals=el('div','sj-gateway-portals'),story=el('section','sj-gateway-portal sj-gateway-story'),art=el('section','sj-gateway-portal sj-gateway-art');
+  portals.append(story,art);
+  const footer=el('footer','sj-gateway-footer'),purpose=el('p','sj-gateway-purpose'),access=el('nav','sj-hero-access');
+  const readVision=el('a','sj-hero-read');readVision.href='#home-vision';
+  const enterFilm=el('button','sj-gateway-film');enterFilm.type='button';
+  access.append(readVision,enterFilm);footer.append(purpose,access);shell.append(header,portals,footer);hero.append(shell);stage.append(hero);root.dataset.hero='true';
+  const paths={story:['/dagbok/','/boken/','/presse/','/juridisk-motvekt/'],art:['/galleri-3d/','/musikk/','/litteratur/','/forebygging-og-forum/#forum']};
+  function localized(path){const en={'/musikk/':'/en/music/','/litteratur/':'/en/literature/'};const u=new URL(lang==='en'?(en[path]||'/en'+path):path,location.origin);if(lang==='zh')u.searchParams.set('lang','zh-Hans');return u.pathname+u.search+u.hash}
+  function paintPortal(node,side){
+    const t=T[lang],c=C[lang],label=side==='story'?c.storyLabel:c.artLabel,name=side==='story'?t.left:t.right,href=side==='story'?t.leftHref:t.rightHref;
+    node.replaceChildren();
+    const frame=el('div','sj-gateway-recess');frame.setAttribute('aria-hidden','true');
+    const number=el('p','sj-gateway-number');number.textContent=side==='story'?'01':'02';
+    const eyebrow=el('p','sj-gateway-eyebrow');eyebrow.textContent=label;
+    const heading=el('h2','sj-gateway-title');heading.textContent=name;
+    const description=el('p','sj-gateway-description');description.textContent=c[side];
+    const entrance=el('a','sj-gateway-enter');entrance.textContent=c.enter;const arrow=el('span');arrow.textContent='↗';arrow.setAttribute('aria-hidden','true');entrance.append(arrow);
+    const u=new URL(href,location.origin);if(lang==='zh')u.searchParams.set('lang','zh-Hans');entrance.href=u.pathname+u.search;entrance.setAttribute('aria-label',c.enter+' · '+name);
+    const nav=el('nav','sj-gateway-links');nav.setAttribute('aria-label',name);paths[side].forEach((path,i)=>{const a=el('a');a.href=localized(path);a.textContent=c[side+'Links'][i];nav.append(a)});
+    node.append(frame,number,eyebrow,heading,description,entrance,nav);
+  }
   function paint(){
-    lang=currentLang();const t=T[lang];
-    left.textContent=t.left;right.textContent=t.right;left.href=t.leftHref;right.href=t.rightHref;
-    symbol.setAttribute('aria-label',t.symbol);flags.setAttribute('aria-label',t.flags);tablet.setAttribute('aria-label',t.h);
-    tablet.innerHTML=`<button type="button" class="sj-hero-close" aria-label="${t.close}">×</button><h2>${t.h}</h2><div class="sj-hero-cols">${t.p.map(text=>`<p>${text}</p>`).join('')}<p class="sig">${t.sig}</p></div><nav class="sj-hero-tools">${t.tools}</nav><p class="sj-hero-invite">${t.invite} ↓</p>`;
-    tablet.querySelectorAll('a[data-go]').forEach(link=>{link.href=link.dataset.go==='l'?t.leftHref:t.rightHref});
-    tablet.lang=title.lang=lang==='zh'?'zh-Hans':lang==='en'?'en':'nb';
-    const entryLabels={no:{read:'Les visjonen',skip:'Gå rett til innholdet',group:'Velg din vei'},en:{read:'Read the vision',skip:'Go straight to the content',group:'Choose your way'},zh:{read:'阅读愿景',skip:'直接进入内容',group:'选择你的方向'}}[lang];
-    readVision.textContent=entryLabels.read;skipFilm.textContent=entryLabels.skip+' ↓';access.setAttribute('aria-label',entryLabels.group);
+    lang=currentLang();const t=T[lang],c=C[lang];hero.lang=lang==='zh'?'zh-Hans':lang==='no'?'nb':'en';
+    brand.textContent=c.brand;symbol.href=lang==='en'?'/en/#top':lang==='zh'?'/?lang=zh-Hans#top':'/#top';symbol.setAttribute('aria-label',c.home);
+    flags.setAttribute('aria-label',t.flags);flags.querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.lang===lang)));
+    paintPortal(story,'story');paintPortal(art,'art');purpose.textContent=t.invite;readVision.textContent=c.read;enterFilm.textContent=c.film+' ↓';access.setAttribute('aria-label',c.optional);
     const closing=document.querySelector('[data-home-vision]');
-    if(closing){
-      closing.lang=tablet.lang;
-      closing.innerHTML=`<h2 id="home-vision-title">${t.h}</h2><div class="home-vision-text">${t.p.map(text=>`<p>${text}</p>`).join('')}<p class="sig">${t.sig}</p></div>`;
-      closing.querySelectorAll('a[data-go]').forEach(link=>{const u=new URL(link.dataset.go==='l'?t.leftHref:t.rightHref,location.origin);if(lang==='zh')u.searchParams.set('lang','zh-Hans');link.href=u.pathname+u.search});
-    }
-    // The same approved vision is available before and after the optional film.
+    if(closing){closing.lang=hero.lang;closing.innerHTML=`<h2 id="home-vision-title" tabindex="-1">${t.h}</h2><div class="home-vision-text">${t.p.map(text=>`<p>${text}</p>`).join('')}<p class="sig">${t.sig}</p></div>`;closing.querySelectorAll('a[data-go]').forEach(link=>{const u=new URL(link.dataset.go==='l'?t.leftHref:t.rightHref,location.origin);if(lang==='zh')u.searchParams.set('lang','zh-Hans');link.href=u.pathname+u.search})}
     const directions=document.querySelector('#home-directions');
-    if(lang==='zh'&&directions){
-      directions.lang='zh-Hans';directions.querySelector('h2').textContent='两条前行之路';
-      const story=directions.querySelector('[data-home-direction="story"]'),art=directions.querySelector('[data-home-direction="art"]');
-      story.firstChild.textContent='声音';art.firstChild.textContent='来自内部';
-      const wings=directions.querySelectorAll('.home-direction-wing');wings[0].querySelector('nav').setAttribute('aria-label','声音');wings[1].querySelector('nav').setAttribute('aria-label','来自内部');wings[0].querySelector('p').textContent='日记、书籍、新闻自由与法律权利工具。';wings[1].querySelector('p').textContent='艺术、音乐与社区，共同迈向积极的未来。';
-      const labels=['日记','书籍','法律工具','视觉艺术','音乐','社区'];directions.querySelectorAll('nav a').forEach((a,i)=>a.textContent=labels[i]);
-      directions.querySelectorAll('a[href]').forEach(a=>{const u=new URL(a.href);u.searchParams.set('lang','zh-Hans');a.href=u.pathname+u.search+u.hash});
-    }
-    flags.querySelectorAll('button').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.lang===lang)));
+    if(lang==='zh'&&directions){directions.lang='zh-Hans';directions.querySelector('h2').textContent='两条前行之路';const wings=directions.querySelectorAll('.home-direction-wing');wings.forEach((wing,i)=>{wing.querySelector('h3 a').firstChild.textContent=i?t.right:t.left;wing.querySelector('p').textContent=i?c.art:c.story;wing.querySelector('nav').setAttribute('aria-label',i?t.right:t.left);wing.querySelectorAll('nav a').forEach((a,j)=>a.textContent=(i?['视觉艺术','音乐','社区']:['日记','书籍','法律工具'])[j])});directions.querySelectorAll('a[href]').forEach(a=>{const u=new URL(a.href);u.searchParams.set('lang','zh-Hans');a.href=u.pathname+u.search+u.hash})}
   }
-  paint();
-  new MutationObserver(()=>{if(currentLang()!==lang)paint()}).observe(document.documentElement,{attributes:true,attributeFilter:['lang']});
-
-  // State: hover (fine pointers), focus, or tap-to-pin.
-  let pinned=false,leaveTimer=0,angle=0,last=0,spinning=false,visible=true,travelProgress=0,coreMoving=false;
-  let tabletOpenY=0,tabletOpener=symbol;
-  function setActive(on){
-    if(on&&travelProgress>0)return;clearTimeout(leaveTimer);const state=on?'active':'idle';if(hero.dataset.state===state)return;
-    hero.dataset.state=state;symbol.setAttribute('aria-expanded',String(on));
-    if(on){tabletOpenY=window.scrollY;hero.style.setProperty('--ox','0px');hero.style.setProperty('--oy','-34vh')}
-    startSpin();
-  }
-  // The empty starfield stays still until the visitor reaches the medallion.
-  // Allow travel from the raised symbol to the tablet without closing it.
-  const hoverTargets = [symbol, left, right, tablet];
-  function leaveSoon() {
-    clearTimeout(leaveTimer);
-    leaveTimer = setTimeout(() => {
-      const reading = tablet.contains(document.activeElement);
-      if (!pinned && !reading && !hoverTargets.some(node => node.matches(':hover'))) {
-        setActive(false);
-      }
-    }, 420);
-  }
-  for (const node of hoverTargets) {
-    node.addEventListener('pointerenter', event => {
-      if (event.pointerType === 'mouse' && hover.matches) setActive(true);
-    });
-    node.addEventListener('pointerleave', event => {
-      if (event.pointerType === 'mouse') leaveSoon();
-    });
-  }
-  tablet.addEventListener('focusout', leaveSoon);
-  readVision.addEventListener('click',()=>{tabletOpener=readVision;pinned=true;hero.dataset.pinned='true';setActive(true);tablet.focus({preventScroll:true})});
-  skipFilm.addEventListener('click',()=>{pinned=false;hero.dataset.pinned='false';setActive(false);requestAnimationFrame(()=>document.querySelector('#home-directions')?.focus({preventScroll:true}))});
-  symbol.addEventListener('click', () => {
-    tabletOpener=symbol;
-    pinned = !pinned;
-    hero.dataset.pinned = String(pinned);
-    setActive(pinned);
-    if (pinned) tablet.focus({preventScroll:true});
-  });
-  tablet.addEventListener('click',event=>{if(event.target.closest('.sj-hero-close')){pinned=false;hero.dataset.pinned='false';setActive(false);tabletOpener.focus({preventScroll:true})}});
-  hero.addEventListener('keydown',event=>{if(event.key==='Escape'&&hero.dataset.state==='active'){pinned=false;hero.dataset.pinned='false';setActive(false);tabletOpener.focus({preventScroll:true});event.stopPropagation()}});
-  flags.addEventListener('click',event=>{const button=event.target.closest('button[data-lang]');if(!button)return;if(button.dataset.lang===lang){pinned=true;hero.dataset.pinned='true';setActive(true);return}try{sessionStorage.setItem('sjHeroOpen','1')}catch{}const code=button.dataset.lang,locale=code==='zh'?'zh-Hans':code;
-    if(window.SFISelectLanguage){window.SFISelectLanguage(locale);return}
-    const url=new URL(location.href);url.pathname=code==='en'?'/en/':'/';if(code==='zh')url.searchParams.set('lang','zh-Hans');else url.searchParams.delete('lang');location.assign(url.href)});
-
-  // Spin: symbol and title turn together; when active they ease to face the visitor and rest.
-  function startSpin(){if(spinning||!visible||travelProgress>0||reduce.matches||root.dataset.quiet==='true')return;spinning=true;last=0;requestAnimationFrame(spin)}
-  function spin(time){
-    if(!spinning)return;if(!visible||travelProgress>0||document.hidden||reduce.matches||root.dataset.quiet==='true'){spinning=false;angle=0;core.style.setProperty('--a','0deg');return}
-    const dt=last?Math.min(64,time-last):16;last=time;
-    if(hero.dataset.state==='active'){const goal=Math.round(angle/360)*360;angle+=(goal-angle)*Math.min(1,dt/130);if(Math.abs(goal-angle)<.08){angle=0;core.style.setProperty('--a','0deg');drawGem();if(!coreMoving){spinning=false;return}}}
-    else angle=(angle+dt*360/18000)%360;
-    core.style.setProperty('--a',angle.toFixed(2)+'deg');drawGem();requestAnimationFrame(spin);
-  }
-
-  // The existing hero clock owns the 3D scene: no renderer timer or RAF.
-  const gemCanvas=symbol.querySelector('.sj-hero-gem');
-  let gem=null,gemFactory=null,gemSize=0,gemFailed=false,gemDisposed=false;
-  root.dataset.medallion='loading';
-  function gemFallback(){
-    const old=gem;gem=null;gemSize=0;root.dataset.medallion='fallback';
-    if(old){try{old.dispose()}catch{}}
-  }
+  paint();new MutationObserver(()=>{if(currentLang()!==lang)paint()}).observe(document.documentElement,{attributes:true,attributeFilter:['lang']});
+  flags.addEventListener('click',event=>{const b=event.target.closest('button[data-lang]');if(!b||b.dataset.lang===lang)return;const code=b.dataset.lang,locale=code==='zh'?'zh-Hans':code;if(window.SFISelectLanguage){window.SFISelectLanguage(locale);return}const u=new URL(location.href);u.pathname=code==='en'?'/en/':'/';if(code==='zh')u.searchParams.set('lang','zh-Hans');else u.searchParams.delete('lang');location.assign(u.href)});
+  enterFilm.addEventListener('click',()=>root.querySelector('[data-sj-next]')?.click());
+  readVision.addEventListener('click',()=>requestAnimationFrame(()=>document.querySelector('#home-vision-title')?.focus({preventScroll:true})));
+  try{sessionStorage.removeItem('sjHeroOpen')}catch{}
+  let gem=null,gemFactory=null,gemSize='',gemFailed=false,disposed=false,travelProgress=0,ticking=false;
+  const canvas=symbol.querySelector('canvas');root.dataset.medallion='fallback';
   function drawGem(){
-    if(gemDisposed||document.hidden||!visible||root.dataset.origin!=='true')return;
-    if(!gem&&gemFactory&&!gemFailed){
-      try{gem=gemFactory(gemCanvas)}catch{gemFailed=true;gemFallback();return}
-    }
-    if(!gem)return;
-    if(!img.complete||!img.naturalWidth)return;
-    try{
-      const size=Math.round(symbol.clientWidth),dpr=Math.min(devicePixelRatio||1,2);
-      const identity=size+':'+dpr;
-      if(gemSize!==identity){gem.resize(size,dpr);gemSize=identity}
-      const background=img.getBoundingClientRect(),view=gemCanvas.getBoundingClientRect();
-      if(background.width<=0||background.height<=0||view.width<=0||view.height<=0)return;
-      gem.setBackdrop?.(img,{u0:(view.left-background.left)/background.width,v0:(view.top-background.top)/background.height,u1:(view.right-background.left)/background.width,v1:(view.bottom-background.top)/background.height});
-      gem.render(angle*Math.PI/180,travelProgress);
-      root.dataset.medallion='three';
-    }catch{gemFailed=true;gemFallback()}
+    if(disposed||document.hidden||root.dataset.origin!=='true'||!img.complete||!img.naturalWidth)return;
+    try{if(!gem&&gemFactory&&!gemFailed)gem=gemFactory(canvas);if(!gem)return;const size=symbol.clientWidth,dpr=Math.min(devicePixelRatio||1,2),key=size+':'+dpr;if(gemSize!==key){gem.resize(size,dpr);gemSize=key}const b=img.getBoundingClientRect(),v=canvas.getBoundingClientRect();if(b.width&&v.width)gem.setBackdrop?.(img,{u0:(v.left-b.left)/b.width,v0:(v.top-b.top)/b.height,u1:(v.right-b.left)/b.width,v1:(v.bottom-b.top)/b.height});gem.render(0,travelProgress);root.dataset.medallion='three'}catch{gemFailed=true;gem?.dispose();gem=null;root.dataset.medallion='fallback'}
   }
-  // Import completion may initialise the opening, but never repaint a stopped
-  // mid-scroll presentation. The next native input admits the pending renderer.
-  import('/assets/journey/hero-medallion.mjs').then(module=>{
-    gemFactory=module.createMedallion;
-    if(travelProgress===0)drawGem();
-  }).catch(()=>{gemFailed=true;root.dataset.medallion='fallback'});
-  gemCanvas.addEventListener('webglcontextlost',event=>{event.preventDefault();gemFailed=true;gemFallback()});
-  gemCanvas.addEventListener('webglcontextrestored',()=>{gemFailed=false;queue()});
-  addEventListener('pagehide',event=>{if(!event.persisted){gemDisposed=true;gemFallback()}});
-  // Initial image readiness is admitted only at the opening. After scroll,
-  // asset completion waits for the next real input instead of idle catch-up.
+  import('/assets/journey/hero-medallion.mjs').then(m=>{gemFactory=m.createMedallion;if(travelProgress===0)drawGem()}).catch(()=>{gemFailed=true});
   img.addEventListener('load',()=>{if(travelProgress===0)drawGem()});
-  core.addEventListener('transitionrun',event=>{if(event.target===core&&event.propertyName==='transform'&&travelProgress===0){coreMoving=true;startSpin()}});
-  for(const type of ['transitionend','transitioncancel'])core.addEventListener(type,event=>{if(event.target===core&&event.propertyName==='transform'){coreMoving=false;if(travelProgress===0)drawGem()}});
-  function rainOn(on){if(on)drawGem()}
-
-  // The first scene's authored 0.3 weight shares the journey's absolute native
-  // scroll geometry. No elapsed-time input or asynchronous collapse is used.
-  const rays=Array.from({length:48},(_,i)=>{const angle=i*2.39996323,near=8+(i*13%17),far=near+12+(i*7%31),x=Math.cos(angle),y=Math.sin(angle);return `<path d="M${(x*near).toFixed(3)} ${(y*near).toFixed(3)}L${(x*far).toFixed(3)} ${(y*far).toFixed(3)}" stroke="#ffdfac" stroke-width="${(.16+(i%4)*.08).toFixed(2)}" opacity="${(.3+(i%7)*.09).toFixed(2)}"/>`}).join('');
-  const burst=el('div','sj-hero-burst',`<svg class="sj-hero-shock" viewBox="-100 -100 200 200" aria-hidden="true">${rays}</svg><span class="sj-hero-point"></span>`);
-  burst.setAttribute('aria-hidden','true');stage.append(burst);
-  const clamp=n=>Math.min(1,Math.max(0,n));
-  const smooth=n=>{n=clamp(n);return n*n*(3-2*n)};
-  function fixedMatrix(p){drawGem()}
-  let ticking=false;
+  canvas.addEventListener('webglcontextlost',e=>{e.preventDefault();gemFailed=true;gem?.dispose();gem=null;root.dataset.medallion='fallback'});
+  canvas.addEventListener('webglcontextrestored',()=>{gemFailed=false;queue()});
+  const clamp=n=>Math.min(1,Math.max(0,n)),smooth=n=>{n=clamp(n);return n*n*(3-2*n)};
   function measure(){
-    ticking=false;const rect=root.getBoundingClientRect(),isOrigin=root.dataset.origin==='true';
-    const staticView=reduce.matches||root.dataset.quiet==='true';
-    const style=getComputedStyle(root),total=parseFloat(style.getPropertyValue('--sj-scenes'));
-    const nav=Math.max(0,parseFloat(style.getPropertyValue('--sj-nav-height'))||0);
-    const distance=Math.max(1,root.offsetHeight-(innerHeight-nav));
-    const span=Number.isFinite(total)&&total>0?distance*.3/total:innerHeight*.3;
-    const progress=staticView?0:clamp((nav-rect.top)/Math.max(1,span));
-    travelProgress=progress;
-    // Pull back under tension, then accelerate into one centre. The final
-    // modest gold ejection expands before the existing big-bang point handoff.
-    const tension=Math.sin(Math.PI*clamp(progress/.5));
-    const collapse=Math.pow(clamp((progress-.3)/.48),3);
-    const scale=Math.max(.001,1-collapse);
-    const burstPhase=clamp((progress-.78)/.22);
-    const opacity=1-smooth((progress-.78)/.22);
-    root.dataset.heroTravel=String(progress>0&&!staticView);
-    hero.dataset.dragsug=progress>0&&!staticView?'true':'false';
-    root.style.setProperty('--hero-travel',progress.toFixed(6));
-    root.style.setProperty('--hero-o',opacity.toFixed(6));
-    root.style.setProperty('--hero-sx',(scale*(1+tension*.32)).toFixed(6));
-    root.style.setProperty('--hero-sy',(scale*(1-tension*.35)).toFixed(6));
-    root.style.setProperty('--hero-burst-scale',(.015+smooth(burstPhase)*1.7).toFixed(6));
-    root.style.setProperty('--hero-burst-opacity',(Math.sin(Math.PI*burstPhase)*.46).toFixed(6));
-    root.style.setProperty('--hero-point-opacity',smooth((progress-.68)/.16).toFixed(6));
-    if(progress>0){rainOn(false);spinning=false;angle=0;core.style.setProperty('--a','0deg');if(isOrigin)fixedMatrix(progress)}
-    const leftStaticTablet=staticView&&Math.abs(window.scrollY-tabletOpenY)>10;
-    if((progress>0||leftStaticTablet||!isOrigin)&&(pinned||hero.dataset.state==='active')){pinned=false;hero.dataset.pinned='false';setActive(false);if(tablet.contains(document.activeElement))document.activeElement.blur()}
-    const shown=isOrigin&&progress<1&&rect.bottom>0;
-    document.body.dataset.heroFront=String(shown);
-    if(shown!==visible){visible=shown;root.dataset.heroHidden=String(!shown);if(!shown&&!pinned)setActive(false);if(shown)drawGem()}
-    if(progress===0&&shown){rainOn(true);startSpin()}
+    ticking=false;const rect=root.getBoundingClientRect(),style=getComputedStyle(root),quiet=reduce.matches||root.dataset.quiet==='true',nav=Math.max(0,parseFloat(style.getPropertyValue('--sj-nav-height'))||0),total=parseFloat(style.getPropertyValue('--sj-scenes')),distance=Math.max(1,root.offsetHeight-(innerHeight-nav)),span=total>0?distance*.3/total:innerHeight*.3;
+    const p=quiet?0:clamp((nav-rect.top)/Math.max(1,span));travelProgress=p;const tension=Math.sin(Math.PI*clamp(p/.5)),scale=Math.max(.001,1-Math.pow(clamp((p-.3)/.48),3));
+    root.dataset.heroTravel=String(p>0&&!quiet);hero.dataset.dragsug=String(p>0&&!quiet);root.style.setProperty('--hero-o',(1-smooth((p-.78)/.22)).toFixed(6));root.style.setProperty('--hero-sx',(scale*(1+tension*.32)).toFixed(6));root.style.setProperty('--hero-sy',(scale*(1-tension*.35)).toFixed(6));
+    const shown=root.dataset.origin==='true'&&p<1&&rect.bottom>0;document.body.dataset.heroFront=String(shown);root.dataset.heroHidden=String(!shown);if(shown)drawGem();
   }
-  reduce.addEventListener('change',()=>{queue();rainOn(visible);if(!reduce.matches)startSpin()});
-  const queue=()=>{if(!ticking){ticking=true;requestAnimationFrame(measure)}};
-  addEventListener('scroll',queue,{passive:true});addEventListener('resize',()=>{layout();queue()});
-  new MutationObserver(()=>{queue();rainOn(visible);if(visible)startSpin()}).observe(root,{attributes:true,attributeFilter:['data-origin','data-quiet']});
-  document.addEventListener('visibilitychange',()=>{rainOn(visible&&!document.hidden);if(!document.hidden&&visible)startSpin()});
-  layout();measure();rainOn(true);startSpin();
-  try{if(sessionStorage.getItem('sjHeroOpen')){sessionStorage.removeItem('sjHeroOpen');pinned=true;hero.dataset.pinned='true';setActive(true)}}catch{}
+  function queue(){if(!ticking){ticking=true;requestAnimationFrame(measure)}}
+  addEventListener('scroll',queue,{passive:true});addEventListener('resize',()=>{layout();queue()});reduce.addEventListener('change',queue);new MutationObserver(queue).observe(root,{attributes:true,attributeFilter:['data-origin','data-quiet']});document.addEventListener('visibilitychange',()=>{if(!document.hidden)queue()});addEventListener('pagehide',e=>{if(!e.persisted){disposed=true;gem?.dispose();gem=null}});addEventListener('pageshow',()=>{layout();queue()});layout();measure();
 })();
