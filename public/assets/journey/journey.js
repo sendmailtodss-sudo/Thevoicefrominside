@@ -154,8 +154,14 @@
       slot.frameCallback=slot.element.requestVideoFrameCallback((now,metadata)=>{
         slot.frameCallback=null;
         if(disposed||slot.decode!==decode||slot.version!==decode.version||slot.seekSerial!==decode.serial)return;
-        if(frames.matchesFrame(decode.request,metadata.mediaTime))decode.reportedTime=metadata.mediaTime;
-        if(!capture(slot,decode,metadata.mediaTime,'video-frame-callback'))awaitFrame(slot,decode);
+        const matched=frames.matchesFrame(decode.request,metadata.mediaTime);
+        if(matched)decode.reportedTime=metadata.mediaTime;
+        // A completed seek alone can precede the decoded picture in WebKit.
+        // Require an actual frame callback. Linux WPE may report shifted PTS;
+        // retain honest estimated timing only after seeked and presentation.
+        const presentedEstimate=constrained&&decode.seeked&&!slot.element.seeking&&slot.element.readyState>=2&&Math.abs(slot.element.currentTime-decode.request.seekTime)<.0011;
+        const captured=matched?capture(slot,decode,metadata.mediaTime,'video-frame-callback'):presentedEstimate?capture(slot,decode,null,'presented-frame+seeked-estimate'):false;
+        if(!captured)awaitFrame(slot,decode);
       });
     }
     function pump(slot){
@@ -166,7 +172,7 @@
       // Coalesce a seek in flight. Its immutable sample can be cached, but only
       // the latest requested composition can ever consume it.
       if(slot.decode||el.seeking)return;
-      const decode={request,version:slot.version,serial:++slot.seekSerial};slot.decode=decode;awaitFrame(slot,decode);
+      const decode={request,version:slot.version,serial:++slot.seekSerial,seeked:false};slot.decode=decode;awaitFrame(slot,decode);
       try{
         if(el.readyState>=2&&Math.abs(el.currentTime-request.seekTime)<1e-7){
           // A same-time assignment may not produce a new frame callback.
@@ -183,10 +189,11 @@
       const version=slot.version,relevant=()=>!disposed&&slot.version===version&&slot.source===source;
       const ready=event=>{
         if(!relevant())return;
+        if(event.type==='seeked'&&slot.decode&&!slot.element.seeking)slot.decode.seeked=true;
         if((event.type==='seeked'||(constrained&&event.type==='loadeddata'))&&slot.decode&&!slot.element.seeking){
           const decode=slot.decode;
           if(Number.isFinite(decode.reportedTime)){cancelFrame(slot);capture(slot,decode,decode.reportedTime,'video-frame-callback+seeked')}
-          else if((constrained||typeof slot.element.requestVideoFrameCallback!=='function')&&slot.element.readyState>=2&&Math.abs(slot.element.currentTime-decode.request.seekTime)<.0011){cancelFrame(slot);capture(slot,decode,null,'seeked-fallback')}
+          else if((typeof slot.element.requestVideoFrameCallback!=='function')&&slot.element.readyState>=2&&Math.abs(slot.element.currentTime-decode.request.seekTime)<.0011){cancelFrame(slot);capture(slot,decode,null,'seeked-fallback')}
         }
         pump(slot);
       };
