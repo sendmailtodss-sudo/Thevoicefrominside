@@ -6,14 +6,22 @@ eier integrasjon og release. Ingen public-fil, manifest eller publisher er endre
 
 ## Hva dette er
 
-En sammenhengende 25–35s åpningsprøve (univers → enkelt sinn → skapende handlinger →
+En sammenhengende åpningsprøve (univers → enkelt sinn → skapende handlinger →
 samklang → skyer), klippet fra eksisterende, hash-verifiserte kildeklipp med **rette
 kutt** — ingen fade, iris, blits eller støvoverlegg for å skjule skjøter. Skjøtene er
 rapportert ærlig, ikke skjult.
 
+**Samlende fargegrading (`grade_opening.py`):** De sju klippene hadde ulik farge
+(varm galakse, blå hjerner, gull synapser, grønn virvel). For at det skal lese som
+**én film i utvikling** og ikke mange klipp, trekkes alle mot én felles kosmisk blå
+palett i CIE-Lab, mens **lysutviklingen (mørkt → lyst) beholdes** så filmen fortsatt
+utvikler seg. Lyse, naturlige flater (skyer, Jord-høylys) beskyttes mot fargeendringen
+så de holder seg realistiske. Dette oppfinner ikke innhold; det re-graderer kun
+eksisterende frames.
+
 - **Leveranse 16:9:** `deliverable/opening-to-clouds-preview-16x9.mp4`
-  1280×720, h264, 24 fps, 820 frames, 34,17 s.
-  sha256 `8ba454ed61537ef1f74f7c57e37783ded64d5fad6294ee0be03a73211ec6c739`
+  1280×720, h264, 24 fps, 788 frames, 32,83 s.
+  sha256 `4ab048a8c20a3b7dd9bd3c32787236c110fe3da9b9ca05d2aafc00a7a28e51d0`
 - **Mobil 9:16 senterutsnitt:** `deliverable/opening-to-clouds-preview-9x16-centrecrop.mp4`
 - **Stillalternativ (reduced-motion):** `deliverable/stills/` – én meningsbærende frame per beat.
 - **Redigerbar tidslinje:** `edl.json` · **Render-oppskrift:** `build_opening.py`
@@ -46,12 +54,12 @@ punkt og inngår ikke her – denne prøven er den kosmiske filmåpningen, ikke 
 | 4 | skapende handlinger | impulses | `dbd602bf…363827b68c` | 60–210 (30) | 5,00s | gyldne synapselinjer tennes mellom hjernene |
 | 5 | samklang | vortex | `4569e5c4…41a772d7f636d` | 110–295 (30) | 6,17s | nettverket binder seg til én blå spiralvirvel |
 | 6 | samklang | supernova | `aa82b367…deb961aec3` | 88–192 (24) | 4,33s | grønn virvel → Jord i rom ved soloppgang |
-| 7 | skyer | earth-gate (frontdel) | `9119c30e…ea260767264` | 0–96 (24) | 4,00s | Jord → ned gjennom atmosfæren til fullt skydekke; **stopper ved skyen** |
+| 7 | skyer | earth-gate (frontdel) | `9119c30e…ea260767264` | 0–64 (24) | 2,67s | Jord → ned gjennom atmosfæren til fullt skydekke; **stopper ved frame 63, siste rene sky før fengselet toner fram (~frame 68)** |
 
 ## Overlevering til Codex (skyoverlevering)
 
-Prøven slutter på det fulle skydekket i `earth-gate` (kilde-frame 95), **før** Bergen
-fengsel-porten. Det eksisterende godkjente nedstigningsklippet `earth-gate` fortsetter
+Prøven slutter på det fulle skydekket i `earth-gate` (kilde-frame 63), **før** noe av
+Bergen fengsel-området blir synlig (fengselet toner fram fra ~frame 68). Det eksisterende godkjente nedstigningsklippet `earth-gate` fortsetter
 uendret derfra inn i fengselet, og er eid av resten av filmen. Overgangshåndtaket er at
 siste segment (supernova) ender på Jord-i-rom som matcher `earth-gate` sin første frame
 (luma-differanse 7). Jeg endrer ikke fengsel, betjenter, C7 eller noe etter skyen.
@@ -67,8 +75,11 @@ Ingen skjøt er «godkjent bevegelse» – det krever Works/din visuelle aksept.
 | **J2 galaxy-descent → brains** | 40 | **Svakest.** Nebula-dis (dim) → nær-svart stjernerom der hjernene toner inn. Kort mørkedupp og ingen felles motiv. Flagges som underkjent skjøt; et mulig forbedringshåndtak er å la hjernene begynne å tone inn tidligere i overlappet. |
 | J3 brains → impulses | 7 | Ren: hjernefelt → hjernefelt, matchet skala og grading. |
 | J4 impulses → vortex | 20 | Motiv-match (synapsenettverk→nettverk), lite fargehopp (gull→blå). Akseptabelt. |
-| J5 vortex → supernova | 31 | Forbedret til **virvel→virvel**: blå spiralvirvel → grønn spiralvirvel, begge sentrert. Fargeskifte blå→grønn gjenstår, men ingen motivreversering. |
+| J5 vortex → supernova | 31 | **virvel→virvel**: blå spiralvirvel → virvel. Etter graderingen er den grønne virvelen trukket mot teal/blå, så fargeskiftet er dempet; ingen motivreversering. |
 | J6 supernova → earth-gate | 7 | Ren skyoverlevering: Jord-i-rom → Jord-i-rom. Liten skala-endring (Jord trekker seg litt unna), samme motiv. |
+
+Graderingen demper fargehoppene i J1, J4 og J5 betydelig (alle i samme blå familie nå).
+J2 er fortsatt den svakeste (mørkedupp), men nå farge-konsistent.
 
 ## Mobilutsnitt (9:16) og stillalternativ
 

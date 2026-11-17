@@ -47,8 +47,8 @@
       "reuse": "'When everyone contributes' resolves the collective into the shared world; ends on Earth, matching earth-gate's first frame for a clean handoff (dY=7)." },
     { "beat": "skyer", "scene": "earth-gate (front portion only)", "clip": "earth-gate-9119c30e8da69db4.mp4",
       "sha256": "9119c30e8da69db446c0695ccacca376aa0945b228f102976a1b1ea260767264",
-      "src_fps": 24, "src_frames": 181, "in": 0, "out": 96,
-      "camera": "Earth in space -> warp down through the atmosphere to full cloud cover; STOPS at the cloud, before the Bergen-prison gate reveal",
+      "src_fps": 24, "src_frames": 181, "in": 0, "out": 64,
+      "camera": "Earth in space -> warp down through the atmosphere to full cloud cover; STOPS at frame 63, the last pure-cloud frame before any prison grounds become visible (prison first appears ~frame 68)",
       "reuse": "Leads into the existing approved cloud arrival and preserves it. The out-frame (full cloud) is the handoff; the existing clip continues unchanged from here into the prison, owned by the rest of the film." }
   ]
 }
