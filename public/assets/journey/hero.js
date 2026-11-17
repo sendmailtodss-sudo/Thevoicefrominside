@@ -1,5 +1,5 @@
-// Landing hero for the origin scene. Builds the black-starfield backdrop, the three
-// language flags, the spinning symbol with its gold title, and the granite tablet.
+// Architectural home entrance: serious graphite/steel and warm ivory/clay.
+// Full original vision and the separate film compositor are preserved.
 // Uses the locally vendored Three renderer for the transparent medallion only.
 (()=>{'use strict';
   const root=document.querySelector('[data-journey]');if(!root||root.dataset.hero)return;
@@ -72,9 +72,9 @@
     const width=Math.max(w,h*4/3);plate.style.width=width+'px';plate.style.height=width*3/4+'px';
   }
   const C={
-    no:{brand:'Stemmen fra innsiden',home:'Til forsiden',purpose:'To veier. Én ny retning.',storyLabel:'Dokumentasjon · rettssikkerhet',artLabel:'Skapelse · fellesskap',story:'Aktivisme, samfunnskritikk og kampen for systemreform.',art:'Kunst, forebyggende arbeid og livet etter soning.',enter:'Gå inn',read:'Les hele visjonen',film:'Se filmreisen',optional:'Velg en inngang, eller bli med på reisen.',storyLinks:['Dagbok','Boken','Fri presse','Juridiske verktøy'],artLinks:['Galleri','Musikk','Litteratur','Fellesskap']},
-    en:{brand:'The Voice from Inside',home:'Back to the entrance',purpose:'Two paths. A new direction.',storyLabel:'Documentation · legal rights',artLabel:'Creativity · community',story:'Activism, social criticism and the fight for system reform.',art:'Art, prevention and life after release.',enter:'Enter',read:'Read the full vision',film:'Explore the film',optional:'Choose an entrance, or join the journey.',storyLinks:['Diary','The Book','Free Press','Legal tools'],artLinks:['Gallery','Music','Literature','Community']},
-    zh:{brand:'来自内部的声音',home:'返回首页',purpose:'两条道路。新的方向。',storyLabel:'记录 · 法律权利',artLabel:'创作 · 社区',story:'倡议、社会批评与制度改革。',art:'艺术、预防工作与出狱后的生活。',enter:'进入',read:'阅读完整愿景',film:'探索影片',optional:'选择入口，或踏上这段旅程。',storyLinks:['日记','书籍','自由新闻','法律工具'],artLinks:['画廊','音乐','文学','社区']}
+    no:{brand:'Stemmen fra innsiden',home:'Til forsiden',purpose:'Menneskene bak murene. Nye muligheter.',contribute:'Organisasjon eller sponsor? Bidra med fag, utstyr, oppdrag eller finansiering',storyLabel:'Dokumentasjon · rettssikkerhet',artLabel:'Skapelse · fellesskap',story:'Rettigheter, innsyn og ansvar. Aktivisme og kampen for systemreform.',art:'Kunst, musikk og nye muligheter. Fellesskap og livet etter soning.',enter:'Gå inn',read:'Les hele visjonen',film:'Se filmreisen',optional:'Velg en inngang, eller bli med på reisen.',storyLinks:['Dagbok','Boken','Fri presse','Juridiske verktøy'],artLinks:['Galleri','Musikk','Litteratur','Fellesskap']},
+    en:{brand:'The Voice from Inside',home:'Back to the entrance',purpose:'People behind the walls. New possibilities.',contribute:'Organisation or sponsor? Contribute expertise, equipment, commissions or funding',storyLabel:'Documentation · legal rights',artLabel:'Creativity · community',story:'Rights, access and accountability. Activism and the fight for system reform.',art:'Art, music and new opportunities. Community and life after release.',enter:'Enter',read:'Read the full vision',film:'Explore the film',optional:'Choose an entrance, or join the journey.',storyLinks:['Diary','The Book','Free Press','Legal tools'],artLinks:['Gallery','Music','Literature','Community']},
+    zh:{brand:'来自内部的声音',home:'返回首页',purpose:'看见高墙内的人，创造新的可能。',contribute:'机构或赞助者：提供专业知识、设备、委托或资金支持',storyLabel:'记录 · 法律权利',artLabel:'创作 · 社区',story:'权利、信息获取与问责。倡议行动与制度改革。',art:'艺术、音乐与新的机会。社区和出狱后的生活。',enter:'进入',read:'阅读完整愿景',film:'探索影片',optional:'选择入口，或踏上这段旅程。',storyLinks:['日记','书籍','自由新闻','法律工具'],artLinks:['画廊','音乐','文学','社区']}
   };
   const hero=el('div','sj-hero');hero.dataset.gateway='true';hero.dataset.state='idle';
   const shell=el('div','sj-gateway-shell'),header=el('header','sj-gateway-header'),brand=el('h1','sj-gateway-brand');
@@ -86,9 +86,10 @@
   const portals=el('div','sj-gateway-portals'),story=el('section','sj-gateway-portal sj-gateway-story'),art=el('section','sj-gateway-portal sj-gateway-art');
   portals.append(story,art);
   const footer=el('footer','sj-gateway-footer'),purpose=el('p','sj-gateway-purpose'),access=el('nav','sj-hero-access');
+  const contribute=el('a','sj-gateway-contribute');
   const readVision=el('a','sj-hero-read');readVision.href='#home-vision';
   const enterFilm=el('button','sj-gateway-film');enterFilm.type='button';enterFilm.disabled=true;
-  access.append(readVision,enterFilm);footer.append(purpose,access);shell.append(header,portals,footer);hero.append(shell);stage.append(hero);root.dataset.hero='true';
+  access.append(readVision,enterFilm);footer.append(purpose,contribute,access);shell.append(header,portals,footer);hero.append(shell);stage.append(hero);root.dataset.hero='true';
   const paths={story:['/dagbok/','/boken/','/presse/','/juridisk-motvekt/'],art:['/galleri-3d/','/musikk/','/litteratur/','/forebygging-og-forum/#forum']};
   function localized(path){const en={'/musikk/':'/en/music/','/litteratur/':'/en/literature/'};const u=new URL(lang==='en'?(en[path]||'/en'+path):path,location.origin);if(lang==='zh')u.searchParams.set('lang','zh-Hans');return u.pathname+u.search+u.hash}
   function syncFilmEntry(){const ready=root.dataset.enhanced==='true';enterFilm.disabled=!ready;enterFilm.setAttribute('aria-busy',String(!ready));enterFilm.textContent=ready?C[lang].film+' ↓':{no:'Laster filmreisen …',en:'Loading the film …',zh:'正在加载影片…'}[lang]}
@@ -109,7 +110,7 @@
     lang=currentLang();const t=T[lang],c=C[lang];hero.lang=lang==='zh'?'zh-Hans':lang==='no'?'nb':'en';
     brand.textContent=c.brand;symbol.href=lang==='en'?'/en/#top':lang==='zh'?'/?lang=zh-Hans#top':'/#top';symbol.setAttribute('aria-label',c.home);
     flags.setAttribute('aria-label',t.flags);flags.querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.lang===lang)));
-    paintPortal(story,'story');paintPortal(art,'art');purpose.textContent=t.invite;readVision.textContent=c.read;syncFilmEntry();access.setAttribute('aria-label',c.optional);
+    paintPortal(story,'story');paintPortal(art,'art');purpose.textContent=c.purpose;contribute.textContent=c.contribute;contribute.href=localized('/collaborate/');readVision.textContent=c.read;syncFilmEntry();access.setAttribute('aria-label',c.optional);
     const closing=document.querySelector('[data-home-vision]');
     if(closing){closing.lang=hero.lang;closing.innerHTML=`<h2 id="home-vision-title" tabindex="-1">${t.h}</h2><div class="home-vision-text">${t.p.map(text=>`<p>${text}</p>`).join('')}<p class="sig">${t.sig}</p></div>`;closing.querySelectorAll('a[data-go]').forEach(link=>{const u=new URL(link.dataset.go==='l'?t.leftHref:t.rightHref,location.origin);if(lang==='zh')u.searchParams.set('lang','zh-Hans');link.href=u.pathname+u.search})}
     const directions=document.querySelector('#home-directions');
