@@ -87,10 +87,11 @@
   portals.append(story,art);
   const footer=el('footer','sj-gateway-footer'),purpose=el('p','sj-gateway-purpose'),access=el('nav','sj-hero-access');
   const readVision=el('a','sj-hero-read');readVision.href='#home-vision';
-  const enterFilm=el('button','sj-gateway-film');enterFilm.type='button';
+  const enterFilm=el('button','sj-gateway-film');enterFilm.type='button';enterFilm.disabled=true;
   access.append(readVision,enterFilm);footer.append(purpose,access);shell.append(header,portals,footer);hero.append(shell);stage.append(hero);root.dataset.hero='true';
   const paths={story:['/dagbok/','/boken/','/presse/','/juridisk-motvekt/'],art:['/galleri-3d/','/musikk/','/litteratur/','/forebygging-og-forum/#forum']};
   function localized(path){const en={'/musikk/':'/en/music/','/litteratur/':'/en/literature/'};const u=new URL(lang==='en'?(en[path]||'/en'+path):path,location.origin);if(lang==='zh')u.searchParams.set('lang','zh-Hans');return u.pathname+u.search+u.hash}
+  function syncFilmEntry(){const ready=root.dataset.enhanced==='true';enterFilm.disabled=!ready;enterFilm.setAttribute('aria-busy',String(!ready));enterFilm.textContent=ready?C[lang].film+' ↓':{no:'Laster filmreisen …',en:'Loading the film …',zh:'正在加载影片…'}[lang]}
   function paintPortal(node,side){
     const t=T[lang],c=C[lang],label=side==='story'?c.storyLabel:c.artLabel,name=side==='story'?t.left:t.right,href=side==='story'?t.leftHref:t.rightHref;
     node.replaceChildren();
@@ -108,7 +109,7 @@
     lang=currentLang();const t=T[lang],c=C[lang];hero.lang=lang==='zh'?'zh-Hans':lang==='no'?'nb':'en';
     brand.textContent=c.brand;symbol.href=lang==='en'?'/en/#top':lang==='zh'?'/?lang=zh-Hans#top':'/#top';symbol.setAttribute('aria-label',c.home);
     flags.setAttribute('aria-label',t.flags);flags.querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.lang===lang)));
-    paintPortal(story,'story');paintPortal(art,'art');purpose.textContent=t.invite;readVision.textContent=c.read;enterFilm.textContent=c.film+' ↓';access.setAttribute('aria-label',c.optional);
+    paintPortal(story,'story');paintPortal(art,'art');purpose.textContent=t.invite;readVision.textContent=c.read;syncFilmEntry();access.setAttribute('aria-label',c.optional);
     const closing=document.querySelector('[data-home-vision]');
     if(closing){closing.lang=hero.lang;closing.innerHTML=`<h2 id="home-vision-title" tabindex="-1">${t.h}</h2><div class="home-vision-text">${t.p.map(text=>`<p>${text}</p>`).join('')}<p class="sig">${t.sig}</p></div>`;closing.querySelectorAll('a[data-go]').forEach(link=>{const u=new URL(link.dataset.go==='l'?t.leftHref:t.rightHref,location.origin);if(lang==='zh')u.searchParams.set('lang','zh-Hans');link.href=u.pathname+u.search})}
     const directions=document.querySelector('#home-directions');
@@ -116,7 +117,7 @@
   }
   paint();new MutationObserver(()=>{if(currentLang()!==lang)paint()}).observe(document.documentElement,{attributes:true,attributeFilter:['lang']});
   flags.addEventListener('click',event=>{const b=event.target.closest('button[data-lang]');if(!b||b.dataset.lang===lang)return;const code=b.dataset.lang,locale=code==='zh'?'zh-Hans':code;if(window.SFISelectLanguage){window.SFISelectLanguage(locale);return}const u=new URL(location.href);u.pathname=code==='en'?'/en/':'/';if(code==='zh')u.searchParams.set('lang','zh-Hans');else u.searchParams.delete('lang');location.assign(u.href)});
-  enterFilm.addEventListener('click',()=>root.querySelector('[data-sj-next]')?.click());
+  enterFilm.addEventListener('click',()=>root.dispatchEvent(new CustomEvent('sfi-enter-film')));
   readVision.addEventListener('click',()=>requestAnimationFrame(()=>document.querySelector('#home-vision-title')?.focus({preventScroll:true})));
   try{sessionStorage.removeItem('sjHeroOpen')}catch{}
   let gem=null,gemFactory=null,gemSize='',gemFailed=false,disposed=false,travelProgress=0,ticking=false;
@@ -132,10 +133,12 @@
   const clamp=n=>Math.min(1,Math.max(0,n)),smooth=n=>{n=clamp(n);return n*n*(3-2*n)};
   function measure(){
     ticking=false;const rect=root.getBoundingClientRect(),style=getComputedStyle(root),quiet=reduce.matches||root.dataset.quiet==='true',nav=Math.max(0,parseFloat(style.getPropertyValue('--sj-nav-height'))||0),total=parseFloat(style.getPropertyValue('--sj-scenes')),distance=Math.max(1,root.offsetHeight-(innerHeight-nav)),span=total>0?distance*.3/total:innerHeight*.3;
-    const p=quiet?0:clamp((nav-rect.top)/Math.max(1,span));travelProgress=p;const tension=Math.sin(Math.PI*clamp(p/.5)),scale=Math.max(.001,1-Math.pow(clamp((p-.3)/.48),3));
-    root.dataset.heroTravel=String(p>0&&!quiet);hero.dataset.dragsug=String(p>0&&!quiet);root.style.setProperty('--hero-o',(1-smooth((p-.78)/.22)).toFixed(6));root.style.setProperty('--hero-sx',(scale*(1+tension*.32)).toFixed(6));root.style.setProperty('--hero-sy',(scale*(1-tension*.35)).toFixed(6));
-    const shown=root.dataset.origin==='true'&&p<1&&rect.bottom>0;document.body.dataset.heroFront=String(shown);root.dataset.heroHidden=String(!shown);if(shown)drawGem();
+    const p=quiet?0:clamp((nav-rect.top)/Math.max(1,span));travelProgress=p;
+    // The entrance is a page, not a deformable film layer. Keep it stable
+    // until the scroll compositor actually commits the first film image.
+    root.dataset.heroTravel='false';hero.dataset.dragsug='false';root.style.setProperty('--hero-o','1');root.style.setProperty('--hero-sx','1');root.style.setProperty('--hero-sy','1');
+    const shown=root.dataset.origin==='true'&&rect.bottom>0;document.body.dataset.heroFront=String(shown);root.dataset.heroHidden=String(!shown);if(shown)drawGem();
   }
   function queue(){if(!ticking){ticking=true;requestAnimationFrame(measure)}}
-  addEventListener('scroll',queue,{passive:true});addEventListener('resize',()=>{layout();queue()});reduce.addEventListener('change',queue);new MutationObserver(queue).observe(root,{attributes:true,attributeFilter:['data-origin','data-quiet']});document.addEventListener('visibilitychange',()=>{if(!document.hidden)queue()});addEventListener('pagehide',e=>{if(!e.persisted){disposed=true;gem?.dispose();gem=null}});addEventListener('pageshow',()=>{layout();queue()});layout();measure();
+  addEventListener('scroll',queue,{passive:true});addEventListener('resize',()=>{layout();queue()});reduce.addEventListener('change',queue);new MutationObserver(()=>{syncFilmEntry();queue()}).observe(root,{attributes:true,attributeFilter:['data-origin','data-quiet','data-enhanced']});document.addEventListener('visibilitychange',()=>{if(!document.hidden)queue()});addEventListener('pagehide',e=>{if(!e.persisted){disposed=true;gem?.dispose();gem=null}});addEventListener('pageshow',()=>{syncFilmEntry();layout();queue()});layout();measure();
 })();
