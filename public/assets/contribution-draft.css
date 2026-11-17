@@ -1,0 +1,35 @@
+/* Only the closed-service local draft wizard. Music/catalogue surfaces are untouched. */
+#creative-studio .contribution-draft-grid{grid-template-columns:minmax(0,1fr)}
+#creative-studio .contribution-draft-grid>.wc-box{padding:0;background:#fcf9f2;color:#302b27;border-color:#b9a797}
+#creative-studio .contribution-draft-grid>.wc-box>h3{padding:20px 20px 0;margin:0;color:#302b27}
+#creative-studio .contribution-draft-grid .contribution-draft{border:0}
+#creative-studio .contribution-draft{color-scheme:light;color:#302b27;background:#fcf9f2;padding:clamp(16px,3vw,30px);border:1px solid #b9a797;overflow-wrap:anywhere}
+#creative-studio .contribution-draft__notice{padding:14px 16px;border-left:3px solid #774c3c;background:#eee3d7;color:#302b27;font:15px/1.6 system-ui,sans-serif}
+#creative-studio .contribution-draft__steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;margin:20px 0}
+#creative-studio .contribution-draft button{background:#774c3c;color:#fffdf7;border:1px solid #774c3c;min-height:44px;font:600 14px/1.4 system-ui,sans-serif;cursor:pointer}
+#creative-studio .contribution-draft button:hover{background:#633d2e;color:#fffdf7}
+#creative-studio .contribution-draft__steps button{padding:9px 8px;background:#fcf9f2;color:#633d2e;border-color:#a38470;text-align:left}
+#creative-studio .contribution-draft__steps button[aria-current="step"]{background:#774c3c;color:#fffdf7;text-decoration:underline;text-underline-offset:4px}
+#creative-studio .contribution-draft button:disabled{opacity:.65;cursor:wait}
+#creative-studio .contribution-draft fieldset{padding:0;border:0;margin:0;min-width:0}
+#creative-studio .contribution-draft legend{font:500 clamp(22px,4vw,30px)/1.3 Georgia,serif;color:#302b27;margin:0 0 20px;padding:0;max-width:100%}
+#creative-studio .contribution-draft .wc-field{color:#302b27}
+#creative-studio .contribution-draft :is(input:not([type=checkbox]),textarea,select){background:#fffdf8;color:#302b27;border:1px solid #a38470;max-width:100%;min-width:0;border-radius:2px}
+#creative-studio .contribution-draft :is(.wc-small,.wc-field small){color:#645c54}
+#creative-studio .contribution-draft .wc-check{color:#302b27}
+#creative-studio .contribution-draft input[type=checkbox]{accent-color:#774c3c}
+#creative-studio .contribution-draft [aria-invalid="true"]{border-color:#8b3930;outline:2px solid #8b3930;outline-offset:1px}
+#creative-studio .contribution-draft__error{background:#f4e3df;color:#6f342c;padding:12px 14px;border-left:3px solid #8b3930;font:15px/1.5 system-ui,sans-serif}
+#creative-studio .contribution-draft__error:empty{display:none}
+#creative-studio .contribution-draft__controls{display:flex;justify-content:space-between;gap:10px;margin-top:24px;padding-top:16px;border-top:1px solid #d0c4b7}
+#creative-studio .contribution-draft [data-contribution-preview] dl{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.5fr);gap:8px 18px;max-width:100%;margin:20px 0}
+#creative-studio .contribution-draft [data-contribution-preview] dt{font-weight:650}
+#creative-studio .contribution-draft [data-contribution-preview] dd{margin:0}
+#creative-studio .contribution-draft [data-contribution-preview] h4{font:500 30px/1.3 Georgia,serif;color:#302b27;margin:0 0 15px}
+#creative-studio .contribution-draft [data-contribution-preview] img{display:block;max-width:100%;height:auto;max-height:65vh;object-fit:contain;background:#fff}
+#creative-studio .contribution-draft [data-contribution-preview] audio{max-width:100%}
+#creative-studio .contribution-draft__prose{white-space:pre-wrap;overflow-wrap:anywhere;max-width:100%;font:inherit}
+#creative-studio .contribution-draft :is(button,input,select,textarea,legend):focus-visible{outline:3px solid #774c3c;outline-offset:3px}
+@media(max-width:600px){#creative-studio .contribution-draft{padding:16px 12px}#creative-studio .contribution-draft__steps{grid-template-columns:repeat(2,minmax(0,1fr))}#creative-studio .contribution-draft [data-contribution-preview] dl{grid-template-columns:1fr;gap:3px}#creative-studio .contribution-draft [data-contribution-preview] dd{margin-bottom:12px}#creative-studio .contribution-draft .wc-actions{align-items:stretch;flex-direction:column}#creative-studio .contribution-draft button{max-width:100%;white-space:normal}}
+
+@media(max-width:400px){#creative-studio .contribution-draft__steps{grid-template-columns:1fr}#creative-studio .contribution-draft__steps button{padding:9px 10px}}

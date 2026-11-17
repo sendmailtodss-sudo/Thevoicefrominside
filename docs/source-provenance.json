@@ -67,5 +67,12 @@
     "en/lawyer-account/report/index.html"
   ],
   "generic_html_updated": 158,
-  "approved_gallery_items": 27
+  "approved_gallery_items": 27,
+  "interface_update_2026_11_17": {
+    "scope": "Reviewed navigation, room design, local reading/draft tools, sharing and accessible status interfaces",
+    "original_writing": "Excluded; new literature routes use explicit example excerpts",
+    "production_mirror": false,
+    "live_services_activated": false,
+    "merchandise_v2": "Production pricing remains blocked pending original identity assets and verified supplier templates"
+  }
 }

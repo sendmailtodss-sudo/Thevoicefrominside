@@ -1,0 +1,35 @@
+/* Scoped diary index: original entry and document pages are untouched. */
+body[data-diary-index] main > .wide,body[data-diary-index] main > .reading{max-width:74rem}
+body[data-diary-index] .diary-index{padding:clamp(18px,3vw,36px) 0;margin:2rem 0 3rem;border:0;border-radius:0;background:transparent;color:#edf0f2}
+body[data-diary-index] .diary-index h2{color:#f3f4f6;font-family:Georgia,serif;font-weight:500}
+body[data-diary-index] .diary-directory-note,body[data-diary-index] .diary-filter-note{max-width:68ch;color:#bfc5cc}
+body[data-diary-index] .diary-latest{display:flex;gap:.4rem 1rem;flex-wrap:wrap;padding:1rem 0;border-top:1px solid #505863;border-bottom:1px solid #505863}
+body[data-diary-index] .diary-latest > span{color:#bfc5cc;font-size:.85rem}
+body[data-diary-index] .diary-latest a{color:#f3f4f6;text-underline-offset:.2em}
+body[data-diary-index] .diary-filters{display:grid;grid-template-columns:auto minmax(10rem,1fr) auto minmax(12rem,2fr) auto;gap:.75rem;align-items:center;margin:1.5rem 0}
+body[data-diary-index] .diary-filters[hidden],body[data-diary-index] .diary-entry-row[hidden],body[data-diary-index] .diary-empty[hidden]{display:none!important}
+body[data-diary-index] .diary-filters label{font-size:.85rem;color:#d5d9de}
+body[data-diary-index] .diary-filters input,body[data-diary-index] .diary-filters select{width:100%;min-width:0;min-height:44px;padding:.65rem;background:#171a1f;border:1px solid #69717d;border-radius:0;color:#f3f4f6;font:inherit;color-scheme:dark}
+body[data-diary-index] .diary-filters button{min-height:44px;padding:.65rem 1rem;border:1px solid #d5d9de;border-radius:0;background:#d5d9de;color:#171a1f;font:600 .9rem system-ui;cursor:pointer}
+body[data-diary-index] .diary-filter-note{grid-column:1/-1;font-size:.8rem;line-height:1.5;margin:.1rem 0}
+body[data-diary-index] .diary-result-count{grid-column:1/-1;color:#d5d9de;font-size:.85rem;margin:0}
+body[data-diary-index] .diary-entry-list{display:block;margin-top:1rem}
+body[data-diary-index] .diary-entry-list > .diary-entry-row{display:grid;grid-template-columns:12rem minmax(0,1fr);gap:1rem 2rem;padding:1.5rem 0;background:transparent;border:0;border-bottom:1px solid #505863;border-radius:0;color:#edf0f2;text-decoration:none;box-shadow:none;scroll-margin-top:9rem}
+body[data-diary-index] .diary-entry-list > .diary-entry-row:first-child{border-top:1px solid #505863}
+body[data-diary-index] .diary-entry-list > .diary-entry-row:hover{background:#1d2127;border-color:#747d89;color:#fff}
+body[data-diary-index] .diary-entry-meta{display:flex;flex-direction:column;gap:.3rem;font:400 .85rem/1.5 system-ui,sans-serif;color:#bfc5cc}
+body[data-diary-index] .diary-entry-meta time{font-variant-numeric:tabular-nums;color:#e3e7eb}
+body[data-diary-index] .diary-date-kind{font-size:.75rem;letter-spacing:.04em}
+body[data-diary-index] .diary-entry-copy{display:flex;flex-direction:column;gap:.55rem;min-width:0}
+body[data-diary-index] .diary-entry-list .diary-entry-title{font:500 clamp(1.2rem,2.5vw,1.6rem)/1.25 Georgia,serif;color:#f3f4f6;overflow-wrap:anywhere}
+body[data-diary-index] .diary-entry-list .diary-excerpt{color:#d5d9de;font:400 1rem/1.6 system-ui,sans-serif}
+body[data-diary-index] .diary-entry-list .diary-source-note{color:#bfc5cc;font:400 .8rem/1.55 system-ui,sans-serif}
+body[data-diary-index] .diary-entry-row[data-diary-returned]{box-shadow:inset 3px 0 #aeb7c3;padding-left:1rem}
+body[data-diary-index] .diary-index :focus-visible{outline:2px solid #f1f4f8;outline-offset:5px}
+body[data-diary-index] .diary-empty{color:#d5d9de;padding:1.5rem 0;border-block:1px solid #505863}
+body[data-diary-index] .diary-introduction-link{display:inline-block;margin-top:1.5rem;color:#edf0f2}
+@media(max-width:900px){body[data-diary-index] .diary-filters{grid-template-columns:8rem minmax(0,1fr)}body[data-diary-index] .diary-filters button{grid-column:2}body[data-diary-index] .diary-entry-list > .diary-entry-row{grid-template-columns:9rem minmax(0,1fr);gap:1rem}}
+@media(max-width:600px){body[data-diary-index] .diary-filters{display:flex;flex-direction:column;align-items:stretch}body[data-diary-index] .diary-filter-note{font-size:.8rem}body[data-diary-index] .diary-entry-list > .diary-entry-row{display:flex;flex-direction:column;gap:.8rem;padding:1.25rem 0}body[data-diary-index] .diary-entry-meta{order:2;flex-direction:row;flex-wrap:wrap;gap:.25rem .7rem}body[data-diary-index] .diary-entry-copy{display:contents}body[data-diary-index] .diary-entry-title{order:1}body[data-diary-index] .diary-excerpt{order:3}body[data-diary-index] .diary-source-note{order:4}body[data-diary-index] .diary-entry-row[data-diary-returned]{padding-left:.75rem}}
+body[data-diary-index] main > .wide > p:not(.note),body[data-diary-index] main > .reading > p:not(.note){max-width:68ch;margin-left:auto;margin-right:auto;line-height:1.8}
+/* The shared editorial stylesheet uses an important gold ring; this register keeps its steel ring. */
+body[data-diary-index] .diary-index :focus-visible{outline:2px solid #eef3f9!important;outline-offset:5px}

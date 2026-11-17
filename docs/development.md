@@ -50,3 +50,7 @@ This repository has no automatic production deployment. A commit, a passing test
 ## 5 November contributor update
 
 The generic interface, navigation, gallery and application code were refreshed from the source revision recorded in [source provenance](source-provenance.json). The 27 approved gallery images and their depth resources are included. Reading-page fixtures and sanitized search and translation data remain examples, so this is not a complete production content mirror. Private case files and manuscripts remain excluded; the preview keeps services disabled.
+
+## 17 November interface update
+
+The contributor tree now includes updated room navigation, local reading and draft controls, accessible status interfaces and literature example routes. Original manuscripts, private forum sources and production bindings remain outside this repository. Local APIs stay disabled. Version 2 merchandise production pricing fails closed until original identity assets and supplier templates are verified.

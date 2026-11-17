@@ -459,3 +459,19 @@ body[data-site-direction="story"] .sfi-language-notice {
   border-inline-start-color: #aeb6c0;
   opacity: 1;
 }
+
+/* Warm contribution and collaboration interfaces share the gallery materials. */
+body[data-site-direction="art"] :is(.hero:not([hidden]),.ig-invite,.fp-invite){background:linear-gradient(115deg,#fcf9f2,#eee3d7);color:#302b27;border-color:#c9b7a5;box-shadow:none}
+body[data-site-direction="art"] .hero::after{background:linear-gradient(0deg,#e7d9c766,transparent 43%)}
+body[data-site-direction="art"] :is(.hero h1,.ig-invite h2,.fp-invite h2){color:#302b27;text-shadow:none}
+body[data-site-direction="art"] :is(.ig-kicker,.fp-kicker,.hub-kicker){color:#774c3c}
+body[data-site-direction="art"] :is(.ig-intro,.fp-intro,.hub-lead){color:#554a42}
+body[data-site-direction="art"] .hub-action{color:#774c3c;border-color:#b79a82;text-underline-offset:.2em}
+body[data-site-direction="art"] .hub-action:hover{color:#4c2d21}
+body[data-site-direction="art"] :is(.ig-launch,.fp-launch,.fp-primary){background:#774c3c;color:#fffaf3;border-color:#774c3c;min-height:44px;border-radius:0;font:600 14px/1.45 system-ui,sans-serif}
+body[data-site-direction="art"] :is(.ig-launch,.fp-launch,.fp-primary):hover{background:#5d3729;color:#fffaf3;border-color:#5d3729}
+body[data-site-direction="art"] .hero .deck{border-inline-start-color:#a38470}
+@media(max-width:560px){body[data-site-direction="art"] main .hero h1{font-size:clamp(28px,8.2vw,42px);line-height:1.12;overflow-wrap:normal;word-break:normal;hyphens:auto;max-width:100%}}
+@media print{body[data-site-direction="art"] :is(.hero:not([hidden]),.ig-invite,.fp-invite){background:#fff;color:#111;border-color:#777}body[data-site-direction="art"] .hero::after{background:none}}
+body[data-site-direction="art"] .hero .deck{color:#554a42;opacity:1}
+body[data-site-direction="art"] .hero .eyebrow{color:#774c3c;opacity:1}

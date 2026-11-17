@@ -64,9 +64,12 @@ export function configuredDesigner(raw){
 
 export function priceMerchDesign(input,sku,configuration){
  const design=normalizeMerchDesign(input),c=configuration;
+ // V2 is a proposal only. Original identity assets, the complete supplier
+ // template and identity printing costs do not have a verified server contract.
+ // No client-supplied flag or legacy front-print price can authorise production.
+ if(design.version===2)reject('identity_production_unverified');
  const productionPrices=design.branding.placement==='front_hem'?c?.productionMinorBySku:c?.productionMinorByBrandingPlacement?.inside_label;
  if(!c?.enabled||sku!==`shirt-${design.color}-${design.size}`||!productionPrices||!Object.hasOwn(productionPrices,sku)||!c.allowedColors.includes(design.color)||!c.allowedLayouts.includes(design.layout))reject('unavailable_design');
- if(design.version===2&&!amount(c.statementFrontMinor))reject('statement_front_price_unconfirmed');
  const counts=new Map();for(const p of design.prints)counts.set(p.artworkId,(counts.get(p.artworkId)||0)+1);
  const artworkFees=[];
  for(const [artworkId,printCount]of counts){
@@ -76,10 +79,10 @@ export function priceMerchDesign(input,sku,configuration){
   const chargeCount=1;
   artworkFees.push({artworkId,artistId:a.artistId,artistName:a.artistName,artworkName:{no:a.nameNo||artworkId,en:a.nameEn||a.nameNo||artworkId},feeBasis:a.feeBasis,unitRateMinor:a.feeMinor,chargeCount,printCount,amountMinor:a.feeMinor,licenseId:a.licenseId,licenseVersion:a.licenseVersion});
  }
- const productionMinor=productionPrices[sku],printingMinor=c.printMinorPerPlacement*design.prints.length+(design.version===2?c.statementFrontMinor:0),feeMinor=c.feeMinorPerUnit,costMinor=productionMinor+printingMinor+feeMinor,artworkMinor=artworkFees.reduce((n,a)=>n+a.amountMinor,0),totalMinor=costMinor+artworkMinor;
+ const productionMinor=productionPrices[sku],printingMinor=c.printMinorPerPlacement*design.prints.length,feeMinor=c.feeMinorPerUnit,costMinor=productionMinor+printingMinor+feeMinor,artworkMinor=artworkFees.reduce((n,a)=>n+a.amountMinor,0),totalMinor=costMinor+artworkMinor;
  if(!amount(totalMinor)||totalMinor<100)reject('invalid_design_total');
  // The selected production cost includes either the exterior front-hem mark
  // or the inside-only label. The latter never falls back to an exterior price.
  // Branding is not an artist motif or an extra paid artwork print.
- return {design,unitPriceMinor:totalMinor,priceBreakdown:{...(design.version===2?{statementFrontMinor:c.statementFrontMinor,identity:{frontText:null,frontSymbol:'black_raised_fist',frontSymbolPlacement:'wearer_left_chest',frontUrlPlacement:'5cm_above_bottom_hem',frontUrl:'stemmen-fra-innsiden.sendmailtodss.chatgpt.site',backSignature:artworkFees[0].artistName==='Innsatt 2601-46'?'Innsatt 260146':artworkFees[0].artistName,artworkPrintCount:1,physicalPrintAreas:3}}:{}),productionMinor,printingMinor,feeMinor,costMinor,artworkFees,artworkMinor,totalMinor,currency:'NOK',basis:'per_garment',branding:{...design.branding},brandingCostIncludedInProduction:true,paymentOrder:['production','printing','fees','artists'],artistPayoutAutomatic:false,originalArtworkOwnershipIncluded:false}};
+ return {design,unitPriceMinor:totalMinor,priceBreakdown:{productionMinor,printingMinor,feeMinor,costMinor,artworkFees,artworkMinor,totalMinor,currency:'NOK',basis:'per_garment',branding:{...design.branding},brandingCostIncludedInProduction:true,paymentOrder:['production','printing','fees','artists'],artistPayoutAutomatic:false,originalArtworkOwnershipIncluded:false}};
 }

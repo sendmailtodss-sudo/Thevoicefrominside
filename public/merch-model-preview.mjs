@@ -3,8 +3,7 @@ import {printArtist,printTitle,safePrintImage} from './merch-shirt-preview.mjs';
 import {availableModels,resolveModel} from './model-cohort.mjs';
 
 const NS='http://www.w3.org/2000/svg';
-const FIST='M264 310 L249 293 L257 280 L270 288 L270 267 L282 262 L291 266 L303 263 L315 273 L325 273 L339 285 L336 320 L321 340 L321 365 L279 365 L279 340 Z';
-const URL_TEXT='stemmen-fra-innsiden.sendmailtodss.chatgpt.site';
+const URL_TEXT='THEVOICEFROMINSIDE.DEV';
 const FRAMES={both:[290,0,950,1000],front:[325,125,380,425],back:[825,125,400,435]};
 const PLACEMENT={
  male:{art:[930,165,200,306],signature:[1030,492],fist:[557,209,.29],url:[514,475,176],mark:[448,481,132]},
@@ -25,9 +24,11 @@ export function createModelSvg({design,artworks,model='male',view='both',languag
  const base=svg('image',{href:identity.image,x:0,y:0,width:1536,height:1024});base.dataset.role='model-template';s.append(base);
  if(source){const [x,y,width,height]=p.art,image=svg('image',{href:source,x,y,width,height,preserveAspectRatio:'xMidYMid meet',class:'hiphop-fabric-print',filter:`url(#${id})`});image.dataset.role='model-artwork';image.dataset.source=source;s.append(image);}
  else{const text=svg('text',{x:p.signature[0],y:300,'text-anchor':'middle','font-size':15});text.textContent=t('Motivbilde utilgjengelig','Artwork image unavailable');text.dataset.role='model-artwork-unavailable';s.append(text);}
- const signature=svg('text',{x:p.signature[0],y:p.signature[1],'text-anchor':'middle','font-size':Math.min(17,300/Math.max(1,artist.length)),'font-family':'Arial','font-weight':700,fill:'#111',class:'hiphop-fabric-print'});signature.dataset.role='model-artist-signature';signature.textContent=artist==='Innsatt 2601-46'?'Innsatt 260146':artist;s.append(signature);
- const [fx,fy,scale]=p.fist,fist=svg('path',{d:FIST,fill:'#111',transform:`translate(${fx} ${fy}) scale(${scale}) translate(-249 -262)`,class:'hiphop-fabric-print'});fist.dataset.role='model-heart-fist';s.append(fist);
- const address=svg('text',{x:p.url[0],y:p.url[1],'text-anchor':'middle','font-size':8.5,'font-family':'Arial',fill:'#111',textLength:p.url[2],lengthAdjust:'spacingAndGlyphs',class:'hiphop-fabric-print'});address.dataset.role='model-site-address';address.dataset.hemOffsetCm='5';address.textContent=URL_TEXT;s.append(address);
+ const signatureSource=safePrintImage(artwork?.signatureImage),symbolSource=safePrintImage(artwork?.approvedMedallionImage);
+ s.dataset.identityAssets='pending-original-asset-verification';
+ if(signatureSource){const signature=svg('image',{href:signatureSource,x:p.signature[0]-50,y:p.signature[1]-12,width:100,height:20,preserveAspectRatio:'xMidYMid meet'});signature.dataset.role='model-artist-signature';signature.dataset.source=signatureSource;s.append(signature)}
+ if(symbolSource){const symbol=svg('image',{href:symbolSource,x:p.signature[0]-15,y:p.art[1]-36,width:30,height:30,preserveAspectRatio:'xMidYMid meet'});symbol.dataset.role='model-original-symbol';symbol.dataset.source=symbolSource;s.append(symbol)}
+ const address=svg('text',{x:p.signature[0],y:p.signature[1]+21,'text-anchor':'middle','font-size':8,'font-family':'Arial',fill:'#111',class:'hiphop-fabric-print'});address.dataset.role='model-back-site-address';address.dataset.placement='lower-edge-proposal';address.textContent=URL_TEXT;s.append(address);
  if(design.branding.placement==='front_hem'){
   const [x,y,width]=p.mark;s.append(svg('rect',{x,y,width,height:13,rx:2,fill:'#263a42'}));const label=svg('text',{x:x+width/2,y:y+9.5,'text-anchor':'middle','font-size':7.7,'font-family':'Arial',fill:'#fff'});label.dataset.role='model-community-mark';label.textContent='Stemmen fra innsiden';s.append(label);
  }
@@ -47,14 +48,14 @@ export async function modelPreviewPng(options){
  c.fillStyle='#f1eee8';c.fillRect(0,0,canvas.width,canvas.height);
  const url=URL.createObjectURL(new Blob([new XMLSerializer().serializeToString(s)],{type:'image/svg+xml'}));
  try{const image=new Image();await new Promise((resolve,reject)=>{image.onload=resolve;image.onerror=reject;image.src=url;});c.drawImage(image,280,20,950,1000);}finally{URL.revokeObjectURL(url);}
- c.textAlign='center';c.fillStyle='#20333b';c.font='bold 25px Arial';const a=options.artworks.find(a=>a.id===options.design.prints[0]?.artworkId);c.fillText(printTitle(a,options.language)+' · '+printArtist(a),768,1055,1420);c.font='20px Arial';c.fillText(options.language==='en'?'Virtual placement preview · not a manufactured sample':'Virtuell plasseringsvisning · ikke en produsert prøve',768,1095);
+ c.textAlign='center';c.fillStyle='#20333b';c.font='bold 25px Arial';const a=options.artworks.find(a=>a.id===options.design.prints[0]?.artworkId);c.fillText(printTitle(a,options.language)+' · '+printArtist(a),768,1055,1420);c.font='20px Arial';c.fillText(options.language==='en'?'Virtual sketch · original symbol/signature pending · not a manufactured sample':'Virtuell skisse · originalsymbol/signatur avklares · ikke produsert prøve',768,1095);
  const blob=await new Promise(resolve=>canvas.toBlob(resolve,'image/png'));if(!blob)throw Error('canvas');return blob;
 }
 
 export function mountModelLookbook({mount,getArtworks,getDesign,language='no',onSelect,compact=false,initialModel='all'}){
  const t=(no,en)=>language==='en'?en:no;let view=compact?'back':'both',displayModel=availableModels().some(identity=>identity.id===initialModel)?initialModel:'all',model=displayModel==='all'?'male':(resolveModel(displayModel).atlasIndex===undefined?resolveModel(displayModel).template:displayModel);
  const wrap=el('section','hiphop-lookbook'),title=el('h2','',t('Se trykket på modellene','See the print on the models'));
- const intro=el('p','',t('Velg et kunstverk og se det på T-skjorten, med kunstnerens signatur. Se begge sider eller gå nærmere inn på trykket.','Choose an artwork and see it on the T-shirt with the artist’s signature. View both sides or look closer at the print.'));
+ const intro=el('p','',t('Velg et kunstverk og se en virtuell plasseringsstudie. Originalsymbol og originalsignatur er ikke verifisert. Se begge sider eller gå nærmere inn på trykket.','Choose an artwork for a virtual placement study. The original symbol and original signature are not verified. View both sides or look closer at the print.'));
  const label=el('label','field',t('Kunstverk og kunstner','Artwork and artist')),select=el('select');select.setAttribute('aria-label',t('Velg trykk på modellene','Choose the print on the models'));label.append(select);
  const views=el('div','model-view-options');views.setAttribute('role','group');views.setAttribute('aria-label',t('Visning','View'));
  for(const [value,no,en]of [['both','Begge sider','Both sides'],['front','Forside / side','Front / side'],['back','Rygg · se trykket stort','Back · closer view']]){const b=el('button','secondary',t(no,en));b.type='button';b.dataset.modelView=value;b.addEventListener('click',()=>{view=value;refreshImages();});views.append(b);}
